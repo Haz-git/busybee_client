@@ -5,12 +5,14 @@ import styled from 'styled-components';
 const Button = styled.button`
     background-color: ${({ theme }) => theme.background};
     border: 2px solid ${({ theme }) => theme.toggleBorder};
-    color: ${({ theme }) => theme.text};
+    color: ${({ theme }) => theme.generalText};
     border-radius: 30px;
     cursor: pointer;
     font-size: 0.8rem;
-    padding: 0.6rem;
+    padding: 0.4rem;
     transition: all 0.5s linear;
+    margin-left: 0.5em;
+    margin-right: 0.5em;
 
     &:hover {
         transform: scale(1.05);
@@ -24,9 +26,9 @@ const Button = styled.button`
 const Toggle = ({ theme, toggleTheme, callBack }) => {
     const renderThemeTitle = () => {
         if (theme === 'light') {
-            return 'Light';
+            return 'Snow';
         } else {
-            return 'Dark';
+            return 'Midnight';
         }
     };
 
