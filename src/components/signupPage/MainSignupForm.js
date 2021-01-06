@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import userRegistration from '../../redux/userRegistration/userRegistrationActions';
@@ -6,6 +6,7 @@ import userRegistration from '../../redux/userRegistration/userRegistrationActio
 //Components
 import InputField from './InputField';
 import SubmitButton from './SubmitButton';
+import VerifyError from './VerifyError';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,33 +26,121 @@ const ButtonContainer = styled.div`
 //Render:
 
 const MainSignupForm = ({ handleSubmit, userRegistration }) => {
+    //Client Verification Handlers:
+    //We will use the browser to handle verification.
+
+    const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
+    const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
+        undefined
+    );
+    const [hasInvalidPasswordLength, setHasInvalidPasswordLength] = useState(
+        undefined
+    );
+    const [invalidPasswordMatch, setInvalidPasswordMatch] = useState(undefined);
+
+    //Verification Checker Functions:
+
+    const fieldEmptyChecker = (obj) => {
+        if (Object.keys(obj).length === 0 && obj.constructor === Object) {
+            return true;
+        } else {
+            return false;
+        }
+    };
+
+    const usernameLengthChecker = (string) => {
+        if (string.trim().length > 4 && string.trim().length < 15) {
+            //meets requirements
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    const passwordLengthChecker = (string) => {
+        if (string.trim().length > 6 && string.trim().length < 20) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
+    const passwordMatchChecker = (password, passwordConfirm) => {
+        if (
+            password.trim().normalize() === passwordConfirm.trim().normalize()
+        ) {
+            return false;
+        } else {
+            return true;
+        }
+    };
+
     const dispatchFormValues = (formValues) => {
-        console.log(formValues);
+        //Dispatch function will first run through all checker functions.
+        setAreFieldsEmpty(fieldEmptyChecker(formValues));
+
+        if (formValues.userName !== undefined) {
+            setHasInvalidUsernameLength(
+                usernameLengthChecker(formValues.userName)
+            );
+        }
+
+        if (formValues.password !== undefined) {
+            setHasInvalidPasswordLength(
+                passwordLengthChecker(formValues.password)
+            );
+        }
+
+        if (
+            formValues.password !== undefined &&
+            formValues.passwordConfirm !== undefined
+        ) {
+            setInvalidPasswordMatch(
+                passwordMatchChecker(
+                    formValues.password,
+                    formValues.passwordConfirm
+                )
+            );
+        }
+
+        if (
+            areFieldsEmpty === false &&
+            hasInvalidUsernameLength === false &&
+            hasInvalidPasswordLength === false &&
+            invalidPasswordMatch === false
+        ) {
+            console.log(formValues);
+            // userRegistration(formValues);
+        }
     };
 
     return (
         <>
             <MainContainer>
                 <LogoContainer>GymJot</LogoContainer>
+                <VerifyError
+                    title="Please fill in all fields."
+                    render={areFieldsEmpty}
+                    center="true"
+                />
                 <form onSubmit={handleSubmit(dispatchFormValues)}>
                     <FormContainer>
                         <InputField
                             formName="firstName"
                             componentType="input"
                             label="First Name"
-                            errorTag="Test!"
                         />
                         <InputField
                             formName="lastName"
                             componentType="input"
                             label="Last Name"
-                            errorTag="Test!"
                         />
                         <InputField
                             formName="userName"
                             componentType="input"
                             label="Username"
-                            errorTag="Test!"
+                            errorTag="Your username must be 4 - 15 characters."
+                            renderError={hasInvalidUsernameLength}
                         />
                         <InputField
                             formName="email"
@@ -64,15 +153,17 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                             formName="password"
                             componentType="input"
                             label="Password"
-                            errorTag="Test!"
+                            errorTag="Your password must be 6 - 20 characters."
                             htmlType="password"
+                            renderError={hasInvalidPasswordLength}
                         />
                         <InputField
                             formName="passwordConfirm"
                             componentType="input"
                             label="Confirm Password"
-                            errorTag="Test!"
+                            errorTag="Your two passwords do not match!"
                             htmlType="password"
+                            renderError={invalidPasswordMatch}
                         />
                         <ButtonContainer>
                             <SubmitButton label="Register" />
