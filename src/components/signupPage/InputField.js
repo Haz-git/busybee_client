@@ -1,6 +1,7 @@
 import React from 'react';
 import { Field } from 'redux-form';
 import styled from 'styled-components';
+import VerifyError from './VerifyError';
 
 //Styles:
 
@@ -37,7 +38,7 @@ export const StyledLabel = styled.label`
 
 export const StyledField = styled(Field)`
     width: 100%;
-    padding: 12px 20px;
+    padding: 12px 15px;
     margin: 8px 0;
     display: inline-block;
     border: 1px solid #ccc;
@@ -45,7 +46,7 @@ export const StyledField = styled(Field)`
     box-sizing: border-box;
 
     @media only screen and (max-width: 650px) {
-        height: 35px;
+        height: 28px;
         margin: 4px 0;
     }
 
@@ -57,7 +58,14 @@ export const StyledField = styled(Field)`
 
 //Render:
 
-const InputField = ({ formName, componentType, label, errorTag, htmlType }) => {
+const InputField = ({
+    formName,
+    componentType,
+    label,
+    errorTag,
+    htmlType,
+    renderError,
+}) => {
     if (htmlType !== undefined) {
         return (
             <InputFieldContainer>
@@ -67,6 +75,7 @@ const InputField = ({ formName, componentType, label, errorTag, htmlType }) => {
                     component={componentType}
                     type={htmlType}
                 />
+                <VerifyError title={errorTag} render={renderError} />
             </InputFieldContainer>
         );
     } else {
@@ -74,6 +83,7 @@ const InputField = ({ formName, componentType, label, errorTag, htmlType }) => {
             <InputFieldContainer>
                 <StyledLabel>{label}</StyledLabel>
                 <StyledField name={formName} component={componentType} />
+                <VerifyError title={errorTag} render={renderError} />
             </InputFieldContainer>
         );
     }
