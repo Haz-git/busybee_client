@@ -1,9 +1,23 @@
 import React from 'react';
+import styled from 'styled-components';
+
+//Styles:
+
+const MainContainer = styled.div``;
+
+const LogoContainer = styled.div``;
+
+const FormContainer = styled.div``;
+
+//Render:
 
 const MainSignupForm = () => {
     return (
         <>
-            <h1>This is the sign up form page.</h1>
+            <MainContainer>
+                <LogoContainer>GymJot</LogoContainer>
+                <FormContainer></FormContainer>
+            </MainContainer>
         </>
     );
 };
