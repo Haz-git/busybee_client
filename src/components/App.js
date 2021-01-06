@@ -1,6 +1,6 @@
 //Dependencies
 import React, { useState, useEffect } from 'react';
-import { Switch, Router, Route } from 'react-router-dom';
+import { Switch, Router, Route, withRouter } from 'react-router-dom';
 import history from './historyObject';
 
 //Styling:
@@ -18,7 +18,7 @@ import NavbarLanding from './landingPage/NavbarLanding';
 
 //Render
 
-const App = () => {
+const App = withRouter(({ location }) => {
     const [appTheme, setAppTheme] = useState('');
 
     useEffect(() => {
@@ -47,26 +47,23 @@ const App = () => {
                 <>
                     <GlobalStyle />
                     <ThemeProvider theme={grabbedTheme}>
-                        <Router history={history}>
-                            <NavbarLanding modeStatus={changeModeStatus} />
-                            <Switch>
-                                <Route
-                                    exact
-                                    path="/"
-                                    component={MainLandingPage}
-                                />
-                                <Route
-                                    exact
-                                    path="/login"
-                                    component={MainloginForm}
-                                />
-                                <Route
-                                    exact
-                                    path="/signup"
-                                    component={MainSignupForm}
-                                />
-                            </Switch>
-                        </Router>
+                        {location.pathname !== '/login' &&
+                            location.pathname !== '/signup' && (
+                                <NavbarLanding modeStatus={changeModeStatus} />
+                            )}
+                        <Switch>
+                            <Route exact path="/" component={MainLandingPage} />
+                            <Route
+                                exact
+                                path="/login"
+                                component={MainloginForm}
+                            />
+                            <Route
+                                exact
+                                path="/signup"
+                                component={MainSignupForm}
+                            />
+                        </Switch>
                     </ThemeProvider>
                 </>
             );
@@ -74,6 +71,6 @@ const App = () => {
     };
 
     return <>{renderApp()}</>;
-};
+});
 
 export default App;
