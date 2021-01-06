@@ -21,7 +21,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 //RootReducer:
 
-const appReducer = combineReducers({
+const rootReducer = combineReducers({
     form: formReducer,
 });
 
