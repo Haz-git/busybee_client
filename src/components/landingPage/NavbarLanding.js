@@ -29,13 +29,14 @@ const NavLinkContainer = styled.div`
 const NavLink = styled(Link)`
     text-decoration: none !important;
     color: ${(props) => props.theme.generalText};
-    margin-left: 0.5em;
-    margin-right: 0.5em;
+    margin-left: 1em;
+    margin-right: 1em;
+    font-size: 0.6em;
     transition: all 0.5s;
     &::after {
         display: block;
         content: '';
-        height: 3px;
+        height: 0.2em;
         width: 0;
         background: transparent;
         transition: width 0.5s ease, background-color 0.5s ease;
@@ -49,6 +50,38 @@ const NavLink = styled(Link)`
     &:hover {
         color: ${(props) => props.theme.generalText} !important;
     }
+
+    @media only screen and (min-width: 300px) {
+        font-size: 0.65em;
+        margin-left: 1em;
+        margin-right: 1em;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    @media only screen and (min-width: 350px) {
+        font-size: 0.65em;
+        margin-left: 1.2em;
+        margin-right: 1.2em;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    @media only screen and (min-width: 480px) {
+        font-size: 0.75em;
+        margin-left: 1.5em;
+        margin-right: 1.5em;
+        white-space: nowrap;
+        overflow: hidden;
+    }
+
+    @media only screen and (max-width: 850px) and (orientation: landscape) {
+        font-size: 12px;
+        margin-left: 1.7em;
+        margin-right: 1.7em;
+        white-space: nowrap;
+        overflow: hidden;
+    }
 `;
 
 //Render:
@@ -57,15 +90,15 @@ const NavbarLanding = ({ modeStatus }) => {
 
     return (
         <DefaultNavbar>
-            <LogoLink to="/">Logo</LogoLink>
+            <LogoLink to="/">GymJot</LogoLink>
             <NavLinkContainer>
                 <Toggler
                     theme={theme}
                     toggleTheme={toggleTheme}
                     callBack={modeStatus}
                 />
-                <NavLink to="/signup">Sign Up</NavLink>
                 <NavLink to="/login">Login</NavLink>
+                <NavLink to="/signup">Join</NavLink>
             </NavLinkContainer>
         </DefaultNavbar>
     );
