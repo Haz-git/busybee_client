@@ -2,9 +2,28 @@ import { USER_LOG_IN } from './userLoginTypes';
 import api from '../../api';
 
 const userLogin = (formValues) => async (dispatch) => {
-    const response = await api.post('/user/login', { ...formValues });
+    let response;
 
-    console.log(response);
+    try {
+        response = await api.post('/user/login', { ...formValues });
+    } catch (err) {
+        //If there is an error, that must mean the user's verificiation credentials are wrong.
+        console.log(err);
+    }
+
+    if (response) {
+        try {
+            localStorage.setItem('jwt', JSON.stringify(response.data.token));
+        } catch (e) {
+            if (e.name === 'QuotaExceededError') {
+                localStorage.clear();
+                localStorage.setItem('jwt', response.data.token);
+            } else {
+                alert(`I'm Sorry! There seems to be a problem logging you in.`);
+                console.log(e);
+            }
+        }
+    }
 };
 
 export default userLogin;
