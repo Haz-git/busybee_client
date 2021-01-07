@@ -146,7 +146,6 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                             formName="email"
                             componentType="input"
                             label="Email Address"
-                            errorTag="Test!"
                             htmlType="email"
                         />
                         <InputField
