@@ -1,4 +1,5 @@
 import { USER_LOG_IN } from './userLoginTypes';
+import history from '../../components/historyObject';
 import api from '../../api';
 
 const userLogin = (formValues) => async (dispatch) => {
@@ -7,13 +8,15 @@ const userLogin = (formValues) => async (dispatch) => {
     try {
         response = await api.post('/user/login', { ...formValues });
     } catch (err) {
-        //If there is an error, that must mean the user's verificiation credentials are wrong.
+        //If there is an error, that must mean the user's verification credentials are wrong.
         console.log(err);
     }
 
     if (response) {
         try {
             localStorage.setItem('jwt', JSON.stringify(response.data.token));
+
+            history.push('/dashboard');
         } catch (e) {
             if (e.name === 'QuotaExceededError') {
                 localStorage.clear();
