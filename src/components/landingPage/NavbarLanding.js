@@ -3,6 +3,13 @@ import Toggler from '../../styling/Toggler';
 import { useDarkMode } from '../../styling/useDarkMode';
 import { Link } from 'react-router-dom';
 
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile,
+} from 'react-device-detect';
+
 //Styles:
 import styled from 'styled-components';
 
@@ -88,20 +95,29 @@ const NavLink = styled(Link)`
 const NavbarLanding = ({ modeStatus }) => {
     const [theme, toggleTheme] = useDarkMode();
 
-    return (
-        <DefaultNavbar>
-            <LogoLink to="/">GymJot</LogoLink>
-            <NavLinkContainer>
-                <Toggler
-                    theme={theme}
-                    toggleTheme={toggleTheme}
-                    callBack={modeStatus}
-                />
-                <NavLink to="/login">Login</NavLink>
-                <NavLink to="/signup">Join</NavLink>
-            </NavLinkContainer>
-        </DefaultNavbar>
-    );
+    const renderNavbar = () => {
+        if (isBrowser) {
+            return (
+                <DefaultNavbar>
+                    <LogoLink to="/">GymJot</LogoLink>
+                    <NavLinkContainer>
+                        <Toggler
+                            theme={theme}
+                            toggleTheme={toggleTheme}
+                            callBack={modeStatus}
+                        />
+                        <NavLink to="/login">Login</NavLink>
+                        <NavLink to="/signup">Join</NavLink>
+                    </NavLinkContainer>
+                </DefaultNavbar>
+            );
+        } else {
+            //The navigation bar will not show on mobile devices to create a more native-app like experience.
+            return null;
+        }
+    };
+
+    return <>{renderNavbar()}</>;
 };
 
 export default NavbarLanding;
