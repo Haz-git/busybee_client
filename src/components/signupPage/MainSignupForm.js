@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { reduxForm } from 'redux-form';
 import { connect } from 'react-redux';
 import userRegistration from '../../redux/userRegistration/userRegistrationActions';
+import { Link } from 'react-router-dom';
 
 //Components
 import InputField from './InputField';
@@ -170,6 +171,9 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                         </ButtonContainer>
                     </FormContainer>
                 </form>
+                <div>
+                    <Link to="/login">Already have an account? Log in.</Link>
+                </div>
             </MainContainer>
         </>
     );
