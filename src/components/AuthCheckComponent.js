@@ -37,6 +37,8 @@ class AuthenticatedComponents extends Component {
             }
         }
 
+        //We need additional verification-- server sided. I was thinking that we could send a direct request to the API here, verify and send 'confirmed' or failed to procced to render the child components.
+
         //If the user's JWT is present: set the React state to 'temp' instead of undefined.
         this.setState({
             user: 'temp',
