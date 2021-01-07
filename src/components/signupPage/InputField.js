@@ -74,6 +74,7 @@ const InputField = ({
                     name={formName}
                     component={componentType}
                     type={htmlType}
+                    autoComplete="off"
                 />
                 <VerifyError title={errorTag} render={renderError} />
             </InputFieldContainer>
@@ -82,7 +83,11 @@ const InputField = ({
         return (
             <InputFieldContainer>
                 <StyledLabel>{label}</StyledLabel>
-                <StyledField name={formName} component={componentType} />
+                <StyledField
+                    name={formName}
+                    component={componentType}
+                    autoComplete="off"
+                />
                 <VerifyError title={errorTag} render={renderError} />
             </InputFieldContainer>
         );
