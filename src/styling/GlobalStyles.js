@@ -7,6 +7,10 @@ export const GlobalStyle = createGlobalStyle`
         padding: 0;
     }
 
+    body {
+        height: 100%;
+    }
+
     a {
         text-decoration: none;
         color: inherit;
