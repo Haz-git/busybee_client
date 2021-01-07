@@ -14,6 +14,12 @@ import MainloginForm from './loginPage/MainloginForm';
 import MainSignupForm from './signupPage/MainSignupForm';
 import NavbarLanding from './landingPage/NavbarLanding';
 
+//Authentication Component:
+import AuthCheckComponent from './AuthCheckComponent';
+
+//Authentication-Required Components:
+import Dashboard from './authComponents/Dashboard';
+
 //Render
 
 const App = withRouter(({ location }) => {
@@ -61,6 +67,13 @@ const App = withRouter(({ location }) => {
                                 path="/signup"
                                 component={MainSignupForm}
                             />
+                            <AuthCheckComponent>
+                                <Route
+                                    exact
+                                    path="/dashboard"
+                                    component={Dashboard}
+                                />
+                            </AuthCheckComponent>
                         </Switch>
                     </ThemeProvider>
                 </>
