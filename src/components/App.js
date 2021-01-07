@@ -1,10 +1,8 @@
 //Dependencies
 import React, { useState, useEffect } from 'react';
-import { Switch, Router, Route, withRouter } from 'react-router-dom';
-import history from './historyObject';
+import { Switch, Route, withRouter } from 'react-router-dom';
 
 //Styling:
-import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../styling/Theme';
 import { getMode } from '../styling/useDarkMode';
