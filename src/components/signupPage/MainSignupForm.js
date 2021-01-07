@@ -110,8 +110,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
             hasInvalidPasswordLength === false &&
             invalidPasswordMatch === false
         ) {
-            console.log(formValues);
-            // userRegistration(formValues);
+            userRegistration(formValues);
         }
     };
 
