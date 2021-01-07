@@ -13,7 +13,7 @@ const userRegistration = (formValues) => async (dispatch) => {
         payload: response.data,
     });
 
-    history.push('/');
+    history.push('/login');
 };
 
 export default userRegistration;
