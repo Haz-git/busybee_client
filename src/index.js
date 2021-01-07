@@ -4,7 +4,7 @@ import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import { store, persistor } from '../src/redux/store';
 
-import { Switch, Router, Route } from 'react-router-dom';
+import { Router } from 'react-router-dom';
 import history from './components/historyObject';
 
 //Components:
