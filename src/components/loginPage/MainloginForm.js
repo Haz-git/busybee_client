@@ -1,9 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import userLogin from '../../redux/userLogin/userLoginActions';
 import InputField from '../signupPage/InputField';
+import Fade from 'react-reveal/Fade';
 
 //Styles:
 import styled from 'styled-components';
@@ -16,6 +17,7 @@ import {
     PromptSpan,
 } from '../signupPage/MainSignupForm';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
+import LoadingPage from './LoadingPage';
 
 const MainContainer = styled.div`
     background: ${(props) => props.theme.background};
@@ -49,14 +51,90 @@ const ButtonContainer = styled.div`
     margin-top: 1em;
 `;
 
+const ErrorTextInvisible = styled.h2`
+    font-family: 'Nunito', sans-serif;
+    color: red;
+    font-size: 1em;
+    font-weight: 100;
+    opacity: 0;
+
+    @media only screen and (max-width: 650px) and (orientation: portrait) {
+        font-size: 0.8em;
+    }
+
+    @media only screen and (max-width: 850px) and (orientation: landscape) {
+        font-size: 0.8em;
+    }
+`;
+
+const ErrorTextVisible = styled.h2`
+    font-family: 'Nunito', sans-serif;
+    color: red;
+    font-size: 15px;
+    font-weight: 100;
+
+    @media only screen and (max-width: 650px) and (orientation: portrait) {
+        font-size: 0.8em;
+    }
+
+    @media only screen and (max-width: 850px) and (orientation: landscape) {
+        font-size: 0.8em;
+    }
+`;
+
 //Render:
 const MainLoginForm = ({ handleSubmit, userLogin }) => {
+    /*
+        setHasErrors is responsible for rendering the verification error if the user's credentials are wrong.
+        renderLoading controls the loading screen after the login details are submitted.
+    */
+
+    const [hasErrors, setHasErrors] = useState(null);
+    const [renderLoading, setRenderLoading] = useState(null);
+
     const handleUserLogin = (formValues) => {
-        userLogin(formValues);
+        if (!formValues.email || !formValues.password) {
+            // If the user doesn't provide an email or password, immediately render verification error.
+            return setHasErrors(true);
+        } else {
+            setRenderLoading(true);
+
+            //Show the loading page for 3.5 seconds on purpose.
+            setTimeout(() => {
+                //Dispatch the user's details to the userLogin action creator. When a response is returned, then an 'errorFlag' value should be returned from the action creator. If the errorFlag is true, then verification error should show and loadingPage is unmounted.
+                userLogin(formValues).then((errorFlag) => {
+                    setHasErrors(errorFlag);
+
+                    if (errorFlag === true) {
+                        setRenderLoading(false);
+                    }
+                });
+            }, 3500);
+        }
+    };
+
+    const renderErrorText = () => {
+        //This function renders the same verification error text, but with different opacities according to the hasErrors state.
+        if (hasErrors === true) {
+            return (
+                <Fade>
+                    <ErrorTextVisible>
+                        Your verification details were incorrect.
+                    </ErrorTextVisible>
+                </Fade>
+            );
+        } else {
+            return (
+                <ErrorTextInvisible>
+                    Your verification details were incorrect.
+                </ErrorTextInvisible>
+            );
+        }
     };
 
     return (
         <>
+            <LoadingPage renderLoading={renderLoading} />
             <MainContainer>
                 <WrapperContainer>
                     <LogoContainer to="/">
@@ -67,6 +145,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
                     </StyledLoginHeader>
                     <form onSubmit={handleSubmit(handleUserLogin)}>
                         <FormContainer>
+                            {renderErrorText()}
                             <InputField
                                 formName="email"
                                 componentType="input"
