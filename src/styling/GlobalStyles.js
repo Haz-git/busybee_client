@@ -9,6 +9,7 @@ export const GlobalStyle = createGlobalStyle`
 
     body {
         height: 100%;
+        background: ${({ theme }) => theme.background};
     }
 
     a {
