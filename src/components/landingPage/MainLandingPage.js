@@ -10,10 +10,9 @@ import { Link } from 'react-router-dom';
 //Styles:
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 
 const MobMainContainer = styled.div`
-    background: ${(props) => props.theme.mainMobBackground};
+    background: ${(props) => props.theme.background};
     height: 100vh;
 `;
 
