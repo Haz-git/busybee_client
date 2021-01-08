@@ -1,11 +1,10 @@
 import React from 'react';
-import Fade from 'react-reveal/Fade';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 
-const fadeIn = keyframes`
+const fadeLoading = keyframes`
     0% { opacity: 0 }
     10% { opacity: 0.1}
     20% { opacity: 0.2}
@@ -25,12 +24,12 @@ const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
     background-color: ${({ theme }) => theme.background};
-    animation-name: ${fadeIn};
-    -webkit-animation: fadeIn 0.8s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadeIn 0.8s; /* Firefox < 16 */
-    -ms-animation: fadeIn 0.8s; /* Internet Explorer */
-    -o-animation: fadeIn 0.8s; /* Opera < 12.1 */
-    animation: fadeIn 0.8s;
+    animation-name: ${fadeLoading};
+    -webkit-animation: fadeLoading 0.8s; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: fadeLoading 0.8s; /* Firefox < 16 */
+    -ms-animation: fadeLoading 0.8s; /* Internet Explorer */
+    -o-animation: fadeLoading 0.8s; /* Opera < 12.1 */
+    animation: fadeLoading 0.8s ease;
     z-index: 9999;
 `;
 
