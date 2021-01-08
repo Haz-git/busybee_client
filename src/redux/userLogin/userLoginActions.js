@@ -9,7 +9,10 @@ const userLogin = (formValues) => async (dispatch) => {
         response = await api.post('/user/login', { ...formValues });
     } catch (err) {
         //If there is an error, that must mean the user's verification credentials are wrong.
-        console.log(err);
+        if (err) {
+            const errorFlag = true;
+            return errorFlag;
+        }
     }
 
     if (response) {
