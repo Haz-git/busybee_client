@@ -26,7 +26,7 @@ export const darkTheme = {
     navBottomBorder: '#293241',
     inputFieldLabel: '#E8E8E8',
     inputFieldColor: 'white',
-    inputFieldBG: '#1c1e37',
+    inputFieldBG: 'inherit',
     //MainMobilePage:
     mainMobBackground: '#0d1b2a',
     mainMobHeaderColor: '#e0e1dd',

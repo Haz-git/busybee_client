@@ -11,8 +11,8 @@ export const InputFieldContainer = styled.div`
     text-align: left;
 
     @media only screen and (max-width: 650px) and (orientation: portrait) {
-        padding-top: 0.35em;
-        padding-bottom: 0.35em;
+        padding-top: 0.3em;
+        padding-bottom: 0.3em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
@@ -62,13 +62,13 @@ export const StyledField = styled(Field)`
     }
 
     @media only screen and (max-width: 650px) {
-        height: 0em;
-        margin: 4px 0;
+        padding: 0.05em 0.8em;
+        margin: 0.1em 0;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        height: 35px;
-        margin: 4px 0;
+        padding: 0.05em 0.8em;
+        margin: 0.1em 0;
     }
 `;
 
