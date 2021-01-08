@@ -30,6 +30,10 @@ export const StyledLabel = styled.div`
     font-size: 17px;
     color: ${(props) => props.theme.inputFieldLabel};
 
+    //Rounded Look for mobile-fix:
+    border-radius: 0;
+    --webkit-appearance: none;
+
     @media only screen and (max-width: 650px) {
         font-size: 0.6em;
     }
