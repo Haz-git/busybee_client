@@ -41,17 +41,14 @@ export const StyledLabel = styled.div`
 
 export const StyledField = styled(Field)`
     width: 100%;
-    /* padding: 12px 10px; */
     padding: 0.65em 0.8em;
     margin: 0.1em 0;
     display: inline-block;
-    outline: 0;
-    border-width: 0 0 1px;
-    border-color: #e8e8e8;
-    /* border-bottom: 1px solid #e8e8e8; */
+    border: none;
+    border-bottom: 1px solid #e8e8e8;
     box-sizing: border-box;
     color: ${(props) => props.theme.inputFieldColor};
-    background-color: inherit;
+    background: transparent;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 100;
     font-size: 0.8em;
