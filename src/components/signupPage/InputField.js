@@ -45,8 +45,10 @@ export const StyledField = styled(Field)`
     padding: 0.65em 0.8em;
     margin: 0.1em 0;
     display: inline-block;
-    border: none;
-    border-bottom: 1px solid #e8e8e8;
+    outline: 0;
+    border-width: 0 0 1px;
+    border-color: #e8e8e8;
+    /* border-bottom: 1px solid #e8e8e8; */
     box-sizing: border-box;
     color: ${(props) => props.theme.inputFieldColor};
     background-color: inherit;
