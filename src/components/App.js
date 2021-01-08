@@ -19,6 +19,8 @@ import AuthCheckComponent from './AuthCheckComponent';
 
 //Authentication-Required Components:
 import Dashboard from './authComponents/Dashboard';
+import DashboardTopNavbar from './authComponents/DashBoardTopNavbar';
+import DashboardNavbar from './authComponents/DashboardNavbar';
 
 //Render
 
@@ -53,7 +55,13 @@ const App = withRouter(({ location }) => {
                         <GlobalStyle />
                         {location.pathname !== '/login' &&
                             location.pathname !== '/signup' && (
-                                <NavbarLanding modeStatus={changeModeStatus} />
+                                <DashboardTopNavbar
+                                    modeStatus={changeModeStatus}
+                                />
+                            )}
+                        {location.pathname !== '/login' &&
+                            location.pathname !== '/signup' && (
+                                <DashboardNavbar />
                             )}
                         <Switch>
                             <Route exact path="/" component={MainLandingPage} />
