@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
+import LoadingPage from './LoadingPage';
 import userLogin from '../../redux/userLogin/userLoginActions';
 import InputField from '../signupPage/InputField';
 import Fade from 'react-reveal/Fade';
@@ -17,7 +18,6 @@ import {
     PromptSpan,
 } from '../signupPage/MainSignupForm';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
-import LoadingPage from './LoadingPage';
 
 const MainContainer = styled.div`
     background: ${(props) => props.theme.background};
