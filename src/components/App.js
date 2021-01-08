@@ -49,8 +49,8 @@ const App = withRouter(({ location }) => {
         } else {
             return (
                 <>
-                    <GlobalStyle />
                     <ThemeProvider theme={grabbedTheme}>
+                        <GlobalStyle />
                         {location.pathname !== '/login' &&
                             location.pathname !== '/signup' && (
                                 <NavbarLanding modeStatus={changeModeStatus} />
