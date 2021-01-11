@@ -7,18 +7,13 @@ const userRegistration = (formValues, callback) => async (dispatch) => {
 
     const response = await api.post('/user/signup', { ...formValues });
 
-    //We'll feint a dispatch for the time being. There is no reducer set to collect this data.
-    // dispatch({
-    //     type: USER_REGISTRATION,
-    //     payload: response.data,
-    // });
+    //There is currently no dispatch for this function in Redux. Perhaps later we will need something like that.
+
     if (response) {
         console.log(response);
         //if response.ok === true, then the user's account has been created.
         callback(true);
     }
-
-    // history.push('/login');
 };
 
 export default userRegistration;
