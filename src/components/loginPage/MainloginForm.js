@@ -27,7 +27,11 @@ const MainContainer = styled.div`
 const WrapperContainer = styled.div`
     position: relative;
     top: 50vh;
-    transform: translateY(-30vh);
+    -webkit-transform: translateY(-40vh);
+    -moz-transform: translateY(-40vh);
+    -ms-transform: translateY(-40vh);
+    -o-transform: translateY(-40vh);
+    transform: translateY(-40vh);
     text-align: center;
 `;
 
@@ -37,9 +41,9 @@ const LogoContainer = styled(Link)`
 
 const StyledLoginHeader = styled.h1`
     color: ${({ theme }) => theme.MobHeaderColor};
-    font-size: 0.7em;
+    font-size: 0.9em;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-weight: 200;
+    font-weight: 900;
     margin-top: 0.5em;
 `;
 
