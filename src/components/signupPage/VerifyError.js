@@ -35,35 +35,35 @@ const MainContainer = styled.div`
 const StyledTextVisible = styled.label`
     font-family: 'Nunito', sans-serif;
     color: red;
-    font-size: 13px;
+    font-size: 0.5em;
     font-weight: 100;
     margin: 0;
     z-index: 10;
 
     @media only screen and (max-width: 650px) and (orientation: portrait) {
-        font-size: 9px;
+        font-size: 0.8em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        font-size: 9px;
+        font-size: 1.2;
     }
 `;
 
 const StyledTextInvisible = styled.label`
     font-family: 'Nunito', sans-serif;
     color: red;
-    font-size: 13px;
+    font-size: 0.5em;
     font-weight: 100;
     opacity: 0;
     margin: 0;
     z-index: 10;
 
     @media only screen and (max-width: 650px) and (orientation: portrait) {
-        font-size: 9px;
+        font-size: 0.8em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        font-size: 9px;
+        font-size: 1.2em;
     }
 `;
 

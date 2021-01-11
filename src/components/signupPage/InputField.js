@@ -26,22 +26,22 @@ export const StyledLabel = styled.div`
     align-items: center;
     justify-content: space-between;
     font-family: 'Nunito', sans-serif, Helvetica;
-    font-weight: 700;
-    font-size: 17px;
+    font-weight: 200;
+    font-size: 1em;
     color: ${(props) => props.theme.inputFieldLabel};
 
     @media only screen and (max-width: 650px) {
-        font-size: 0.6em;
+        font-size: 0.8em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        font-size: 13px;
+        font-size: 1.5em;
     }
 `;
 
 export const StyledField = styled(Field)`
     width: 100%;
-    padding: 0.65em 0.8em;
+    padding: 0em 1em;
     margin: 0.1em 0;
     display: inline-block;
     border: none;
@@ -50,8 +50,8 @@ export const StyledField = styled(Field)`
     color: ${(props) => props.theme.inputFieldColor};
     background: transparent;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-weight: 100;
-    font-size: 0.8em;
+    font-weight: 900;
+    font-size: 0.9em;
 
     //Rounded Look for mobile-fix:
     border-radius: 0;
@@ -64,7 +64,7 @@ export const StyledField = styled(Field)`
 
     @media only screen and (max-width: 650px) {
         padding: 0.05em 0.8em;
-        margin: 0.1em 0;
+        margin: 0.5em 0;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {

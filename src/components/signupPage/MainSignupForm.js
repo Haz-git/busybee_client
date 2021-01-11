@@ -32,6 +32,7 @@ const WrapperContainer = styled.div`
     top: 50vh;
     transform: translateY(-45vh);
     text-align: center;
+    padding: 0.5em 0;
 `;
 
 const LogoContainer = styled(Link)`
@@ -40,9 +41,9 @@ const LogoContainer = styled(Link)`
 
 const StyledSignUpHeader = styled.h1`
     color: ${({ theme }) => theme.MobHeaderColor};
-    font-size: 0.7em;
+    font-size: 0.9em;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-weight: 200;
+    font-weight: 900;
     margin-top: 0.5em;
 `;
 
@@ -80,23 +81,25 @@ export const StyledLockIcon = styled(Lock2)`
 
 export const StyledLogo = styled.img`
     object-fit: cover;
-    height: 5.5em;
-    width: 5.5em;
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
 const NoticeContainer = styled.div``;
 
 export const PromptSpan = styled.span`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 0.3em;
+    font-size: 0.8em;
     font-weight: 300;
     color: ${({ theme }) => theme.MobPromptSpan};
 `;
 
 export const PromptLink = styled(Link)`
-    margin-left: 0.7em;
+    margin-left: 0.5em;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 0.3em;
+    font-size: 0.8em;
     font-weight: 600;
     color: ${({ theme }) => theme.MobPromptLink};
 `;
