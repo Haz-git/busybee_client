@@ -26,7 +26,11 @@ const CustomButton = withStyles({
 
 //Render:
 const SubmitButton = ({ label }) => {
-    return <CustomButton type="submit">{label}</CustomButton>;
+    return (
+        <CustomButton type="submit" value="Submit" id="submit">
+            {label}
+        </CustomButton>
+    );
 };
 
 export default SubmitButton;
