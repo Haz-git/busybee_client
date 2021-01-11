@@ -277,6 +277,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                     <form
                         onSubmit={handleSubmit(dispatchFormValues)}
                         name="registerForm"
+                        id="regForm"
                     >
                         <FormContainer>
                             <InputField
@@ -331,7 +332,10 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                                 <StyledLockIcon />
                             </InputField>
                             <ButtonContainer>
-                                <SubmitButton label="Create new account" />
+                                <SubmitButton
+                                    label="Create new account"
+                                    formID="regForm"
+                                />
                             </ButtonContainer>
                         </FormContainer>
                     </form>
