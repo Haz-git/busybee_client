@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { reduxForm } from 'redux-form';
+import { reduxForm, reset } from 'redux-form';
 import { connect } from 'react-redux';
 import userRegistration from '../../redux/userRegistration/userRegistrationActions';
 import { Link } from 'react-router-dom';
@@ -11,6 +11,11 @@ import VerifyError from './VerifyError';
 
 //Styles:
 import styled from 'styled-components';
+import { withStyles } from '@material-ui/core/styles';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import Button from '@material-ui/core/Button';
 import { Mail } from '@styled-icons/entypo/Mail';
 import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { UserCircle } from '@styled-icons/boxicons-solid/UserCircle';
@@ -96,12 +101,46 @@ export const PromptLink = styled(Link)`
     color: ${({ theme }) => theme.MobPromptLink};
 `;
 
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        backgroundColor: '#136539',
+        '& .MuiAlert-icon': {
+            fontSize: '1.25em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '.85em',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
+
+const CustomAlertButton = withStyles(() => ({
+    root: {
+        padding: '2em 4em',
+        margin: '0',
+        height: '2em',
+        maxWidth: '4.5em',
+        minWidth: '4.5em',
+        fontFamily: 'Nunito, sans-serif, helvetica',
+        fontSize: '.5em',
+        fontWeight: '500',
+    },
+}))(Button);
+
+//Helper functions:
+const Alert = (props) => {
+    return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+};
+
 //Render:
 
 const MainSignupForm = ({ handleSubmit, userRegistration }) => {
     //Client Verification Handlers:
     //We will use the browser to handle verification.
-
+    //Snackbar controls the label that indicates proper user regristration.
+    const [openSnackBar, setOpenSnackBar] = useState(false);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
         undefined
@@ -148,20 +187,34 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
         }
     };
 
-    const dispatchFormValues = (formValues) => {
+    const dispatchFormValues = (formValues, dispatch) => {
         //Dispatch function will first run through all checker functions.
+
+        //We will use variables to also store the result instead of React state variables because they take some time to 'set' the results (async);
+
+        //Meet requirements === false;
+        let fieldsEmpty;
+        let invalidUsername;
+        let invalidPassword;
+        let invalidPasswordMatchVar;
+
         setAreFieldsEmpty(fieldEmptyChecker(formValues));
+        fieldsEmpty = fieldEmptyChecker(formValues);
 
         if (formValues.userName !== undefined) {
             setHasInvalidUsernameLength(
                 usernameLengthChecker(formValues.userName)
             );
+
+            invalidUsername = usernameLengthChecker(formValues.userName);
         }
 
         if (formValues.password !== undefined) {
             setHasInvalidPasswordLength(
                 passwordLengthChecker(formValues.password)
             );
+
+            invalidPassword = passwordLengthChecker(formValues.password);
         }
 
         if (
@@ -174,16 +227,36 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                     formValues.passwordConfirm
                 )
             );
+
+            invalidPasswordMatchVar = passwordMatchChecker(
+                formValues.password,
+                formValues.passwordConfirm
+            );
         }
 
         if (
-            areFieldsEmpty === false &&
-            hasInvalidUsernameLength === false &&
-            hasInvalidPasswordLength === false &&
-            invalidPasswordMatch === false
+            fieldsEmpty === false &&
+            invalidUsername === false &&
+            invalidPassword === false &&
+            invalidPasswordMatchVar === false
         ) {
-            userRegistration(formValues);
+            userRegistration(formValues, showSnackBar);
+            dispatch(reset('registrationForm'));
         }
+    };
+
+    //Controls opening the snackbar:
+    const showSnackBar = (bool) => {
+        setOpenSnackBar(bool);
+    };
+
+    //Controls closing the snackbar:
+    const closeSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackBar(false);
     };
 
     return (
@@ -201,7 +274,10 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                         render={areFieldsEmpty}
                         center="true"
                     />
-                    <form onSubmit={handleSubmit(dispatchFormValues)}>
+                    <form
+                        onSubmit={handleSubmit(dispatchFormValues)}
+                        name="registerForm"
+                    >
                         <FormContainer>
                             <InputField
                                 formName="firstName"
@@ -264,6 +340,31 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                         <PromptLink to="/login">Login here.</PromptLink>
                     </NoticeContainer>
                 </WrapperContainer>
+                <Slide direction="right" in={openSnackBar} timeout="exit">
+                    <Snackbar
+                        open={openSnackBar}
+                        autoHideDuration={20000}
+                        onClose={closeSnackBar}
+                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    >
+                        <Alert
+                            severity="success"
+                            action={
+                                <Link to="/login">
+                                    <CustomAlertButton
+                                        variant="contained"
+                                        color="primary"
+                                        size="small"
+                                    >
+                                        Login
+                                    </CustomAlertButton>
+                                </Link>
+                            }
+                        >
+                            Your account has been created!
+                        </Alert>
+                    </Snackbar>
+                </Slide>
             </MainContainer>
         </>
     );
