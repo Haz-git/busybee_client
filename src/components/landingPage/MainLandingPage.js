@@ -6,6 +6,7 @@ import {
     isMobile,
 } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+import gymjot_logo from '../../imgs/gymjot_transparent.png';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,16 +26,26 @@ const MobWrapper = styled.div`
 
 const MobHeaderContainer = styled.div``;
 
+const LogoContainer = styled.div``;
+
+export const StyledMainLogo = styled.img`
+    object-fit: cover;
+    height: 10em;
+    width: 10em;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+`;
+
 const MobHeader = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 2.5em;
+    font-size: 4em;
     font-weight: 100;
     color: ${(props) => props.theme.mainMobHeaderColor};
 `;
 
 const MobLabel = styled.label`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 0.8em;
+    font-size: 1.2em;
     font-weight: 100;
     color: ${(props) => props.theme.mainMobHeaderColor};
 `;
@@ -59,6 +70,12 @@ const MainLandingPage = () => {
                     <MobMainContainer>
                         <MobWrapper>
                             <MobHeaderContainer>
+                                <LogoContainer>
+                                    <StyledMainLogo
+                                        src={gymjot_logo}
+                                        alt="gymjot logo"
+                                    />
+                                </LogoContainer>
                                 <MobHeader>GymJot</MobHeader>
                                 <MobLabel>Train more efficiently.</MobLabel>
                             </MobHeaderContainer>
