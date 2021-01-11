@@ -54,15 +54,15 @@ const App = withRouter(({ location }) => {
                     <ThemeProvider theme={grabbedTheme}>
                         <GlobalStyle />
                         {location.pathname !== '/login' &&
-                            location.pathname !== '/signup' && (
+                            location.pathname !== '/signup' &&
+                            location.pathname !== '/' && (
                                 <DashboardTopNavbar
                                     modeStatus={changeModeStatus}
                                 />
                             )}
                         {location.pathname !== '/login' &&
-                            location.pathname !== '/signup' && (
-                                <DashboardNavbar />
-                            )}
+                            location.pathname !== '/signup' &&
+                            location.pathname !== '/' && <DashboardNavbar />}
                         <Switch>
                             <Route exact path="/" component={MainLandingPage} />
                             <Route
