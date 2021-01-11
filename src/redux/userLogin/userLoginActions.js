@@ -15,6 +15,8 @@ const userLogin = (formValues) => async (dispatch) => {
         }
     }
 
+    //There is currently no dispatch for this function in Redux. Perhaps later we will need something like that.
+
     if (response) {
         try {
             localStorage.setItem('jwt', JSON.stringify(response.data.token));
