@@ -88,7 +88,6 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
         setHasErrors is responsible for rendering the verification error if the user's credentials are wrong.
         renderLoading controls the loading screen after the login details are submitted.
     */
-
     const [hasErrors, setHasErrors] = useState(null);
     const [renderLoading, setRenderLoading] = useState(null);
 
