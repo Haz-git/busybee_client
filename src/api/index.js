@@ -4,6 +4,6 @@ import axios from 'axios';
 
 export default axios.create({
     // baseURL: 'http://localhost:7467/api',
-    baseURL: 'https://gymjot.herokuapp.com/',
+    baseURL: 'https://gymjot.herokuapp.com/api',
     withCredentials: true,
 });
