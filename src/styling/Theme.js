@@ -15,9 +15,17 @@ export const lightTheme = {
     MobIconColor: 'black',
     MobPromptSpan: 'black',
     MobPromptLink: '#14A84B',
-    //Login
+    //Login:
     MobHeaderColor: 'black',
-    //Main Dashboard
+    //Loading:
+    SpinnerColor: 'black',
+    SpinnerCharacter: 'black',
+    //Main Dashboard:
+    DashSpinnerColor: 'black',
+    DashSpinnerCharacter: 'black',
+    //Bottom Navbar:
+    NavColor: 'white',
+    NavIconColor: 'black',
 };
 
 export const darkTheme = {
@@ -35,7 +43,15 @@ export const darkTheme = {
     MobIconColor: 'white',
     MobPromptSpan: 'white',
     MobPromptLink: '#14A84B',
-    //Login
+    //Login:
     MobHeaderColor: '#E8E8E8',
-    //Main Dashboard
+    //Loading:
+    SpinnerColor: 'white',
+    SpinnerCharacter: 'white',
+    //Main Dashboard:
+    DashSpinnerColor: 'white',
+    DashSpinnerCharacter: 'white',
+    //Bottom Navbar:
+    NavColor: '#1d262d',
+    NavIconColor: 'white',
 };
