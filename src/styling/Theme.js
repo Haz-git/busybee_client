@@ -23,6 +23,10 @@ export const lightTheme = {
     //Main Dashboard:
     DashSpinnerColor: 'black',
     DashSpinnerCharacter: 'black',
+    //UserGreeting:
+    UserGreetingColor: 'black',
+    UserGreetingBG: '#293241',
+    LogoShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
     //Bottom Navbar:
     NavColor: 'white',
     NavIconColor: 'black',
@@ -30,7 +34,7 @@ export const lightTheme = {
 
 export const darkTheme = {
     //Generals:
-    background: '#293241',
+    background: '#14181F',
     generalText: '#f6f9fc',
     navBottomBorder: '#293241',
     inputFieldLabel: '#E8E8E8',
@@ -51,6 +55,10 @@ export const darkTheme = {
     //Main Dashboard:
     DashSpinnerColor: 'white',
     DashSpinnerCharacter: 'white',
+    //UserGreeting:
+    UserGreetingColor: 'white',
+    UserGreetingBG: '#293241',
+    LogoShadow: 'rgba(255, 255, 255, 0.4) 0px 3px 8px',
     //Bottom Navbar:
     NavColor: '#1d262d',
     NavIconColor: 'white',
