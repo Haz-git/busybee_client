@@ -76,7 +76,7 @@ const DashboardNavbar = () => {
                     <NavItem>
                         <StyledStatsIcon />
                     </NavItem>
-                    <NavItem>
+                    <NavItem to="/dashboard">
                         <StyledHomeIcon />
                     </NavItem>
                     <NavItem>
