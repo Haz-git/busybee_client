@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
     BrowserView,
     MobileView,
@@ -6,6 +6,8 @@ import {
     isMobile,
 } from 'react-device-detect';
 import { Link } from 'react-router-dom';
+import { getJWT } from '../../utils/jwthelper';
+import history from '../historyObject';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
 
 //Styles:
@@ -63,6 +65,16 @@ const MobButtonDiv = styled.div`
 
 //Render:
 const MainLandingPage = () => {
+    useEffect(() => {
+        //This useEffect serves to check if the user has a JWT. If avaliable --> send to AuthCheck to check to expiration.
+
+        const jwtFromStorage = getJWT();
+
+        if (jwtFromStorage !== undefined && jwtFromStorage !== null) {
+            history.push('/dashboard');
+        }
+    }, []);
+
     const renderMainPage = () => {
         if (isMobile) {
             return (
