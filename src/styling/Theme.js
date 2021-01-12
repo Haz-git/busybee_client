@@ -17,6 +17,7 @@ export const lightTheme = {
     MobPromptLink: '#14A84B',
     //Login
     MobHeaderColor: 'black',
+    //Main Dashboard
 };
 
 export const darkTheme = {
@@ -36,4 +37,5 @@ export const darkTheme = {
     MobPromptLink: '#14A84B',
     //Login
     MobHeaderColor: '#E8E8E8',
+    //Main Dashboard
 };
