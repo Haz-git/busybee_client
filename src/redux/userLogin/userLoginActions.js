@@ -32,6 +32,11 @@ const userLogin = (formValues) => async (dispatch) => {
             }
         }
     }
+
+    dispatch({
+        type: USER_LOG_IN,
+        payload: response.data,
+    });
 };
 
 export default userLogin;
