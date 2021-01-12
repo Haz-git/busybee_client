@@ -35,6 +35,9 @@ class AuthenticatedComponents extends Component {
                 history.push('/login');
                 alert('Your session has expired. Please log in to continue.');
             }
+
+            //If the JWT is availiable and has not expired, then push the user to the dashboard:
+            history.push('/dashboard');
         }
 
         //We need additional verification-- server sided. I was thinking that we could send a direct request to the API here, verify and send 'confirmed' or failed to procced to render the child components.
