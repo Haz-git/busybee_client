@@ -38,7 +38,7 @@ const SpinnerContainer = styled.div`
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: White;
+    color: ${({ theme }) => theme.SpinnerColor};
 `;
 
 const LoadingCharacterContainer = styled.div`
@@ -46,7 +46,6 @@ const LoadingCharacterContainer = styled.div`
     top: 54%;
     left: 50%;
     transform: translate(-50%, -50%);
-    color: White;
     white-space: nowrap;
 `;
 
@@ -54,7 +53,7 @@ const LoadingCharacters = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
     font-size: 1em;
     font-weight: 100;
-    color: White;
+    color: ${({ theme }) => theme.SpinnerCharacter};
 `;
 
 //Render:
