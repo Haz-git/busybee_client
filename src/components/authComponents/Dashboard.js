@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 
 //Components:
 import UserGreeting from './dashboardComponents/UserGreeting';
+import UserPowerStats from './dashboardComponents/UserPowerStats';
 
 //Styles:
 import styled from 'styled-components';
@@ -36,6 +37,16 @@ const MainContainer = styled.div`
     padding: 1em 1em;
 `;
 
+const StyledDivider = styled.hr`
+    margin-top: 0.4em;
+    margin-bottom: 0.4em;
+    border: none;
+    height: 1px;
+    border-radius: 50%;
+    color: ${({ theme }) => theme.DashHrBG};
+    background-color: ${({ theme }) => theme.DashHrBG};
+`;
+
 //Render:
 
 const Dashboard = ({ user }) => {
@@ -57,6 +68,8 @@ const Dashboard = ({ user }) => {
                         userID={_id}
                         userName={userName}
                     />
+                    <StyledDivider />
+                    <UserPowerStats />
                 </MainContainer>
             );
         } else {
