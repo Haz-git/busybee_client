@@ -23,10 +23,13 @@ export const lightTheme = {
     //Main Dashboard:
     DashSpinnerColor: 'black',
     DashSpinnerCharacter: 'black',
+    DashHrBG: 'black',
     //UserGreeting:
     UserGreetingColor: 'black',
     UserGreetingBG: '#293241',
     LogoShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+    //UserPowerStats:
+    UserPowerHeaderColor: 'black',
     //Bottom Navbar:
     NavColor: 'white',
     NavIconColor: 'black',
@@ -55,10 +58,13 @@ export const darkTheme = {
     //Main Dashboard:
     DashSpinnerColor: 'white',
     DashSpinnerCharacter: 'white',
+    DashHrBG: 'white',
     //UserGreeting:
     UserGreetingColor: 'white',
     UserGreetingBG: '#293241',
     LogoShadow: 'rgba(255, 255, 255, 0.4) 0px 3px 8px',
+    //UserPowerStats:
+    UserPowerHeaderColor: 'white',
     //Bottom Navbar:
     NavColor: '#1d262d',
     NavIconColor: 'white',
