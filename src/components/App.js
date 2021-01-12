@@ -19,7 +19,6 @@ import AuthCheckComponent from './AuthCheckComponent';
 
 //Authentication-Required Components:
 import Dashboard from './authComponents/Dashboard';
-import DashboardTopNavbar from './authComponents/DashBoardTopNavbar';
 import DashboardNavbar from './authComponents/DashboardNavbar';
 
 //Render
@@ -53,13 +52,6 @@ const App = withRouter(({ location }) => {
                 <>
                     <ThemeProvider theme={grabbedTheme}>
                         <GlobalStyle />
-                        {location.pathname !== '/login' &&
-                            location.pathname !== '/signup' &&
-                            location.pathname !== '/' && (
-                                <DashboardTopNavbar
-                                    modeStatus={changeModeStatus}
-                                />
-                            )}
                         {location.pathname !== '/login' &&
                             location.pathname !== '/signup' &&
                             location.pathname !== '/' && <DashboardNavbar />}
