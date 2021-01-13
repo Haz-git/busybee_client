@@ -17,7 +17,7 @@ const MainHeader = styled.h1`
     font-family: 'Lato';
     font-size: 1.5em;
     color: ${({ theme }) => theme.UserGreetingColor};
-    font-weight: 400;
+    font-weight: 900;
     margin-bottom: 0.2em;
 `;
 
