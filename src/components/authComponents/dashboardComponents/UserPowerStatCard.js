@@ -8,7 +8,8 @@ const MainContainer = styled.div`
     padding: 0.7em 0.7em;
     border-radius: 0.5em;
     background: #27303f;
-    margin: 0 auto;
+    margin: 0 0.3em;
+    border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
