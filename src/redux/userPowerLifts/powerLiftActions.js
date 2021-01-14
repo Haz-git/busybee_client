@@ -12,10 +12,10 @@ export function getUserLiftingData() {
 
         console.log(response);
 
-        // dispatch({
-        //     type: USER_ADD_NEW_BENCH,
-        //     payload: response.data,
-        // });
+        dispatch({
+            type: USER_ADD_NEW_BENCH,
+            payload: response.data.userExistingPLStats,
+        });
     };
 }
 
