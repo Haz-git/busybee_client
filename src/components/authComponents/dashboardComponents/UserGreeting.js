@@ -42,8 +42,6 @@ const StyledLogo = styled.img`
 //Render:
 
 const UserGreeting = ({ firstName, lastName, userName, email, _id }) => {
-    console.log(userName);
-
     return (
         <>
             <MainContainer>
