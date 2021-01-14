@@ -64,7 +64,7 @@ export const darkTheme = {
     UserGreetingBG: '#293241',
     LogoShadow: 'rgba(255, 255, 255, 0.4) 0px 3px 8px',
     //UserPowerStats:
-    UserPowerHeaderColor: 'white',
+    UserPowerHeaderColor: '#fdbc3d',
     //Bottom Navbar:
     NavColor: '#1d262d',
     NavIconColor: 'white',
