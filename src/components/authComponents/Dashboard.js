@@ -51,7 +51,7 @@ const StyledDivider = styled.hr`
 
 const Dashboard = ({ user }) => {
     const renderLoadingIfNoUserDetails = () => {
-        if (user !== undefined && user !== null) {
+        if (user.userLogIn !== undefined && user.userLogIn !== null) {
             const {
                 firstName,
                 lastName,
