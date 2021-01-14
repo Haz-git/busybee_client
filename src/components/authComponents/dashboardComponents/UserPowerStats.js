@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import { connect } from 'react-redux';
 
 //Components:
 import UserPowerStatCard from './UserPowerStatCard';
@@ -7,6 +8,14 @@ import UserPowerStatCard from './UserPowerStatCard';
 import benchpress from '../../../imgs/benchpress256.png';
 import squat from '../../../imgs/squat256.png';
 import deadlift from '../../../imgs/deadlift256.png';
+
+//Actions:
+import {
+    addNewBench,
+    addNewSquat,
+    addNewDeadlift,
+    getUserLiftingData,
+} from '../../../redux/userPowerLifts/powerLiftActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -26,23 +35,41 @@ const MainHeader = styled.h2`
 const StatCardContainer = styled.div`
     margin-top: 1em;
     display: flex;
+    justify-content: center;
+    align-content: center;
 `;
 
 //Render:
 
-const UserPowerStats = () => {
+const UserPowerStats = ({ getUserLiftingData }) => {
+    useEffect(() => {
+        getUserLiftingData();
+    }, []);
+
     return (
         <>
             <MainContainer>
                 <MainHeader>Your main lifts</MainHeader>
                 <StatCardContainer>
-                    <UserPowerStatCard header="Deadlift" img={deadlift} />
-                    <UserPowerStatCard header="Squat" img={squat} />
-                    <UserPowerStatCard header="Bench" img={benchpress} />
+                    <UserPowerStatCard
+                        header="Deadlift"
+                        img={deadlift}
+                        addAction={addNewDeadlift}
+                    />
+                    <UserPowerStatCard
+                        header="Squat"
+                        img={squat}
+                        addAction={addNewSquat}
+                    />
+                    <UserPowerStatCard
+                        header="Bench"
+                        img={benchpress}
+                        addAction={addNewBench}
+                    />
                 </StatCardContainer>
             </MainContainer>
         </>
     );
 };
 
-export default UserPowerStats;
+export default connect(null, { getUserLiftingData })(UserPowerStats);
