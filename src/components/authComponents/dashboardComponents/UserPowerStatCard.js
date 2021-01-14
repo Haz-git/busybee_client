@@ -40,7 +40,7 @@ const DescLabel = styled.p`
 
 //Render:
 
-const UserPowerStatCard = ({ header, img }) => {
+const UserPowerStatCard = ({ header, img, addAction }) => {
     return (
         <>
             <MainContainer>
