@@ -41,7 +41,7 @@ const StatCardContainer = styled.div`
 
 //Render:
 
-const UserPowerStats = ({ getUserLiftingData }) => {
+const UserPowerStats = ({ getUserLiftingData, existingStats }) => {
     useEffect(() => {
         getUserLiftingData();
     }, []);
@@ -55,16 +55,34 @@ const UserPowerStats = ({ getUserLiftingData }) => {
                         header="Deadlift"
                         img={deadlift}
                         addAction={addNewDeadlift}
+                        existingStat={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats.deadlift
+                                : null
+                        }
                     />
                     <UserPowerStatCard
                         header="Squat"
                         img={squat}
                         addAction={addNewSquat}
+                        existingStat={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats.squat
+                                : null
+                        }
                     />
                     <UserPowerStatCard
                         header="Bench"
                         img={benchpress}
                         addAction={addNewBench}
+                        existingStat={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats.bench
+                                : null
+                        }
                     />
                 </StatCardContainer>
             </MainContainer>
@@ -72,4 +90,10 @@ const UserPowerStats = ({ getUserLiftingData }) => {
     );
 };
 
-export default connect(null, { getUserLiftingData })(UserPowerStats);
+const mapStateToProps = (state) => {
+    return {
+        existingStats: state.powerStats,
+    };
+};
+
+export default connect(mapStateToProps, { getUserLiftingData })(UserPowerStats);
