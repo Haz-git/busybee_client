@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 //Styles:
 import styled from 'styled-components';
 import { Edit } from '@styled-icons/fa-solid/Edit';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
+import { withStyles } from '@material-ui/core/styles';
 
 const MainContainer = styled.div`
     position: relative;
@@ -15,21 +19,26 @@ const MainContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 `;
 
-const EditCorner = styled.div`
+const EditCorner = styled.button`
     text-align: center;
     position: absolute;
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.9em;
+    width: 1.9em;
     top: 0;
     right: 0;
     border-top-right-radius: 24em;
     border-bottom-left-radius: 100em;
     background: #fdbc3d;
+    border: none;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const StyledEditIcon = styled(Edit)`
-    height: 0.8em;
-    width: 0.8em;
+    height: 1em;
+    width: 1em;
     position: absolute;
     top: 0.2em;
     right: 0.2em;
@@ -64,6 +73,12 @@ const DescLabel = styled.p`
 //Render:
 
 const UserPowerStatCard = ({ header, img, addAction, existingStat }) => {
+    //Various states, manages modal open/close and user inputs.
+    const [modalOpen, setModalOpen] = useState(false);
+    const [inputLb, setInputLb] = useState(null);
+    const [inputKg, setInputKg] = useState(null);
+
+    //Check for existing values for lbs.
     const renderExistingStatLbs = () => {
         if (existingStat !== null && existingStat !== 'NA') {
             return existingStat;
@@ -72,6 +87,7 @@ const UserPowerStatCard = ({ header, img, addAction, existingStat }) => {
         }
     };
 
+    //Render properly calculated kg from lbs.
     const renderExistingStatKgs = () => {
         if (existingStat !== null && existingStat !== 'NA') {
             //Calculation for lbs to kg.
@@ -80,10 +96,21 @@ const UserPowerStatCard = ({ header, img, addAction, existingStat }) => {
             return '-';
         }
     };
+
+    //handles modal open/close:
+
+    const handleOpen = () => {
+        setModalOpen(true);
+    };
+
+    const handleClose = () => {
+        setModalOpen(false);
+    };
+
     return (
         <>
             <MainContainer>
-                <EditCorner>
+                <EditCorner type="button" onClick={handleOpen}>
                     <StyledEditIcon />
                 </EditCorner>
                 <MainHeader>{header}</MainHeader>
@@ -95,6 +122,22 @@ const UserPowerStatCard = ({ header, img, addAction, existingStat }) => {
                     <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
                 </DescContainer>
             </MainContainer>
+            <Modal
+                aria-labelledby="powerlift-modal"
+                aria-describedby="powerlifts modal for user input"
+                // className={classes.modal}
+                open={modalOpen}
+                onClose={handleClose}
+                closeAfterTransition
+                BackdropComponent={Backdrop}
+                BackdropProps={{
+                    timeout: 500,
+                }}
+            >
+                <Fade in={modalOpen}>
+                    <h2> This is a test !</h2>
+                </Fade>
+            </Modal>
         </>
     );
 };
