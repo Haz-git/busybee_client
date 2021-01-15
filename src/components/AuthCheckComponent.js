@@ -20,7 +20,7 @@ class AuthenticatedComponents extends Component {
         //If there's no JWT present in the localstorage, no JWT must be sent over from server, meaning that login is wrong. Push the user back to the login page.
         if (!jwt) {
             history.push('/login');
-        } else {
+        } else if (jwt) {
             //After checking if there is a JWT in the first place, we must check if the JWT is expired.
             const jsonWebToken = localStorage.getItem('jwt');
             const formattedToken = jsonWebToken.split(' ')[1].slice(0, -1);
@@ -31,13 +31,18 @@ class AuthenticatedComponents extends Component {
             const dateNow = new Date();
 
             if (decodedToken.payload.exp * 1000 < dateNow.getTime()) {
+                //The JWT is expired: Remove the JWT.
+                localStorage.removeItem('jwt');
                 isExpired = true;
-                history.push('/login');
                 alert('Your session has expired. Please log in to continue.');
+                history.push('/login');
+            } else {
+                //The JWT is valid and not expired:
+
+                history.push('/dashboard');
             }
 
             //If the JWT is availiable and has not expired, then push the user to the dashboard:
-            history.push('/dashboard');
         }
 
         //We need additional verification-- server sided. I was thinking that we could send a direct request to the API here, verify and send 'confirmed' or failed to procced to render the child components.
