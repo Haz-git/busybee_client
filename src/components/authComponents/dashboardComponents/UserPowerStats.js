@@ -41,7 +41,13 @@ const StatCardContainer = styled.div`
 
 //Render:
 
-const UserPowerStats = ({ getUserLiftingData, existingStats }) => {
+const UserPowerStats = ({
+    getUserLiftingData,
+    existingStats,
+    addNewBench,
+    addNewSquat,
+    addNewDeadlift,
+}) => {
     useEffect(() => {
         getUserLiftingData();
     }, []);
@@ -58,7 +64,22 @@ const UserPowerStats = ({ getUserLiftingData, existingStats }) => {
                         existingStat={
                             existingStats.powerLiftStats !== undefined &&
                             existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats.deadlift
+                                ? existingStats.powerLiftStats
+                                      .userExistingPLStats.deadlift
+                                : null
+                        }
+                        recentStatWeightChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentDeadliftWeightChange.weightChange
+                                : null
+                        }
+                        recentStatTimeChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentDeadliftWeightChange.updateTime
                                 : null
                         }
                     />
@@ -69,7 +90,22 @@ const UserPowerStats = ({ getUserLiftingData, existingStats }) => {
                         existingStat={
                             existingStats.powerLiftStats !== undefined &&
                             existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats.squat
+                                ? existingStats.powerLiftStats
+                                      .userExistingPLStats.squat
+                                : null
+                        }
+                        recentStatWeightChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentSquatWeightChange.weightChange
+                                : null
+                        }
+                        recentStatTimeChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentSquatWeightChange.updateTime
                                 : null
                         }
                     />
@@ -80,7 +116,22 @@ const UserPowerStats = ({ getUserLiftingData, existingStats }) => {
                         existingStat={
                             existingStats.powerLiftStats !== undefined &&
                             existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats.bench
+                                ? existingStats.powerLiftStats
+                                      .userExistingPLStats.bench
+                                : null
+                        }
+                        recentStatWeightChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentBenchWeightChange.weightChange
+                                : null
+                        }
+                        recentStatTimeChange={
+                            existingStats.powerLiftStats !== undefined &&
+                            existingStats.powerLiftStats !== null
+                                ? existingStats.powerLiftStats
+                                      .recentBenchWeightChange.updateTime
                                 : null
                         }
                     />
@@ -96,4 +147,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getUserLiftingData })(UserPowerStats);
+export default connect(mapStateToProps, {
+    getUserLiftingData,
+    addNewBench,
+    addNewSquat,
+    addNewDeadlift,
+})(UserPowerStats);
