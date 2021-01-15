@@ -30,6 +30,9 @@ export const lightTheme = {
     LogoShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
     //UserPowerStats:
     UserPowerHeaderColor: 'black',
+    //UserPowerStatsModal:
+    ModalBG: 'white',
+    ModalHeader: '#fdbc3d',
     //Bottom Navbar:
     NavColor: 'white',
     NavIconColor: 'black',
@@ -65,7 +68,13 @@ export const darkTheme = {
     LogoShadow: 'rgba(255, 255, 255, 0.4) 0px 3px 8px',
     //UserPowerStats:
     UserPowerHeaderColor: '#fdbc3d',
+    //UserPowerStatsModal:
+    ModalBG:
+        'linear-gradient(180deg, rgba(30,44,70,1) 0%, rgba(25,32,43,1) 100%)',
+    ModalHeader: '#fdbc3d',
     //Bottom Navbar:
     NavColor: '#1d262d',
     NavIconColor: 'white',
+
+    //I liked the live coding and feedback, because I
 };
