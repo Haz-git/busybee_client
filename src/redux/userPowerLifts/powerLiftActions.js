@@ -13,74 +13,55 @@ export function getUserLiftingData() {
         console.log(response);
 
         dispatch({
-            type: USER_ADD_NEW_BENCH,
-            payload: response.data.userExistingPLStats,
+            type: USER_GET_EXISTING_DATA,
+            payload: response.data.responseObject,
         });
     };
 }
 
 export function addNewBench(newBenchValue) {
     return async (dispatch, getState) => {
-        const {
-            auth: {
-                user: { _id },
-            },
-        } = getState();
-
         const response = await api.post(`/user/addNewBench`, {
-            _id,
             newBenchValue,
         });
 
         console.log(response);
 
-        // dispatch({
-        //     type: USER_ADD_NEW_BENCH,
-        //     payload: response.data,
-        // });
+        dispatch({
+            type: USER_ADD_NEW_BENCH,
+            payload: response.data.responseObject,
+        });
     };
 }
 
 export function addNewSquat(newSquatValue) {
     return async (dispatch, getState) => {
-        const {
-            auth: {
-                user: { _id },
-            },
-        } = getState();
-
         const response = await api.post(`/user/addNewSquat`, {
-            _id,
             newSquatValue,
         });
 
         console.log(response);
 
-        // dispatch({
-        //     type: USER_ADD_NEW_SQUAT,
-        //     payload: response.data,
-        // });
+        dispatch({
+            type: USER_ADD_NEW_SQUAT,
+            payload: response.data.responseObject,
+        });
     };
 }
 
 export function addNewDeadlift(newDeadliftValue) {
     return async (dispatch, getState) => {
-        const {
-            auth: {
-                user: { _id },
-            },
-        } = getState();
+        console.log('action creator deadlift');
 
         const response = await api.post(`/user/addNewDeadlift`, {
-            _id,
             newDeadliftValue,
         });
 
         console.log(response);
 
-        // dispatch({
-        //     type: USER_ADD_NEW_DEADLIFT,
-        //     payload: response.data,
-        // });
+        dispatch({
+            type: USER_ADD_NEW_DEADLIFT,
+            payload: response.data.responseObject,
+        });
     };
 }
