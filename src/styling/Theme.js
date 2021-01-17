@@ -34,8 +34,9 @@ export const lightTheme = {
     ModalBG: 'white',
     ModalHeader: '#fdbc3d',
     //Bottom Navbar:
-    NavColor: 'white',
-    NavIconColor: 'black',
+    NavColor: 'black',
+    NavIconColor: 'white',
+    //Stats:
 };
 
 export const darkTheme = {
@@ -75,6 +76,5 @@ export const darkTheme = {
     //Bottom Navbar:
     NavColor: '#1d262d',
     NavIconColor: 'white',
-
-    //I liked the live coding and feedback, because I
+    //Stats:
 };
