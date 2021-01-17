@@ -77,8 +77,6 @@ const DescLabelTime = styled.label`
 //Render:
 
 const RecentWeightBox = ({ time, weight }) => {
-    console.log(time, typeof weight);
-
     const renderWeight = () => {
         if (weight !== 'NA') {
             return weight;
