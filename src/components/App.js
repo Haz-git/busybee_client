@@ -20,6 +20,8 @@ import AuthCheckComponent from './AuthCheckComponent';
 //Authentication-Required Components:
 import Dashboard from './authComponents/Dashboard';
 import DashboardNavbar from './authComponents/DashboardNavbar';
+import MainPrograms from './authComponents/programDashboard/MainPrograms';
+import MainStats from './authComponents/statsDashboard/MainStats';
 
 //Render
 
@@ -72,6 +74,16 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/dashboard"
                                     component={Dashboard}
+                                />
+                                <Route
+                                    exact
+                                    path="/programs"
+                                    component={MainPrograms}
+                                />
+                                <Route
+                                    exact
+                                    path="/stats"
+                                    component={MainStats}
                                 />
                             </AuthCheckComponent>
                         </Switch>
