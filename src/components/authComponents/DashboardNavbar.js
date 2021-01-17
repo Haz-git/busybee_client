@@ -1,5 +1,5 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 //Styles:
 import styled from 'styled-components';
@@ -59,7 +59,7 @@ const NavItemContainer = styled.div`
     justify-content: space-evenly;
 `;
 
-const NavItem = styled(Link)`
+const NavItem = styled(NavLink)`
     padding: 0.8em 0.8em;
 `;
 
@@ -70,19 +70,34 @@ const DashboardNavbar = () => {
         <>
             <MainContainer>
                 <NavItemContainer>
-                    <NavItem>
+                    <NavItem
+                        to="/dashboard"
+                        activeStyle={{ background: '#101530' }}
+                    >
                         <StyledCalendarIcon />
                     </NavItem>
-                    <NavItem>
+                    <NavItem
+                        to="/stats"
+                        activeStyle={{ background: '#101530' }}
+                    >
                         <StyledStatsIcon />
                     </NavItem>
-                    <NavItem to="/dashboard">
+                    <NavItem
+                        to="/dashboard"
+                        activeStyle={{ background: '#101530' }}
+                    >
                         <StyledHomeIcon />
                     </NavItem>
-                    <NavItem>
+                    <NavItem
+                        to="/programs"
+                        activeStyle={{ background: '#101530' }}
+                    >
                         <StyledBarbellIcon />
                     </NavItem>
-                    <NavItem>
+                    <NavItem
+                        to="/dashboard"
+                        activeStyle={{ background: '#101530' }}
+                    >
                         <StyledUserCogIcon />
                     </NavItem>
                 </NavItemContainer>
