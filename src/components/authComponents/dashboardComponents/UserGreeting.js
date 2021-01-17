@@ -13,7 +13,7 @@ const MainContainer = styled.div`
 
 const DetailsContainer = styled.div``;
 
-const MainHeader = styled.h1`
+export const MainHeader = styled.h1`
     font-family: 'Lato';
     font-size: 1.5em;
     color: ${({ theme }) => theme.UserGreetingColor};
