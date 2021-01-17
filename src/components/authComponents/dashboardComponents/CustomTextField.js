@@ -25,13 +25,27 @@ const StyledTextField = styled.input`
 //Render:
 
 const CustomTextField = ({ type, placeholder, existingStat, changeFunc }) => {
-    return (
-        <StyledTextField
-            type={type}
-            placeholder={existingStat}
-            onChange={changeFunc}
-        />
-    );
+    const renderPlaceholder = () => {
+        if (existingStat) {
+            return (
+                <StyledTextField
+                    type={type}
+                    placeholder={existingStat}
+                    onChange={changeFunc}
+                />
+            );
+        } else if (placeholder && !existingStat) {
+            return (
+                <StyledTextField
+                    type={type}
+                    placeholder={placeholder}
+                    onChange={changeFunc}
+                />
+            );
+        }
+    };
+
+    return <>{renderPlaceholder()}</>;
 };
 
 export default CustomTextField;
