@@ -6,12 +6,9 @@ import { Edit } from '@styled-icons/fa-solid/Edit';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import { withStyles } from '@material-ui/core/styles';
-import TextField from '@material-ui/core/TextField';
 import bicep from '../../../imgs/bicep.png';
-import Select from '@material-ui/core/Select';
-import FormControl from '@material-ui/core/FormControl';
-import MenuItem from '@material-ui/core/MenuItem';
+//Originally it's Fade, but MUI has taken that name:
+import FadeRR from 'react-reveal/Fade';
 
 //Components:
 import CustomSubmitButton from './CustomSubmitButton';
@@ -93,7 +90,7 @@ const DescLabel = styled.p`
 
 //Modal Container
 
-const ModalContainer = styled.div`
+export const ModalContainer = styled.div`
     position: absolute;
     left: 50%;
     top: 40%;
@@ -113,7 +110,8 @@ const ModalContainer = styled.div`
     }
 `;
 
-const ModalHeader = styled.h2`
+export const ModalHeader = styled.h2`
+    white-space: nowrap;
     font-size: 1em;
     font-weight: 900;
     color: ${({ theme }) => theme.ModalHeader};
@@ -128,7 +126,7 @@ const ModalPicture = styled.img`
         brightness(92%) contrast(86%);
 `;
 
-const ModalDesc = styled.p`
+export const ModalDesc = styled.p`
     margin-top: 0.5em;
     font-size: 0.8em;
     font-weight: 500;
@@ -161,7 +159,6 @@ const UserPowerStatCard = ({
     //Check for existing values for lbs.
     const renderExistingStatLbs = () => {
         if (existingStat !== null && existingStat !== 'NA') {
-            console.log(existingStat);
             return parseInt(existingStat);
         } else {
             return '-';
@@ -238,11 +235,9 @@ const UserPowerStatCard = ({
             >
                 <Fade in={modalOpen}>
                     <ModalContainer>
-                        <ModalHeader>Awesome!</ModalHeader>
+                        <ModalHeader>Oh, a new score?</ModalHeader>
                         <ModalPicture src={bicep} />
-                        <ModalDesc>
-                            Seems like you've hit a new milestone.
-                        </ModalDesc>
+                        <ModalDesc>Let us know how you're doing.</ModalDesc>
                         <form onSubmit={handleNewStatSubmit}>
                             <ModalInputContainer>
                                 <CustomTextField
@@ -263,25 +258,29 @@ const UserPowerStatCard = ({
                 </Fade>
             </Modal>
             <WrapperContainer>
-                <MainContainer>
-                    <EditCorner type="button" onClick={handleOpen}>
-                        <StyledEditIcon />
-                    </EditCorner>
-                    <MainHeader>{header}</MainHeader>
-                    <ImgContainer>
-                        <ExerciseImg src={img} />
-                    </ImgContainer>
-                    <DescContainer>
-                        <DescLabel>{renderExistingStatLbs()} lbs</DescLabel>
-                        <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
-                    </DescContainer>
-                </MainContainer>
-                <RecentWeightContainer>
-                    <RecentWeightBox
-                        time={recentStatTimeChange}
-                        weight={recentStatWeightChange}
-                    />
-                </RecentWeightContainer>
+                <FadeRR>
+                    <MainContainer>
+                        <EditCorner type="button" onClick={handleOpen}>
+                            <StyledEditIcon />
+                        </EditCorner>
+                        <MainHeader>{header}</MainHeader>
+                        <ImgContainer>
+                            <ExerciseImg src={img} />
+                        </ImgContainer>
+                        <DescContainer>
+                            <DescLabel>{renderExistingStatLbs()} lbs</DescLabel>
+                            <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
+                        </DescContainer>
+                    </MainContainer>
+                </FadeRR>
+                <FadeRR top>
+                    <RecentWeightContainer>
+                        <RecentWeightBox
+                            time={recentStatTimeChange}
+                            weight={recentStatWeightChange}
+                        />
+                    </RecentWeightContainer>
+                </FadeRR>
             </WrapperContainer>
         </>
     );
