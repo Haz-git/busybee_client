@@ -15,6 +15,7 @@ import {
 import CustomTextField from '../dashboardComponents/CustomTextField';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
+import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 import Fade from '@material-ui/core/Fade';
 
 const MainContainer = styled.div`
@@ -35,13 +36,31 @@ const SecondaryStatHeader = styled(MainHeader)`
     margin: 0.7em 0;
 `;
 
+const FormContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const StatModalHeader = styled(ModalHeader)`
+    margin-bottom: 0.7em;
+`;
+
 const StatContainer = styled.div``;
+
+const ButtonContainer = styled.div`
+    margin: 0 auto;
+    width: 4em;
+`;
 
 //Render:
 
 const MainStats = () => {
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
+
+    //State for user submission:
+    const [userNewExercise, setUserNewExercise] = useState(null);
 
     //Modal Functions:
     const openModal = () => {
@@ -50,6 +69,31 @@ const MainStats = () => {
 
     const closeModal = () => {
         setStatModalOpen(false);
+    };
+
+    //Control user input:
+
+    const handleUserInput = (e) => {
+        e.preventDefault();
+        setUserNewExercise(e.target.value);
+    };
+
+    //Control Submit:
+
+    const handleUserSubmit = (e) => {
+        e.preventDefault();
+
+        if (
+            userNewExercise === '' ||
+            userNewExercise === undefined ||
+            userNewExercise === null
+        ) {
+            alert('Please enter an exercise before submission.');
+        } else {
+            console.log(userNewExercise);
+        }
+
+        //Action Creator --> e.target.value;
     };
 
     return (
@@ -68,12 +112,22 @@ const MainStats = () => {
             >
                 <Fade in={statModalOpen}>
                     <ModalContainer>
-                        <ModalHeader>Track new exercise</ModalHeader>
-                        <form>
-                            <CustomTextField
-                                type="text"
-                                placeholder="Exercise Name"
-                            />
+                        <StatModalHeader>Track new exercise</StatModalHeader>
+                        <form onSubmit={handleUserSubmit}>
+                            <FormContainer>
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="Exercise Name"
+                                    changeFunc={handleUserInput}
+                                />
+                                <ButtonContainer>
+                                    <CustomSubmitButton
+                                        label="Add"
+                                        type="submit"
+                                        variant="contained"
+                                    />
+                                </ButtonContainer>
+                            </FormContainer>
                         </form>
                     </ModalContainer>
                 </Fade>
