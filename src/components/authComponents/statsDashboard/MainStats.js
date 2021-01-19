@@ -34,6 +34,7 @@ const SearchBarContainer = styled.div`
 `;
 
 const FlexWrapper = styled.div`
+    position: sticky;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
