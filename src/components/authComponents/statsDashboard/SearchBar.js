@@ -8,8 +8,8 @@ const WrapperContainer = styled.div`
     position: sticky;
     display: flex;
     max-height: 4em;
-    width: 17em;
-    max-width: 17em;
+    width: 100%;
+    max-width: 100%;
     align-items: center;
     justify-content: center;
 `;
@@ -46,11 +46,11 @@ const StyledInput = styled.input`
 
 //Render:
 
-const SearchBar = () => {
+const SearchBar = ({ value }) => {
     return (
         <WrapperContainer>
             <StyledSearchIcon />
-            <StyledInput />
+            <StyledInput placeholder={`${value} Total Stats`} />
         </WrapperContainer>
     );
 };
