@@ -5,7 +5,7 @@ import styled from 'styled-components';
 import { SearchCircle } from '@styled-icons/ionicons-solid/SearchCircle';
 
 const WrapperContainer = styled.div`
-    position: sticky;
+    position: relative;
     display: flex;
     max-height: 4em;
     width: 100%;
