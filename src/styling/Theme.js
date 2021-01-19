@@ -37,6 +37,15 @@ export const lightTheme = {
     NavColor: 'black',
     NavIconColor: 'white',
     //Stats:
+
+    //StatCard:
+    StatCardBG: 'white',
+    StatCardHeader: '#fdbc3d',
+    StatCardTime: 'black',
+    TrashIcon: 'red',
+    EditIcon: 'white',
+    CaretIcon: 'white',
+    ButtonBG: '#27303f',
 };
 
 export const darkTheme = {
@@ -77,4 +86,13 @@ export const darkTheme = {
     NavColor: '#1d262d',
     NavIconColor: 'white',
     //Stats:
+
+    //StatCard:
+    StatCardBG: '#27303f',
+    StatCardHeader: '#fdbc3d',
+    StatCardTime: 'white',
+    TrashIcon: '#CB3F46',
+    EditIcon: '#178B1F',
+    CaretIcon: '#fdbc3d',
+    ButtonBG: '#121E33',
 };
