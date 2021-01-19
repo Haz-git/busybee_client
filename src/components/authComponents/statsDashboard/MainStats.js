@@ -128,6 +128,16 @@ const MainStats = ({ getUserStatData, stats }) => {
         }
     };
 
+    //Find total number of stats:
+
+    const renderNumberOfStats = () => {
+        if (stats.stats !== undefined && stats.stats !== null) {
+            return stats.stats.length;
+        } else {
+            return null;
+        }
+    };
+
     return (
         <>
             <Modal
@@ -171,7 +181,7 @@ const MainStats = ({ getUserStatData, stats }) => {
                 </SecondaryStatHeader>
                 <FlexWrapper>
                     <SearchBarContainer>
-                        <SearchBar />
+                        <SearchBar value={renderNumberOfStats()} />
                     </SearchBarContainer>
                     <AddButton clickFunction={openModal} />
                 </FlexWrapper>
