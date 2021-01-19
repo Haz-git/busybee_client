@@ -18,7 +18,7 @@ const CustomButton = withStyles({
         textTransform: 'capitalize',
         color: '#fdbc3d',
         fontFamily: 'Nunito, Lato, sans-serif',
-        fontWeight: '200',
+        fontWeight: '400',
         fontSize: '.8em',
         padding: '.5em .6em',
         borderRadius: '.4em',
