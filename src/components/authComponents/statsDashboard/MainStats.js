@@ -1,8 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
+import { connect } from 'react-redux';
+import { getUserStatData } from '../../../redux/userStats/userStatActions';
+import { v4 as uuid } from 'uuid';
 
 //Components:
 import SearchBar from './SearchBar';
 import AddButton from './AddButton';
+import StatCard from './StatCard';
 
 //Styles:
 import styled from 'styled-components';
@@ -29,6 +33,12 @@ const SearchBarContainer = styled.div`
     text-align: center;
 `;
 
+const FlexWrapper = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+`;
+
 const SecondaryStatHeader = styled(MainHeader)`
     font-size: 1em;
     font-weight: 200;
@@ -53,9 +63,15 @@ const ButtonContainer = styled.div`
     width: 4em;
 `;
 
+const StatCardContainer = styled.div``;
+
 //Render:
 
-const MainStats = () => {
+const MainStats = ({ getUserStatData, stats }) => {
+    useEffect(() => {
+        getUserStatData();
+    }, []);
+
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
 
@@ -94,6 +110,22 @@ const MainStats = () => {
         }
 
         //Action Creator --> e.target.value;
+    };
+
+    //Stat Card render function:
+
+    const renderStatCards = () => {
+        if (stats.stats !== undefined && stats.stats !== null) {
+            return stats.stats.map((stat) => (
+                <StatCard
+                    key={uuid()}
+                    name={stat.exerciseName}
+                    date={stat.dateUpdated}
+                />
+            ));
+        } else {
+            return null;
+        }
     };
 
     return (
@@ -137,13 +169,22 @@ const MainStats = () => {
                 <SecondaryStatHeader>
                     Keep track of your achievements.
                 </SecondaryStatHeader>
-                <SearchBarContainer>
-                    <SearchBar />
-                </SearchBarContainer>
-                <AddButton clickFunction={openModal} />
+                <FlexWrapper>
+                    <SearchBarContainer>
+                        <SearchBar />
+                    </SearchBarContainer>
+                    <AddButton clickFunction={openModal} />
+                </FlexWrapper>
+                <StatCardContainer>{renderStatCards()}</StatCardContainer>
             </MainContainer>
         </>
     );
 };
 
-export default MainStats;
+const mapStateToProps = (state) => {
+    return {
+        stats: state.stats,
+    };
+};
+
+export default connect(mapStateToProps, { getUserStatData })(MainStats);
