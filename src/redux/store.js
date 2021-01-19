@@ -7,6 +7,7 @@ import { persistReducer } from 'redux-persist';
 //Reducers:
 import authReducer from './authReducer/authReducer';
 import powerStatReducer from './userPowerLifts/powerLiftReducer';
+import statReducer from './userStats/userStatReducer';
 
 //LocalStorage from window browser:
 import storage from 'redux-persist/lib/storage';
@@ -27,6 +28,7 @@ const rootReducer = combineReducers({
     form: formReducer,
     auth: authReducer,
     powerStats: powerStatReducer,
+    stats: statReducer,
 });
 
 //Persisting RootReducer:
