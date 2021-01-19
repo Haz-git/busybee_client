@@ -70,10 +70,7 @@ const DashboardNavbar = () => {
         <>
             <MainContainer>
                 <NavItemContainer>
-                    <NavItem
-                        to="/dashboard"
-                        activeStyle={{ background: '#101530' }}
-                    >
+                    <NavItem to="/made" activeStyle={{ background: '#101530' }}>
                         <StyledCalendarIcon />
                     </NavItem>
                     <NavItem
@@ -95,7 +92,7 @@ const DashboardNavbar = () => {
                         <StyledBarbellIcon />
                     </NavItem>
                     <NavItem
-                        to="/dashboard"
+                        to="/unmade"
                         activeStyle={{ background: '#101530' }}
                     >
                         <StyledUserCogIcon />
