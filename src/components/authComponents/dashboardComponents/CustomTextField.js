@@ -24,7 +24,13 @@ const StyledTextField = styled.input`
 
 //Render:
 
-const CustomTextField = ({ type, placeholder, existingStat, changeFunc }) => {
+const CustomTextField = ({
+    type,
+    placeholder,
+    existingStat,
+    changeFunc,
+    maxlength,
+}) => {
     const renderPlaceholder = () => {
         if (existingStat) {
             return (
@@ -32,6 +38,7 @@ const CustomTextField = ({ type, placeholder, existingStat, changeFunc }) => {
                     type={type}
                     placeholder={existingStat}
                     onChange={changeFunc}
+                    maxLength={maxlength ? maxlength : undefined}
                 />
             );
         } else if (placeholder && !existingStat) {
@@ -40,6 +47,7 @@ const CustomTextField = ({ type, placeholder, existingStat, changeFunc }) => {
                     type={type}
                     placeholder={placeholder}
                     onChange={changeFunc}
+                    maxLength={maxlength ? maxlength : undefined}
                 />
             );
         }
