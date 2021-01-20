@@ -2,6 +2,15 @@ import React, { Component } from 'react';
 import { getJWT } from '../utils/jwthelper';
 import history from './historyObject';
 import jsonwebtoken from 'jsonwebtoken';
+import styled from 'styled-components';
+
+//Styles:
+
+//Pushing app container upwards to make space for dashboard bottom navbar.
+
+const MainAppContainer = styled.div`
+    padding-bottom: 2.8em;
+`;
 
 class AuthenticatedComponents extends Component {
     constructor(props) {
@@ -66,7 +75,11 @@ class AuthenticatedComponents extends Component {
             );
         }
 
-        return <>{this.props.children}</>;
+        return (
+            <>
+                <MainAppContainer>{this.props.children}</MainAppContainer>
+            </>
+        );
     }
 }
 
