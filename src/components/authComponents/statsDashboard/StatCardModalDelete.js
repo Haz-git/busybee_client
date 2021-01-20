@@ -6,6 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
+import { withStyles } from '@material-ui/core/styles';
 
 import {
     ModalContainer,
@@ -35,6 +36,12 @@ const ButtonContainer = styled.div`
     justify-content: space-evenly;
 `;
 
+const StyledButton = withStyles({
+    root: {
+        textTransform: 'capitalize',
+    },
+})(Button);
+
 const StatCardModalDelete = ({
     openBoolean,
     closeFunction,
@@ -62,21 +69,21 @@ const StatCardModalDelete = ({
                             will be deleted.
                         </DeleteModalDesc>
                         <ButtonContainer>
-                            <Button
+                            <StyledButton
                                 size="small"
                                 variant="contained"
                                 color="secondary"
                                 onClick={buttonSubmitFunction}
                             >
                                 Delete
-                            </Button>
-                            <Button
+                            </StyledButton>
+                            <StyledButton
                                 size="small"
                                 variant="contained"
                                 onClick={closeFunction}
                             >
                                 Cancel
-                            </Button>
+                            </StyledButton>
                         </ButtonContainer>
                     </DeleteModalContainer>
                 </Fade>
