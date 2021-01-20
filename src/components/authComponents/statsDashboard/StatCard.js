@@ -1,5 +1,10 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import { connect } from 'react-redux';
+import { deleteStat } from '../../../redux/userStats/userStatActions';
+
+//Components:
+import StatCardModalDelete from './StatCardModalDelete';
 
 //Styles:
 import styled from 'styled-components';
@@ -24,11 +29,12 @@ const MainContainer = styled.div`
 
 const NameContainer = styled.div`
     text-align: left;
+    white-space: nowrap;
 `;
 
 const NameHeader = styled.h2`
     color: ${({ theme }) => theme.StatCardHeader};
-    font-size: 1.2em;
+    font-size: 1em;
     font-weight: 400;
     text-shadow: 2px 2px 2px #14181f;
 `;
@@ -81,13 +87,34 @@ const StyledButton = styled.button`
 
 //Render:
 
-const StatCard = ({ name, date }) => {
+const StatCard = ({ name, date, exerciseId, deleteStat }) => {
+    //States for modals:
+
+    //Deletion Modal:
+    const [stateDeleteModal, setStateDeleteModal] = useState(false);
+
+    //Reformats ISO timestamp:
     const reformatDate = () => {
         if (date !== undefined && date !== null) {
             return dayjs(date).format('MM/DD/YYYY');
         } else {
             return null;
         }
+    };
+
+    //Controller Functions for Deletion Modal:
+
+    const openDeleteModal = () => {
+        setStateDeleteModal(true);
+    };
+
+    const closeDeleteModal = () => {
+        setStateDeleteModal(false);
+    };
+
+    const onDeleteConfirmation = () => {
+        deleteStat(exerciseId);
+        setStateDeleteModal(false);
     };
 
     return (
@@ -101,7 +128,7 @@ const StatCard = ({ name, date }) => {
                         </DateContainer>
                     </NameContainer>
                     <ButtonContainer>
-                        <StyledButton>
+                        <StyledButton onClick={openDeleteModal}>
                             <TrashIcon />
                         </StyledButton>
                         <StyledButton>
@@ -113,8 +140,13 @@ const StatCard = ({ name, date }) => {
                     </ButtonContainer>
                 </MainContainer>
             </WrapperContainer>
+            <StatCardModalDelete
+                openBoolean={stateDeleteModal}
+                closeFunction={closeDeleteModal}
+                buttonSubmitFunction={onDeleteConfirmation}
+            />
         </>
     );
 };
 
-export default StatCard;
+export default connect(null, { deleteStat })(StatCard);
