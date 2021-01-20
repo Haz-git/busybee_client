@@ -46,11 +46,14 @@ const StyledInput = styled.input`
 
 //Render:
 
-const SearchBar = ({ value }) => {
+const SearchBar = ({ value, changeFunction }) => {
     return (
         <WrapperContainer>
             <StyledSearchIcon />
-            <StyledInput placeholder={`${value} Total Stats`} />
+            <StyledInput
+                placeholder={`${value} Total Stats`}
+                onChange={changeFunction}
+            />
         </WrapperContainer>
     );
 };
