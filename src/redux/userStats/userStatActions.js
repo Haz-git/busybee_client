@@ -46,3 +46,17 @@ export function deleteStat(exerciseId) {
         });
     };
 }
+
+export function editStat(exerciseId, newExerciseName) {
+    return async (dispatch) => {
+        const response = await api.patch('/user/editstat', {
+            exerciseId,
+            newExerciseName,
+        });
+
+        dispatch({
+            type: USER_EDIT_STAT,
+            payload: response.data.userSavedStats,
+        });
+    };
+}
