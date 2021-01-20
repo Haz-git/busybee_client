@@ -172,7 +172,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Search bar onChange function:
 
     const handleSearchBarChange = (e) => {
-        console.log(e.target.value);
         let filteredArray;
         //Filter stats.stats array:
         if (stats.stats !== undefined && stats.stats !== null) {
@@ -184,7 +183,13 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             });
         }
 
-        setUserSearchArray(filteredArray);
+        //Prevents React not re-rendering cards after a search:
+
+        if (e.target.value === '') {
+            setUserSearchArray(null);
+        } else {
+            setUserSearchArray(filteredArray);
+        }
     };
 
     return (
