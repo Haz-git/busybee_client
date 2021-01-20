@@ -13,7 +13,23 @@ import {
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
 
+const DeleteModalContainer = styled(ModalContainer)`
+    width: 82.5%;
+`;
+
+const DeleteModalHeader = styled(ModalHeader)`
+    white-space: normal;
+`;
+
+const DeleteModalDesc = styled(ModalDesc)`
+    white-space: normal;
+    text-align: justify;
+    text-justify: distribute;
+    text-align-last: left;
+`;
+
 const ButtonContainer = styled.div`
+    margin-top: 1em;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -38,17 +54,16 @@ const StatCardModalDelete = ({
                 }}
             >
                 <Fade in={openBoolean}>
-                    <ModalContainer>
-                        <ModalHeader>
-                            Are you sure you want to delete this stat?
-                        </ModalHeader>
-                        <ModalDesc>
-                            This process is irreversible, and all underlying
-                            records will be deleted.
-                        </ModalDesc>
+                    <DeleteModalContainer>
+                        <DeleteModalHeader>Confirm Deletion</DeleteModalHeader>
+                        <DeleteModalDesc>
+                            Are you sure you want to delete this stat? This
+                            process is irreversible, and all underlying records
+                            will be deleted.
+                        </DeleteModalDesc>
                         <ButtonContainer>
                             <Button
-                                size="large"
+                                size="small"
                                 variant="contained"
                                 color="secondary"
                                 onClick={buttonSubmitFunction}
@@ -56,14 +71,14 @@ const StatCardModalDelete = ({
                                 Delete
                             </Button>
                             <Button
-                                size="large"
+                                size="small"
                                 variant="contained"
                                 onClick={closeFunction}
                             >
                                 Cancel
                             </Button>
                         </ButtonContainer>
-                    </ModalContainer>
+                    </DeleteModalContainer>
                 </Fade>
             </Modal>
         </>
