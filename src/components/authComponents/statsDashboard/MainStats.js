@@ -1,6 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { getUserStatData } from '../../../redux/userStats/userStatActions';
+import {
+    getUserStatData,
+    addNewStat,
+} from '../../../redux/userStats/userStatActions';
 import { v4 as uuid } from 'uuid';
 
 //Components:
@@ -26,6 +29,7 @@ const MainContainer = styled.div`
     display: block;
     text-align: center;
     padding: 0.5em 0.5em;
+    /* overflow-y: scroll; */
 `;
 
 const SearchBarContainer = styled.div`
@@ -34,10 +38,14 @@ const SearchBarContainer = styled.div`
 `;
 
 const FlexWrapper = styled.div`
+    top: 0;
+    position: -webkit-sticky;
     position: sticky;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    background: ${({ theme }) => theme.background};
+    padding: 0.5em 0;
 `;
 
 const SecondaryStatHeader = styled(MainHeader)`
@@ -68,7 +76,7 @@ const StatCardContainer = styled.div``;
 
 //Render:
 
-const MainStats = ({ getUserStatData, stats }) => {
+const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     useEffect(() => {
         getUserStatData();
     }, []);
@@ -78,6 +86,9 @@ const MainStats = ({ getUserStatData, stats }) => {
 
     //State for user submission:
     const [userNewExercise, setUserNewExercise] = useState(null);
+
+    //State for search filter:
+    const [userSearchArray, setUserSearchArray] = useState(null);
 
     //Modal Functions:
     const openModal = () => {
@@ -107,7 +118,8 @@ const MainStats = ({ getUserStatData, stats }) => {
         ) {
             alert('Please enter an exercise before submission.');
         } else {
-            console.log(userNewExercise);
+            addNewStat(userNewExercise);
+            setStatModalOpen(false);
         }
 
         //Action Creator --> e.target.value;
@@ -116,12 +128,30 @@ const MainStats = ({ getUserStatData, stats }) => {
     //Stat Card render function:
 
     const renderStatCards = () => {
-        if (stats.stats !== undefined && stats.stats !== null) {
+        if (
+            stats.stats !== undefined &&
+            stats.stats !== null &&
+            userSearchArray === null
+        ) {
             return stats.stats.map((stat) => (
                 <StatCard
                     key={uuid()}
                     name={stat.exerciseName}
                     date={stat.dateUpdated}
+                    exerciseId={stat.exerciseId}
+                />
+            ));
+        } else if (
+            stats.stats !== undefined &&
+            stats.stats !== null &&
+            userSearchArray !== null
+        ) {
+            return userSearchArray.map((stat) => (
+                <StatCard
+                    key={uuid()}
+                    name={stat.exerciseName}
+                    date={stat.dateUpdated}
+                    exerciseId={stat.exerciseId}
                 />
             ));
         } else {
@@ -137,6 +167,24 @@ const MainStats = ({ getUserStatData, stats }) => {
         } else {
             return null;
         }
+    };
+
+    //Search bar onChange function:
+
+    const handleSearchBarChange = (e) => {
+        console.log(e.target.value);
+        let filteredArray;
+        //Filter stats.stats array:
+        if (stats.stats !== undefined && stats.stats !== null) {
+            filteredArray = stats.stats.filter((stat) => {
+                return stat.exerciseName
+                    .trim()
+                    .toLowerCase()
+                    .includes(e.target.value.trim().toLowerCase());
+            });
+        }
+
+        setUserSearchArray(filteredArray);
     };
 
     return (
@@ -162,6 +210,7 @@ const MainStats = ({ getUserStatData, stats }) => {
                                     type="text"
                                     placeholder="Exercise Name"
                                     changeFunc={handleUserInput}
+                                    maxlength={17}
                                 />
                                 <ButtonContainer>
                                     <CustomSubmitButton
@@ -182,7 +231,10 @@ const MainStats = ({ getUserStatData, stats }) => {
                 </SecondaryStatHeader>
                 <FlexWrapper>
                     <SearchBarContainer>
-                        <SearchBar value={renderNumberOfStats()} />
+                        <SearchBar
+                            value={renderNumberOfStats()}
+                            changeFunction={handleSearchBarChange}
+                        />
                     </SearchBarContainer>
                     <AddButton clickFunction={openModal} />
                 </FlexWrapper>
@@ -198,4 +250,6 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getUserStatData })(MainStats);
+export default connect(mapStateToProps, { getUserStatData, addNewStat })(
+    MainStats
+);
