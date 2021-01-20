@@ -9,7 +9,7 @@ const StyledTextField = styled.input`
     background-color: inherit;
     color: white;
     padding: 0.5em 1em;
-    width: 10em;
+    width: 100%;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
 
