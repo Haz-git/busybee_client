@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import { connect } from 'react-redux';
-import { deleteStat } from '../../../redux/userStats/userStatActions';
+import { deleteStat, editStat } from '../../../redux/userStats/userStatActions';
 
 //Components:
 import StatCardModalDelete from './StatCardModalDelete';
+import StatCardModalEdit from './StatCardModalEdit';
 
 //Styles:
 import styled from 'styled-components';
@@ -87,11 +88,16 @@ const StyledButton = styled.button`
 
 //Render:
 
-const StatCard = ({ name, date, exerciseId, deleteStat }) => {
+const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
     //States for modals:
 
     //Deletion Modal:
     const [stateDeleteModal, setStateDeleteModal] = useState(false);
+
+    //Edit Modal:
+
+    const [stateEditModal, setStateEditModal] = useState(false);
+    const [userEditInput, setUserEditInput] = useState(false);
 
     //Reformats ISO timestamp:
     const reformatDate = () => {
@@ -117,6 +123,25 @@ const StatCard = ({ name, date, exerciseId, deleteStat }) => {
         setStateDeleteModal(false);
     };
 
+    //Controller Functions for Edit Modal:
+
+    const openEditModal = () => {
+        setStateEditModal(true);
+    };
+
+    const closeEditModal = () => {
+        setStateEditModal(false);
+    };
+
+    const onEditInput = (e) => {
+        setUserEditInput(e.target.value);
+    };
+
+    const onEditConfirmation = () => {
+        editStat(exerciseId, userEditInput);
+        setStateEditModal(false);
+    };
+
     return (
         <>
             <WrapperContainer>
@@ -131,7 +156,7 @@ const StatCard = ({ name, date, exerciseId, deleteStat }) => {
                         <StyledButton onClick={openDeleteModal}>
                             <TrashIcon />
                         </StyledButton>
-                        <StyledButton>
+                        <StyledButton onClick={openEditModal}>
                             <EditIcon />
                         </StyledButton>
                         <StyledButton>
@@ -145,8 +170,14 @@ const StatCard = ({ name, date, exerciseId, deleteStat }) => {
                 closeFunction={closeDeleteModal}
                 buttonSubmitFunction={onDeleteConfirmation}
             />
+            <StatCardModalEdit
+                openBoolean={stateEditModal}
+                closeFunction={closeEditModal}
+                inputFunction={onEditInput}
+                buttonSubmitFunction={onEditConfirmation}
+            />
         </>
     );
 };
 
-export default connect(null, { deleteStat })(StatCard);
+export default connect(null, { deleteStat, editStat })(StatCard);
