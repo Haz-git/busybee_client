@@ -6,6 +6,7 @@ import { deleteStat, editStat } from '../../../redux/userStats/userStatActions';
 //Components:
 import StatCardModalDelete from './StatCardModalDelete';
 import StatCardModalEdit from './StatCardModalEdit';
+import StatCardRecordModal from './StatCardRecordModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -88,7 +89,14 @@ const StyledButton = styled.button`
 
 //Render:
 
-const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
+const StatCard = ({
+    name,
+    date,
+    exerciseId,
+    deleteStat,
+    editStat,
+    records,
+}) => {
     //States for modals:
 
     //Deletion Modal:
@@ -98,6 +106,10 @@ const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
 
     const [stateEditModal, setStateEditModal] = useState(false);
     const [userEditInput, setUserEditInput] = useState(false);
+
+    //Record Modal:
+
+    const [stateRecordModal, setStateRecordModal] = useState(false);
 
     //Reformats ISO timestamp:
     const reformatDate = () => {
@@ -142,6 +154,16 @@ const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
         setStateEditModal(false);
     };
 
+    //Controller functions for Record Modal:
+
+    const openRecordModal = () => {
+        setStateRecordModal(true);
+    };
+
+    const closeRecordModal = () => {
+        setStateRecordModal(false);
+    };
+
     return (
         <>
             <WrapperContainer>
@@ -160,7 +182,7 @@ const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
                             <EditIcon />
                         </StyledButton>
                         <StyledButton>
-                            <CaretIcon />
+                            <CaretIcon onClick={openRecordModal} />
                         </StyledButton>
                     </ButtonContainer>
                 </MainContainer>
@@ -175,6 +197,11 @@ const StatCard = ({ name, date, exerciseId, deleteStat, editStat }) => {
                 closeFunction={closeEditModal}
                 inputFunction={onEditInput}
                 buttonSubmitFunction={onEditConfirmation}
+            />
+            <StatCardRecordModal
+                openBoolean={stateRecordModal}
+                closeFunction={closeRecordModal}
+                recordArray={records}
             />
         </>
     );
