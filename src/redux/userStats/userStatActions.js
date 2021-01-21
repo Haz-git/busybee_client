@@ -63,7 +63,7 @@ export function editStat(exerciseId, newExerciseName) {
 
 //Action Creators for records:
 
-export function addRecord(exerciseId, sets, reps, weight, unit) {
+export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
     return async (dispatch) => {
         const response = await api.post('/user/stat/addnewrecord', {
             exerciseId,
@@ -73,12 +73,18 @@ export function addRecord(exerciseId, sets, reps, weight, unit) {
             unit,
         });
 
-        console.log(response);
-
         dispatch({
             type: USER_ADD_NEW_RECORD,
             payload: response.data.userSavedStats,
         });
+
+        console.log(typeof callback);
+
+        //Creating a snackbar to notify new record add:
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
