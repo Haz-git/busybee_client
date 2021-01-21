@@ -202,6 +202,7 @@ const StatCard = ({
                 openBoolean={stateRecordModal}
                 closeFunction={closeRecordModal}
                 recordArray={records}
+                exerciseId={exerciseId}
             />
         </>
     );
