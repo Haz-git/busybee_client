@@ -24,6 +24,25 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 import Fade from '@material-ui/core/Fade';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        backgroundColor: '#136539',
+        '& .MuiAlert-icon': {
+            fontSize: '1.7em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.1em',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
 
 const MainContainer = styled.div`
     display: block;
@@ -80,6 +99,9 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     useEffect(() => {
         getUserStatData();
     }, []);
+
+    //States for SnackBars:
+    const [openSnackBar, setOpenSnackBar] = useState(false);
 
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
@@ -140,6 +162,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
+                    addRecordSnackbar={showSnackBar}
                 />
             ));
         } else if (
@@ -154,6 +177,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
+                    addRecordSnackbar={showSnackBar}
                 />
             ));
         } else {
@@ -192,6 +216,26 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         } else {
             setUserSearchArray(filteredArray);
         }
+    };
+
+    //Controller functions for SnackBars:
+
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    //Controls opening the snackbar:
+    const showSnackBar = (bool) => {
+        setOpenSnackBar(bool);
+    };
+
+    //Controls closing the snackbar:
+    const closeSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackBar(false);
     };
 
     return (
@@ -247,6 +291,18 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 </FlexWrapper>
                 <StatCardContainer>{renderStatCards()}</StatCardContainer>
             </MainContainer>
+            <Slide direction="right" in={openSnackBar} timeout="exit">
+                <Snackbar
+                    open={openSnackBar}
+                    autoHideDuration={7000}
+                    onClose={closeSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                >
+                    <Alert severity="success">
+                        Your record has been added!
+                    </Alert>
+                </Snackbar>
+            </Slide>
         </>
     );
 };
