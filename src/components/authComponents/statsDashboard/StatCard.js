@@ -11,7 +11,7 @@ import StatCardRecordModal from './StatCardRecordModal';
 //Styles:
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
-import { Trash } from '@styled-icons/boxicons-regular/Trash';
+import { Trash } from '@styled-icons/ionicons-outline/Trash';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 
@@ -96,6 +96,7 @@ const StatCard = ({
     deleteStat,
     editStat,
     records,
+    addRecordSnackbar,
 }) => {
     //States for modals:
 
@@ -203,6 +204,7 @@ const StatCard = ({
                 closeFunction={closeRecordModal}
                 recordArray={records}
                 exerciseId={exerciseId}
+                addRecordSnackbar={addRecordSnackbar}
             />
         </>
     );
