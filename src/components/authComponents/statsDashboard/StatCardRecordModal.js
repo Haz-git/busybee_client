@@ -80,6 +80,7 @@ const StatCardRecordModal = ({
     recordArray,
     addRecord,
     exerciseId,
+    addRecordSnackbar,
 }) => {
     //Controls state of modal to add new record:
 
@@ -133,8 +134,14 @@ const StatCardRecordModal = ({
 
     const handleSubmission = (e) => {
         e.preventDefault();
-
-        addRecord(exerciseId, setsInput, repsInput, weightInput, unitSelect);
+        addRecord(
+            exerciseId,
+            setsInput,
+            repsInput,
+            weightInput,
+            unitSelect,
+            addRecordSnackbar
+        );
         setStateAddRecordModal(false);
     };
 
@@ -193,3 +200,5 @@ const StatCardRecordModal = ({
 };
 
 export default connect(null, { addRecord })(StatCardRecordModal);
+
+// export default StatCardRecordModal;
