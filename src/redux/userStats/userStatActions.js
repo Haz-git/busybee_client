@@ -75,10 +75,10 @@ export function addRecord(exerciseId, sets, reps, weight, unit) {
 
         console.log(response);
 
-        // dispatch({
-        //     type: USER_ADD_NEW_RECORD,
-        //     payload: response.data.userSavedStats,
-        // });
+        dispatch({
+            type: USER_ADD_NEW_RECORD,
+            payload: response.data.userSavedStats,
+        });
     };
 }
 
