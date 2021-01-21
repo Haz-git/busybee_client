@@ -60,3 +60,62 @@ export function editStat(exerciseId, newExerciseName) {
         });
     };
 }
+
+//Action Creators for records:
+
+export function addRecord(exerciseId, sets, reps, weight, unit) {
+    return async (dispatch) => {
+        const response = await api.post('/user/stat/addnewrecord', {
+            exerciseId,
+            sets,
+            reps,
+            weight,
+            unit,
+        });
+
+        console.log(response);
+
+        // dispatch({
+        //     type: USER_ADD_NEW_RECORD,
+        //     payload: response.data.userSavedStats,
+        // });
+    };
+}
+
+export function deleteRecord(exerciseId, recordId) {
+    return async (dispatch) => {
+        const response = await api.delete('/user/stat/deleterecord', {
+            data: {
+                exerciseId,
+                recordId,
+            },
+        });
+
+        console.log(response);
+
+        // dispatch({
+        //     type: USER_DELETE_RECORD,
+        //     payload: response.data.userSavedStats,
+        // });
+    };
+}
+
+export function editRecord(exerciseId, recordId, sets, reps, weight, unit) {
+    return async (dispatch) => {
+        const response = await api.patch('/user/stat/editrecord', {
+            exerciseId,
+            recordId,
+            sets,
+            reps,
+            weight,
+            unit,
+        });
+
+        console.log(response);
+
+        // dispatch({
+        //     type: USER_EDIT_RECORD,
+        //     payload: response.data.userSavedStats,
+        // });
+    };
+}
