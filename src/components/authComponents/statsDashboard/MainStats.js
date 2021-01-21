@@ -139,6 +139,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     name={stat.exerciseName}
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
+                    records={stat.records}
                 />
             ));
         } else if (
@@ -152,6 +153,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     name={stat.exerciseName}
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
+                    records={stat.records}
                 />
             ));
         } else {
