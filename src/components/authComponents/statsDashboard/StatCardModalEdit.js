@@ -15,6 +15,8 @@ import {
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
 
+//Styles:
+
 const DeleteModalContainer = styled(ModalContainer)`
     width: 82.5%;
 `;
