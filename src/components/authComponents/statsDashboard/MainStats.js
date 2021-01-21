@@ -86,6 +86,11 @@ const StatModalHeader = styled(ModalHeader)`
 
 const StatContainer = styled.div``;
 
+const TextFieldContainer = styled.div`
+    width: 10em;
+    margin-right: 1em;
+`;
+
 const ButtonContainer = styled.div`
     margin: 0 auto;
     width: 4em;
@@ -257,12 +262,14 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                         <StatModalHeader>Track new exercise</StatModalHeader>
                         <form onSubmit={handleUserSubmit}>
                             <FormContainer>
-                                <CustomTextField
-                                    type="text"
-                                    placeholder="Exercise Name"
-                                    changeFunc={handleUserInput}
-                                    maxlength={17}
-                                />
+                                <TextFieldContainer>
+                                    <CustomTextField
+                                        type="text"
+                                        placeholder="Exercise Name"
+                                        changeFunc={handleUserInput}
+                                        maxlength={17}
+                                    />
+                                </TextFieldContainer>
                                 <ButtonContainer>
                                     <CustomSubmitButton
                                         label="Add"
