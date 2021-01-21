@@ -41,7 +41,7 @@ export function deleteStat(exerciseId) {
         });
 
         dispatch({
-            type: USER_ADD_NEW_STAT,
+            type: USER_DELETE_STAT,
             payload: response.data.userSavedStats,
         });
     };
