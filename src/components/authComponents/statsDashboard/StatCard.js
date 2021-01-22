@@ -97,6 +97,8 @@ const StatCard = ({
     editStat,
     records,
     addRecordSnackbar,
+    editRecordSnackbar,
+    deleteRecordSnackbar,
 }) => {
     //States for modals:
 
@@ -192,6 +194,11 @@ const StatCard = ({
                 openBoolean={stateDeleteModal}
                 closeFunction={closeDeleteModal}
                 buttonSubmitFunction={onDeleteConfirmation}
+                modalDesc="Are you sure you want to delete this stat? This
+                process is irreversible, and all underlying records
+                will be deleted."
+                ariaLabel="stat card modal"
+                ariaDesc="modal for stat deletion"
             />
             <StatCardModalEdit
                 openBoolean={stateEditModal}
@@ -205,6 +212,8 @@ const StatCard = ({
                 recordArray={records}
                 exerciseId={exerciseId}
                 addRecordSnackbar={addRecordSnackbar}
+                editRecordSnackbar={editRecordSnackbar}
+                deleteRecordSnackbar={deleteRecordSnackbar}
             />
         </>
     );
