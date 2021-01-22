@@ -58,9 +58,13 @@ const DeleteIcon = styled(Cancel)`
 `;
 
 const FlexContainer = styled.div`
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
-    padding: 0.5em 0;
+    padding: 0;
 `;
 
 const DetailsContainer = styled.div`
