@@ -46,12 +46,15 @@ const StatCardModalDelete = ({
     openBoolean,
     closeFunction,
     buttonSubmitFunction,
+    modalDesc,
+    ariaLabel,
+    ariaDesc,
 }) => {
     return (
         <>
             <Modal
-                aria-labelledby="stat card modal"
-                aria-describedby="modal for stat deletion"
+                aria-labelledby={ariaLabel}
+                aria-describedby={ariaDesc}
                 open={openBoolean}
                 onClose={closeFunction}
                 closeAfterTransition
@@ -63,11 +66,7 @@ const StatCardModalDelete = ({
                 <Fade in={openBoolean}>
                     <DeleteModalContainer>
                         <DeleteModalHeader>Confirm Deletion</DeleteModalHeader>
-                        <DeleteModalDesc>
-                            Are you sure you want to delete this stat? This
-                            process is irreversible, and all underlying records
-                            will be deleted.
-                        </DeleteModalDesc>
+                        <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                         <ButtonContainer>
                             <StyledButton
                                 size="small"
