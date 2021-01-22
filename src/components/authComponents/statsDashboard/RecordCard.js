@@ -10,6 +10,7 @@ import {
 
 //Components:
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
+import RecordCardEditModal from '../statsDashboard/RecordCardEditModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -149,7 +150,14 @@ const RecordCard = ({
     const [stateDeleteRecordModal, setStateDeleteRecordModal] = useState(false);
     const [stateEditRecordModal, setStateEditRecordModal] = useState(false);
 
-    //Controller functions for deletion and edit modals:
+    //States for handling user input for edit modal:
+
+    const [recordWeight, setRecordWeight] = useState(null);
+    const [recordSets, setRecordSets] = useState(null);
+    const [recordReps, setRecordReps] = useState(null);
+    const [recordUnit, setRecordUnit] = useState(null);
+
+    //Controller functions for deletion modal:
 
     const openDeleteRecordModal = () => {
         setStateDeleteRecordModal(true);
@@ -162,6 +170,64 @@ const RecordCard = ({
     const onDeleteRecordConfirmation = () => {
         deleteRecord(exerciseId, recordId, deleteRecordSnackbar);
         setStateDeleteRecordModal(false);
+    };
+
+    //Controller functions for edit modal:
+
+    const openEditRecordModal = () => {
+        setStateEditRecordModal(true);
+    };
+
+    const closeEditRecordModal = () => {
+        setStateEditRecordModal(false);
+    };
+
+    //User input handling functions for edit modal:
+
+    const handleEditWeight = (e) => {
+        setRecordWeight(e.target.value);
+    };
+
+    const handleEditSets = (e) => {
+        setRecordSets(e.target.value);
+    };
+
+    const handleEditReps = (e) => {
+        setRecordReps(e.target.value);
+    };
+
+    const handleEditUnit = (e) => {
+        console.log(e.target.value + typeof e.target.value);
+        setRecordUnit(e.target.value);
+    };
+
+    const handleUserEditSubmission = () => {
+        //Basic Empty check:
+        if (
+            recordSets !== null &&
+            recordReps !== null &&
+            recordWeight !== null
+        ) {
+            if (
+                recordSets.trim() !== '' &&
+                recordReps.trim() !== '' &&
+                recordWeight.trim() !== ''
+            ) {
+                editRecord(
+                    exerciseId,
+                    recordId,
+                    recordSets,
+                    recordReps,
+                    recordWeight,
+                    recordUnit,
+                    editRecordSnackbar
+                );
+            } else {
+                alert('Please input values, or press cancel to exit.');
+            }
+        } else {
+            alert('Please input values, or press cancel to exit.');
+        }
     };
 
     //Helper Functions:
@@ -182,7 +248,7 @@ const RecordCard = ({
                         <DateText>Edited on:</DateText>
                         <DateText>{convertISOToDate()}</DateText>
                         <ButtonContainer>
-                            <EditButton>
+                            <EditButton onClick={openEditRecordModal}>
                                 <EditIcon />
                             </EditButton>
                             <DeleteButton onClick={openDeleteRecordModal}>
@@ -211,6 +277,18 @@ const RecordCard = ({
                 modalDesc="Are you sure you want to delete this record?"
                 ariaLabel="record delete modal"
                 ariaDesc="modal for confirmation of record deletion"
+            />
+            <RecordCardEditModal
+                openBoolean={stateEditRecordModal}
+                closeFunction={closeEditRecordModal}
+                weightFunction={handleEditWeight}
+                setsFunction={handleEditSets}
+                repsFunction={handleEditReps}
+                unitFunction={handleEditUnit}
+                submitHandler={handleUserEditSubmission}
+                existingStatSets={`Sets: ${sets}`}
+                existingStatReps={`Reps: ${reps}`}
+                existingStatWeight={weight}
             />
         </>
     );
