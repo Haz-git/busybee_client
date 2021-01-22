@@ -20,14 +20,28 @@ import { Cancel } from '@styled-icons/material-rounded/Cancel';
 import { Pencil } from '@styled-icons/remix-fill/Pencil';
 
 const MainContainer = styled.div`
+    /* display: flex;
+    position: relative;
+    margin-bottom: 0.5em;
+    background: #10122a;
+    border-radius: 0.2em;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
+    align-items: center;
+    justify-content: space-between; */
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
     position: relative;
     margin-bottom: 0.5em;
     background: #10122a;
-    /* background: #393954; */
     border-radius: 0.2em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
+    -webkit-box-pack: justify;
+    -ms-flex-pack: justify;
     justify-content: space-between;
 `;
 
@@ -123,7 +137,12 @@ const DeleteButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
     border-bottom-right-radius: 0.2em;
     border-top-right-radius: 0.2em;
