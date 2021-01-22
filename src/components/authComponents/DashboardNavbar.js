@@ -70,9 +70,6 @@ const DashboardNavbar = () => {
         <>
             <MainContainer>
                 <NavItemContainer>
-                    <NavItem to="/made" activeStyle={{ background: '#101530' }}>
-                        <StyledCalendarIcon />
-                    </NavItem>
                     <NavItem
                         to="/stats"
                         activeStyle={{ background: '#101530' }}
@@ -80,16 +77,16 @@ const DashboardNavbar = () => {
                         <StyledStatsIcon />
                     </NavItem>
                     <NavItem
-                        to="/dashboard"
-                        activeStyle={{ background: '#101530' }}
-                    >
-                        <StyledHomeIcon />
-                    </NavItem>
-                    <NavItem
                         to="/programs"
                         activeStyle={{ background: '#101530' }}
                     >
                         <StyledBarbellIcon />
+                    </NavItem>
+                    <NavItem
+                        to="/dashboard"
+                        activeStyle={{ background: '#101530' }}
+                    >
+                        <StyledHomeIcon />
                     </NavItem>
                     <NavItem
                         to="/unmade"

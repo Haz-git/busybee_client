@@ -27,7 +27,8 @@ const MainContainer = styled.div`
     /* background: #393954; */
     border-radius: 0.2em;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
-    padding: 0.5em 0;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 const EditIcon = styled(Pencil)`
@@ -45,6 +46,7 @@ const DeleteIcon = styled(Cancel)`
 const FlexContainer = styled.div`
     align-items: center;
     display: flex;
+    padding: 0.5em 0;
 `;
 
 const DetailsContainer = styled.div`
@@ -123,12 +125,8 @@ const DeleteButton = styled.button`
 const ButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
-    position: absolute;
-    right: 0;
-    bottom: 0;
     border-bottom-right-radius: 0.2em;
     border-top-right-radius: 0.2em;
-    transform: translate(-0%, -0.5%);
 `;
 
 //Render:
@@ -247,14 +245,6 @@ const RecordCard = ({
                     <DateContainer>
                         <DateText>Edited on:</DateText>
                         <DateText>{convertISOToDate()}</DateText>
-                        <ButtonContainer>
-                            <EditButton onClick={openEditRecordModal}>
-                                <EditIcon />
-                            </EditButton>
-                            <DeleteButton onClick={openDeleteRecordModal}>
-                                <DeleteIcon />
-                            </DeleteButton>
-                        </ButtonContainer>
                     </DateContainer>
                     <DetailsContainer>
                         <TechContainer>
@@ -269,6 +259,14 @@ const RecordCard = ({
                         </WeightContainer>
                     </DetailsContainer>
                 </FlexContainer>
+                <ButtonContainer>
+                    <EditButton onClick={openEditRecordModal}>
+                        <EditIcon />
+                    </EditButton>
+                    <DeleteButton onClick={openDeleteRecordModal}>
+                        <DeleteIcon />
+                    </DeleteButton>
+                </ButtonContainer>
             </MainContainer>
             <StatCardModalDelete
                 openBoolean={stateDeleteRecordModal}
