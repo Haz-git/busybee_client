@@ -46,14 +46,14 @@ const MainContainer = styled.div`
 `;
 
 const EditIcon = styled(Pencil)`
-    width: 1.35em;
-    height: 1.35em;
+    width: 2em;
+    height: 2em;
     color: ${({ theme }) => theme.EditIcon};
 `;
 
 const DeleteIcon = styled(Cancel)`
-    width: 1.35em;
-    height: 1.35em;
+    width: 2em;
+    height: 2em;
     color: ${({ theme }) => theme.TrashIcon};
 `;
 
@@ -68,19 +68,23 @@ const FlexContainer = styled.div`
 `;
 
 const DetailsContainer = styled.div`
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
     align-items: center;
-    -ms-flex-pack: distribute;
-    justify-content: space-around;
+    -webkit-box-pack: start;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
     padding: 0.5em 0em;
     text-align: left;
 `;
 
 const DateContainer = styled.div`
     text-align: left;
-    padding-top: 0.2em;
-    padding-bottom: 0.2em;
-    padding-left: 0.5em;
+    padding-bottom: 0.3em;
+    padding-left: 0.2em;
 `;
 
 const DateText = styled.h2`
@@ -92,8 +96,8 @@ const DateText = styled.h2`
 const WeightContainer = styled.div`
     white-space: nowrap;
     margin: 0 1em;
-    font-size: 0.7em;
-    font-weight: 900;
+    font-size: 1em;
+    font-weight: 700;
     color: ${({ theme }) => theme.generalText};
 `;
 
@@ -102,8 +106,8 @@ const WeightDivider = styled.div``;
 const TechContainer = styled.div`
     white-space: nowrap;
     margin: 0 1em;
-    font-size: 0.7em;
-    font-weight: 900;
+    font-size: 1em;
+    font-weight: 700;
     color: ${({ theme }) => theme.generalText};
 `;
 
@@ -265,12 +269,11 @@ const RecordCard = ({
 
     return (
         <>
+            <DateContainer>
+                <DateText>Edited on: {convertISOToDate()}</DateText>
+            </DateContainer>
             <MainContainer>
                 <FlexContainer>
-                    <DateContainer>
-                        <DateText>Edited on:</DateText>
-                        <DateText>{convertISOToDate()}</DateText>
-                    </DateContainer>
                     <DetailsContainer>
                         <TechContainer>
                             <TechDivider>Sets: {sets}</TechDivider>
