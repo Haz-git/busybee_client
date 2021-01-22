@@ -50,7 +50,6 @@ const RecordCardContainer = styled.div`
     overflow-y: scroll;
     height: 20em;
     max-height: 20em;
-    background: salmon;
 `;
 
 const ButtonContainer = styled.div`
