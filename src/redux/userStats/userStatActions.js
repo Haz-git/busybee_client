@@ -78,8 +78,6 @@ export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
             payload: response.data.userSavedStats,
         });
 
-        console.log(typeof callback);
-
         //Creating a snackbar to notify new record add:
 
         if (response) {
@@ -88,7 +86,7 @@ export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
     };
 }
 
-export function deleteRecord(exerciseId, recordId) {
+export function deleteRecord(exerciseId, recordId, callback) {
     return async (dispatch) => {
         const response = await api.delete('/user/stat/deleterecord', {
             data: {
@@ -97,16 +95,28 @@ export function deleteRecord(exerciseId, recordId) {
             },
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_DELETE_RECORD,
+            payload: response.data.userSavedStats,
+        });
 
-        // dispatch({
-        //     type: USER_DELETE_RECORD,
-        //     payload: response.data.userSavedStats,
-        // });
+        //Creating a snackbar to notify user that a record is deleted:
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
-export function editRecord(exerciseId, recordId, sets, reps, weight, unit) {
+export function editRecord(
+    exerciseId,
+    recordId,
+    sets,
+    reps,
+    weight,
+    unit,
+    callback
+) {
     return async (dispatch) => {
         const response = await api.patch('/user/stat/editrecord', {
             exerciseId,
@@ -123,5 +133,11 @@ export function editRecord(exerciseId, recordId, sets, reps, weight, unit) {
         //     type: USER_EDIT_RECORD,
         //     payload: response.data.userSavedStats,
         // });
+
+        //Creating a snackbar to notify user that record is edited:
+
+        if (response) {
+            callback(true);
+        }
     };
 }
