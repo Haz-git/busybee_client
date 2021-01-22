@@ -355,9 +355,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     transitionDuration={100}
                 >
-                    <Alert severity="info">
-                        Your record has been edited and saved.
-                    </Alert>
+                    <Alert severity="info">Your edits have been saved.</Alert>
                 </Snackbar>
             </Slide>
             <Slide
