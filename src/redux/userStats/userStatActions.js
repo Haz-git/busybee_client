@@ -127,12 +127,10 @@ export function editRecord(
             unit,
         });
 
-        console.log(response);
-
-        // dispatch({
-        //     type: USER_EDIT_RECORD,
-        //     payload: response.data.userSavedStats,
-        // });
+        dispatch({
+            type: USER_EDIT_RECORD,
+            payload: response.data.userSavedStats,
+        });
 
         //Creating a snackbar to notify user that record is edited:
 
