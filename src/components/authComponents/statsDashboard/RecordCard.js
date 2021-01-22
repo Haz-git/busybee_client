@@ -66,6 +66,7 @@ const FlexContainer = styled.div`
 const DetailsContainer = styled.div`
     display: flex;
     align-items: center;
+    -ms-flex-pack: distribute;
     justify-content: space-around;
     padding: 0.5em 0em;
     text-align: left;
@@ -137,6 +138,7 @@ const DeleteButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
+    height: 100%;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
