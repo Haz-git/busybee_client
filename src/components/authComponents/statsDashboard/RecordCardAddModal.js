@@ -6,7 +6,7 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import CustomTextField from '../dashboardComponents/CustomTextField';
+import CustomNumberField from '../dashboardComponents/CustomNumberField';
 import CustomSelector from '../dashboardComponents/CustomSelector';
 import { withStyles } from '@material-ui/core/styles';
 import RecordCard from './RecordCard';
@@ -76,12 +76,12 @@ const RecordCardAddModal = ({
                         </AddRecordModalHeader>
                         <InputContainer>
                             <InputDivider>
-                                <CustomTextField
+                                <CustomNumberField
                                     type="number"
                                     placeholder="Weight"
                                     changeFunc={weightFunction}
                                 />
-                                <CustomTextField
+                                <CustomNumberField
                                     type="number"
                                     placeholder="Sets"
                                     changeFunc={setsFunction}
@@ -89,7 +89,7 @@ const RecordCardAddModal = ({
                             </InputDivider>
                             <InputDivider>
                                 <CustomSelector changeFunc={unitFunction} />
-                                <CustomTextField
+                                <CustomNumberField
                                     type="number"
                                     placeholder="Reps"
                                     changeFunc={repsFunction}
