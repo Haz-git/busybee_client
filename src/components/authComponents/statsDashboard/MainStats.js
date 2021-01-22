@@ -106,7 +106,11 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     }, []);
 
     //States for SnackBars:
-    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [openAddRecordSnackBar, setOpenAddRecordSnackBar] = useState(false);
+    const [openEditRecordSnackBar, setOpenEditRecordSnackBar] = useState(false);
+    const [openDeleteRecordSnackBar, setOpenDeleteRecordSnackBar] = useState(
+        false
+    );
 
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
@@ -168,6 +172,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     exerciseId={stat.exerciseId}
                     records={stat.records}
                     addRecordSnackbar={showNewRecordSnackBar}
+                    editRecordSnackbar={showEditRecordSnackBar}
+                    deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
         } else if (
@@ -183,6 +189,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     exerciseId={stat.exerciseId}
                     records={stat.records}
                     addRecordSnackbar={showNewRecordSnackBar}
+                    editRecordSnackbar={showEditRecordSnackBar}
+                    deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
         } else {
@@ -226,21 +234,49 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Controller functions for SnackBars:
 
     const Alert = (props) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+        return <MuiAlert elevation={6} variant="filled" {...props} />;
     };
 
-    //Controls opening the snackbar:
+    //Controls opening the 'new record' snackbar:
     const showNewRecordSnackBar = (bool) => {
-        setOpenSnackBar(bool);
+        setOpenAddRecordSnackBar(bool);
     };
 
-    //Controls closing the snackbar:
+    //Controls closing the 'New Record' snackbar:
     const closeNewRecordSnackBar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
 
-        setOpenSnackBar(false);
+        setOpenAddRecordSnackBar(false);
+    };
+
+    //Controls opening and closing 'Editing' records snackbar:
+
+    const showEditRecordSnackBar = (bool) => {
+        setOpenEditRecordSnackBar(bool);
+    };
+
+    const closeEditRecordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenEditRecordSnackBar(false);
+    };
+
+    //Controls opening and closing 'Deleting' records snackbar:
+
+    const showDeleteRecordSnackBar = (bool) => {
+        setOpenDeleteRecordSnackBar(bool);
+    };
+
+    const closeDeleteRecordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteRecordSnackBar(false);
     };
 
     return (
@@ -298,15 +334,46 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 </FlexWrapper>
                 <StatCardContainer>{renderStatCards()}</StatCardContainer>
             </MainContainer>
-            <Slide direction="right" in={openSnackBar}>
+            <Slide direction="right" in={openAddRecordSnackBar} timeout="exit">
                 <Snackbar
-                    open={openSnackBar}
-                    autoHideDuration={7000}
+                    open={openAddRecordSnackBar}
+                    autoHideDuration={1000}
                     onClose={closeNewRecordSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
                 >
                     <Alert severity="success">
-                        Your record has been added!
+                        Your record has been added.
+                    </Alert>
+                </Snackbar>
+            </Slide>
+            <Slide direction="right" in={openEditRecordSnackBar} timeout="exit">
+                <Snackbar
+                    open={openEditRecordSnackBar}
+                    autoHideDuration={1000}
+                    onClose={closeEditRecordSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
+                >
+                    <Alert severity="info">
+                        Your record has been edited and saved.
+                    </Alert>
+                </Snackbar>
+            </Slide>
+            <Slide
+                direction="right"
+                in={openDeleteRecordSnackBar}
+                timeout="exit"
+            >
+                <Snackbar
+                    open={openDeleteRecordSnackBar}
+                    autoHideDuration={1000}
+                    onClose={closeDeleteRecordSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
+                >
+                    <Alert severity="warning">
+                        Your record has been removed.
                     </Alert>
                 </Snackbar>
             </Slide>
