@@ -1,5 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
+
+//Redux Actions:
+import { connect } from 'react-redux';
+import {
+    deleteRecord,
+    editRecord,
+} from '../../../redux/userStats/userStatActions';
+
+//Components:
+import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 
 //Styles:
 import styled from 'styled-components';
@@ -12,7 +22,8 @@ const MainContainer = styled.div`
     display: flex;
     position: relative;
     margin-bottom: 0.5em;
-    background: #273a5a;
+    background: #10122a;
+    /* background: #393954; */
     border-radius: 0.2em;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     padding: 0.5em 0;
@@ -116,13 +127,47 @@ const ButtonContainer = styled.div`
     bottom: 0;
     border-bottom-right-radius: 0.2em;
     border-top-right-radius: 0.2em;
+    transform: translate(-0%, -0.5%);
 `;
 
 //Render:
 
-const RecordCard = ({ sets, reps, weight, dateModified }) => {
+const RecordCard = ({
+    sets,
+    reps,
+    weight,
+    recordId,
+    exerciseId,
+    dateModified,
+    editRecordSnackbar,
+    deleteRecordSnackbar,
+    deleteRecord,
+    editRecord,
+}) => {
+    //States for showing delete and edit modals for records.
+
+    const [stateDeleteRecordModal, setStateDeleteRecordModal] = useState(false);
+    const [stateEditRecordModal, setStateEditRecordModal] = useState(false);
+
+    //Controller functions for deletion and edit modals:
+
+    const openDeleteRecordModal = () => {
+        setStateDeleteRecordModal(true);
+    };
+
+    const closeDeleteRecordModal = () => {
+        setStateDeleteRecordModal(false);
+    };
+
+    const onDeleteRecordConfirmation = () => {
+        deleteRecord(exerciseId, recordId, deleteRecordSnackbar);
+        setStateDeleteRecordModal(false);
+    };
+
+    //Helper Functions:
+
     const convertWeightToKg = () => {
-        return (parseInt(weight) / 2.2).toFixed(2);
+        return (parseInt(weight) / 2.205).toFixed(0);
     };
 
     const convertISOToDate = () => {
@@ -140,7 +185,7 @@ const RecordCard = ({ sets, reps, weight, dateModified }) => {
                             <EditButton>
                                 <EditIcon />
                             </EditButton>
-                            <DeleteButton>
+                            <DeleteButton onClick={openDeleteRecordModal}>
                                 <DeleteIcon />
                             </DeleteButton>
                         </ButtonContainer>
@@ -159,8 +204,16 @@ const RecordCard = ({ sets, reps, weight, dateModified }) => {
                     </DetailsContainer>
                 </FlexContainer>
             </MainContainer>
+            <StatCardModalDelete
+                openBoolean={stateDeleteRecordModal}
+                closeFunction={closeDeleteRecordModal}
+                buttonSubmitFunction={onDeleteRecordConfirmation}
+                modalDesc="Are you sure you want to delete this record?"
+                ariaLabel="record delete modal"
+                ariaDesc="modal for confirmation of record deletion"
+            />
         </>
     );
 };
 
-export default RecordCard;
+export default connect(null, { deleteRecord, editRecord })(RecordCard);
