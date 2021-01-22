@@ -167,7 +167,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
-                    addRecordSnackbar={showSnackBar}
+                    addRecordSnackbar={showNewRecordSnackBar}
                 />
             ));
         } else if (
@@ -182,7 +182,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
-                    addRecordSnackbar={showSnackBar}
+                    addRecordSnackbar={showNewRecordSnackBar}
                 />
             ));
         } else {
@@ -230,12 +230,12 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     };
 
     //Controls opening the snackbar:
-    const showSnackBar = (bool) => {
+    const showNewRecordSnackBar = (bool) => {
         setOpenSnackBar(bool);
     };
 
     //Controls closing the snackbar:
-    const closeSnackBar = (event, reason) => {
+    const closeNewRecordSnackBar = (event, reason) => {
         if (reason === 'clickaway') {
             return;
         }
@@ -298,11 +298,11 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 </FlexWrapper>
                 <StatCardContainer>{renderStatCards()}</StatCardContainer>
             </MainContainer>
-            <Slide direction="right" in={openSnackBar} timeout="exit">
+            <Slide direction="right" in={openSnackBar}>
                 <Snackbar
                     open={openSnackBar}
                     autoHideDuration={7000}
-                    onClose={closeSnackBar}
+                    onClose={closeNewRecordSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                 >
                     <Alert severity="success">
