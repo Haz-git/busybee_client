@@ -80,6 +80,8 @@ const StatCardRecordModal = ({
     addRecord,
     exerciseId,
     addRecordSnackbar,
+    editRecordSnackbar,
+    deleteRecordSnackbar,
 }) => {
     //Controls state of modal to add new record:
 
@@ -97,7 +99,11 @@ const StatCardRecordModal = ({
                     sets={record.sets}
                     reps={record.reps}
                     weight={record.weight}
+                    recordId={record.recordId}
+                    exerciseId={exerciseId}
                     dateModified={record.dateModified}
+                    editRecordSnackbar={editRecordSnackbar}
+                    deleteRecordSnackbar={deleteRecordSnackbar}
                 />
             ));
         } else {
