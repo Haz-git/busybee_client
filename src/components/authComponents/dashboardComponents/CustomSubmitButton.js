@@ -20,6 +20,9 @@ const StyledSubmitButton = withStyles({
             background:
                 'linear-gradient(90deg, rgba(87,97,0,1) 0%, rgba(0,133,46,1) 50%, rgba(0,133,150,1) 100%)',
         },
+        '@media only screen and (min-width: 375px)': {
+            fontSize: '1.45em',
+        },
     },
     label: {
         textTransform: 'capitalize',

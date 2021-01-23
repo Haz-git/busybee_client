@@ -21,6 +21,10 @@ const StyledTextField = styled.input`
     &:focus {
         outline: none;
     }
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1.3em;
+    }
 `;
 
 //Render:

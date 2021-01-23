@@ -21,6 +21,9 @@ const CustomButton = withStyles({
         '&:hover': {
             backgroundColor: '#62c267',
         },
+        '@media only screen and (min-width: 375px)': {
+            fontSize: '.7em',
+        },
     },
 })(Button);
 

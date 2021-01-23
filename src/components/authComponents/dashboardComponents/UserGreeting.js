@@ -9,6 +9,12 @@ const MainContainer = styled.div`
     text-align: left;
     align-items: center;
     justify-content: space-between;
+
+    //Min-width = @ 375 or greater width, changes occur:
+
+    /* @media only screen and (min-width: 414px) {
+        display: inline-block;
+    } */
 `;
 
 const DetailsContainer = styled.div``;
@@ -19,6 +25,10 @@ export const MainHeader = styled.h1`
     color: ${({ theme }) => theme.UserGreetingColor};
     font-weight: 900;
     margin-bottom: 0.2em;
+
+    @media only screen and (min-width: 375px) {
+        font-size: 2em;
+    }
 `;
 
 const UserDetailLabel = styled.h2`
@@ -27,6 +37,11 @@ const UserDetailLabel = styled.h2`
     font-size: 1em;
     color: ${({ theme }) => theme.UserGreetingColor};
     font-weight: 500;
+    white-space: nowrap;
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1.2em;
+    }
 `;
 
 const LogoContainer = styled.div``;
@@ -37,6 +52,11 @@ const StyledLogo = styled.img`
     width: 6.7em;
     border-radius: 50%;
     box-shadow: ${({ theme }) => theme.LogoShadow};
+
+    @media only screen and (min-width: 375px) {
+        height: 7.2em;
+        width: 7.2em;
+    }
 `;
 
 //Render:

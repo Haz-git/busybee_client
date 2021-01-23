@@ -31,6 +31,10 @@ const MainContainer = styled.div`
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     z-index: 1;
+
+    @media only screen and (min-width: 375px) {
+        padding: 0.6em 1.5em;
+    }
 `;
 
 const RecentWeightContainer = styled.div`
@@ -54,6 +58,12 @@ const EditCorner = styled.button`
     &:focus {
         outline: none;
     }
+
+    @media only screen and (min-width: 375px) {
+        height: 3.5em;
+        width: 3.5em;
+        border-top-right-radius: 16em;
+    }
 `;
 
 const StyledEditIcon = styled(Edit)`
@@ -63,6 +73,13 @@ const StyledEditIcon = styled(Edit)`
     top: 0.4em;
     right: 0.4em;
     color: black;
+
+    @media only screen and (min-width: 375px) {
+        height: 1.7em;
+        width: 1.7em;
+        top: 0.45em;
+        right: 0.45em;
+    }
 `;
 
 const MainHeader = styled.h2`
@@ -84,6 +101,10 @@ const ExerciseImg = styled.img`
     width: 4.2em;
     filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(289deg)
         brightness(103%) contrast(101%);
+    @media only screen and (min-width: 375px) {
+        height: 4.3em;
+        width: 4.3em;
+    }
 `;
 
 const DescContainer = styled.div`
@@ -124,6 +145,7 @@ export const ModalContainer = styled.div`
     -ms-flex-line-pack: center;
     align-content: center;
     text-align: center;
+    width: 86%;
 
     &:focus {
         outline: none;
