@@ -12,6 +12,7 @@ const StyledSelector = styled.select`
     padding: 0.5em 1em;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
+    font-size: 1em;
 
     &:hover {
         outline: none;

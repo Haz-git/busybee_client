@@ -75,7 +75,7 @@ export const darkTheme = {
     //UserGreeting:
     UserGreetingColor: 'white',
     UserGreetingBG: '#293241',
-    LogoShadow: 'rgba(255, 255, 255, 0.4) 0px 3px 8px',
+    LogoShadow: 'rgba(0, 0, 0, 0.9) 0px 3px 8px',
     //UserPowerStats:
     UserPowerHeaderColor: '#fdbc3d',
     //UserPowerStatsModal:

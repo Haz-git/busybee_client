@@ -27,7 +27,7 @@ const MainContainer = styled.div`
 
 const MainHeader = styled.h2`
     font-family: 'Lato';
-    font-size: 0.9em;
+    font-size: 1.1em;
     color: ${({ theme }) => theme.UserPowerHeaderColor};
     font-weight: 900;
 `;

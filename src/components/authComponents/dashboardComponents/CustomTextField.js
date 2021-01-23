@@ -12,6 +12,7 @@ const StyledTextField = styled.input`
     width: 100%;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
+    font-size: 1em;
 
     &:hover {
         outline: none;

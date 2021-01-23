@@ -15,7 +15,7 @@ const DetailsContainer = styled.div``;
 
 export const MainHeader = styled.h1`
     font-family: 'Lato';
-    font-size: 1.5em;
+    font-size: 1.8em;
     color: ${({ theme }) => theme.UserGreetingColor};
     font-weight: 900;
     margin-bottom: 0.2em;
@@ -24,7 +24,7 @@ export const MainHeader = styled.h1`
 const UserDetailLabel = styled.h2`
     margin: 0.2em 0;
     font-family: 'Lato';
-    font-size: 0.7em;
+    font-size: 1em;
     color: ${({ theme }) => theme.UserGreetingColor};
     font-weight: 500;
 `;
@@ -33,8 +33,8 @@ const LogoContainer = styled.div``;
 
 const StyledLogo = styled.img`
     object-fit: cover;
-    height: 5.3em;
-    width: 5.3em;
+    height: 6.7em;
+    width: 6.7em;
     border-radius: 50%;
     box-shadow: ${({ theme }) => theme.LogoShadow};
 `;

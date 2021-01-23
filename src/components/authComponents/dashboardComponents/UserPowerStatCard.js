@@ -12,7 +12,7 @@ import FadeRR from 'react-reveal/Fade';
 
 //Components:
 import CustomSubmitButton from './CustomSubmitButton';
-import CustomTextField from './CustomTextField';
+import CustomNumberField from './CustomNumberField';
 import CustomSelector from './CustomSelector';
 import RecentWeightBox from './RecentWeightBox';
 
@@ -24,12 +24,13 @@ const WrapperContainer = styled.div`
 const MainContainer = styled.div`
     position: relative;
     text-align: center;
-    padding: 0.7em 0.7em;
+    padding: 0.6em 0.99em;
     border-radius: 0.5em;
     background: #27303f;
-    margin: 0 0.3em;
+    margin: 0 0.15em;
     border: 1px solid #fdbc3d;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
+    z-index: 1;
 `;
 
 const RecentWeightContainer = styled.div`
@@ -39,15 +40,16 @@ const RecentWeightContainer = styled.div`
 const EditCorner = styled.button`
     text-align: center;
     position: absolute;
-    height: 1.9em;
-    width: 1.9em;
+    height: 3em;
+    width: 3em;
     top: 0;
     right: 0;
-    border-top-right-radius: 24em;
+    border-top-right-radius: 20em;
     border-bottom-left-radius: 100em;
     background: #fdbc3d;
     border: none;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
+    z-index: 2;
 
     &:focus {
         outline: none;
@@ -55,37 +57,45 @@ const EditCorner = styled.button`
 `;
 
 const StyledEditIcon = styled(Edit)`
-    height: 1em;
-    width: 1em;
+    height: 1.5em;
+    width: 1.5em;
     position: absolute;
-    top: 0.2em;
-    right: 0.2em;
+    top: 0.4em;
+    right: 0.4em;
     color: black;
 `;
 
 const MainHeader = styled.h2`
-    font-size: 0.75em;
+    margin-top: 0.7em;
+    font-size: 1em;
     font-weight: 700;
+    /* color: ${({ theme }) => theme.UserPowerHeaderColor}; */
     color: white;
+    text-shadow: 2px 2px 2px #14181f;
+    z-index: 4;
 `;
 
 const ImgContainer = styled.div`
-    margin-top: 0.35em;
+    margin-top: 0.3em;
 `;
 
 const ExerciseImg = styled.img`
-    height: 4.3em;
-    width: 4.3em;
+    height: 4.2em;
+    width: 4.2em;
     filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(289deg)
         brightness(103%) contrast(101%);
 `;
 
-const DescContainer = styled.div``;
+const DescContainer = styled.div`
+    max-width: 4em;
+    text-align: center;
+`;
 
 const DescLabel = styled.p`
-    font-size: 0.35em;
+    font-size: 0.8em;
     color: white;
     font-weight: 900;
+    white-space: nowrap;
 `;
 
 //Modal Container
@@ -94,14 +104,24 @@ export const ModalContainer = styled.div`
     position: absolute;
     left: 50%;
     top: 40%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
     transform: translate(-50%, -50%);
     background: ${({ theme }) => theme.ModalBG};
     /* border: 1px solid #fdbc3d; */
     border-radius: 0.4em;
     padding: 1em 1em;
+    display: -webkit-box;
+    display: -ms-flexbox;
     display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
     flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
+    -ms-flex-line-pack: center;
     align-content: center;
     text-align: center;
 
@@ -112,7 +132,7 @@ export const ModalContainer = styled.div`
 
 export const ModalHeader = styled.h2`
     white-space: nowrap;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: 900;
     color: ${({ theme }) => theme.ModalHeader};
     font-family: 'Lato', 'Nunito', sans-serif, helvetica;
@@ -120,15 +140,15 @@ export const ModalHeader = styled.h2`
 
 const ModalPicture = styled.img`
     margin: 0.5em auto;
-    height: 4em;
-    width: 4em;
+    height: 5.8em;
+    width: 5.8em;
     filter: invert(10%) sepia(23%) saturate(1426%) hue-rotate(77deg)
         brightness(92%) contrast(86%);
 `;
 
 export const ModalDesc = styled.p`
     margin-top: 0.5em;
-    font-size: 0.8em;
+    font-size: 1.1em;
     font-weight: 500;
     color: ${({ theme }) => theme.generalText};
     white-space: nowrap;
@@ -240,8 +260,7 @@ const UserPowerStatCard = ({
                         <ModalDesc>Let us know how you're doing.</ModalDesc>
                         <form onSubmit={handleNewStatSubmit}>
                             <ModalInputContainer>
-                                <CustomTextField
-                                    type="number"
+                                <CustomNumberField
                                     placeholder="Weight"
                                     existingStat={existingStat}
                                     changeFunc={handleTextFieldChange}

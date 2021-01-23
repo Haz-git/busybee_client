@@ -30,46 +30,50 @@ const DescContainer = styled.div`
 
 const IncreaseIcon = styled(ChevronsUp)`
     color: green;
-    height: 2.7em;
-    width: 2.7em;
+    height: 3.5em;
+    width: 3.5em;
 `;
 
 const DecreaseIcon = styled(ChevronsDown)`
     color: red;
-    height: 2.7em;
-    width: 2.7em;
+    height: 3.5em;
+    width: 3.5em;
 `;
 
 const NoneIcon = styled(DotsVerticalRounded)`
     color: rgba(15.7, 18.8, 24.3, 1);
-    height: 2.7em;
-    width: 2.7em;
+    height: 3.5em;
+    width: 3.5em;
 `;
 
 const DescLabelImprove = styled.label`
+    white-space: nowrap;
     margin: 0.15em 0;
-    font-size: 0.45em;
+    font-size: 0.75em;
     color: green;
     font-weight: 900;
 `;
 
 const DescLabelFail = styled.label`
+    white-space: nowrap;
     margin: 0.15em 0;
-    font-size: 0.45em;
+    font-size: 0.75em;
     color: red;
     font-weight: 900;
 `;
 
 const DescLabelNone = styled.label`
+    white-space: nowrap;
     margin: 0.15em 0;
-    font-size: 0.45em;
+    font-size: 0.75em;
     color: rgba(15.7, 18.8, 24.3, 1);
     font-weight: 900;
 `;
 
 const DescLabelTime = styled.label`
+    white-space: nowrap;
     margin: 0.15em 0;
-    font-size: 0.45em;
+    font-size: 0.75em;
     color: white;
     font-weight: 900;
 `;

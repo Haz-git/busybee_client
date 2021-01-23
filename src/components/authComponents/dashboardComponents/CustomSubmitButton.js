@@ -7,7 +7,7 @@ import styled from 'styled-components';
 
 const StyledSubmitButton = withStyles({
     root: {
-        fontSize: '.8em',
+        fontSize: '1em',
         borderRadius: '2em',
         minWidth: '100%',
         maxWidth: '100%',
