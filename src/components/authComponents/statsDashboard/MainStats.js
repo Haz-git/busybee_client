@@ -69,7 +69,7 @@ const FlexWrapper = styled.div`
 
 const SecondaryStatHeader = styled(MainHeader)`
     font-size: 1em;
-    font-weight: 200;
+    font-weight: 400;
     white-space: nowrap;
     margin: 0.7em 0;
 `;
