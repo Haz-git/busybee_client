@@ -76,6 +76,7 @@ const SecondaryStatHeader = styled(MainHeader)`
 
 const FormContainer = styled.div`
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
 `;
@@ -87,13 +88,13 @@ const StatModalHeader = styled(ModalHeader)`
 const StatContainer = styled.div``;
 
 const TextFieldContainer = styled.div`
-    width: 10em;
+    width: 100%;
     margin-right: 1em;
 `;
 
 const ButtonContainer = styled.div`
     margin: 0 auto;
-    width: 4em;
+    width: 100%;
 `;
 
 const StatCardContainer = styled.div``;
