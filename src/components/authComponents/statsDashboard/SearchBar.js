@@ -18,8 +18,8 @@ const StyledSearchIcon = styled(SearchCircle)`
     position: absolute;
     left: 0;
     color: rgb(255, 169, 0);
-    height: 2.2em;
-    width: 2.2em;
+    height: 3.3em;
+    width: 3.3em;
 `;
 
 const StyledInput = styled.input`
@@ -34,7 +34,7 @@ const StyledInput = styled.input`
     outline: 0;
     background: #27303f;
     color: white;
-    font-size: 0.75em;
+    font-size: 1.1em;
     font-weight: 100;
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
