@@ -35,7 +35,7 @@ const StyledInput = styled.input`
     background: #27303f;
     color: white;
     font-size: 1.1em;
-    font-weight: 100;
+    font-weight: 300;
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
 
