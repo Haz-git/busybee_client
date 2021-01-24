@@ -15,7 +15,7 @@ import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 
 const WrapperContainer = styled.div`
-    margin: 1em 0.65em;
+    margin: 1em 0.1em;
 `;
 
 const MainContainer = styled.div`
@@ -35,7 +35,7 @@ const NameContainer = styled.div`
 
 const NameHeader = styled.h2`
     color: ${({ theme }) => theme.StatCardHeader};
-    font-size: 1em;
+    font-size: 1.2em;
     font-weight: 400;
     text-shadow: 2px 2px 2px #14181f;
 `;
@@ -47,28 +47,30 @@ const DateContainer = styled.div`
 const DateText = styled.h2`
     font-family: 'Lato', 'Nunito';
     color: ${({ theme }) => theme.StatCardTime};
-    font-size: 0.3em;
+    font-size: 0.9em;
     text-align: left;
     font-weight: 400;
 `;
 
-const ButtonContainer = styled.div``;
+const ButtonContainer = styled.div`
+    white-space: nowrap;
+`;
 
 const TrashIcon = styled(Trash)`
-    height: 2em;
-    width: 2em;
+    height: 3em;
+    width: 3em;
     color: ${({ theme }) => theme.TrashIcon};
 `;
 
 const EditIcon = styled(Pencil)`
-    height: 2em;
-    width: 2em;
+    height: 3em;
+    width: 3em;
     color: ${({ theme }) => theme.EditIcon};
 `;
 
 const CaretIcon = styled(ChevronDown)`
-    height: 2em;
-    width: 2em;
+    height: 3em;
+    width: 3em;
     color: ${({ theme }) => theme.CaretIcon};
 `;
 
