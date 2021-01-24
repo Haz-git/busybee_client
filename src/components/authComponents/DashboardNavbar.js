@@ -11,36 +11,36 @@ import { UserCog } from '@styled-icons/fa-solid/UserCog';
 import { Barbell } from '@styled-icons/ionicons-outline/Barbell';
 
 const StyledHomeIcon = styled(Home)`
-    height: 2em;
-    width: 2em;
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
-    height: 2em;
-    width: 2em;
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledStatsIcon = styled(StatsChart)`
-    height: 2em;
-    width: 2em;
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
-    height: 2em;
-    width: 2em;
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
-    height: 2em;
-    width: 2em;
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
