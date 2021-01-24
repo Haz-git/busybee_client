@@ -24,7 +24,7 @@ const MainContainer = styled.div`
     display: -ms-flexbox;
     display: flex;
     position: relative;
-    margin-bottom: 0.5em;
+    margin-bottom: 1em;
     background: #10122a;
     border-radius: 0.2em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
