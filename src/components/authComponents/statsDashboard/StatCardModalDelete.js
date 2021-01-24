@@ -24,9 +24,7 @@ const DeleteModalHeader = styled(ModalHeader)`
 
 const DeleteModalDesc = styled(ModalDesc)`
     white-space: normal;
-    text-align: justify;
-    text-justify: distribute;
-    text-align-last: left;
+    text-align: center;
 `;
 
 const ButtonContainer = styled.div`
@@ -39,6 +37,7 @@ const ButtonContainer = styled.div`
 const StyledButton = withStyles({
     root: {
         textTransform: 'capitalize',
+        fontSize: '1em',
     },
 })(Button);
 
@@ -69,7 +68,7 @@ const StatCardModalDelete = ({
                         <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                         <ButtonContainer>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 color="secondary"
                                 onClick={buttonSubmitFunction}
@@ -77,7 +76,7 @@ const StatCardModalDelete = ({
                                 Delete
                             </StyledButton>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 onClick={closeFunction}
                             >
