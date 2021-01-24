@@ -7,8 +7,8 @@ import Button from '@material-ui/core/Button';
 import { AddCircle } from '@styled-icons/ionicons-solid/AddCircle';
 
 const AddIcon = styled(AddCircle)`
-    height: 0.9em;
-    width: 0.9em;
+    height: 1.1em;
+    width: 1.1em;
 `;
 
 const CustomButton = withStyles({
@@ -19,9 +19,10 @@ const CustomButton = withStyles({
         color: '#fdbc3d',
         fontFamily: 'Nunito, Lato, sans-serif',
         fontWeight: '400',
-        fontSize: '.8em',
-        padding: '.5em .6em',
-        borderRadius: '.4em',
+        fontSize: '1.2em',
+        padding: '.5em .8em',
+        borderRadius: '.5em',
+        marginLeft: '.4em',
     },
 })(Button);
 
