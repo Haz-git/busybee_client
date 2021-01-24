@@ -16,17 +16,22 @@ import {
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
 
-const AddRecordModalHeader = styled(ModalHeader)`
-    font-size: 0.85em;
-    font-weight: 400;
+const EditRecordModalContainer = styled(ModalContainer)`
+    width: 92%;
+`;
+
+const EditRecordModalHeader = styled(ModalHeader)`
+    font-size: 1.2em;
+    font-weight: 900;
     margin: 0.5em 0;
 `;
 
 const InputContainer = styled.div`
-    width: 13em;
+    width: 100%;
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    align-content: center;
+    justify-content: space-between;
     margin-bottom: 0.7em;
 `;
 
@@ -43,6 +48,7 @@ const ButtonContainer = styled.div`
 const StyledButton = withStyles({
     root: {
         textTransform: 'capitalize',
+        fontSize: '1.3em',
     },
 })(Button);
 
@@ -72,10 +78,10 @@ const RecordCardEditModal = ({
                 }}
             >
                 <Fade in={openBoolean}>
-                    <ModalContainer>
-                        <AddRecordModalHeader>
+                    <EditRecordModalContainer>
+                        <EditRecordModalHeader>
                             Edit your record!
-                        </AddRecordModalHeader>
+                        </EditRecordModalHeader>
                         <InputContainer>
                             <InputDivider>
                                 <CustomNumberField
@@ -100,7 +106,7 @@ const RecordCardEditModal = ({
                         </InputContainer>
                         <ButtonContainer>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 color="primary"
                                 onClick={submitHandler}
@@ -108,7 +114,7 @@ const RecordCardEditModal = ({
                                 Save
                             </StyledButton>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 color="secondary"
                                 onClick={closeFunction}
@@ -116,7 +122,7 @@ const RecordCardEditModal = ({
                                 Cancel
                             </StyledButton>
                         </ButtonContainer>
-                    </ModalContainer>
+                    </EditRecordModalContainer>
                 </Fade>
             </Modal>
         </>
