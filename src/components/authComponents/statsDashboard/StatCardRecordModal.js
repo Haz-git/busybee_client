@@ -6,7 +6,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
-import CustomTextField from '../dashboardComponents/CustomTextField';
 import { withStyles } from '@material-ui/core/styles';
 import RecordCard from './RecordCard';
 import RecordCardAddModal from './RecordCardAddModal';
@@ -14,11 +13,7 @@ import { connect } from 'react-redux';
 import { addRecord } from '../../../redux/userStats/userStatActions';
 import { v4 as uuid } from 'uuid';
 
-import {
-    ModalContainer,
-    ModalHeader,
-    ModalDesc,
-} from '../dashboardComponents/UserPowerStatCard';
+import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
 import { PlaylistAdd } from '@styled-icons/material/PlaylistAdd';
 
@@ -59,13 +54,14 @@ const ButtonContainer = styled.div`
 `;
 
 const AddIcon = styled(PlaylistAdd)`
-    height: 1.1em;
-    width: 1.1em;
+    height: 1.2em;
+    width: 1.2em;
 `;
 
 const StyledButton = withStyles({
     root: {
         textTransform: 'capitalize',
+        fontSize: '1.1em',
     },
 })(Button);
 
@@ -171,7 +167,7 @@ const StatCardRecordModal = ({
                         </RecordCardContainer>
                         <ButtonContainer>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 color="primary"
                                 startIcon={<AddIcon />}
@@ -180,7 +176,7 @@ const StatCardRecordModal = ({
                                 Add New Record
                             </StyledButton>
                             <StyledButton
-                                size="small"
+                                size="large"
                                 variant="contained"
                                 color="secondary"
                                 onClick={closeFunction}
