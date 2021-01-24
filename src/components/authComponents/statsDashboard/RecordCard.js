@@ -20,14 +20,6 @@ import { Cancel } from '@styled-icons/material-rounded/Cancel';
 import { Pencil } from '@styled-icons/remix-fill/Pencil';
 
 const MainContainer = styled.div`
-    /* display: flex;
-    position: relative;
-    margin-bottom: 0.5em;
-    background: #10122a;
-    border-radius: 0.2em;
-    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
-    align-items: center;
-    justify-content: space-between; */
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -46,14 +38,14 @@ const MainContainer = styled.div`
 `;
 
 const EditIcon = styled(Pencil)`
-    width: 2em;
-    height: 2em;
+    width: 3em;
+    height: 3em;
     color: ${({ theme }) => theme.EditIcon};
 `;
 
 const DeleteIcon = styled(Cancel)`
-    width: 2em;
-    height: 2em;
+    width: 3em;
+    height: 3em;
     color: ${({ theme }) => theme.TrashIcon};
 `;
 
@@ -88,7 +80,7 @@ const DateContainer = styled.div`
 `;
 
 const DateText = styled.h2`
-    font-size: 0.7em;
+    font-size: 0.9em;
     font-weight: 900;
     color: #e6ac00;
 `;
@@ -96,8 +88,8 @@ const DateText = styled.h2`
 const WeightContainer = styled.div`
     white-space: nowrap;
     margin: 0 1em;
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 1.2em;
+    font-weight: 500;
     color: ${({ theme }) => theme.generalText};
 `;
 
@@ -106,8 +98,8 @@ const WeightDivider = styled.div``;
 const TechContainer = styled.div`
     white-space: nowrap;
     margin: 0 1em;
-    font-size: 1em;
-    font-weight: 700;
+    font-size: 1.2em;
+    font-weight: 500;
     color: ${({ theme }) => theme.generalText};
 `;
 
