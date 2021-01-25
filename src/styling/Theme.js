@@ -84,7 +84,7 @@ export const darkTheme = {
     ModalHeader: '#fdbc3d',
     //Bottom Navbar:
     NavColor: '#1d262d',
-    NavIconColor: 'white',
+    NavIconColor: '#3B576D',
     //Stats:
 
     //StatCard:

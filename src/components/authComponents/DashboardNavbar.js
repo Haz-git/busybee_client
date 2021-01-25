@@ -11,36 +11,36 @@ import { UserCog } from '@styled-icons/fa-solid/UserCog';
 import { Barbell } from '@styled-icons/ionicons-outline/Barbell';
 
 const StyledHomeIcon = styled(Home)`
-    height: 2.7em;
-    width: 2.7em;
+    height: 2.4em;
+    width: 2.4em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
-    height: 2.7em;
-    width: 2.7em;
+    height: 2.4em;
+    width: 2.4em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledStatsIcon = styled(StatsChart)`
-    height: 2.7em;
-    width: 2.7em;
+    height: 2.4em;
+    width: 2.4em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
-    height: 2.7em;
-    width: 2.7em;
+    height: 2.4em;
+    width: 2.4em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
-    height: 2.7em;
-    width: 2.7em;
+    height: 2.4em;
+    width: 2.4em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -51,16 +51,19 @@ const MainContainer = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
+    border-top-left-radius: 1.2em;
+    border-top-right-radius: 1.2em;
 `;
 
 const NavItemContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    align-content: stretch;
+    justify-content: space-between;
 `;
 
 const NavItem = styled(NavLink)`
-    padding: 0.8em 0.8em;
+    padding: 1.4em 1.4em;
 `;
 
 //Render:
@@ -72,25 +75,37 @@ const DashboardNavbar = () => {
                 <NavItemContainer>
                     <NavItem
                         to="/stats"
-                        activeStyle={{ background: '#101530' }}
+                        activeStyle={{
+                            filter:
+                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                        }}
                     >
                         <StyledStatsIcon />
                     </NavItem>
                     <NavItem
                         to="/programs"
-                        activeStyle={{ background: '#101530' }}
+                        activeStyle={{
+                            filter:
+                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                        }}
                     >
                         <StyledBarbellIcon />
                     </NavItem>
                     <NavItem
                         to="/dashboard"
-                        activeStyle={{ background: '#101530' }}
+                        activeStyle={{
+                            filter:
+                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                        }}
                     >
                         <StyledHomeIcon />
                     </NavItem>
                     <NavItem
                         to="/unmade"
-                        activeStyle={{ background: '#101530' }}
+                        activeStyle={{
+                            filter:
+                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                        }}
                     >
                         <StyledUserCogIcon />
                     </NavItem>
