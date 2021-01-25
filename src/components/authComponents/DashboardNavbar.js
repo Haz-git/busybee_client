@@ -63,7 +63,17 @@ const NavItemContainer = styled.div`
 `;
 
 const NavItem = styled(NavLink)`
-    padding: 1.4em 1.4em;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1.2em 1.2em;
+`;
+
+const NavLabel = styled.label`
+    font-size: 0.75em;
+    font-weight: 400;
+    color: ${({ theme }) => theme.NavIconColor};
 `;
 
 //Render:
@@ -81,6 +91,7 @@ const DashboardNavbar = () => {
                         }}
                     >
                         <StyledStatsIcon />
+                        <NavLabel>Stats</NavLabel>
                     </NavItem>
                     <NavItem
                         to="/programs"
@@ -90,6 +101,7 @@ const DashboardNavbar = () => {
                         }}
                     >
                         <StyledBarbellIcon />
+                        <NavLabel>Programs</NavLabel>
                     </NavItem>
                     <NavItem
                         to="/dashboard"
@@ -99,6 +111,7 @@ const DashboardNavbar = () => {
                         }}
                     >
                         <StyledHomeIcon />
+                        <NavLabel>Dashboard</NavLabel>
                     </NavItem>
                     <NavItem
                         to="/unmade"
@@ -108,6 +121,7 @@ const DashboardNavbar = () => {
                         }}
                     >
                         <StyledUserCogIcon />
+                        <NavLabel>Settings</NavLabel>
                     </NavItem>
                 </NavItemContainer>
             </MainContainer>
