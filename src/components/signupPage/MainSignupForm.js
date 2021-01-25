@@ -118,12 +118,12 @@ export const PromptSpan = styled.span`
 export const PromptLink = styled(Link)`
     margin-left: 0.5em;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 0.8em;
+    font-size: 0.9em;
     font-weight: 600;
     color: ${({ theme }) => theme.MobPromptLink};
 
     @media only screen and (min-width: 375px) {
-        font-size: 1em;
+        font-size: 1.1em;
         font-weight: 900;
     }
 `;

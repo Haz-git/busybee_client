@@ -51,8 +51,8 @@ const MainContainer = styled.div`
     position: fixed;
     bottom: 0;
     width: 100%;
-    border-top-left-radius: 1.2em;
-    border-top-right-radius: 1.2em;
+    border-top-left-radius: 1.5em;
+    border-top-right-radius: 1.5em;
 `;
 
 const NavItemContainer = styled.div`
