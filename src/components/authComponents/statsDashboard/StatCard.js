@@ -10,7 +10,7 @@ import StatCardRecordModal from './StatCardRecordModal';
 
 //Styles:
 import styled from 'styled-components';
-import { Trash } from '@styled-icons/ionicons-outline/Trash';
+import { Trash } from '@styled-icons/typicons/Trash';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 
