@@ -45,12 +45,7 @@ class AuthenticatedComponents extends Component {
                 isExpired = true;
                 alert('Your session has expired. Please log in to continue.');
                 history.push('/login');
-            } else {
-                //The JWT is valid and not expired:
-
-                history.push('/dashboard');
             }
-
             //If the JWT is availiable and has not expired, then push the user to the dashboard:
         }
 
