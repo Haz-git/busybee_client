@@ -24,6 +24,16 @@ const MainContainer = styled.div`
     height: 100vh;
 `;
 
+const LoginLogo = styled(StyledLogo)`
+    height: 8em;
+    width: 8em;
+
+    @media only screen and (min-width: 375px) {
+        height: 12em;
+        width: 12em;
+    }
+`;
+
 const WrapperContainer = styled.div`
     position: relative;
     top: 50vh;
@@ -33,6 +43,10 @@ const WrapperContainer = styled.div`
     -o-transform: translateY(-40vh);
     transform: translateY(-40vh);
     text-align: center;
+
+    @media only screen and (min-width: 375px) {
+        top: 47vh;
+    }
 `;
 
 const LogoContainer = styled(Link)`
@@ -45,6 +59,10 @@ const StyledLoginHeader = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     margin-top: 0.5em;
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1.2em;
+    }
 `;
 
 const FormContainer = styled.div`
@@ -62,12 +80,16 @@ const ErrorTextInvisible = styled.h2`
     font-weight: 100;
     opacity: 0;
 
+    @media only screen and (min-width: 375px) {
+        font-size: 1em;
+    }
+
     @media only screen and (max-width: 650px) and (orientation: portrait) {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 `;
 
@@ -77,12 +99,16 @@ const ErrorTextVisible = styled.h2`
     font-size: 15px;
     font-weight: 100;
 
+    @media only screen and (min-width: 375px) {
+        font-size: 1em;
+    }
+
     @media only screen and (max-width: 650px) and (orientation: portrait) {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
-        font-size: 0.8em;
+        font-size: 1em;
     }
 `;
 
@@ -141,7 +167,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
             <MainContainer>
                 <WrapperContainer>
                     <LogoContainer to="/">
-                        <StyledLogo src={gymjot_logo} alt="gymjot logo" />
+                        <LoginLogo src={gymjot_logo} alt="gymjot logo" />
                     </LogoContainer>
                     <StyledLoginHeader>
                         Welcome back, GymJotter.

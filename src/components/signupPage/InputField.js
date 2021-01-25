@@ -30,8 +30,8 @@ export const StyledLabel = styled.div`
     font-size: 1em;
     color: ${(props) => props.theme.inputFieldLabel};
 
-    @media only screen and (max-width: 650px) {
-        font-size: 0.8em;
+    @media only screen and (max-width: 377px) {
+        font-size: 1em;
     }
 
     @media only screen and (max-width: 850px) and (orientation: landscape) {
@@ -52,6 +52,7 @@ export const StyledField = styled(Field)`
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     font-size: 0.9em;
+    height: 100%;
 
     //Rounded Look for mobile-fix:
     border-radius: 0;
@@ -62,14 +63,8 @@ export const StyledField = styled(Field)`
         outline-width: 0;
     }
 
-    @media only screen and (max-width: 650px) {
-        padding: 0.05em 0.8em;
-        margin: 0.5em 0;
-    }
-
-    @media only screen and (max-width: 850px) and (orientation: landscape) {
-        padding: 0.05em 0.8em;
-        margin: 0.1em 0;
+    @media only screen and (min-width: 375px) {
+        font-size: 1.3em;
     }
 `;
 

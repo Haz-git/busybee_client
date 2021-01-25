@@ -18,11 +18,13 @@ const CustomButton = withStyles({
         fontSize: '.6em',
         letterSpacing: '.1em',
         padding: '1em 0',
+        textTransform: 'capitalize',
         '&:hover': {
             backgroundColor: '#62c267',
         },
         '@media only screen and (min-width: 375px)': {
-            fontSize: '.7em',
+            padding: '.7em 0',
+            fontSize: '1em',
         },
     },
 })(Button);

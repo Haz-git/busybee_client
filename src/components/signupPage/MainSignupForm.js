@@ -33,6 +33,10 @@ const WrapperContainer = styled.div`
     transform: translateY(-45vh);
     text-align: center;
     padding: 0.5em 0;
+
+    @media only screen and (min-width: 375px) {
+        top: 47vh;
+    }
 `;
 
 const LogoContainer = styled(Link)`
@@ -45,6 +49,10 @@ const StyledSignUpHeader = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     margin-top: 0.5em;
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1.2em;
+    }
 `;
 
 const FormContainer = styled.div`
@@ -84,16 +92,27 @@ export const StyledLogo = styled.img`
     height: 8em;
     width: 8em;
     border-radius: 50%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 8px;
+
+    @media only screen and (min-width: 375px) {
+        height: 12em;
+        width: 12em;
+    }
 `;
 
-const NoticeContainer = styled.div``;
+const NoticeContainer = styled.div`
+    margin-bottom: 1em;
+`;
 
 export const PromptSpan = styled.span`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 0.8em;
+    font-size: 1em;
     font-weight: 300;
     color: ${({ theme }) => theme.MobPromptSpan};
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1em;
+    }
 `;
 
 export const PromptLink = styled(Link)`
@@ -102,11 +121,20 @@ export const PromptLink = styled(Link)`
     font-size: 0.8em;
     font-weight: 600;
     color: ${({ theme }) => theme.MobPromptLink};
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1em;
+        font-weight: 900;
+    }
 `;
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
+        display: 'flex',
+        alignItems: 'center',
+        alignContent: 'center',
         backgroundColor: '#136539',
+        padding: '.8em .8em',
         '& .MuiAlert-icon': {
             fontSize: '1.25em',
         },
@@ -114,7 +142,17 @@ const CustomMuiAlert = withStyles(() => ({
             fontSize: '.85em',
         },
         '& .MuiAlert-action': {
-            fontSize: '.85em',
+            margin: '0',
+            padding: '0',
+        },
+        '@media only screen and (min-width: 375px)': {
+            padding: '.8em .8em',
+            '& .MuiAlert-icon': {
+                fontSize: '2.7em',
+            },
+            '& .MuiAlert-message': {
+                fontSize: '1.2em',
+            },
         },
     },
 }))(MuiAlert);
@@ -129,6 +167,14 @@ const CustomAlertButton = withStyles(() => ({
         fontFamily: 'Nunito, sans-serif, helvetica',
         fontSize: '.5em',
         fontWeight: '500',
+        textTransform: 'capitalize',
+        boxShadow: 'rgba(0, 0, 0, 0.7) 0px 3px 8px',
+
+        '@media only screen and (min-width: 375px)': {
+            fontSize: '1.5em',
+            padding: '1.3em 2em',
+            margin: '0 0',
+        },
     },
 }))(Button);
 
@@ -368,7 +414,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                                 </Link>
                             }
                         >
-                            Your account has been created!
+                            Your account has been successfully created!
                         </Alert>
                     </Snackbar>
                 </Slide>
