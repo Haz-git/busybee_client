@@ -38,6 +38,8 @@ class AuthenticatedComponents extends Component {
                 complete: true,
             });
 
+            console.log(decodedToken);
+
             const dateNow = new Date();
 
             //Check for manipulated JWT:
@@ -61,22 +63,24 @@ class AuthenticatedComponents extends Component {
 
             //Server-sided check for valid JWT:
 
-            api.get('/user/protected').catch((err) => {
-                console.log(err.response.status === 401);
-                if (err.response.status === 401) {
-                    localStorage.removeItem('jwt');
-                    isExpired = true;
-                    alert('Your JWT is not valid. Please re-log in.');
-                    history.push('/login');
-                } else if (err.response.status === 500) {
-                    console.log(err.response);
-                    localStorage.removeItem('jwt');
-                    alert(
-                        'Something happened to the server. It may be offline.'
-                    );
-                    history.push('/login');
-                }
-            });
+            //There's an error here currently, the api is sending the request before jwt is valid in the localstorage...
+
+            // api.get('/user/protected').catch((err) => {
+            //     console.log(err.response.status === 401);
+            //     if (err.response.status === 401) {
+            //         localStorage.removeItem('jwt');
+            //         isExpired = true;
+            //         alert('Your JWT is not valid. Please re-log in.');
+            //         history.push('/login');
+            //     } else if (err.response.status === 500) {
+            //         console.log(err.response);
+            //         localStorage.removeItem('jwt');
+            //         alert(
+            //             'Something happened to the server. It may be offline.'
+            //         );
+            //         history.push('/login');
+            //     }
+            // });
 
             //If the JWT is availiable, valid, and has not expired, then push the user to the dashboard:
         }
