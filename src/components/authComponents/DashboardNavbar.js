@@ -8,7 +8,7 @@ import { Home } from '@styled-icons/ionicons-solid/Home';
 import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
 import { StatsChart } from '@styled-icons/ionicons-solid/StatsChart';
 import { UserCog } from '@styled-icons/fa-solid/UserCog';
-import { Barbell } from '@styled-icons/ionicons-outline/Barbell';
+import { Barbell } from '@styled-icons/ionicons-solid/Barbell';
 
 const StyledHomeIcon = styled(Home)`
     height: 2.4em;
