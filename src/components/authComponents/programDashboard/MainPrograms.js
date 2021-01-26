@@ -37,6 +37,10 @@ const MainPrograms = () => {
     //This state controls program open/close:
     const [stateProgramAddModal, setStateProgramAddModal] = useState(false);
 
+    //These states control the input text fields to create a new program:
+    const [inputProgramName, setInputProgramName] = useState(undefined);
+    const [inputProgramDesc, setInputProgramDesc] = useState(undefined);
+
     //Add Program modal functions:
     const openAddProgramModal = () => {
         setStateProgramAddModal(true);
@@ -46,11 +50,40 @@ const MainPrograms = () => {
         setStateProgramAddModal(false);
     };
 
+    //Add Program Input function controllers:
+
+    const addTitleInput = (e) => {
+        setInputProgramName(e.target.value);
+    };
+
+    const addDescInput = (e) => {
+        setInputProgramDesc(e.target.value);
+    };
+
+    const submitUserInputs = () => {
+        if (
+            inputProgramName !== undefined &&
+            inputProgramName !== null &&
+            inputProgramName !== ''
+            // && inputProgramDesc !== undefined &&
+            // inputProgramDesc !== null &&
+            // inputProgramDesc !== ''
+        ) {
+            console.log(inputProgramName, inputProgramDesc);
+            setStateProgramAddModal(false);
+        } else {
+            alert('Please enter a program name.');
+        }
+    };
+
     return (
         <>
             <CreateProgramModal
                 openBoolean={stateProgramAddModal}
                 closeFunction={closeAddProgramModal}
+                titleFunction={addTitleInput}
+                descFunction={addDescInput}
+                submitHandler={submitUserInputs}
             />
             <MainContainer>
                 <MainHeader>Program Manager</MainHeader>
