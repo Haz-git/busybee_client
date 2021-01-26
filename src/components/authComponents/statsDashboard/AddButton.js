@@ -21,7 +21,7 @@ const CustomButton = withStyles({
         fontWeight: '400',
         fontSize: '1.2em',
         padding: '.5em .8em',
-        borderRadius: '.5em',
+        borderRadius: '.3em',
         marginLeft: '.4em',
     },
 })(Button);
