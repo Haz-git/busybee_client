@@ -81,7 +81,7 @@ const DescInput = styled.textarea`
     height: 10em;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 300;
-    font-size: 0.7em;
+    font-size: 1em;
 
     &:hover {
         outline: none;
