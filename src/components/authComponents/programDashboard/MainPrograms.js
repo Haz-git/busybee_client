@@ -1,4 +1,9 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+//Components:
+import SearchBar from '../statsDashboard/SearchBar';
+import CreateProgramButton from './CreateProgramButton';
+import CreateProgramModal from './CreateProgramModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,18 +20,47 @@ const SecondaryProgramHeader = styled(MainHeader)`
     font-size: 1em;
     font-weight: 400;
     white-space: nowrap;
-    margin: 0.7em 0;
+    margin: 1em 0;
+`;
+
+const SearchBarContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 //Render:
 const MainPrograms = () => {
+    //This state controls snackbars:
+    const [openAddProgramSnackbar, setOpenAddProgramSnackbar] = useState(false);
+
+    //This state controls program open/close:
+    const [stateProgramAddModal, setStateProgramAddModal] = useState(false);
+
+    //Add Program modal functions:
+    const openAddProgramModal = () => {
+        setStateProgramAddModal(true);
+    };
+
+    const closeAddProgramModal = () => {
+        setStateProgramAddModal(false);
+    };
+
     return (
         <>
+            <CreateProgramModal
+                openBoolean={stateProgramAddModal}
+                closeFunction={closeAddProgramModal}
+            />
             <MainContainer>
                 <MainHeader>Program Manager</MainHeader>
                 <SecondaryProgramHeader>
                     Design and run your lifting programs.
                 </SecondaryProgramHeader>
+                <SearchBarContainer>
+                    <SearchBar placeholder="Total Programs" />
+                    <CreateProgramButton clickFunction={openAddProgramModal} />
+                </SearchBarContainer>
             </MainContainer>
         </>
     );
