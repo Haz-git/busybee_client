@@ -322,11 +322,12 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             <MainContainer>
                 <MainHeader>Stat Log</MainHeader>
                 <SecondaryStatHeader>
-                    Keep track of your achievements.
+                    Jot down all of your achievements.
                 </SecondaryStatHeader>
                 <FlexWrapper>
                     <SearchBarContainer>
                         <SearchBar
+                            placeholder="Total Stats"
                             value={renderNumberOfStats()}
                             changeFunction={handleSearchBarChange}
                         />
