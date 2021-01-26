@@ -46,6 +46,15 @@ export const lightTheme = {
     EditIcon: 'white',
     CaretIcon: 'white',
     ButtonBG: '#27303f',
+
+    //ProgramCard:
+    ProgramCardBG: '#27303f',
+    ProgramCardHeader: '#fdbc3d',
+    ProgramCardDesc: 'white',
+    ProgramCardDescBG: '#364765',
+    ProgramCardDate: 'white',
+    PlayIcon: 'white',
+    LowerContainerBG: '#1A222F',
 };
 
 export const darkTheme = {
@@ -95,4 +104,12 @@ export const darkTheme = {
     EditIcon: '#178B1F',
     CaretIcon: '#fdbc3d',
     ButtonBG: '#121E33',
+
+    //ProgramCard:
+    ProgramCardBG: '#27303f',
+    ProgramCardHeader: '#fdbc3d',
+    ProgramCardDesc: 'white',
+    ProgramCardDescBG: '#041839',
+    PlayIcon: 'white',
+    LowerContainerBG: '#1A222F',
 };
