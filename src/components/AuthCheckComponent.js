@@ -3,6 +3,7 @@ import { getJWT } from '../utils/jwthelper';
 import history from './historyObject';
 import jsonwebtoken from 'jsonwebtoken';
 import styled from 'styled-components';
+import api from '../api';
 
 //Styles:
 
@@ -39,6 +40,17 @@ class AuthenticatedComponents extends Component {
 
             const dateNow = new Date();
 
+            //Check for manipulated JWT:
+
+            if (decodedToken === null) {
+                localStorage.removeItem('jwt');
+                isExpired = true;
+                alert('Your JWT is not valid. Please re-log in.');
+                history.push('/login');
+            }
+
+            //Check for expired JWT:
+
             if (decodedToken.payload.exp * 1000 < dateNow.getTime()) {
                 //The JWT is expired: Remove the JWT.
                 localStorage.removeItem('jwt');
@@ -46,7 +58,27 @@ class AuthenticatedComponents extends Component {
                 alert('Your session has expired. Please log in to continue.');
                 history.push('/login');
             }
-            //If the JWT is availiable and has not expired, then push the user to the dashboard:
+
+            //Server-sided check for valid JWT:
+
+            api.get('/user/protected').catch((err) => {
+                console.log(err.response.status === 401);
+                if (err.response.status === 401) {
+                    localStorage.removeItem('jwt');
+                    isExpired = true;
+                    alert('Your JWT is not valid. Please re-log in.');
+                    history.push('/login');
+                } else if (err.response.status === 500) {
+                    console.log(err.response);
+                    localStorage.removeItem('jwt');
+                    alert(
+                        'Something happened to the server. It may be offline.'
+                    );
+                    history.push('/login');
+                }
+            });
+
+            //If the JWT is availiable, valid, and has not expired, then push the user to the dashboard:
         }
 
         //We need additional verification-- server sided. I was thinking that we could send a direct request to the API here, verify and send 'confirmed' or failed to procced to render the child components.
