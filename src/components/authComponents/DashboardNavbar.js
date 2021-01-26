@@ -53,6 +53,7 @@ const MainContainer = styled.div`
     width: 100%;
     border-top-left-radius: 1.5em;
     border-top-right-radius: 1.5em;
+    z-index: 99999 !important;
 `;
 
 const NavItemContainer = styled.div`
