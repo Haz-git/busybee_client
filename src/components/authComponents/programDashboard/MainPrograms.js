@@ -80,9 +80,6 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
             inputProgramName !== undefined &&
             inputProgramName !== null &&
             inputProgramName !== ''
-            // && inputProgramDesc !== undefined &&
-            // inputProgramDesc !== null &&
-            // inputProgramDesc !== ''
         ) {
             console.log(inputProgramName, inputProgramDesc);
             setStateProgramAddModal(false);
