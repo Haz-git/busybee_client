@@ -1,5 +1,8 @@
-import React from 'react';
+import React, { useState } from 'react';
 import dayjs from 'dayjs';
+
+//Components:
+import CreateProgramModal from './CreateProgramModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -201,7 +204,48 @@ const ProgramCard = ({
     programId,
     programExercises,
     dateCreated,
+    editAction,
+    deleteAction,
 }) => {
+    //States
+    const [stateEditModal, setStateEditModal] = useState(false);
+    const [editModalName, setEditModalName] = useState(name);
+    const [editModalDesc, setEditModalDesc] = useState(desc);
+    const [stateDeleteModal, setStateDeleteModal] = useState(false);
+
+    //Modal user input event handlers:
+
+    const editModalOpen = () => {
+        setStateEditModal(true);
+    };
+
+    const editModalClose = () => {
+        setStateEditModal(false);
+    };
+
+    const handleEditModalName = (e) => {
+        setEditModalName(e.target.value);
+    };
+
+    const handleEditModalDesc = (e) => {
+        setEditModalDesc(e.target.value);
+    };
+
+    const handleEditModalSubmit = () => {
+        if (
+            editModalName !== undefined &&
+            editModalName !== null &&
+            editModalName !== ''
+        ) {
+            editAction(programId, editModalName, editModalDesc);
+            setStateEditModal(false);
+        } else {
+            alert('The name cannot be empty values.');
+        }
+    };
+
+    //Utility Functions:
+
     const findNumberOfExercises = () => {
         return programExercises.length;
     };
@@ -216,6 +260,18 @@ const ProgramCard = ({
 
     return (
         <>
+            <CreateProgramModal
+                ariaDesc="Modal for editing program"
+                ariaLabel="Modal for editing program"
+                headerLabel="Edit your program"
+                openBoolean={stateEditModal}
+                closeFunction={editModalClose}
+                titleFunction={handleEditModalName}
+                descFunction={handleEditModalDesc}
+                submitHandler={handleEditModalSubmit}
+                namePlaceholder={name}
+                descPlaceholder={desc}
+            />
             <WrapperContainer>
                 <MainContainer>
                     <PlayButton>
@@ -242,7 +298,7 @@ const ProgramCard = ({
                 </MainContainer>
                 <ButtonPlayContainer>
                     <DeleteButton>Delete</DeleteButton>
-                    <EditButton>Edit</EditButton>
+                    <EditButton onClick={editModalOpen}>Edit</EditButton>
                     <ConfigureButton>Configure</ConfigureButton>
                 </ButtonPlayContainer>
             </WrapperContainer>
