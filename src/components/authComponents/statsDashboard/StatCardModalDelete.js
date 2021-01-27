@@ -15,7 +15,7 @@ import {
 } from '../dashboardComponents/UserPowerStatCard';
 
 const DeleteModalContainer = styled(ModalContainer)`
-    width: 82.5%;
+    width: 85.5%;
 `;
 
 const DeleteModalHeader = styled(ModalHeader)`
