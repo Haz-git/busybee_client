@@ -28,6 +28,10 @@ export function addNewProgram(programName, programDesc, callback) {
             type: USER_ADD_NEW_PROGRAM,
             payload: response.data.userPrograms,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
@@ -48,6 +52,10 @@ export function editExistingProgram(
             type: USER_EDIT_PROGRAM,
             payload: response.data.userPrograms,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
@@ -61,5 +69,9 @@ export function deleteExistingProgram(programId, callback) {
             type: USER_DELETE_PROGRAM,
             payload: response.data.userPrograms,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
