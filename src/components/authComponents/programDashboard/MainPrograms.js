@@ -15,10 +15,31 @@ import SearchBar from '../statsDashboard/SearchBar';
 import CreateProgramButton from './CreateProgramButton';
 import CreateProgramModal from './CreateProgramModal';
 import ProgramCard from './ProgramCard';
+import Fade from '@material-ui/core/Fade';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
 
 //Styles:
 import styled from 'styled-components';
 import { MainHeader } from '../dashboardComponents/UserGreeting';
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.9em .5em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
 
 const MainContainer = styled.div`
     display: block;
@@ -61,11 +82,11 @@ const MainPrograms = ({
     }, []);
 
     //This state controls snackbars:
-    const [openAddProgramSnackbar, setOpenAddProgramSnackbar] = useState(false);
-    const [openEditProgramSnackbar, setOpenEditProgramSnackbar] = useState(
+    const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
+    const [openEditProgramSnackBar, setOpenEditProgramSnackBar] = useState(
         false
     );
-    const [openDeleteProgramSnackbar, setOpenDeleteProgramSnackbar] = useState(
+    const [openDeleteProgramSnackBar, setOpenDeleteProgramSnackBar] = useState(
         false
     );
     //This state controls the filtered array for programs:
@@ -103,7 +124,11 @@ const MainPrograms = ({
             inputProgramName !== null &&
             inputProgramName !== ''
         ) {
-            addNewProgram(inputProgramName, inputProgramDesc);
+            addNewProgram(
+                inputProgramName,
+                inputProgramDesc,
+                showNewProgramSnackBar
+            );
             setStateProgramAddModal(false);
         } else {
             alert('Please enter a program name.');
@@ -128,6 +153,8 @@ const MainPrograms = ({
                     dateCreated={program.dateCreated}
                     editAction={editExistingProgram}
                     deleteAction={deleteExistingProgram}
+                    editProgramSnackbar={showEditProgramSnackBar}
+                    deleteProgramSnackbar={showDeleteProgramSnackBar}
                 />
             ));
         } else if (
@@ -145,6 +172,8 @@ const MainPrograms = ({
                     dateCreated={program.dateCreated}
                     editAction={editExistingProgram}
                     deleteAction={deleteExistingProgram}
+                    editProgramSnackbar={showEditProgramSnackBar}
+                    deleteProgramSnackbar={showDeleteProgramSnackBar}
                 />
             ));
         } else {
@@ -184,6 +213,53 @@ const MainPrograms = ({
         }
     };
 
+    //Alert function for snackbars:
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    //Controls opening the 'new program' snackbar:
+    const showNewProgramSnackBar = (bool) => {
+        setOpenAddProgramSnackBar(bool);
+    };
+
+    //Controls closing the 'New program' snackbar:
+    const closeNewProgramSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenAddProgramSnackBar(false);
+    };
+
+    //Controls opening and closing 'Editing' Programs snackbar:
+
+    const showEditProgramSnackBar = (bool) => {
+        setOpenEditProgramSnackBar(bool);
+    };
+
+    const closeEditProgramSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenEditProgramSnackBar(false);
+    };
+
+    //Controls opening and closing 'Deleting' Programs snackbar:
+
+    const showDeleteProgramSnackBar = (bool) => {
+        setOpenDeleteProgramSnackBar(bool);
+    };
+
+    const closeDeleteProgramSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteProgramSnackBar(false);
+    };
+
     return (
         <>
             <CreateProgramModal
@@ -213,6 +289,51 @@ const MainPrograms = ({
                     {renderProgramCards()}
                 </ProgramCardContainer>
             </MainContainer>
+            <Slide direction="right" in={openAddProgramSnackBar} timeout="exit">
+                <Snackbar
+                    open={openAddProgramSnackBar}
+                    autoHideDuration={1000}
+                    onClose={closeNewProgramSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
+                >
+                    <Alert severity="success">
+                        Your Program has been added.
+                    </Alert>
+                </Snackbar>
+            </Slide>
+            <Slide
+                direction="right"
+                in={openEditProgramSnackBar}
+                timeout="exit"
+            >
+                <Snackbar
+                    open={openEditProgramSnackBar}
+                    autoHideDuration={1000}
+                    onClose={closeEditProgramSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
+                >
+                    <Alert severity="info">Your edits have been saved.</Alert>
+                </Snackbar>
+            </Slide>
+            <Slide
+                direction="right"
+                in={openDeleteProgramSnackBar}
+                timeout="exit"
+            >
+                <Snackbar
+                    open={openDeleteProgramSnackBar}
+                    autoHideDuration={1000}
+                    onClose={closeDeleteProgramSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={100}
+                >
+                    <Alert severity="warning">
+                        Your Program has been removed.
+                    </Alert>
+                </Snackbar>
+            </Slide>
         </>
     );
 };
