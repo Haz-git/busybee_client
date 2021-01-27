@@ -3,6 +3,7 @@ import dayjs from 'dayjs';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
+import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 
 //Styles:
 import styled from 'styled-components';
@@ -213,7 +214,7 @@ const ProgramCard = ({
     const [editModalDesc, setEditModalDesc] = useState(desc);
     const [stateDeleteModal, setStateDeleteModal] = useState(false);
 
-    //Modal user input event handlers:
+    //Edit Modal user input event handlers:
 
     const editModalOpen = () => {
         setStateEditModal(true);
@@ -240,8 +241,23 @@ const ProgramCard = ({
             editAction(programId, editModalName, editModalDesc);
             setStateEditModal(false);
         } else {
-            alert('The name cannot be empty values.');
+            alert('The name cannot be an empty value.');
         }
+    };
+
+    //Delete Modal Input handlers:
+
+    const openDeleteModal = () => {
+        setStateDeleteModal(true);
+    };
+
+    const closeDeleteModal = () => {
+        setStateDeleteModal(false);
+    };
+
+    const deleteModalHandler = () => {
+        deleteAction(programId);
+        setStateDeleteModal(false);
     };
 
     //Utility Functions:
@@ -260,6 +276,14 @@ const ProgramCard = ({
 
     return (
         <>
+            <StatCardModalDelete
+                openBoolean={stateDeleteModal}
+                closeFunction={closeDeleteModal}
+                buttonSubmitFunction={deleteModalHandler}
+                modalDesc="Are you sure you want to delete this program? This action is irreversible, and all program exercises will be deleted."
+                ariaDesc="Modal for deleting a program"
+                ariaLabel="Modal for deleting a program"
+            />
             <CreateProgramModal
                 ariaDesc="Modal for editing program"
                 ariaLabel="Modal for editing program"
@@ -297,7 +321,9 @@ const ProgramCard = ({
                     </DateContainer>
                 </MainContainer>
                 <ButtonPlayContainer>
-                    <DeleteButton>Delete</DeleteButton>
+                    <DeleteButton onClick={openDeleteModal}>
+                        Delete
+                    </DeleteButton>
                     <EditButton onClick={editModalOpen}>Edit</EditButton>
                     <ConfigureButton>Configure</ConfigureButton>
                 </ButtonPlayContainer>
