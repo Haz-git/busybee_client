@@ -109,17 +109,24 @@ const ButtonMargin = styled.span`
 //Render:
 
 const CreateProgramModal = ({
+    ariaDesc,
+    ariaLabel,
+    headerLabel,
     openBoolean,
     closeFunction,
     titleFunction,
     descFunction,
     submitHandler,
+    nameValue,
+    descValue,
+    namePlaceholder,
+    descPlaceholder,
 }) => {
     return (
         <>
             <Modal
-                aria-labelledby="modal for add new program"
-                aria-describedby="modal for adding a new program"
+                aria-labelledby={ariaLabel}
+                aria-describedby={ariaDesc}
                 open={openBoolean}
                 onClose={closeFunction}
                 closeAfterTransition
@@ -131,18 +138,26 @@ const CreateProgramModal = ({
                 <Fade in={openBoolean}>
                     <CreateProgramModalContainer>
                         <CreateProgramModalHeader>
-                            Create a new Program
+                            {headerLabel}
                         </CreateProgramModalHeader>
                         <InputContainer>
                             <InputDivider>
                                 <TitleInput
-                                    placeholder="Program name..."
+                                    placeholder={
+                                        namePlaceholder
+                                            ? namePlaceholder
+                                            : 'Program name...'
+                                    }
                                     onChange={titleFunction}
                                 />
                             </InputDivider>
                             <InputDivider>
                                 <DescInput
-                                    placeholder="Description (optional)..."
+                                    placeholder={
+                                        descPlaceholder
+                                            ? descPlaceholder
+                                            : 'Program description (optional)'
+                                    }
                                     onChange={descFunction}
                                 />
                             </InputDivider>
