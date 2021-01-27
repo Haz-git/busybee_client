@@ -53,7 +53,7 @@ export function editExistingProgram(
 
 export function deleteExistingProgram(programId, callback) {
     return async (dispatch) => {
-        const response = await api.delete(`/user/editprogram`, {
+        const response = await api.delete(`/user/deleteprogram`, {
             data: { programId },
         });
 
