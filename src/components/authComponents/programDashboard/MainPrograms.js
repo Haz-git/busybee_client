@@ -38,6 +38,12 @@ const SearchBarContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    z-index: 100 !important;
+    background: ${({ theme }) => theme.background};
+    padding: 0.5em 0;
 `;
 
 const ProgramCardContainer = styled.div``;
