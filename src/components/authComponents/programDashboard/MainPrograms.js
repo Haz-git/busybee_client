@@ -2,7 +2,12 @@ import React, { useState, useEffect } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
-import { getUserProgramData } from '../../../redux/userPrograms/userProgramActions';
+import {
+    getUserProgramData,
+    addNewProgram,
+    editExistingProgram,
+    deleteExistingProgram,
+} from '../../../redux/userPrograms/userProgramActions';
 import { v4 as uuid } from 'uuid';
 
 //Components:
@@ -38,14 +43,25 @@ const SearchBarContainer = styled.div`
 const ProgramCardContainer = styled.div``;
 
 //Render:
-const MainPrograms = ({ getUserProgramData, programs }) => {
+const MainPrograms = ({
+    addNewProgram,
+    editExistingProgram,
+    deleteExistingProgram,
+    getUserProgramData,
+    programs,
+}) => {
     useEffect(() => {
         getUserProgramData();
     }, []);
 
     //This state controls snackbars:
     const [openAddProgramSnackbar, setOpenAddProgramSnackbar] = useState(false);
-
+    const [openEditProgramSnackbar, setOpenEditProgramSnackbar] = useState(
+        false
+    );
+    const [openDeleteProgramSnackbar, setOpenDeleteProgramSnackbar] = useState(
+        false
+    );
     //This state controls the filtered array for programs:
     const [userSearchArray, setUserSearchArray] = useState(null);
 
@@ -81,7 +97,7 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
             inputProgramName !== null &&
             inputProgramName !== ''
         ) {
-            console.log(inputProgramName, inputProgramDesc);
+            addNewProgram(inputProgramName, inputProgramDesc);
             setStateProgramAddModal(false);
         } else {
             alert('Please enter a program name.');
@@ -104,6 +120,8 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
                     programId={program.programId}
                     programExercises={program.programExercises}
                     dateCreated={program.dateCreated}
+                    editAction={editExistingProgram}
+                    deleteAction={deleteExistingProgram}
                 />
             ));
         } else if (
@@ -111,7 +129,6 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
             programs.programs !== null &&
             userSearchArray !== null
         ) {
-            console.log(userSearchArray);
             return userSearchArray.map((program) => (
                 <ProgramCard
                     key={uuid()}
@@ -120,6 +137,8 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
                     programId={program.programId}
                     programExercises={program.programExercises}
                     dateCreated={program.dateCreated}
+                    editAction={editExistingProgram}
+                    deleteAction={deleteExistingProgram}
                 />
             ));
         } else {
@@ -162,6 +181,9 @@ const MainPrograms = ({ getUserProgramData, programs }) => {
     return (
         <>
             <CreateProgramModal
+                headerLabel="Create a new program"
+                arialLabel="Modal for adding a new program"
+                ariaDesc="Modal for adding a program"
                 openBoolean={stateProgramAddModal}
                 closeFunction={closeAddProgramModal}
                 titleFunction={addTitleInput}
@@ -195,4 +217,9 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getUserProgramData })(MainPrograms);
+export default connect(mapStateToProps, {
+    getUserProgramData,
+    addNewProgram,
+    editExistingProgram,
+    deleteExistingProgram,
+})(MainPrograms);
