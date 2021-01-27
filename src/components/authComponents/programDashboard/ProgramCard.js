@@ -207,6 +207,8 @@ const ProgramCard = ({
     dateCreated,
     editAction,
     deleteAction,
+    editProgramSnackbar,
+    deleteProgramSnackbar,
 }) => {
     //States
     const [stateEditModal, setStateEditModal] = useState(false);
@@ -238,7 +240,12 @@ const ProgramCard = ({
             editModalName !== null &&
             editModalName !== ''
         ) {
-            editAction(programId, editModalName, editModalDesc);
+            editAction(
+                programId,
+                editModalName,
+                editModalDesc,
+                editProgramSnackbar
+            );
             setStateEditModal(false);
         } else {
             alert('The name cannot be an empty value.');
@@ -256,7 +263,7 @@ const ProgramCard = ({
     };
 
     const deleteModalHandler = () => {
-        deleteAction(programId);
+        deleteAction(programId, deleteProgramSnackbar);
         setStateDeleteModal(false);
     };
 
