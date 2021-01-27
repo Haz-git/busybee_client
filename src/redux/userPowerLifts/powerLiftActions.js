@@ -7,7 +7,7 @@ import {
 } from './powerLiftTypes';
 
 export function getUserLiftingData() {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const response = await api.get(`/user/getMainPLStats`);
 
         dispatch({
@@ -18,7 +18,7 @@ export function getUserLiftingData() {
 }
 
 export function addNewBench(newBenchValue) {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const response = await api.post(`/user/addNewBench`, {
             newBenchValue,
         });
@@ -31,7 +31,7 @@ export function addNewBench(newBenchValue) {
 }
 
 export function addNewSquat(newSquatValue) {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const response = await api.post(`/user/addNewSquat`, {
             newSquatValue,
         });
@@ -44,7 +44,7 @@ export function addNewSquat(newSquatValue) {
 }
 
 export function addNewDeadlift(newDeadliftValue) {
-    return async (dispatch, getState) => {
+    return async (dispatch) => {
         const response = await api.post(`/user/addNewDeadlift`, {
             newDeadliftValue,
         });
