@@ -112,4 +112,8 @@ export const darkTheme = {
     ProgramCardDescBG: '#041839',
     PlayIcon: 'white',
     LowerContainerBG: '#1A222F',
+
+    //ConfigureMain:
+    CMHeaderC: '#fdbc3d',
+    CMExerciseC: '#DA5930',
 };
