@@ -17,7 +17,7 @@ export function getUserProgramData() {
     };
 }
 
-export function addNewProgram(programName, programDesc) {
+export function addNewProgram(programName, programDesc, callback) {
     return async (dispatch) => {
         const response = await api.post(`/user/addnewprogram`, {
             programName,
@@ -31,12 +31,17 @@ export function addNewProgram(programName, programDesc) {
     };
 }
 
-export function editExistingProgram(programId, programName, programDesc) {
+export function editExistingProgram(
+    programId,
+    newProgramName,
+    newProgramDesc,
+    callback
+) {
     return async (dispatch) => {
         const response = await api.patch(`/user/editprogram`, {
             programId,
-            programName,
-            programDesc,
+            newProgramName,
+            newProgramDesc,
         });
 
         dispatch({
@@ -46,7 +51,7 @@ export function editExistingProgram(programId, programName, programDesc) {
     };
 }
 
-export function deleteExistingProgram(programId) {
+export function deleteExistingProgram(programId, callback) {
     return async (dispatch) => {
         const response = await api.delete(`/user/editprogram`, {
             data: { programId },
