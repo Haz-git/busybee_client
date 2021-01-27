@@ -22,6 +22,7 @@ import Dashboard from './authComponents/Dashboard';
 import DashboardNavbar from './authComponents/DashboardNavbar';
 import MainPrograms from './authComponents/programDashboard/MainPrograms';
 import MainStats from './authComponents/statsDashboard/MainStats';
+import ConfigureMain from './authComponents/configureProgram/ConfigureMain';
 
 //Render
 
@@ -84,6 +85,11 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/stats"
                                     component={MainStats}
+                                />
+                                <Route
+                                    exact
+                                    path="/programs/configure/:name/:id"
+                                    component={ConfigureMain}
                                 />
                             </AuthCheckComponent>
                         </Switch>
