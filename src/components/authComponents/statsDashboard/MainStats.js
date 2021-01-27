@@ -31,12 +31,13 @@ import { withStyles } from '@material-ui/core/styles';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        backgroundColor: '#136539',
+        padding: '.9em .5em',
         '& .MuiAlert-icon': {
-            fontSize: '1.7em',
+            fontSize: '2.2em',
         },
         '& .MuiAlert-message': {
-            fontSize: '1.1em',
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
         },
         '& .MuiAlert-action': {
             fontSize: '.85em',
@@ -235,7 +236,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Controller functions for SnackBars:
 
     const Alert = (props) => {
-        return <MuiAlert elevation={6} variant="filled" {...props} />;
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
     };
 
     //Controls opening the 'new record' snackbar:
