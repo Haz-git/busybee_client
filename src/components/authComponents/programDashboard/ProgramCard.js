@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
+import { Link } from 'react-router-dom';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
@@ -157,10 +158,10 @@ const DeleteButton = styled.button`
     }
 `;
 
-const ConfigureButton = styled.button`
+const ConfigureButton = styled(Link)`
     border: none;
     border-radius: 0.4em;
-    padding: 0.8em 1.3em;
+    padding: 0.68em 1.3em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
     background: #c99521;
     font-size: 1em;
@@ -332,7 +333,11 @@ const ProgramCard = ({
                         Delete
                     </DeleteButton>
                     <EditButton onClick={editModalOpen}>Edit</EditButton>
-                    <ConfigureButton>Configure</ConfigureButton>
+                    <ConfigureButton
+                        to={`/programs/configure/${name}/${programId}`}
+                    >
+                        Configure
+                    </ConfigureButton>
                 </ButtonPlayContainer>
             </WrapperContainer>
         </>
