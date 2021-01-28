@@ -105,7 +105,7 @@ const AddRestButtonOpening = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #096b27;
+    background: #323875;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -120,12 +120,12 @@ const AddRestButtonOpening = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #62c267;
+        background-color: #535993;
     }
 
     &:focus {
         outline: none;
-        background-color: #62c267;
+        background-color: #535993;
     }
 `;
 
@@ -149,7 +149,7 @@ const AddExerciseButtonOpening = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #096b27;
+    background: #861d29;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -164,12 +164,12 @@ const AddExerciseButtonOpening = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #62c267;
+        background-color: #ae424f;
     }
 
     &:focus {
         outline: none;
-        background-color: #62c267;
+        background-color: #ae424f;
     }
 `;
 
@@ -214,7 +214,7 @@ const AddExerciseButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #096b27;
+    background: #861d29;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -226,12 +226,12 @@ const AddExerciseButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #62c267;
+        background-color: #ae424f;
     }
 
     &:focus {
         outline: none;
-        background-color: #62c267;
+        background-color: #ae424f;
     }
 `;
 
@@ -256,7 +256,7 @@ const AddRestButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #096b27;
+    background: #323875;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -268,12 +268,12 @@ const AddRestButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #62c267;
+        background-color: #535993;
     }
 
     &:focus {
         outline: none;
-        background-color: #62c267;
+        background-color: #535993;
     }
 `;
 
