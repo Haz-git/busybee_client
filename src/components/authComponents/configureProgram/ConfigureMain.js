@@ -1,5 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
+
+//Redux:
+import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -10,8 +14,15 @@ import { Zzz } from '@styled-icons/remix-line/Zzz';
 import { Running } from '@styled-icons/fa-solid/Running';
 import { PostAdd } from '@styled-icons/material/PostAdd';
 import { Plus } from '@styled-icons/boxicons-regular/Plus';
+import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
 
 //Icons:
+
+const BackIcon = styled(CaretBack)`
+    height: 3.8em;
+    width: 3.8em;
+`;
+
 const RestIcon = styled(Zzz)`
     height: 3em;
     width: 3em;
@@ -58,7 +69,11 @@ const MainHeader = styled.h1`
 `;
 
 const HeaderContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
     text-align: left;
+    height: fit-content;
 `;
 
 const ExerciseHeader = styled.h2`
@@ -140,7 +155,7 @@ const ExerciseMove = keyframes`
     }
 `;
 
-const AddExerciseButtonOpening = styled.button`
+const AddExerciseButtonOpening = styled(Link)`
     animation: ${ExerciseMove} 0.3s ease;
     position: absolute;
     display: flex;
@@ -277,13 +292,28 @@ const AddRestButtonClosing = styled.button`
     }
 `;
 
-// const Rotate = styled.div`
-//     display: inline-block;
-//     animation: ${rotate} 2s linear infinite;
-//     padding: 5px;
-//     font-size: 1.2rem;
-//     background: 'white';
-// `;
+const BackButton = styled.button`
+    border: none;
+    background: #3a4e55;
+    height: 6em;
+    border-radius: 0.4em;
+    margin-right: 0.8em;
+    color: white;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    cursor: pointer;
+
+    &:hover {
+        outline: none;
+        background-color: #536870;
+    }
+
+    &:focus {
+        outline: none;
+        background-color: #536870;
+    }
+`;
+
+const FlexWrapper = styled.div``;
 
 //Render:
 
@@ -291,8 +321,15 @@ const ConfigureMain = ({
     match: {
         params: { name, id },
     },
+    getUserProgramExerciseData,
+    programExercises,
 }) => {
     //id === programId.
+
+    useEffect(() => {
+        getUserProgramExerciseData(id);
+    }, []);
+
     const [stateAddButtons, setStateAddButtons] = useState(true);
 
     //Click function to close state of addButtons:
@@ -305,17 +342,41 @@ const ConfigureMain = ({
         }
     };
 
+    //Util function to count number of elements in array:
+    const returnArrayCount = () => {
+        if (
+            programExercises.programs !== undefined &&
+            programExercises.programs !== null &&
+            programExercises.programs.length !== 0
+        ) {
+            return programExercises.length;
+        } else {
+            return 0;
+        }
+    };
+
     return (
         <>
             <MainContainer>
                 <HeaderContainer>
-                    <MainHeader>{name}</MainHeader>
-                    <ExerciseHeader>0 Total Exercises</ExerciseHeader>
+                    <Link to="/programs">
+                        <BackButton>
+                            <BackIcon />
+                        </BackButton>
+                    </Link>
+                    <FlexWrapper>
+                        <MainHeader>{name}</MainHeader>
+                        <ExerciseHeader>
+                            {returnArrayCount()} Total Exercises
+                        </ExerciseHeader>
+                    </FlexWrapper>
                 </HeaderContainer>
             </MainContainer>
             <ButtonContainer>
                 {stateAddButtons === true ? (
-                    <AddExerciseButtonOpening>
+                    <AddExerciseButtonOpening
+                        to={`/programs/configure/select/${name}/${id}`}
+                    >
                         <PlusIcon />
                         Exercise
                     </AddExerciseButtonOpening>
@@ -344,4 +405,12 @@ const ConfigureMain = ({
     );
 };
 
-export default ConfigureMain;
+const mapStateToProps = (state) => {
+    return {
+        programExercises: state.programExercises,
+    };
+};
+
+export default connect(mapStateToProps, { getUserProgramExerciseData })(
+    ConfigureMain
+);
