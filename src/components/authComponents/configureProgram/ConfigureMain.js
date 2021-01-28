@@ -9,6 +9,7 @@ import Button from '@material-ui/core/Button';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
 import { Running } from '@styled-icons/fa-solid/Running';
 import { PostAdd } from '@styled-icons/material/PostAdd';
+import { Plus } from '@styled-icons/boxicons-regular/Plus';
 
 //Icons:
 const RestIcon = styled(Zzz)`
@@ -27,6 +28,11 @@ const AddIcon = styled(PostAdd)`
     right: 0.85em;
     height: 3em;
     width: 3em;
+`;
+
+const PlusIcon = styled(Plus)`
+    height: 1.5em;
+    width: 1.5em;
 `;
 
 //Headers/containers:
@@ -85,7 +91,7 @@ const RestMove = keyframes`
         opacity: 0;
     }
     to {
-        transform: translate(-.1em, -5em);
+        transform: translate(-.1em, -4.5em);
         opacity: 1;
     }
 `;
@@ -93,18 +99,24 @@ const RestMove = keyframes`
 const AddRestButtonOpening = styled.button`
     animation: ${RestMove} 0.3s ease;
     position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
-    max-width: 5em;
-    min-width: 5em;
     border: none;
     background: #096b27;
     font-family: 'Nunito', 'Lato';
-    font-weight: 300;
+    font-weight: 900;
     font-size: 1.2em;
-    padding: 0.2em 4em;
+    padding: 0.4em 0.6em;
     text-transform: capitalize;
+    border-radius: 0.4em;
+    cursor: pointer;
+
+    //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    transform: translate(-0.1em, -5em);
+    transform: translate(-0.1em, -4.5em);
 
     &:hover {
         outline: none;
@@ -123,7 +135,7 @@ const ExerciseMove = keyframes`
         opacity: 0;
     }
     to {
-        transform: translate(-5em, -.5em);
+        transform: translate(-0.1em, -7.5em);
         opacity: 1;
     }
 `;
@@ -131,18 +143,24 @@ const ExerciseMove = keyframes`
 const AddExerciseButtonOpening = styled.button`
     animation: ${ExerciseMove} 0.3s ease;
     position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
-    max-width: 5em;
-    min-width: 5em;
     border: none;
     background: #096b27;
     font-family: 'Nunito', 'Lato';
-    font-weight: 300;
+    font-weight: 900;
     font-size: 1.2em;
-    padding: 0.2em 4em;
+    padding: 0.4em 0.4em;
     text-transform: capitalize;
+    border-radius: 0.4em;
+    cursor: pointer;
+
+    //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    transform: translate(-5em, -0.5em);
+    transform: translate(-0.1em, -7.5em);
 
     &:hover {
         outline: none;
@@ -178,7 +196,7 @@ const AddButton = withStyles({
 
 const ExerciseMoveClose = keyframes`
     from {
-        transform: translate(-5em, -.5em);
+        transform: translate(-0.1em, -7.5em);
         opacity: 1;
     }
     to {
@@ -190,17 +208,19 @@ const ExerciseMoveClose = keyframes`
 const AddExerciseButtonClosing = styled.button`
     animation: ${ExerciseMoveClose} 0.3s ease;
     position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
-    max-width: 5em;
-    min-width: 5em;
     border: none;
     background: #096b27;
     font-family: 'Nunito', 'Lato';
-    font-weight: 300;
+    font-weight: 900;
     font-size: 1.2em;
-    padding: 0.2em 4em;
+    padding: 0.4em 0.4em;
     text-transform: capitalize;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    border-radius: 0.4em;
     transform: translate(0, 0);
     opacity: 0;
 
@@ -217,7 +237,7 @@ const AddExerciseButtonClosing = styled.button`
 
 const RestMoveClose = keyframes`
     from {
-        transform: translate(-.1em, -5em);
+        transform: translate(-.1em, -4.5em);
         opacity: 1;
     }
     to {
@@ -230,17 +250,19 @@ const RestMoveClose = keyframes`
 const AddRestButtonClosing = styled.button`
     animation: ${RestMoveClose} 0.3s ease;
     position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
     color: #ffffff;
-    max-width: 5em;
-    min-width: 5em;
     border: none;
     background: #096b27;
     font-family: 'Nunito', 'Lato';
-    font-weight: 300;
+    font-weight: 900;
     font-size: 1.2em;
-    padding: 0.2em 4em;
+    padding: 0.4em 0.6em;
     text-transform: capitalize;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    border-radius: 0.4em;
     transform: translate(0, 0);
     opacity: 0;
 
@@ -271,7 +293,7 @@ const ConfigureMain = ({
     },
 }) => {
     //id === programId.
-    const [stateAddButtons, setStateAddButtons] = useState(false);
+    const [stateAddButtons, setStateAddButtons] = useState(true);
 
     //Click function to close state of addButtons:
 
@@ -292,19 +314,27 @@ const ConfigureMain = ({
                 </HeaderContainer>
             </MainContainer>
             <ButtonContainer>
-                {stateAddButtons === false ? (
+                {stateAddButtons === true ? (
                     <AddExerciseButtonOpening>
-                        Add Exercise
+                        <PlusIcon />
+                        Exercise
                     </AddExerciseButtonOpening>
                 ) : (
                     <AddExerciseButtonClosing>
-                        Add Exercise
+                        <PlusIcon />
+                        Exercise
                     </AddExerciseButtonClosing>
                 )}
-                {stateAddButtons === false ? (
-                    <AddRestButtonOpening>Add Rest</AddRestButtonOpening>
+                {stateAddButtons === true ? (
+                    <AddRestButtonOpening>
+                        <PlusIcon />
+                        Rest
+                    </AddRestButtonOpening>
                 ) : (
-                    <AddRestButtonClosing>Add Rest</AddRestButtonClosing>
+                    <AddRestButtonClosing>
+                        <PlusIcon />
+                        Rest
+                    </AddRestButtonClosing>
                 )}
                 <AddButton onClick={showAddButtons}>
                     <AddIcon />
