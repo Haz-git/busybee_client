@@ -9,6 +9,7 @@ import authReducer from './authReducer/authReducer';
 import powerStatReducer from './userPowerLifts/powerLiftReducer';
 import statReducer from './userStats/userStatReducer';
 import programReducer from './userPrograms/userProgramReducer';
+import programExerciseReducer from './userProgramExercises/programExerciseReducer';
 
 //LocalStorage from window browser:
 import storage from 'redux-persist/lib/storage';
@@ -31,6 +32,7 @@ const rootReducer = combineReducers({
     powerStats: powerStatReducer,
     stats: statReducer,
     programs: programReducer,
+    programExercises: programExerciseReducer,
 });
 
 //Persisting RootReducer:
