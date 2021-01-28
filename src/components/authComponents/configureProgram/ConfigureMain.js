@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import ProgramExerciseCard from './ProgramExerciseCard';
+import { v4 as uuid } from 'uuid';
 
 //Redux:
 import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
@@ -74,6 +76,10 @@ const HeaderContainer = styled.div`
     justify-content: flex-start;
     text-align: left;
     height: fit-content;
+    position: sticky;
+    top: 0;
+    background: ${({ theme }) => theme.background};
+    padding: 0.5em 0;
 `;
 
 const ExerciseHeader = styled.h2`
@@ -89,13 +95,13 @@ const ExerciseHeader = styled.h2`
 `;
 
 const ButtonContainer = styled.div`
-    position: absolute;
+    position: fixed;
+    bottom: 5.5em;
+    right: 0.4em;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
-    bottom: 17vh;
-    right: 3%;
 `;
 
 //Custom Buttons:
@@ -106,7 +112,7 @@ const RestMove = keyframes`
         opacity: 0;
     }
     to {
-        transform: translate(-.1em, -4.5em);
+        transform: translate(-0.1em, -5em);
         opacity: 1;
     }
 `;
@@ -131,7 +137,7 @@ const AddRestButtonOpening = styled.button`
 
     //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    transform: translate(-0.1em, -4.5em);
+    transform: translate(-0.1em, -5em);
 
     &:hover {
         outline: none;
@@ -190,7 +196,9 @@ const AddExerciseButtonOpening = styled(Link)`
 
 const AddButton = withStyles({
     root: {
-        position: 'relative',
+        position: 'absolute',
+        // position: '-webkit-sticky',
+        // top: '0',
         color: '#ffffff',
         margin: '0',
         maxWidth: '5em',
@@ -200,6 +208,7 @@ const AddButton = withStyles({
         borderRadius: '50%',
         padding: '1em 1em',
         boxShadow: 'rgba(0, 0, 0, 0.5) 0px 3px 8px',
+        bottom: '1em',
         '&:hover': {
             backgroundColor: '#62c267',
         },
@@ -252,7 +261,7 @@ const AddExerciseButtonClosing = styled.button`
 
 const RestMoveClose = keyframes`
     from {
-        transform: translate(-.1em, -4.5em);
+        transform: translate(-0.1em, -5em);
         opacity: 1;
     }
     to {
@@ -315,6 +324,18 @@ const BackButton = styled.button`
 
 const FlexWrapper = styled.div``;
 
+const CardContainer = styled.div`
+    margin-top: 1em;
+`;
+
+// const StickContainer = styled.div`
+//     position: sticky;
+//     position: --webkit-sticky;
+//     top: 0;
+//     bottom: 5.5em;
+//     right: 0.5em;
+// `;
+
 //Render:
 
 const ConfigureMain = ({
@@ -349,9 +370,29 @@ const ConfigureMain = ({
             programExercises.programs !== null &&
             programExercises.programs.length !== 0
         ) {
-            return programExercises.length;
+            return programExercises.programs.length;
         } else {
             return 0;
+        }
+    };
+
+    //Function to render out existing programExercise cards:
+
+    const renderProgramExerciseCards = () => {
+        if (
+            programExercises.programs !== undefined &&
+            programExercises.programs !== null
+        ) {
+            return programExercises.programs.map((programExercise) => (
+                <ProgramExerciseCard
+                    key={uuid()}
+                    name={programExercise.programExerciseName}
+                    id={programExercise.programExerciseId}
+                    sets={programExercise.sets}
+                    reps={programExercise.reps}
+                    weight={programExercise.weight}
+                />
+            ));
         }
     };
 
@@ -371,6 +412,7 @@ const ConfigureMain = ({
                         </ExerciseHeader>
                     </FlexWrapper>
                 </HeaderContainer>
+                <CardContainer>{renderProgramExerciseCards()}</CardContainer>
             </MainContainer>
             <ButtonContainer>
                 {stateAddButtons === true ? (
