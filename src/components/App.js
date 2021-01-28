@@ -23,6 +23,7 @@ import DashboardNavbar from './authComponents/DashboardNavbar';
 import MainPrograms from './authComponents/programDashboard/MainPrograms';
 import MainStats from './authComponents/statsDashboard/MainStats';
 import ConfigureMain from './authComponents/configureProgram/ConfigureMain';
+import ExerciseSelectorPage from './authComponents/configureProgram/ExerciseSelectorPage';
 
 //Render
 
@@ -90,6 +91,11 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/programs/configure/:name/:id"
                                     component={ConfigureMain}
+                                />
+                                <Route
+                                    exact
+                                    path="/programs/configure/select/:name/:id"
+                                    component={ExerciseSelectorPage}
                                 />
                             </AuthCheckComponent>
                         </Switch>
