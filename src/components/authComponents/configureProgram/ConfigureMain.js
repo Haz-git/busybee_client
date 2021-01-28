@@ -54,7 +54,7 @@ const MainContainer = styled.div`
     position: relative;
     display: block;
     text-align: center;
-    padding: 1em 1em;
+    /* padding: 1em 1em; */
     /* overflow-y: scroll; */
 `;
 
@@ -79,7 +79,8 @@ const HeaderContainer = styled.div`
     position: sticky;
     top: 0;
     background: ${({ theme }) => theme.background};
-    padding: 0.5em 0;
+    padding: 1em 1em;
+    z-index: 999 !important;
 `;
 
 const ExerciseHeader = styled.h2`
@@ -156,7 +157,7 @@ const ExerciseMove = keyframes`
         opacity: 0;
     }
     to {
-        transform: translate(-0.1em, -7.5em);
+        transform: translate(-0.1em, -7.7em);
         opacity: 1;
     }
 `;
@@ -181,7 +182,7 @@ const AddExerciseButtonOpening = styled(Link)`
 
     //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    transform: translate(-0.1em, -7.5em);
+    transform: translate(-0.1em, -7.7em);
 
     &:hover {
         outline: none;
@@ -220,7 +221,7 @@ const AddButton = withStyles({
 
 const ExerciseMoveClose = keyframes`
     from {
-        transform: translate(-0.1em, -7.5em);
+        transform: translate(-0.1em, -7.7em);
         opacity: 1;
     }
     to {
@@ -325,7 +326,7 @@ const BackButton = styled.button`
 const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
-    margin-top: 1em;
+    padding: 0em 1em;
 `;
 
 // const StickContainer = styled.div`
