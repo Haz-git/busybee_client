@@ -6,7 +6,7 @@ const StyledTextField = styled.input`
     margin: 0.5em 0.5em;
     border: 1px solid white;
     border-radius: 5em;
-    background-color: inherit;
+    background-color: #111a28;
     color: white;
     padding: 0.5em 1em;
     width: 100%;
