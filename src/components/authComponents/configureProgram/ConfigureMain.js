@@ -20,7 +20,7 @@ import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
 
 //Icons:
 
-const BackIcon = styled(CaretBack)`
+export const BackIcon = styled(CaretBack)`
     height: 3.8em;
     width: 3.8em;
 `;
@@ -58,7 +58,7 @@ const MainContainer = styled.div`
     /* overflow-y: scroll; */
 `;
 
-const MainHeader = styled.h1`
+export const MainHeader = styled.h1`
     font-family: 'Lato';
     font-size: 1.8em;
     color: ${({ theme }) => theme.CMHeaderC};
@@ -70,7 +70,7 @@ const MainHeader = styled.h1`
     }
 `;
 
-const HeaderContainer = styled.div`
+export const HeaderContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -83,7 +83,7 @@ const HeaderContainer = styled.div`
     z-index: 999 !important;
 `;
 
-const ExerciseHeader = styled.h2`
+export const ExerciseHeader = styled.h2`
     font-family: 'Lato';
     font-size: 1.3em;
     color: ${({ theme }) => theme.CMExerciseC};
@@ -302,7 +302,7 @@ const AddRestButtonClosing = styled.button`
     }
 `;
 
-const BackButton = styled.button`
+export const BackButton = styled.button`
     border: none;
     background: #3a4e55;
     height: 6em;
@@ -323,20 +323,11 @@ const BackButton = styled.button`
     }
 `;
 
-const FlexWrapper = styled.div``;
+export const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
     padding: 0em 1em;
 `;
-
-// const StickContainer = styled.div`
-//     position: sticky;
-//     position: --webkit-sticky;
-//     top: 0;
-//     bottom: 5.5em;
-//     right: 0.5em;
-// `;
-
 //Render:
 
 const ConfigureMain = ({
