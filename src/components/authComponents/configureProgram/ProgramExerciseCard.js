@@ -1,9 +1,14 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+//Redux:
+import { connect } from 'react-redux';
+import { deleteProgramExercise } from '../../../redux/userProgramExercises/programExerciseActions';
 
 //styles:
 import styled from 'styled-components';
 import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
+import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 
 //Icons:
 
@@ -113,7 +118,38 @@ const ButtonContainer = styled.div`
 
 //Render:
 
-const ProgramExerciseCard = ({ number, name, id, sets, reps, weight }) => {
+const ProgramExerciseCard = ({
+    number,
+    name,
+    sets,
+    reps,
+    weight,
+    deleteSnackBar,
+    exerciseId,
+    programId,
+    deleteProgramExercise,
+    minutes,
+    seconds,
+}) => {
+    const [
+        stateDeleteProgramExerciseModal,
+        setStateDeleteProgramExerciseModal,
+    ] = useState(false);
+
+    //Controller functions for deletion modal:
+
+    const openDeleteProgramExerciseModal = () => {
+        setStateDeleteProgramExerciseModal(true);
+    };
+
+    const closeDeleteProgramExerciseModal = () => {
+        setStateDeleteProgramExerciseModal(false);
+    };
+
+    const onDeleteProgramExerciseConfirmation = () => {
+        deleteProgramExercise(programId, exerciseId, deleteSnackBar);
+        setStateDeleteProgramExerciseModal(false);
+    };
     return (
         <>
             <MainContainer>
@@ -122,22 +158,32 @@ const ProgramExerciseCard = ({ number, name, id, sets, reps, weight }) => {
                 </HeaderBlock>
                 <InfoBlock>
                     <DetailContainer>
-                        <InfoText>Sets: {sets}</InfoText>
-                        <InfoText>Reps: {reps}</InfoText>
-                        <InfoText>Weight: {weight}</InfoText>
+                        {sets && <InfoText>Sets: {sets}</InfoText>}
+                        {reps && <InfoText>Reps: {reps}</InfoText>}
+                        {weight && <InfoText>Weight: {weight}</InfoText>}
+                        {minutes && <InfoText>Minutes: {minutes}</InfoText>}
+                        {seconds && <InfoText>Seconds: {seconds}</InfoText>}
                     </DetailContainer>
                 </InfoBlock>
                 <ButtonContainer>
                     <EditButton>
                         <EditIcon />
                     </EditButton>
-                    <DeleteButton>
+                    <DeleteButton onClick={openDeleteProgramExerciseModal}>
                         <DelIcon />
                     </DeleteButton>
                 </ButtonContainer>
             </MainContainer>
+            <StatCardModalDelete
+                openBoolean={stateDeleteProgramExerciseModal}
+                closeFunction={closeDeleteProgramExerciseModal}
+                buttonSubmitFunction={onDeleteProgramExerciseConfirmation}
+                modalDesc="Confirm deletion of exercise"
+                ariaLabel="program exercise delete modal"
+                ariaDesc="program exercise delete modal"
+            />
         </>
     );
 };
 
-export default ProgramExerciseCard;
+export default connect(null, { deleteProgramExercise })(ProgramExerciseCard);
