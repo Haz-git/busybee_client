@@ -19,3 +19,56 @@ export function getUserProgramExerciseData(programId) {
         });
     };
 }
+
+export function addNewProgramExercise(
+    programId,
+    sets,
+    reps,
+    programExerciseName,
+    weight,
+    unit,
+    callback
+) {
+    return async (dispatch) => {
+        const response = await api.post(
+            '/user/programs/addnewprogramexercise',
+            {
+                programId,
+                sets,
+                reps,
+                programExerciseName,
+                weight,
+                unit,
+            }
+        );
+
+        dispatch({
+            type: USER_GET_PROGRAM_EXERCISES,
+            payload: response.data.userProgramExercises,
+        });
+
+        if (response) {
+            callback(true);
+        }
+    };
+}
+
+export function deleteProgramExercise(programId, programExerciseId, callback) {
+    return async (dispatch) => {
+        const response = await api.delete(
+            `/user/programs/deleteprogramexercise`,
+            {
+                data: { programId, programExerciseId },
+            }
+        );
+
+        dispatch({
+            type: USER_GET_PROGRAM_EXERCISES,
+            payload: response.data.userProgramExercises,
+        });
+
+        if (response) {
+            callback(true);
+        }
+    };
+}
