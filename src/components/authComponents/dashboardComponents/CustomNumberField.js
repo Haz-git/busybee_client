@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 //Styles:
 const StyledTextField = styled.input`
-    margin: 0.5em 0.5em;
-    border: 1px solid white;
+    margin: 0.4em 0em;
+    border: none;
     border-radius: 5em;
     background-color: #111a28;
     color: white;
@@ -13,6 +13,7 @@ const StyledTextField = styled.input`
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     font-size: 1em;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
 
     &:hover {
         outline: none;
