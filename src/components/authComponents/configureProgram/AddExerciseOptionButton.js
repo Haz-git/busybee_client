@@ -28,7 +28,7 @@ const CustomExerciseSelector = styled.button`
     border: none;
     cursor: pointer;
     background: #111a28;
-    border-radius: 0.4em;
+    border-radius: 0.7em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
 
@@ -42,10 +42,10 @@ const CustomExerciseSelector = styled.button`
     }
 `;
 
-const AddExerciseOptionButton = ({ buttonLabel, icon }) => {
+const AddExerciseOptionButton = ({ buttonLabel, icon, clickFunction }) => {
     return (
         <>
-            <CustomExerciseSelector>
+            <CustomExerciseSelector onClick={clickFunction}>
                 {icon}
                 <ButtonLabel>{buttonLabel}</ButtonLabel>
             </CustomExerciseSelector>
