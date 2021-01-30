@@ -90,7 +90,7 @@ const StatContainer = styled.div``;
 
 const TextFieldContainer = styled.div`
     width: 100%;
-    margin-right: 1em;
+    margin-bottom: 1em;
 `;
 
 const ButtonContainer = styled.div`
