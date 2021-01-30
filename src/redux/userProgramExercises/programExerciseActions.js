@@ -43,7 +43,7 @@ export function addNewProgramExercise(
         );
 
         dispatch({
-            type: USER_GET_PROGRAM_EXERCISES,
+            type: USER_ADD_PROGRAM_EXERCISE,
             payload: response.data.userProgramExercises,
         });
 
@@ -62,13 +62,39 @@ export function deleteProgramExercise(programId, programExerciseId, callback) {
             }
         );
 
+        console.log(response);
+
         dispatch({
-            type: USER_GET_PROGRAM_EXERCISES,
+            type: USER_DELETE_PROGRAM_EXERCISE,
             payload: response.data.userProgramExercises,
         });
 
         if (response) {
             callback(true);
         }
+    };
+}
+
+export function addNewRestPeriod(
+    programId,
+    restLengthMinute,
+    restLengthSecond,
+    callback
+) {
+    return async (dispatch) => {
+        const response = await api.post(`/user/programs/addnewrestperiod`, {
+            programId,
+            restLengthMinute,
+            restLengthSecond,
+        });
+
+        dispatch({
+            type: USER_ADD_REST,
+            payload: response.data.userProgramExercises,
+        });
+
+        // if (response) {
+        //     callback(true);
+        // }
     };
 }
