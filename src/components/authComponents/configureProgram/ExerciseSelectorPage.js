@@ -236,17 +236,13 @@ const ExerciseSelectorPage = ({
                 nameFunction={handleNameChange}
                 maxTextLength="18"
             />
-            <Slide
-                direction="right"
-                in={openAddProgramExerciseSnackBar}
-                timeout="exit"
-            >
+            <Slide direction="down" in={openAddProgramExerciseSnackBar}>
                 <Snackbar
                     open={openAddProgramExerciseSnackBar}
                     autoHideDuration={5000}
                     onClose={closeNewProgramExerciseSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={700}
+                    transitionDuration={300}
                 >
                     <Alert severity="success">
                         Your Exercise Has Been Added.
