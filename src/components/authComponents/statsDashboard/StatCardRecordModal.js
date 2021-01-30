@@ -188,6 +188,9 @@ const StatCardRecordModal = ({
                 </Fade>
             </Modal>
             <RecordCardAddModal
+                ariaLab="Modal for adding a new record"
+                ariaDesc="Modal for adding a new record"
+                modalHeader="Add a New Record!"
                 openBoolean={stateAddRecordModal}
                 closeFunction={closeAddRecordModal}
                 weightFunction={handleWeightChange}
@@ -195,6 +198,7 @@ const StatCardRecordModal = ({
                 repsFunction={handleRepsChange}
                 unitFunction={handleUnitSelect}
                 submitHandler={handleSubmission}
+                needNameHandler={false}
             />
         </>
     );
