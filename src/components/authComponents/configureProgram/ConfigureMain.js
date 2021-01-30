@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link } from 'react-router-dom';
+import { Link, Route } from 'react-router-dom';
 import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
+import ExerciseSelectorPage from './ExerciseSelectorPage';
 
 //Redux:
 import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
@@ -10,13 +11,32 @@ import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/
 //Styles:
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
-import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
 import { Running } from '@styled-icons/fa-solid/Running';
 import { PostAdd } from '@styled-icons/material/PostAdd';
 import { Plus } from '@styled-icons/boxicons-regular/Plus';
 import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.9em .5em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
 
 //Icons:
 
@@ -327,6 +347,7 @@ export const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
     padding: 0em 1em;
+    margin-bottom: 5em;
 `;
 //Render:
 
@@ -344,6 +365,13 @@ const ConfigureMain = ({
     }, []);
 
     const [stateAddButtons, setStateAddButtons] = useState(true);
+
+    //States for SnackBars:
+
+    const [
+        openDeleteProgramExerciseSnackBar,
+        setOpenDeleteProgramExerciseSnackBar,
+    ] = useState(false);
 
     //Click function to close state of addButtons:
 
@@ -386,6 +414,39 @@ const ConfigureMain = ({
                 />
             ));
         }
+    };
+
+    //Handler Functions for snackbars:
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    //Controls opening the 'new record' snackbar:
+    const showNewProgramExerciseSnackBar = (bool) => {
+        setOpenAddProgramExerciseSnackBar(bool);
+    };
+
+    //Controls closing the 'New ProgramExercise' snackbar:
+    const closeNewProgramExerciseSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenAddProgramExerciseSnackBar(false);
+    };
+
+    //Controls opening and closing 'Deleting' ProgramExercises snackbar:
+
+    const showDeleteProgramExerciseSnackBar = (bool) => {
+        setOpenDeleteProgramExerciseSnackBar(bool);
+    };
+
+    const closeDeleteProgramExerciseSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteProgramExerciseSnackBar(false);
     };
 
     return (
@@ -435,6 +496,23 @@ const ConfigureMain = ({
                     <AddIcon />
                 </AddButton>
             </ButtonContainer>
+            <Slide
+                direction="right"
+                in={openDeleteProgramExerciseSnackBar}
+                timeout="exit"
+            >
+                <Snackbar
+                    open={openDeleteProgramExerciseSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeDeleteProgramExerciseSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={700}
+                >
+                    <Alert severity="warning">
+                        Your Exercise Has Been Removed.
+                    </Alert>
+                </Snackbar>
+            </Slide>
         </>
     );
 };
