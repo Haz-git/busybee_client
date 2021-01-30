@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
-import { Link, Route } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
-import ExerciseSelectorPage from './ExerciseSelectorPage';
+import TimeSelectModal from './TimeSelectModal';
 
 //Redux:
-import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
+import {
+    getUserProgramExerciseData,
+    addNewRestPeriod,
+} from '../../../redux/userProgramExercises/programExerciseActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -357,12 +360,17 @@ const ConfigureMain = ({
     },
     getUserProgramExerciseData,
     programExercises,
+    addNewRestPeriod,
 }) => {
     //id === programId.
 
     useEffect(() => {
         getUserProgramExerciseData(id);
     }, []);
+
+    const [stateTimeSelectModal, setStateTimeSelectModal] = useState(false);
+    const [minInput, setMinInput] = useState(null);
+    const [secInput, setSecInput] = useState(null);
 
     const [stateAddButtons, setStateAddButtons] = useState(true);
 
@@ -407,10 +415,15 @@ const ConfigureMain = ({
                 <ProgramExerciseCard
                     key={uuid()}
                     name={programExercise.programExerciseName}
-                    id={programExercise.programExerciseId}
+                    exerciseId={programExercise.programExerciseId}
+                    programId={id}
                     sets={programExercise.sets}
                     reps={programExercise.reps}
                     weight={programExercise.weight}
+                    deleteSnackBar={showDeleteProgramExerciseSnackBar}
+                    minutes={programExercise.restLengthMinute}
+                    seconds={programExercise.restLengthSecond}
+                    restId={programExercise.restId}
                 />
             ));
         }
@@ -420,21 +433,6 @@ const ConfigureMain = ({
     const Alert = (props) => {
         return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
     };
-
-    //Controls opening the 'new record' snackbar:
-    const showNewProgramExerciseSnackBar = (bool) => {
-        setOpenAddProgramExerciseSnackBar(bool);
-    };
-
-    //Controls closing the 'New ProgramExercise' snackbar:
-    const closeNewProgramExerciseSnackBar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenAddProgramExerciseSnackBar(false);
-    };
-
     //Controls opening and closing 'Deleting' ProgramExercises snackbar:
 
     const showDeleteProgramExerciseSnackBar = (bool) => {
@@ -447,6 +445,30 @@ const ConfigureMain = ({
         }
 
         setOpenDeleteProgramExerciseSnackBar(false);
+    };
+
+    //Handler functions for time select modal:
+
+    const openTimeSelectorModal = () => {
+        setStateTimeSelectModal(true);
+    };
+
+    const closeTimeSelectorModal = () => {
+        setStateTimeSelectModal(false);
+    };
+
+    const secInputHandler = (e) => {
+        setSecInput(e.target.value);
+    };
+
+    const minInputHandler = (e) => {
+        setMinInput(e.target.value);
+    };
+
+    const timeSelectorSubmitHandler = (e) => {
+        e.preventDefault();
+        addNewRestPeriod(id, minInput, secInput);
+        setStateTimeSelectModal(false);
     };
 
     return (
@@ -482,7 +504,7 @@ const ConfigureMain = ({
                     </AddExerciseButtonClosing>
                 )}
                 {stateAddButtons === true ? (
-                    <AddRestButtonOpening>
+                    <AddRestButtonOpening onClick={openTimeSelectorModal}>
                         <PlusIcon />
                         Rest
                     </AddRestButtonOpening>
@@ -496,23 +518,43 @@ const ConfigureMain = ({
                     <AddIcon />
                 </AddButton>
             </ButtonContainer>
-            <Slide
-                direction="right"
-                in={openDeleteProgramExerciseSnackBar}
-                timeout="exit"
-            >
+            <Slide direction="down" in={openDeleteProgramExerciseSnackBar}>
                 <Snackbar
                     open={openDeleteProgramExerciseSnackBar}
-                    autoHideDuration={5000}
+                    autoHideDuration={3000}
                     onClose={closeDeleteProgramExerciseSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={700}
+                    transitionDuration={400}
                 >
                     <Alert severity="warning">
                         Your Exercise Has Been Removed.
                     </Alert>
                 </Snackbar>
             </Slide>
+            {/* <Slide direction="down" in={openDeleteProgramExerciseSnackBar}>
+                <Snackbar
+                    open={openDeleteProgramExerciseSnackBar}
+                    autoHideDuration={3000}
+                    onClose={closeDeleteProgramExerciseSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={400}
+                >
+                    <Alert severity="warning">
+                        Your Exercise Has Been Removed.
+                    </Alert>
+                </Snackbar>
+            </Slide> */}
+            <TimeSelectModal
+                openBoolean={stateTimeSelectModal}
+                closeFunction={closeTimeSelectorModal}
+                buttonSubmitFunction={timeSelectorSubmitHandler}
+                modalDesc="Select the length of your rest period."
+                modalHeader="Take a Break"
+                ariaLabel="Modal for adding a rest period to program"
+                ariaDesc="Modal for adding a rest period to program"
+                minHandler={minInputHandler}
+                secHandler={secInputHandler}
+            />
         </>
     );
 };
@@ -523,6 +565,7 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps, { getUserProgramExerciseData })(
-    ConfigureMain
-);
+export default connect(mapStateToProps, {
+    getUserProgramExerciseData,
+    addNewRestPeriod,
+})(ConfigureMain);
