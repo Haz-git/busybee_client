@@ -2,7 +2,10 @@ import React, { useState } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
-import { deleteProgramExercise } from '../../../redux/userProgramExercises/programExerciseActions';
+import {
+    deleteProgramExercise,
+    deleteRestPeriod,
+} from '../../../redux/userProgramExercises/programExerciseActions';
 
 //styles:
 import styled from 'styled-components';
@@ -65,6 +68,11 @@ const DetailContainer = styled.div`
     justify-content: space-between;
 `;
 
+const TimeContainer = styled.div`
+    display: flex;
+    justify-content: space-evenly;
+`;
+
 const DeleteButton = styled.button`
     border: none;
     border-radius: 50%;
@@ -125,11 +133,14 @@ const ProgramExerciseCard = ({
     reps,
     weight,
     deleteSnackBar,
+    deleteRestSnackBar,
     exerciseId,
+    restId,
     programId,
     deleteProgramExercise,
     minutes,
     seconds,
+    deleteRestPeriod,
 }) => {
     const [
         stateDeleteProgramExerciseModal,
@@ -150,6 +161,13 @@ const ProgramExerciseCard = ({
         deleteProgramExercise(programId, exerciseId, deleteSnackBar);
         setStateDeleteProgramExerciseModal(false);
     };
+
+    const onDeleteProgramRestConfirmation = () => {
+        console.log('test');
+        deleteRestPeriod(programId, restId, deleteRestSnackBar);
+        setStateDeleteProgramExerciseModal(false);
+    };
+
     return (
         <>
             <MainContainer>
@@ -161,9 +179,11 @@ const ProgramExerciseCard = ({
                         {sets && <InfoText>Sets: {sets}</InfoText>}
                         {reps && <InfoText>Reps: {reps}</InfoText>}
                         {weight && <InfoText>Weight: {weight}</InfoText>}
+                    </DetailContainer>
+                    <TimeContainer>
                         {minutes && <InfoText>Minutes: {minutes}</InfoText>}
                         {seconds && <InfoText>Seconds: {seconds}</InfoText>}
-                    </DetailContainer>
+                    </TimeContainer>
                 </InfoBlock>
                 <ButtonContainer>
                     <EditButton>
@@ -174,16 +194,31 @@ const ProgramExerciseCard = ({
                     </DeleteButton>
                 </ButtonContainer>
             </MainContainer>
-            <StatCardModalDelete
-                openBoolean={stateDeleteProgramExerciseModal}
-                closeFunction={closeDeleteProgramExerciseModal}
-                buttonSubmitFunction={onDeleteProgramExerciseConfirmation}
-                modalDesc="Confirm deletion of exercise"
-                ariaLabel="program exercise delete modal"
-                ariaDesc="program exercise delete modal"
-            />
+            {exerciseId && (
+                <StatCardModalDelete
+                    openBoolean={stateDeleteProgramExerciseModal}
+                    closeFunction={closeDeleteProgramExerciseModal}
+                    buttonSubmitFunction={onDeleteProgramExerciseConfirmation}
+                    modalDesc="Confirm deletion of exercise"
+                    ariaLabel="program exercise delete modal"
+                    ariaDesc="program exercise delete modal"
+                />
+            )}
+
+            {restId && (
+                <StatCardModalDelete
+                    openBoolean={stateDeleteProgramExerciseModal}
+                    closeFunction={closeDeleteProgramExerciseModal}
+                    buttonSubmitFunction={onDeleteProgramRestConfirmation}
+                    modalDesc="Confirm deletion of Rest Period"
+                    ariaLabel="program Rest delete modal"
+                    ariaDesc="program Rest delete modal"
+                />
+            )}
         </>
     );
 };
 
-export default connect(null, { deleteProgramExercise })(ProgramExerciseCard);
+export default connect(null, { deleteProgramExercise, deleteRestPeriod })(
+    ProgramExerciseCard
+);
