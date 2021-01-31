@@ -93,8 +93,33 @@ export function addNewRestPeriod(
             payload: response.data.userProgramExercises,
         });
 
-        // if (response) {
-        //     callback(true);
-        // }
+        if (response) {
+            callback(true);
+        }
+    };
+}
+
+export function deleteRestPeriod(programId, restId, callback) {
+    return async (dispatch) => {
+        const response = await api.delete(
+            '/user/programs/deleteprogramrestperiod',
+            {
+                data: {
+                    programId,
+                    restId,
+                },
+            }
+        );
+
+        console.log(response);
+
+        dispatch({
+            type: USER_DELETE_REST,
+            payload: response.data.userProgramExercises,
+        });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
