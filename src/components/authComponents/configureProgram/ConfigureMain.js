@@ -381,6 +381,16 @@ const ConfigureMain = ({
         setOpenDeleteProgramExerciseSnackBar,
     ] = useState(false);
 
+    const [
+        openAddProgramRestSnackBar,
+        setOpenAddProgramRestSnackBar,
+    ] = useState(false);
+
+    const [
+        openDeleteProgramRestSnackBar,
+        setOpenDeleteProgramRestSnackBar,
+    ] = useState(false);
+
     //Click function to close state of addButtons:
 
     const showAddButtons = () => {
@@ -421,6 +431,7 @@ const ConfigureMain = ({
                     reps={programExercise.reps}
                     weight={programExercise.weight}
                     deleteSnackBar={showDeleteProgramExerciseSnackBar}
+                    deleteRestSnackBar={showDeleteProgramRestSnackBar}
                     minutes={programExercise.restLengthMinute}
                     seconds={programExercise.restLengthSecond}
                     restId={programExercise.restId}
@@ -447,6 +458,32 @@ const ConfigureMain = ({
         setOpenDeleteProgramExerciseSnackBar(false);
     };
 
+    //Controls opening and closing 'rest add' snackbar:
+
+    const showAddProgramRestSnackBar = (bool) => {
+        setOpenAddProgramRestSnackBar(bool);
+    };
+
+    const closeAddProgramRestSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenAddProgramRestSnackBar(false);
+    };
+
+    const showDeleteProgramRestSnackBar = (bool) => {
+        setOpenDeleteProgramRestSnackBar(bool);
+    };
+
+    const closeDeleteProgramRestSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteProgramRestSnackBar(false);
+    };
+
     //Handler functions for time select modal:
 
     const openTimeSelectorModal = () => {
@@ -467,7 +504,7 @@ const ConfigureMain = ({
 
     const timeSelectorSubmitHandler = (e) => {
         e.preventDefault();
-        addNewRestPeriod(id, minInput, secInput);
+        addNewRestPeriod(id, minInput, secInput, showAddProgramRestSnackBar);
         setStateTimeSelectModal(false);
     };
 
@@ -531,19 +568,30 @@ const ConfigureMain = ({
                     </Alert>
                 </Snackbar>
             </Slide>
-            {/* <Slide direction="down" in={openDeleteProgramExerciseSnackBar}>
+            <Slide direction="down" in={openAddProgramRestSnackBar}>
                 <Snackbar
-                    open={openDeleteProgramExerciseSnackBar}
-                    autoHideDuration={3000}
-                    onClose={closeDeleteProgramExerciseSnackBar}
+                    open={openAddProgramRestSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeAddProgramRestSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={400}
+                    transitionDuration={300}
+                >
+                    <Alert severity="info">Rest Period Has Been Added.</Alert>
+                </Snackbar>
+            </Slide>
+            <Slide direction="down" in={openDeleteProgramRestSnackBar}>
+                <Snackbar
+                    open={openDeleteProgramRestSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeDeleteProgramRestSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={300}
                 >
                     <Alert severity="warning">
-                        Your Exercise Has Been Removed.
+                        Rest Period Has Been Deleted.
                     </Alert>
                 </Snackbar>
-            </Slide> */}
+            </Slide>
             <TimeSelectModal
                 openBoolean={stateTimeSelectModal}
                 closeFunction={closeTimeSelectorModal}
