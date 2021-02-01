@@ -20,6 +20,7 @@ import { Running } from '@styled-icons/fa-solid/Running';
 import { PostAdd } from '@styled-icons/material/PostAdd';
 import { Plus } from '@styled-icons/boxicons-regular/Plus';
 import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
+import { ArrowRightSquareFill } from '@styled-icons/bootstrap/ArrowRightSquareFill';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -42,6 +43,12 @@ const CustomMuiAlert = withStyles(() => ({
 }))(MuiAlert);
 
 //Icons:
+
+const ArrowIcon = styled(ArrowRightSquareFill)`
+    height: 2.2em;
+    width: 2.2em;
+    color: ${({ theme }) => theme.AddMoreLabelC};
+`;
 
 export const BackIcon = styled(CaretBack)`
     height: 3.8em;
@@ -350,7 +357,23 @@ export const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
     padding: 0em 1em;
-    margin-bottom: 5em;
+    margin-bottom: 0em;
+`;
+
+const LabelContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 4.6em;
+`;
+
+const AddMoreLabel = styled.h3`
+    padding: 0;
+    margin: 0 0.5em;
+    font-size: 1.7em;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: ${({ theme }) => theme.AddMoreLabelC};
 `;
 //Render:
 
@@ -525,6 +548,10 @@ const ConfigureMain = ({
                     </FlexWrapper>
                 </HeaderContainer>
                 <CardContainer>{renderProgramExerciseCards()}</CardContainer>
+                <LabelContainer>
+                    <AddMoreLabel>Add more </AddMoreLabel>
+                    <ArrowIcon />
+                </LabelContainer>
             </MainContainer>
             <ButtonContainer>
                 {stateAddButtons === true ? (
