@@ -392,11 +392,15 @@ const ConfigureMain = ({
     useEffect(() => {
         /*
             The change of state from rendering the 'Add more --> ' label at bottom of the scroll re-renders the component and therefore calls getUserProgramExerciseData() multiple times on user scroll. This causes much network traffic and is inefficient. A hack I've found is to check for an empty object (which programExercises would be on refresh) BEFORE calling a GET request to the api.
+
+            Additionally, it's necessary to check if programExercises.programs === undefined since that's the value when you return to the page after adding exercises
         */
+        console.log(programExercises);
 
         if (
-            Object.keys(programExercises).length === 0 &&
-            programExercises.constructor === Object
+            (Object.keys(programExercises).length === 0 &&
+                programExercises.constructor === Object) ||
+            programExercises.programs === undefined
         ) {
             getUserProgramExerciseData(id);
         }
