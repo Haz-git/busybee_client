@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AddExerciseOptionButton from './AddExerciseOptionButton';
@@ -6,9 +6,14 @@ import history from '../../../components/historyObject';
 
 //Redux:
 import { addNewProgramExercise } from '../../../redux/userProgramExercises/programExerciseActions';
+import { getUserStatData } from '../../../redux/userStats/userStatActions';
+import { getUserLiftingData } from '../../../redux/userPowerLifts/powerLiftActions';
 
 //Repurposing StatCardRecordModal to enter a new exercise:
 import RecordCardAddModal from '../statsDashboard/RecordCardAddModal';
+
+//AddStatModal:
+import StatSelectModal from './StatSelectModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -81,6 +86,10 @@ const ExerciseSelectorPage = ({
         params: { name, id },
     },
     addNewProgramExercise,
+    getUserStatData,
+    getUserLiftingData,
+    stats,
+    powerStats,
 }) => {
     //From match and params, name === programName and id === programId.
     /* 
@@ -90,6 +99,12 @@ const ExerciseSelectorPage = ({
         3. Use main stat exercise.
 
     */
+
+    useEffect(() => {
+        getUserStatData();
+        getUserLiftingData();
+    }, []);
+
     //States for SnackBars:
     const [
         openAddProgramExerciseSnackBar,
@@ -100,6 +115,8 @@ const ExerciseSelectorPage = ({
     const [stateAddNewExerciseModal, setStateAddNewExerciseModal] = useState(
         false
     );
+
+    const [stateStatModal, setStateStatModal] = useState(false);
 
     //State for add New Exercise Modal:
     const [exerciseName, setExerciseName] = useState(null);
@@ -172,6 +189,16 @@ const ExerciseSelectorPage = ({
         }
     };
 
+    //Handlers for adding from stat log:
+
+    const openStatModal = () => {
+        setStateStatModal(true);
+    };
+
+    const closeStatModal = () => {
+        setStateStatModal(false);
+    };
+
     //Handler Functions for snackbars:
     const Alert = (props) => {
         return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
@@ -214,6 +241,7 @@ const ExerciseSelectorPage = ({
                     <AddExerciseOptionButton
                         buttonLabel="Select from Stat Log"
                         icon={<LogIcon />}
+                        clickFunction={openStatModal}
                     />
                     <AddExerciseOptionButton
                         buttonLabel="Use a Main Lift"
@@ -236,10 +264,14 @@ const ExerciseSelectorPage = ({
                 nameFunction={handleNameChange}
                 maxTextLength="18"
             />
-            <Slide direction="down" in={openAddProgramExerciseSnackBar}>
+            <StatSelectModal
+                openBoolean={stateStatModal}
+                closeFunction={closeStatModal}
+            />
+            <Slide direction="bottom" in={openAddProgramExerciseSnackBar}>
                 <Snackbar
                     open={openAddProgramExerciseSnackBar}
-                    autoHideDuration={5000}
+                    autoHideDuration={2400}
                     onClose={closeNewProgramExerciseSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     transitionDuration={300}
@@ -253,4 +285,15 @@ const ExerciseSelectorPage = ({
     );
 };
 
-export default connect(null, { addNewProgramExercise })(ExerciseSelectorPage);
+const mapStateToProps = (state) => {
+    return {
+        stats: state.stats.stats,
+        powerStats: state.powerStats.powerLiftStats,
+    };
+};
+
+export default connect(mapStateToProps, {
+    addNewProgramExercise,
+    getUserStatData,
+    getUserLiftingData,
+})(ExerciseSelectorPage);
