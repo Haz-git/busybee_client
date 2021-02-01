@@ -57,6 +57,8 @@ export const StyledField = styled(Field)`
     //Rounded Look for mobile-fix:
     border-radius: 0;
     --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
 
     &:focus {
         outline: none;
