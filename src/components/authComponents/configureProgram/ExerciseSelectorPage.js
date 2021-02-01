@@ -81,6 +81,20 @@ const OptionsContainer = styled.div`
     padding: 1em 1.5em;
 `;
 
+//Options for MainLiftModal:
+
+const mainLiftOptions = [
+    {
+        exerciseName: 'Bench',
+    },
+    {
+        exerciseName: 'Squat',
+    },
+    {
+        exerciseName: 'Deadlift',
+    },
+];
+
 const ExerciseSelectorPage = ({
     match: {
         params: { name, id },
@@ -118,12 +132,22 @@ const ExerciseSelectorPage = ({
 
     const [stateStatModal, setStateStatModal] = useState(false);
 
+    const [stateMainLiftModal, setStateMainLiftModal] = useState(false);
+
     //State for add New Exercise Modal:
     const [exerciseName, setExerciseName] = useState(null);
     const [weightInput, setWeightInput] = useState(null);
     const [setsInput, setSetsInput] = useState(null);
     const [repsInput, setRepsInput] = useState(null);
     const [unitSelect, setUnitSelect] = useState(null);
+
+    //Stat select handler state:
+    const [statSelected, setStatSelected] = useState(null);
+
+    //The main lift selector will also use the same function:
+    const handleStatSelected = (e) => {
+        setStatSelected(e.target.value);
+    };
 
     //Function handlers for adding a new exercise//////////////:
 
@@ -180,7 +204,61 @@ const ExerciseSelectorPage = ({
                     showNewProgramExerciseSnackBar
                 );
 
+                //Refresh all states:
+                setSetsInput(null);
+                setRepsInput(null);
+                setExerciseName(null);
+                setWeightInput(null);
+                setUnitSelect(null);
+
+                //Close modal:
                 setStateAddNewExerciseModal(false);
+            } else {
+                alert('Please input values, or press cancel to exit.');
+            }
+        } else {
+            alert('Please input values, or press cancel to exit.');
+        }
+    };
+
+    //Select existing stat submission handler:
+    const handleExistingStatSubmission = (e) => {
+        e.preventDefault();
+        //Action creator here:
+        if (
+            statSelected !== null &&
+            weightInput !== null &&
+            setsInput !== null &&
+            repsInput !== null
+        ) {
+            if (
+                statSelected.trim() !== '' &&
+                weightInput.trim() !== '' &&
+                setsInput.trim() !== '' &&
+                repsInput.trim() !== ''
+            ) {
+                addNewProgramExercise(
+                    id,
+                    setsInput,
+                    repsInput,
+                    statSelected,
+                    weightInput,
+                    unitSelect,
+                    showNewProgramExerciseSnackBar
+                );
+
+                //Refresh all states:
+                setSetsInput(null);
+                setRepsInput(null);
+                setStatSelected(null);
+                setWeightInput(null);
+                setUnitSelect(null);
+
+                //Close modal:
+                setStateStatModal(false);
+
+                //Since MainLiftModal is using the same submission function, close mainLift modal on submit:
+                setStateMainLiftModal(false);
             } else {
                 alert('Please input values, or press cancel to exit.');
             }
@@ -197,6 +275,16 @@ const ExerciseSelectorPage = ({
 
     const closeStatModal = () => {
         setStateStatModal(false);
+    };
+
+    //Handlers for adding an exercise using a main lift log:
+
+    const openMainLiftModal = () => {
+        setStateMainLiftModal(true);
+    };
+
+    const closeMainLiftModal = () => {
+        setStateMainLiftModal(false);
     };
 
     //Handler Functions for snackbars:
@@ -246,6 +334,7 @@ const ExerciseSelectorPage = ({
                     <AddExerciseOptionButton
                         buttonLabel="Use a Main Lift"
                         icon={<MainLiftIcon />}
+                        clickFunction={openMainLiftModal}
                     />
                 </OptionsContainer>
             </MainContainer>
@@ -265,9 +354,34 @@ const ExerciseSelectorPage = ({
                 maxTextLength="18"
             />
             <StatSelectModal
+                ariaLab="Modal for selecting a recorded stat"
+                ariaDesc="Modal for selecting a recorded stat"
+                modalHeader="Select Your Stat"
                 openBoolean={stateStatModal}
                 closeFunction={closeStatModal}
                 optionsList={stats ? stats : undefined}
+                statSelected={handleStatSelected}
+                weightFunction={handleWeightChange}
+                setsFunction={handleSetsChange}
+                repsFunction={handleRepsChange}
+                unitFunction={handleUnitSelect}
+                submitHandler={handleExistingStatSubmission}
+                optionsDefaultValue="Stat"
+            />
+            <StatSelectModal
+                ariaLab="Modal for selecting a main lift"
+                ariaDesc="Modal for selecting a main lift"
+                modalHeader="Select Your Main Lift"
+                openBoolean={stateMainLiftModal}
+                closeFunction={closeMainLiftModal}
+                optionsList={mainLiftOptions}
+                statSelected={handleStatSelected}
+                weightFunction={handleWeightChange}
+                setsFunction={handleSetsChange}
+                repsFunction={handleRepsChange}
+                unitFunction={handleUnitSelect}
+                submitHandler={handleExistingStatSubmission}
+                optionsDefaultValue="Main Lift"
             />
             <Slide direction="bottom" in={openAddProgramExerciseSnackBar}>
                 <Snackbar
