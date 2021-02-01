@@ -17,6 +17,8 @@ const StyledSelector = styled.select`
     -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
     --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
 
     &:hover {
         outline: none;
@@ -34,13 +36,32 @@ const StyledSelector = styled.select`
 const StyledOption = styled.option``;
 //Render:
 
-const CustomSelector = ({ changeFunc }) => {
-    return (
-        <StyledSelector onChange={changeFunc}>
-            <StyledOption value="Lbs">Lbs</StyledOption>
-            <StyledOption value="Kgs">Kgs</StyledOption>
-        </StyledSelector>
-    );
+const CustomSelector = ({ changeFunc, optionsList, optionsDefaultValue }) => {
+    const renderSelector = () => {
+        if (optionsList === null || optionsList === undefined) {
+            return (
+                <StyledSelector onChange={changeFunc}>
+                    <StyledOption value="Lbs">Lbs</StyledOption>
+                    <StyledOption value="Kgs">Kgs</StyledOption>
+                </StyledSelector>
+            );
+        } else if (optionsList !== null && optionsList !== undefined) {
+            return (
+                <StyledSelector onChange={changeFunc}>
+                    <StyledOption value="">
+                        Choose a {optionsDefaultValue}...
+                    </StyledOption>
+                    {optionsList.map((option) => (
+                        <StyledOption value={`${option.exerciseName}`}>
+                            {option.exerciseName}
+                        </StyledOption>
+                    ))}
+                </StyledSelector>
+            );
+        }
+    };
+
+    return <>{renderSelector()}</>;
 };
 
 export default CustomSelector;

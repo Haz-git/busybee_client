@@ -15,6 +15,8 @@ const StyledTextField = styled.input`
     font-size: 1em;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
     --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
 
     &:hover {
         outline: none;
