@@ -116,4 +116,5 @@ export const darkTheme = {
     //ConfigureMain:
     CMHeaderC: '#fdbc3d',
     CMExerciseC: '#DA5930',
+    AddMoreLabelC: '#26292F',
 };
