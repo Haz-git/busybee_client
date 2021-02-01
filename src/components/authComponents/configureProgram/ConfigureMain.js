@@ -390,7 +390,16 @@ const ConfigureMain = ({
     //id === programId.
 
     useEffect(() => {
-        getUserProgramExerciseData(id);
+        /*
+            The change of state from rendering the 'Add more --> ' label at bottom of the scroll re-renders the component and therefore calls getUserProgramExerciseData() multiple times on user scroll. This causes much network traffic and is inefficient. A hack I've found is to check for an empty object (which programExercises would be on refresh) BEFORE calling a GET request to the api.
+        */
+
+        if (
+            Object.keys(programExercises).length === 0 &&
+            programExercises.constructor === Object
+        ) {
+            getUserProgramExerciseData(id);
+        }
 
         window.addEventListener('scroll', handleScroll);
 
@@ -560,6 +569,7 @@ const ConfigureMain = ({
         const windowBottom = windowHeight + window.pageYOffset;
 
         if (windowBottom >= docHeight) {
+            //Shouldn't change the state, cause that will cause component re-render and therefore GET request again.
             setStateCardEndLabel(true);
         } else {
             setStateCardEndLabel(false);
