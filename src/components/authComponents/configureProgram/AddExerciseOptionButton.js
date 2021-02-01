@@ -27,7 +27,8 @@ const CustomExerciseSelector = styled.button`
     padding: 1.5em 2em;
     border: none;
     cursor: pointer;
-    background: #111a28;
+    /* background: #111a28; */
+    background: rgba(17, 26, 40, 1);
     border-radius: 0.7em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
