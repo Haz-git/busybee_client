@@ -357,14 +357,16 @@ export const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
     padding: 0em 1em;
-    margin-bottom: 0em;
+    margin-bottom: 8.5em;
 `;
 
 const LabelContainer = styled.div`
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
-    margin-bottom: 4.6em;
+    bottom: 7.25em;
+    right: 6em;
 `;
 
 const AddMoreLabel = styled.h3`
@@ -389,7 +391,15 @@ const ConfigureMain = ({
 
     useEffect(() => {
         getUserProgramExerciseData(id);
+
+        window.addEventListener('scroll', handleScroll);
+
+        return () => {
+            window.removeEventListener('scroll', handleScroll);
+        };
     }, []);
+
+    const [stateCardEndLabel, setStateCardEndLabel] = useState(false);
 
     const [stateTimeSelectModal, setStateTimeSelectModal] = useState(false);
     const [minInput, setMinInput] = useState(null);
@@ -531,6 +541,31 @@ const ConfigureMain = ({
         setStateTimeSelectModal(false);
     };
 
+    //Handles the visibility of the 'add more' label, this label should only be visible at the bottom of the card container.
+
+    const handleScroll = (e) => {
+        const windowHeight =
+            'innerHeight' in window
+                ? window.innerHeight
+                : document.documentElement.offsetHeight;
+        const body = document.body;
+        const html = document.documentElement;
+        const docHeight = Math.max(
+            body.scrollHeight,
+            body.offsetHeight,
+            html.clientHeight,
+            html.scrollHeight,
+            html.offsetHeight
+        );
+        const windowBottom = windowHeight + window.pageYOffset;
+
+        if (windowBottom >= docHeight) {
+            setStateCardEndLabel(true);
+        } else {
+            setStateCardEndLabel(false);
+        }
+    };
+
     return (
         <>
             <MainContainer>
@@ -548,11 +583,13 @@ const ConfigureMain = ({
                     </FlexWrapper>
                 </HeaderContainer>
                 <CardContainer>{renderProgramExerciseCards()}</CardContainer>
+            </MainContainer>
+            {stateCardEndLabel && (
                 <LabelContainer>
                     <AddMoreLabel>Add more </AddMoreLabel>
                     <ArrowIcon />
                 </LabelContainer>
-            </MainContainer>
+            )}
             <ButtonContainer>
                 {stateAddButtons === true ? (
                     <AddExerciseButtonOpening
