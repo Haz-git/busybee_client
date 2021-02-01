@@ -13,6 +13,8 @@ export function getUserProgramExerciseData(programId) {
             programId,
         });
 
+        console.log(response);
+
         dispatch({
             type: USER_GET_PROGRAM_EXERCISES,
             payload: response.data.userProgramExercises,
@@ -41,6 +43,8 @@ export function addNewProgramExercise(
                 unit,
             }
         );
+
+        console.log(response);
 
         dispatch({
             type: USER_ADD_PROGRAM_EXERCISE,
@@ -110,8 +114,6 @@ export function deleteRestPeriod(programId, restId, callback) {
                 },
             }
         );
-
-        console.log(response);
 
         dispatch({
             type: USER_DELETE_REST,
