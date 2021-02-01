@@ -267,6 +267,7 @@ const ExerciseSelectorPage = ({
             <StatSelectModal
                 openBoolean={stateStatModal}
                 closeFunction={closeStatModal}
+                optionsList={stats ? stats : undefined}
             />
             <Slide direction="bottom" in={openAddProgramExerciseSnackBar}>
                 <Snackbar

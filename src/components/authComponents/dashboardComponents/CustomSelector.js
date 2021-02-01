@@ -14,7 +14,9 @@ const StyledSelector = styled.select`
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     font-size: 1em;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
+    --webkit-appearance: none;
 
     &:hover {
         outline: none;
