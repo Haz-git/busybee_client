@@ -163,7 +163,7 @@ const ProgramExerciseCard = ({
     };
 
     const onDeleteProgramRestConfirmation = () => {
-        console.log('test');
+        console.log(restId);
         deleteRestPeriod(programId, restId, deleteRestSnackBar);
         setStateDeleteProgramExerciseModal(false);
     };
