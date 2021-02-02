@@ -109,6 +109,7 @@ export const MainHeader = styled.h1`
     color: ${({ theme }) => theme.CMHeaderC};
     font-weight: 900;
     margin-bottom: 0.2em;
+    text-shadow: 2px 2px 2px #14181f;
 
     @media only screen and (min-width: 375px) {
         font-size: 2em;
@@ -134,6 +135,7 @@ export const ExerciseHeader = styled.h2`
     color: ${({ theme }) => theme.CMExerciseC};
     font-weight: 900;
     margin-bottom: 0.2em;
+    text-shadow: 2px 2px 2px #14181f;
 
     @media only screen and (min-width: 375px) {
         font-size: 1.5em;
