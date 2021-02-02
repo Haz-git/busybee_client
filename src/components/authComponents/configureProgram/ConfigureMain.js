@@ -21,6 +21,7 @@ import { PostAdd } from '@styled-icons/material/PostAdd';
 import { Plus } from '@styled-icons/boxicons-regular/Plus';
 import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
 import { ArrowRightSquareFill } from '@styled-icons/bootstrap/ArrowRightSquareFill';
+import { ChevronsDown } from '@styled-icons/boxicons-solid/ChevronsDown';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -48,6 +49,14 @@ const ArrowIcon = styled(ArrowRightSquareFill)`
     height: 2.2em;
     width: 2.2em;
     color: ${({ theme }) => theme.AddMoreLabelC};
+`;
+
+const HideIcon = styled(ChevronsDown)`
+    position: absolute;
+    top: 1em;
+    right: 0.71em;
+    height: 3.5em;
+    width: 3.5em;
 `;
 
 export const BackIcon = styled(CaretBack)`
@@ -412,6 +421,8 @@ const ConfigureMain = ({
         };
     }, []);
 
+    const [stateSelfAddButton, setStateSelfAddButton] = useState(true);
+
     const [stateCardEndLabel, setStateCardEndLabel] = useState(false);
 
     const [stateTimeSelectModal, setStateTimeSelectModal] = useState(false);
@@ -442,8 +453,10 @@ const ConfigureMain = ({
     const showAddButtons = () => {
         if (stateAddButtons === true) {
             setStateAddButtons(false);
+            setStateSelfAddButton(false);
         } else {
             setStateAddButtons(true);
+            setStateSelfAddButton(true);
         }
     };
 
@@ -629,9 +642,15 @@ const ConfigureMain = ({
                         Rest
                     </AddRestButtonClosing>
                 )}
-                <AddButton onClick={showAddButtons}>
-                    <AddIcon />
-                </AddButton>
+                {stateSelfAddButton === true ? (
+                    <AddButton onClick={showAddButtons}>
+                        <HideIcon />
+                    </AddButton>
+                ) : (
+                    <AddButton onClick={showAddButtons}>
+                        <AddIcon />
+                    </AddButton>
+                )}
             </ButtonContainer>
             <Slide direction="down" in={openDeleteProgramExerciseSnackBar}>
                 <Snackbar
