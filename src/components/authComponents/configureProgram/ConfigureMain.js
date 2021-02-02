@@ -22,6 +22,7 @@ import { Plus } from '@styled-icons/boxicons-regular/Plus';
 import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
 import { ArrowRightSquareFill } from '@styled-icons/bootstrap/ArrowRightSquareFill';
 import { ChevronsDown } from '@styled-icons/boxicons-solid/ChevronsDown';
+import { SortAlt2 } from '@styled-icons/boxicons-regular/SortAlt2';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -44,6 +45,11 @@ const CustomMuiAlert = withStyles(() => ({
 }))(MuiAlert);
 
 //Icons:
+
+const SortIcon = styled(SortAlt2)`
+    height: 1.5em;
+    width: 1.5em;
+`;
 
 const ArrowIcon = styled(ArrowRightSquareFill)`
     height: 2.2em;
@@ -146,6 +152,51 @@ const ButtonContainer = styled.div`
 
 //Custom Buttons:
 
+const LayoutMove = keyframes`
+    from {
+        transform: translate(0,0);
+        opacity: 0;
+    }
+    to {
+        transform: translate(-0.1em, -10.5em);
+        opacity: 1;
+    }
+`;
+
+const EditLayoutButtonOpening = styled(Link)`
+    animation: ${LayoutMove} 0.3s ease;
+    position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border: none;
+    background: #ca7500;
+    font-family: 'Nunito', 'Lato';
+    font-weight: 900;
+    font-size: 1.2em;
+    padding: 0.4em 0.6em;
+    text-transform: capitalize;
+    border-radius: 0.4em;
+    cursor: pointer;
+    text-shadow: 2px 2px 2px #14181f;
+
+    //Transforms
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    transform: translate(-0.1em, -10.5em);
+
+    &:hover {
+        outline: none;
+        background: #fa9100;
+    }
+
+    &:focus {
+        outline: none;
+        background: #fa9100;
+    }
+`;
+
 const RestMove = keyframes`
     from {
         transform: translate(0,0);
@@ -174,6 +225,7 @@ const AddRestButtonOpening = styled.button`
     text-transform: capitalize;
     border-radius: 0.4em;
     cursor: pointer;
+    text-shadow: 2px 2px 2px #14181f;
 
     //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
@@ -218,6 +270,7 @@ const AddExerciseButtonOpening = styled(Link)`
     text-transform: capitalize;
     border-radius: 0.4em;
     cursor: pointer;
+    text-shadow: 2px 2px 2px #14181f;
 
     //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
@@ -341,6 +394,51 @@ const AddRestButtonClosing = styled.button`
     }
 `;
 
+const LayoutMoveClose = keyframes`
+    from {
+        transform: translate(-0.1em, -10.5em);
+        opacity: 1;
+    }
+    to {
+        transform: translate(0,0);
+        opacity: 0;
+    }
+`;
+
+const EditLayoutButtonClosing = styled.button`
+    animation: ${LayoutMoveClose} 0.3s ease;
+    position: absolute;
+    display: flex;
+    white-space: nowrap;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff;
+    border: none;
+    background: #ca7500;
+    font-family: 'Nunito', 'Lato';
+    font-weight: 900;
+    font-size: 1.2em;
+    padding: 0.4em 0.6em;
+    text-transform: capitalize;
+    border-radius: 0.4em;
+    cursor: pointer;
+    opacity: 0;
+
+    //Transforms
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    transform: translate(0, 0);
+
+    &:hover {
+        outline: none;
+        background: #fa9100;
+    }
+
+    &:focus {
+        outline: none;
+        background: #fa9100;
+    }
+`;
+
 export const BackButton = styled.button`
     border: none;
     background: #3a4e55;
@@ -366,7 +464,7 @@ export const FlexWrapper = styled.div``;
 
 const CardContainer = styled.div`
     padding: 0em 1em;
-    margin-bottom: 8.5em;
+    margin-bottom: 8.7em;
 `;
 
 const LabelContainer = styled.div`
@@ -374,17 +472,19 @@ const LabelContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: center;
-    bottom: 7.25em;
+    bottom: 6.5em;
     right: 6em;
+    text-align: left;
 `;
 
 const AddMoreLabel = styled.h3`
     padding: 0;
     margin: 0 0.5em;
-    font-size: 1.7em;
+    font-size: 1.1em;
     font-family: 'Lato', Arial, Helvetica, sans-serif;
     font-weight: 700;
     color: ${({ theme }) => theme.AddMoreLabelC};
+    white-space: nowrap;
 `;
 //Render:
 
@@ -613,11 +713,28 @@ const ConfigureMain = ({
             </MainContainer>
             {stateCardEndLabel && (
                 <LabelContainer>
-                    <AddMoreLabel>Add more </AddMoreLabel>
+                    <AddMoreLabel>
+                        Add more exercises, or <br />
+                        configure your blueprint's <br />
+                        layout to finish and save.
+                    </AddMoreLabel>
                     <ArrowIcon />
                 </LabelContainer>
             )}
             <ButtonContainer>
+                {stateAddButtons === true ? (
+                    <EditLayoutButtonOpening
+                        to={`/programs/configure/blueprint/${name}/${id}`}
+                    >
+                        <SortIcon />
+                        Blueprint
+                    </EditLayoutButtonOpening>
+                ) : (
+                    <EditLayoutButtonClosing>
+                        <SortIcon />
+                        Blueprint
+                    </EditLayoutButtonClosing>
+                )}
                 {stateAddButtons === true ? (
                     <AddExerciseButtonOpening
                         to={`/programs/configure/select/${name}/${id}`}
