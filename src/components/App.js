@@ -24,6 +24,7 @@ import MainPrograms from './authComponents/programDashboard/MainPrograms';
 import MainStats from './authComponents/statsDashboard/MainStats';
 import ConfigureMain from './authComponents/configureProgram/ConfigureMain';
 import ExerciseSelectorPage from './authComponents/configureProgram/ExerciseSelectorPage';
+import BlueprintLayoutSelectionPage from './authComponents/configureProgram/BlueprintLayoutSelectionPage';
 
 //Render
 
@@ -96,6 +97,11 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/programs/configure/select/:name/:id"
                                     component={ExerciseSelectorPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/programs/configure/blueprint/:name/:id"
+                                    component={BlueprintLayoutSelectionPage}
                                 />
                             </AuthCheckComponent>
                         </Switch>
