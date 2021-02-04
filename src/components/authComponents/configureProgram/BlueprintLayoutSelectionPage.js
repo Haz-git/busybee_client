@@ -22,8 +22,16 @@ const MainContainer = styled.div`
 
 const ProgramCounterContainer = styled.div``;
 
-const ProgramCounterSpan = styled.span`
+const ProgramCounterSpanNegative = styled.span`
     color: red;
+    font-size: 1em;
+    margin-left: 0.5em;
+    text-shadow: 2px 2px 2px #14181f;
+    font-weight: 900;
+`;
+
+const ProgramCounterSpanPositive = styled.span`
+    color: green;
     font-size: 1em;
     margin-left: 0.5em;
     text-shadow: 2px 2px 2px #14181f;
@@ -70,6 +78,7 @@ const BlueprintLayoutSelectionPage = ({
     }, []);
 
     const [userBlueprint, setUserBlueprint] = useState([]);
+    const [userBlueprintCount, setUserBlueprintCount] = useState(0);
 
     // const [userProgramExercises, setUserProgramExercises] = useState(
     //     programExercises
@@ -137,6 +146,8 @@ const BlueprintLayoutSelectionPage = ({
                 setUserBlueprint(userBlueprintArray);
             }
         }
+
+        resetUserBlueprintCount();
     };
 
     const sortUserBlueprint = () => {
@@ -180,6 +191,26 @@ const BlueprintLayoutSelectionPage = ({
         }
     };
 
+    const resetUserBlueprintCount = () => {
+        setUserBlueprintCount(userBlueprint.length);
+    };
+
+    const renderProgramCounter = () => {
+        if (userBlueprintCount === countProgramExercises()) {
+            return (
+                <ProgramCounterSpanPositive>
+                    {userBlueprintCount}/{countProgramExercises()}
+                </ProgramCounterSpanPositive>
+            );
+        } else {
+            return (
+                <ProgramCounterSpanNegative>
+                    {userBlueprintCount}/{countProgramExercises()}
+                </ProgramCounterSpanNegative>
+            );
+        }
+    };
+
     return (
         <>
             <MainContainer>
@@ -197,9 +228,7 @@ const BlueprintLayoutSelectionPage = ({
                 <ProgramCounterContainer>
                     <ProgramCounterLabel>
                         Exercises Formatted:
-                        <ProgramCounterSpan>
-                            0/{countProgramExercises()}
-                        </ProgramCounterSpan>
+                        {renderProgramCounter()}
                     </ProgramCounterLabel>
                 </ProgramCounterContainer>
                 <LabelContainer>
