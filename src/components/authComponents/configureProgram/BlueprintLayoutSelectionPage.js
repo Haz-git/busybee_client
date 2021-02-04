@@ -21,6 +21,7 @@ import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 const MainContainer = styled.div`
     display: block;
     text-align: center;
+    padding-bottom: 5em;
 `;
 
 const ProgramCounterContainer = styled.div`
@@ -72,7 +73,8 @@ const SelectorContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    margin: 0.5em 1.5em;
+    margin-left: 1.5em;
+    margin-right: 1.5em;
 `;
 
 const BlueprintLayoutSelectionPage = ({
@@ -192,7 +194,10 @@ const BlueprintLayoutSelectionPage = ({
     };
 
     const renderProgramCounter = () => {
-        if (userBlueprintCount === countProgramExercises()) {
+        if (
+            userBlueprintCount === countProgramExercises() &&
+            countProgramExercises() !== 0
+        ) {
             return (
                 <ProgramCounterSpanPositive>
                     {userBlueprintCount}/{countProgramExercises()}
@@ -216,9 +221,12 @@ const BlueprintLayoutSelectionPage = ({
 
     const renderSubmissionButton = () => {
         //Renders a conditional 'save' button based on status of formatting exercises...
-        if (userBlueprintCount === countProgramExercises()) {
+        if (
+            userBlueprintCount === countProgramExercises() &&
+            countProgramExercises() !== 0
+        ) {
             return (
-                <Fade bottom big>
+                <Fade>
                     <CustomSubmitButton
                         label="Save"
                         clickFunc={SubmitBlueprint}
