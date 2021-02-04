@@ -67,7 +67,9 @@ const SearchBarContainer = styled.div`
     padding: 0.5em 0;
 `;
 
-const ProgramCardContainer = styled.div``;
+const ProgramCardContainer = styled.div`
+    padding-bottom: 3.5em;
+`;
 
 //Render:
 const MainPrograms = ({
