@@ -507,13 +507,13 @@ const ConfigureMain = ({
         */
         console.log(programExercises);
 
-        if (
-            (Object.keys(programExercises).length === 0 &&
-                programExercises.constructor === Object) ||
-            programExercises.programs === undefined
-        ) {
-            getUserProgramExerciseData(id);
-        }
+        // if (
+        //     Object.keys(programExercises).length === 0 &&
+        //     programExercises.constructor === Object &&
+        //     programExercises.programs === undefined
+        // ) {
+        getUserProgramExerciseData(id);
+        // }
 
         window.addEventListener('scroll', handleScroll);
 
