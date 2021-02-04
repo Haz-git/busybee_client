@@ -5,6 +5,7 @@ import {
     USER_DELETE_PROGRAM_EXERCISE,
     USER_ADD_REST,
     USER_DELETE_REST,
+    USER_ADD_REST_BETWEEN_SETS,
 } from './programExerciseTypes';
 
 export function getUserProgramExerciseData(programId) {
@@ -12,8 +13,6 @@ export function getUserProgramExerciseData(programId) {
         const response = await api.post('/user/programs/getprogramexercises', {
             programId,
         });
-
-        console.log(response);
 
         dispatch({
             type: USER_GET_PROGRAM_EXERCISES,
@@ -44,8 +43,6 @@ export function addNewProgramExercise(
             }
         );
 
-        console.log(response);
-
         dispatch({
             type: USER_ADD_PROGRAM_EXERCISE,
             payload: response.data.userProgramExercises,
@@ -65,8 +62,6 @@ export function deleteProgramExercise(programId, programExerciseId, callback) {
                 data: { programId, programExerciseId },
             }
         );
-
-        console.log(response);
 
         dispatch({
             type: USER_DELETE_PROGRAM_EXERCISE,
@@ -100,6 +95,35 @@ export function addNewRestPeriod(
         if (response) {
             callback(true);
         }
+    };
+}
+
+export function addNewRestPeriodBetweenSets(
+    programId,
+    exerciseId,
+    restLengthMinute,
+    restLengthSecond,
+    callback
+) {
+    return async (dispatch) => {
+        const response = await api.post(
+            `/user/programs/addrestperiodbetweensets`,
+            {
+                programId,
+                exerciseId,
+                restLengthMinute,
+                restLengthSecond,
+            }
+        );
+
+        dispatch({
+            type: USER_ADD_REST_BETWEEN_SETS,
+            payload: response.data.userProgramExercises,
+        });
+
+        // if (response) {
+        //     callback(true);
+        // }
     };
 }
 
