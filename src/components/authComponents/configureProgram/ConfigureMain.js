@@ -160,7 +160,7 @@ const LayoutMove = keyframes`
         opacity: 0;
     }
     to {
-        transform: translate(-0.1em, -10.5em);
+        transform: translate(-0.1em, -10.4em);
         opacity: 1;
     }
 `;
@@ -186,7 +186,7 @@ const EditLayoutButtonOpening = styled(Link)`
 
     //Transforms
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    transform: translate(-0.1em, -10.5em);
+    transform: translate(-0.1em, -10.4em);
 
     &:hover {
         outline: none;
@@ -264,7 +264,7 @@ const AddExerciseButtonOpening = styled(Link)`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #861d29;
+    background: #72045d;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -280,12 +280,12 @@ const AddExerciseButtonOpening = styled(Link)`
 
     &:hover {
         outline: none;
-        background-color: #ae424f;
+        background-color: #9e2e89;
     }
 
     &:focus {
         outline: none;
-        background-color: #ae424f;
+        background-color: #9e2e89;
     }
 `;
 
@@ -333,7 +333,7 @@ const AddExerciseButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #861d29;
+    background: #72045d;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -345,12 +345,12 @@ const AddExerciseButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #ae424f;
+        background-color: #9e2e89;
     }
 
     &:focus {
         outline: none;
-        background-color: #ae424f;
+        background-color: #9e2e89;
     }
 `;
 
@@ -398,7 +398,7 @@ const AddRestButtonClosing = styled.button`
 
 const LayoutMoveClose = keyframes`
     from {
-        transform: translate(-0.1em, -10.5em);
+        transform: translate(-0.1em, -10.4em);
         opacity: 1;
     }
     to {
@@ -596,6 +596,9 @@ const ConfigureMain = ({
                     minutes={programExercise.restLengthMinute}
                     seconds={programExercise.restLengthSecond}
                     restId={programExercise.restId}
+                    restMinutesPerSet={programExercise.restLengthMinutePerSet}
+                    restSecondsPerSet={programExercise.restLengthSecondPerSet}
+                    restNum={programExercise.numRest}
                 />
             ));
         }
