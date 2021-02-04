@@ -3,8 +3,13 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BlueprintSelector from './BlueprintSelector';
 import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
+import {
+    getUserFormattedProgram,
+    submitFormattedProgram,
+} from '../../../redux/userFormattedPrograms/formattedProgramsActions';
 import { v4 as uuid } from 'uuid';
 import Fade from 'react-reveal/Fade';
+import dayjs from 'dayjs';
 
 //Styles:
 import styled from 'styled-components';
@@ -65,6 +70,24 @@ const InfoLabel = styled.label`
     font-weight: 900;
     color: ${({ theme }) => theme.AddMoreLabelC};
     white-space: nowrap;
+    text-shadow: 2px 2px 2px #14181f;
+`;
+
+const FormattedText = styled.label`
+    padding: 0;
+    margin: 0 0.5em;
+    font-size: 0.9em;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 600;
+    color: white;
+    white-space: nowrap;
+    text-shadow: 2px 2px 2px #14181f;
+`;
+
+const FormatSpan = styled.span`
+    margin: 0 0.5em;
+    color: #fdbc3d;
+    text-shadow: 2px 2px 2px #14181f;
 `;
 
 const SelectorContainer = styled.div`
@@ -83,9 +106,13 @@ const BlueprintLayoutSelectionPage = ({
     },
     programExercises,
     getUserProgramExerciseData,
+    getUserFormattedProgram,
+    submitFormattedProgram,
+    formattedProgram,
 }) => {
     useEffect(() => {
         getUserProgramExerciseData(id);
+        getUserFormattedProgram(id);
     }, []);
 
     const [userBlueprint, setUserBlueprint] = useState([]);
@@ -212,11 +239,31 @@ const BlueprintLayoutSelectionPage = ({
         }
     };
 
+    const renderFormattedBefore = () => {
+        if (formattedProgram !== undefined && formattedProgram !== null) {
+            if (formattedProgram.isFormatted === 'true') {
+                return (
+                    <FormattedText>
+                        Previous Format Saved On:
+                        <FormatSpan>
+                            {dayjs(
+                                formattedProgram.formattedProgram
+                                    .dateLastFormatted
+                            ).format('MM/DD/YYYY')}
+                        </FormatSpan>
+                    </FormattedText>
+                );
+            }
+        }
+    };
+
     const SubmitBlueprint = () => {
         //Create new route 'programFormats' and submit userBlueprint to this area...
         console.log('submitted: ', sortUserBlueprint());
 
         //Perhaps add a snackbar detailing that the blueprint has been saved, and the next time the user visits this page --> where the save button is a 'date saved prior' stamp...
+
+        submitFormattedProgram(sortUserBlueprint(), id);
     };
 
     const renderSubmissionButton = () => {
@@ -258,11 +305,12 @@ const BlueprintLayoutSelectionPage = ({
                         {renderProgramCounter()}
                     </ProgramCounterLabel>
                 </ProgramCounterContainer>
-                <LabelContainer>
+                <LabelContainer>{renderFormattedBefore()}</LabelContainer>
+                {/* <LabelContainer>
                     <InfoLabel>
                         **Exercise 1 will begin first when program is ran!**
                     </InfoLabel>
-                </LabelContainer>
+                </LabelContainer> */}
                 <SelectorContainer>{renderSelectorValues()}</SelectorContainer>
                 <ButtonContainer>{renderSubmissionButton()}</ButtonContainer>
             </MainContainer>
@@ -273,9 +321,12 @@ const BlueprintLayoutSelectionPage = ({
 const mapStateToProps = (state) => {
     return {
         programExercises: state.programExercises.programs,
+        formattedProgram: state.formattedProgram.formattedProgram,
     };
 };
 
-export default connect(mapStateToProps, { getUserProgramExerciseData })(
-    BlueprintLayoutSelectionPage
-);
+export default connect(mapStateToProps, {
+    getUserProgramExerciseData,
+    getUserFormattedProgram,
+    submitFormattedProgram,
+})(BlueprintLayoutSelectionPage);
