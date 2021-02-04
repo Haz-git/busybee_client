@@ -10,6 +10,7 @@ import powerStatReducer from './userPowerLifts/powerLiftReducer';
 import statReducer from './userStats/userStatReducer';
 import programReducer from './userPrograms/userProgramReducer';
 import programExerciseReducer from './userProgramExercises/programExerciseReducer';
+import formattedProgramReducer from './userFormattedPrograms/formattedProgramsReducer';
 
 //LocalStorage from window browser:
 import storage from 'redux-persist/lib/storage';
@@ -40,6 +41,7 @@ const rootReducer = combineReducers({
     stats: statReducer,
     programs: programReducer,
     programExercises: programExerciseReducer,
+    formattedProgram: formattedProgramReducer,
 });
 
 //Persisting RootReducer:
