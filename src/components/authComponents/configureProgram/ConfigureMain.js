@@ -67,7 +67,7 @@ const HideIcon = styled(ChevronsDown)`
 
 export const BackIcon = styled(CaretBack)`
     height: 3.8em;
-    width: 3.8em;
+    width: 4.3em;
 `;
 
 const RestIcon = styled(Zzz)`
@@ -118,10 +118,9 @@ export const MainHeader = styled.h1`
 
 export const HeaderContainer = styled.div`
     display: flex;
-    align-items: center;
+    align-items: stretch;
     justify-content: flex-start;
     text-align: left;
-    height: fit-content;
     position: sticky;
     top: 0;
     background: ${({ theme }) => theme.background};
@@ -444,9 +443,9 @@ const EditLayoutButtonClosing = styled.button`
 export const BackButton = styled.button`
     border: none;
     background: #3a4e55;
-    height: 6em;
     border-radius: 0.4em;
     margin-right: 0.8em;
+    height: 100%;
     color: white;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
     cursor: pointer;
