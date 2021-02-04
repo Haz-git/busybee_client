@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
+import TimeSelectModal from './TimeSelectModal';
 
 //Redux:
 import { connect } from 'react-redux';
 import {
     deleteProgramExercise,
     deleteRestPeriod,
+    addNewRestPeriodBetweenSets,
 } from '../../../redux/userProgramExercises/programExerciseActions';
 
 //styles:
@@ -12,11 +14,17 @@ import styled from 'styled-components';
 import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
+import { Zzz } from '@styled-icons/remix-line/Zzz';
 
 //Icons:
 
 const EditIcon = styled(EditOutline)`
     height: 1.5em;
+    width: 1.6em;
+`;
+
+const RestIcon = styled(Zzz)`
+    height: 1.4em;
     width: 1.6em;
 `;
 
@@ -31,15 +39,15 @@ const MainContainer = styled.div`
     flex-direction: column;
     /* align-items: center; */
     background: #27303f;
-    border-radius: 0.4em;
+    border-radius: 0.5em;
     margin: 1.2em 0;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
 `;
 
 const HeaderBlock = styled.div`
     background: #081120;
-    border-top-left-radius: 0.4em;
-    border-top-right-radius: 0.4em;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
     padding: 0.6em 1em;
 `;
 
@@ -71,6 +79,15 @@ const DetailContainer = styled.div`
 const TimeContainer = styled.div`
     display: flex;
     justify-content: space-evenly;
+`;
+
+const RestPerSetContainer = styled.div`
+    display: block;
+    background: #121e31;
+    border-radius: 4em;
+    margin: 0.3em 0;
+    padding: 0.2em 0.4em;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 4px;
 `;
 
 const DeleteButton = styled.button`
@@ -141,7 +158,17 @@ const ProgramExerciseCard = ({
     minutes,
     seconds,
     deleteRestPeriod,
+    addNewRestPeriodBetweenSets,
+    restMinutesPerSet,
+    restSecondsPerSet,
+    restNum,
 }) => {
+    const [stateRestTimeSelectModal, setStateRestTimeSelectModal] = useState(
+        false
+    );
+    const [userMin, setUserMin] = useState(null);
+    const [userSec, setUserSec] = useState(null);
+
     const [
         stateDeleteProgramExerciseModal,
         setStateDeleteProgramExerciseModal,
@@ -167,6 +194,41 @@ const ProgramExerciseCard = ({
         setStateDeleteProgramExerciseModal(false);
     };
 
+    //Controller functions for rest period modal:
+
+    const openRestModal = () => {
+        console.log(sets);
+        if (parseInt(sets) > 1) {
+            setStateRestTimeSelectModal(true);
+        } else if (parseInt(sets) < 1) {
+            setStateRestTimeSelectModal(false);
+            alert(
+                'You cannot place rest periods between a single set. Please add a rest block!'
+            );
+        } else if (sets === undefined) {
+            setStateRestTimeSelectModal(false);
+            alert(
+                `We're sorry, you can't place rest periods inside of a rest block.`
+            );
+        }
+    };
+
+    const closeRestModal = () => {
+        setStateRestTimeSelectModal(false);
+    };
+
+    const handleUserMins = (e) => {
+        setUserMin(e.target.value);
+    };
+
+    const handleUserSec = (e) => {
+        setUserSec(e.target.value);
+    };
+
+    const handleUserSubmit = () => {
+        addNewRestPeriodBetweenSets(programId, exerciseId, userMin, userSec);
+    };
+
     return (
         <>
             <MainContainer>
@@ -179,14 +241,23 @@ const ProgramExerciseCard = ({
                         {reps && <InfoText>Reps: {reps}</InfoText>}
                         {weight && <InfoText>Weight: {weight}</InfoText>}
                     </DetailContainer>
+                    {restMinutesPerSet && restNum && restSecondsPerSet && (
+                        <RestPerSetContainer>
+                            <InfoText>Total Rest Periods: {restNum}</InfoText>
+                            <InfoText>
+                                Rest Length: {restMinutesPerSet}m{' '}
+                                {restSecondsPerSet}s
+                            </InfoText>
+                        </RestPerSetContainer>
+                    )}
                     <TimeContainer>
                         {minutes && <InfoText>Minutes: {minutes}</InfoText>}
                         {seconds && <InfoText>Seconds: {seconds}</InfoText>}
                     </TimeContainer>
                 </InfoBlock>
                 <ButtonContainer>
-                    <EditButton>
-                        <EditIcon />
+                    <EditButton onClick={openRestModal}>
+                        <RestIcon />
                     </EditButton>
                     <DeleteButton onClick={openDeleteProgramExerciseModal}>
                         <DelIcon />
@@ -201,6 +272,19 @@ const ProgramExerciseCard = ({
                     modalDesc="Confirm deletion of exercise"
                     ariaLabel="program exercise delete modal"
                     ariaDesc="program exercise delete modal"
+                />
+            )}
+            {exerciseId && (
+                <TimeSelectModal
+                    openBoolean={stateRestTimeSelectModal}
+                    closeFunction={closeRestModal}
+                    ariaLabel="Modal for adding a rest period between sets"
+                    ariaDesc="Modal for adding a rest period between sets"
+                    modalHeader="Rest Between Sets"
+                    modalDesc="Add a rest period between your sets!"
+                    minHandler={handleUserMins}
+                    secHandler={handleUserSec}
+                    buttonSubmitFunction={handleUserSubmit}
                 />
             )}
 
@@ -218,6 +302,8 @@ const ProgramExerciseCard = ({
     );
 };
 
-export default connect(null, { deleteProgramExercise, deleteRestPeriod })(
-    ProgramExerciseCard
-);
+export default connect(null, {
+    deleteProgramExercise,
+    deleteRestPeriod,
+    addNewRestPeriodBetweenSets,
+})(ProgramExerciseCard);
