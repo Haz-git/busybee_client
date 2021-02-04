@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import BlueprintSelector from './BlueprintSelector';
 import { getUserProgramExerciseData } from '../../../redux/userProgramExercises/programExerciseActions';
+import { v4 as uuid } from 'uuid';
+import Fade from 'react-reveal/Fade';
 
 //Styles:
 import styled from 'styled-components';
@@ -14,13 +16,16 @@ import {
     BackButton,
     BackIcon,
 } from './ConfigureMain';
+import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 
 const MainContainer = styled.div`
     display: block;
     text-align: center;
 `;
 
-const ProgramCounterContainer = styled.div``;
+const ProgramCounterContainer = styled.div`
+    display: block;
+`;
 
 const ProgramCounterSpanNegative = styled.span`
     color: red;
@@ -66,6 +71,10 @@ const SelectorContainer = styled.div`
     padding: 0.5em 1.5em;
 `;
 
+const ButtonContainer = styled.div`
+    margin: 0.5em 1.5em;
+`;
+
 const BlueprintLayoutSelectionPage = ({
     match: {
         params: { name, id },
@@ -79,6 +88,7 @@ const BlueprintLayoutSelectionPage = ({
 
     const [userBlueprint, setUserBlueprint] = useState([]);
     const [userBlueprintCount, setUserBlueprintCount] = useState(0);
+    // const [isAllFormatted, setIsAllFormatted] = useState(null);
 
     // const [userProgramExercises, setUserProgramExercises] = useState(
     //     programExercises
@@ -113,9 +123,16 @@ const BlueprintLayoutSelectionPage = ({
         let selectId = e.target.value[0]; //Id of select
         let selectedExerciseId = e.target.value.slice(1); //programExerciseId of the selected value
 
+        //We'll find the exercise details within 'programExercises' and append it to the new object.
+
+        const matchingExerciseIndex = programExercises.findIndex(
+            (element) => element.programExerciseId === selectedExerciseId
+        );
+
         const newBlueprintObject = {
             orderId: selectId,
             programExerciseId: selectedExerciseId,
+            exerciseDetails: programExercises[matchingExerciseIndex],
         };
 
         if (
@@ -155,32 +172,11 @@ const BlueprintLayoutSelectionPage = ({
         return userBlueprint.sort((a, b) => (a.orderId > b.orderId ? 1 : -1));
     };
 
-    const filterOptions = () => {
-        if (userBlueprint === undefined || userBlueprint.length === 0) {
-            return programExercises;
-        } else {
-            let tempArray = programExercises;
-            let resultsArray = [];
-
-            for (let i = 0; i < userBlueprint.length; i++) {
-                if (
-                    userBlueprint[i].programExerciseId ===
-                    tempArray[i].programExerciseId
-                ) {
-                    resultsArray.push(tempArray[i]);
-                }
-            }
-
-            console.log(resultsArray);
-
-            return resultsArray;
-        }
-    };
-
     const renderSelectorValues = () => {
         if (programExercises !== null && programExercises !== undefined) {
             return programExercises.map((exercise) => (
                 <BlueprintSelector
+                    // key={uuid()} <-- this breaks rendering the selected value...
                     optionsList={programExercises}
                     optionsDefaultValue="Program Exercise"
                     numLabel={programExercises.indexOf(exercise) + 1}
@@ -211,6 +207,29 @@ const BlueprintLayoutSelectionPage = ({
         }
     };
 
+    const SubmitBlueprint = () => {
+        //Create new route 'programFormats' and submit userBlueprint to this area...
+        console.log('submitted');
+
+        //Perhaps add a snackbar detailing that the blueprint has been saved, and the next time the user visits this page --> where the save button is a 'date saved prior' stamp...
+    };
+
+    const renderSubmissionButton = () => {
+        //Renders a conditional 'save' button based on status of formatting exercises...
+        if (userBlueprintCount === countProgramExercises()) {
+            return (
+                <Fade bottom big>
+                    <CustomSubmitButton
+                        label="Save"
+                        clickFunc={SubmitBlueprint}
+                    />
+                </Fade>
+            );
+        } else {
+            return null;
+        }
+    };
+
     return (
         <>
             <MainContainer>
@@ -237,6 +256,7 @@ const BlueprintLayoutSelectionPage = ({
                     </InfoLabel>
                 </LabelContainer>
                 <SelectorContainer>{renderSelectorValues()}</SelectorContainer>
+                <ButtonContainer>{renderSubmissionButton()}</ButtonContainer>
             </MainContainer>
         </>
     );
