@@ -89,13 +89,17 @@ const NameHeader = styled.h2`
 `;
 
 const DescContainer = styled.div`
-    font-family: 'Lato', 'Nunito';
-    width: 84%;
-    font-size: 0.9em;
+    width: 80%;
     margin: 0.85em 0;
     text-align: left;
     /* text-justify: distribute;
     word-spacing: -2px; */
+    word-break: break-all;
+`;
+
+const DescText = styled.h3`
+    font-size: 0.9em;
+    font-family: 'Lato', 'Nunito';
     font-weight: 500;
     color: ${({ theme }) => theme.ProgramCardDesc};
 `;
@@ -313,7 +317,7 @@ const ProgramCard = ({
                         <NameHeader>{name}</NameHeader>
                     </HeaderContainer>
                     <DescContainer>
-                        <p>{desc}</p>
+                        <DescText>{desc}</DescText>
                     </DescContainer>
                     <ExercisesContainer>
                         <CalendarIcon />
