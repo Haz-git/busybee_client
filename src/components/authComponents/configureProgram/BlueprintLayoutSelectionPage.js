@@ -214,7 +214,7 @@ const BlueprintLayoutSelectionPage = ({
 
     const SubmitBlueprint = () => {
         //Create new route 'programFormats' and submit userBlueprint to this area...
-        console.log('submitted');
+        console.log('submitted: ', sortUserBlueprint());
 
         //Perhaps add a snackbar detailing that the blueprint has been saved, and the next time the user visits this page --> where the save button is a 'date saved prior' stamp...
     };
