@@ -22,6 +22,32 @@ import {
     BackIcon,
 } from './ConfigureMain';
 import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.9em .5em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
+
+const CustomSnackBar = withStyles(() => ({
+    anchorOriginBottomCenter: {
+        marginBottom: '6em',
+    },
+}))(Snackbar);
 
 const MainContainer = styled.div`
     display: block;
@@ -115,6 +141,10 @@ const BlueprintLayoutSelectionPage = ({
         getUserFormattedProgram(id);
     }, []);
 
+    //State snackbar:
+
+    const [openFormattedSnackbar, setOpenFormattedSnackbar] = useState(false);
+
     const [userBlueprint, setUserBlueprint] = useState([]);
     const [userBlueprintCount, setUserBlueprintCount] = useState(0);
     // const [isAllFormatted, setIsAllFormatted] = useState(null);
@@ -127,6 +157,24 @@ const BlueprintLayoutSelectionPage = ({
         if (programExercises !== null && programExercises !== undefined) {
             return programExercises.length;
         }
+    };
+
+    //Snackbar Handlers:
+
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    const showFormattedSnackbar = (bool) => {
+        setOpenFormattedSnackbar(true);
+    };
+
+    const closeFormattedSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenFormattedSnackbar(false);
     };
 
     /*
@@ -263,7 +311,7 @@ const BlueprintLayoutSelectionPage = ({
 
         //Perhaps add a snackbar detailing that the blueprint has been saved, and the next time the user visits this page --> where the save button is a 'date saved prior' stamp...
 
-        submitFormattedProgram(sortUserBlueprint(), id);
+        submitFormattedProgram(sortUserBlueprint(), id, showFormattedSnackbar);
     };
 
     const renderSubmissionButton = () => {
@@ -314,6 +362,19 @@ const BlueprintLayoutSelectionPage = ({
                 <SelectorContainer>{renderSelectorValues()}</SelectorContainer>
                 <ButtonContainer>{renderSubmissionButton()}</ButtonContainer>
             </MainContainer>
+            <Slide direction="up" in={openFormattedSnackbar}>
+                <CustomSnackBar
+                    open={openFormattedSnackbar}
+                    autoHideDuration={5000}
+                    onClose={closeFormattedSnackbar}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    transitionDuration={300}
+                >
+                    <Alert severity="success">
+                        Your program has been formatted.
+                    </Alert>
+                </CustomSnackBar>
+            </Slide>
         </>
     );
 };
