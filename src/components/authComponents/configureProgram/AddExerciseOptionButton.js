@@ -13,7 +13,7 @@ const ButtonLabel = styled.p`
 `;
 
 const CustomExerciseSelector = styled.button`
-    margin: 1.2em 0;
+    margin: 1em 0;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
