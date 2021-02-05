@@ -9,13 +9,14 @@ import {
     deleteExistingProgram,
 } from '../../../redux/userPrograms/userProgramActions';
 import { v4 as uuid } from 'uuid';
+import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Components:
 import SearchBar from '../statsDashboard/SearchBar';
 import CreateProgramButton from './CreateProgramButton';
 import CreateProgramModal from './CreateProgramModal';
 import ProgramCard from './ProgramCard';
-import Fade from '@material-ui/core/Fade';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -79,8 +80,16 @@ const MainPrograms = ({
     getUserProgramData,
     programs,
 }) => {
+    //State controls component loaded status:
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
-        getUserProgramData();
+        const getUserExistingProgramData = async () => {
+            const bool = await getUserProgramData();
+            setIsLoaded(bool);
+        };
+        getUserExistingProgramData();
     }, []);
 
     //This state controls snackbars:
@@ -282,13 +291,21 @@ const MainPrograms = ({
                 <SearchBarContainer>
                     <SearchBar
                         placeholder="Total Programs"
-                        value={renderNumberOfPrograms()}
+                        value={
+                            isLoaded === true ? renderNumberOfPrograms() : '...'
+                        }
                         changeFunction={handleSearchBarChange}
                     />
                     <CreateProgramButton clickFunction={openAddProgramModal} />
                 </SearchBarContainer>
                 <ProgramCardContainer>
-                    {renderProgramCards()}
+                    {isLoaded === true ? (
+                        renderProgramCards()
+                    ) : (
+                        <LoadingContainer>
+                            <CustomLoadingDots />
+                        </LoadingContainer>
+                    )}
                 </ProgramCardContainer>
             </MainContainer>
             <Slide direction="right" in={openAddProgramSnackBar} timeout="exit">
