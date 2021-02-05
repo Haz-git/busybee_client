@@ -14,6 +14,10 @@ export function getUserFormattedProgram(programId) {
             type: USER_GET_FORMATTED_PROGRAM,
             payload: response.data,
         });
+
+        //IsLoaded flag for BlueprintLayoutSelectionPage:
+
+        return true;
     };
 }
 
