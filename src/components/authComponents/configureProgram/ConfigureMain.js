@@ -26,6 +26,8 @@ import { SortAlt2 } from '@styled-icons/boxicons-regular/SortAlt2';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
+import CircularProgress from '@material-ui/core/CircularProgress';
+import CustomLoadingDots from './CustomLoadingDots';
 import { withStyles } from '@material-ui/core/styles';
 
 const CustomMuiAlert = withStyles(() => ({
@@ -487,6 +489,13 @@ const AddMoreLabel = styled.h3`
     color: ${({ theme }) => theme.AddMoreLabelC};
     white-space: nowrap;
 `;
+
+export const LoadingContainer = styled.div`
+    position: fixed;
+    top: 45%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+`;
 //Render:
 
 const ConfigureMain = ({
@@ -498,6 +507,10 @@ const ConfigureMain = ({
     addNewRestPeriod,
 }) => {
     //id === programId.
+
+    //LoaderState:
+
+    const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         /*
@@ -511,8 +524,14 @@ const ConfigureMain = ({
         //     programExercises.constructor === Object &&
         //     programExercises.programs === undefined
         // ) {
-        getUserProgramExerciseData(id);
+        const getUserInfo = async () => {
+            const bool = await getUserProgramExerciseData(id);
+            setIsLoaded(bool);
+        };
+
         // }
+
+        getUserInfo();
 
         window.addEventListener('scroll', handleScroll);
 
@@ -565,7 +584,8 @@ const ConfigureMain = ({
         if (
             programExercises.programs !== undefined &&
             programExercises.programs !== null &&
-            programExercises.programs.length !== 0
+            programExercises.programs.length !== 0 &&
+            isLoaded === true
         ) {
             return programExercises.programs.length;
         } else {
@@ -578,7 +598,8 @@ const ConfigureMain = ({
     const renderProgramExerciseCards = () => {
         if (
             programExercises.programs !== undefined &&
-            programExercises.programs !== null
+            programExercises.programs !== null &&
+            isLoaded === true
         ) {
             return programExercises.programs.map((programExercise) => (
                 <ProgramExerciseCard
@@ -599,6 +620,12 @@ const ConfigureMain = ({
                     restNum={programExercise.numRest}
                 />
             ));
+        } else {
+            return (
+                <LoadingContainer>
+                    <CustomLoadingDots />
+                </LoadingContainer>
+            );
         }
     };
 
@@ -777,7 +804,10 @@ const ConfigureMain = ({
                     open={openDeleteProgramExerciseSnackBar}
                     autoHideDuration={3000}
                     onClose={closeDeleteProgramExerciseSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
                     transitionDuration={400}
                 >
                     <Alert severity="warning">
@@ -790,7 +820,10 @@ const ConfigureMain = ({
                     open={openAddProgramRestSnackBar}
                     autoHideDuration={5000}
                     onClose={closeAddProgramRestSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
                     transitionDuration={300}
                 >
                     <Alert severity="info">Rest Period Has Been Added.</Alert>
@@ -801,7 +834,10 @@ const ConfigureMain = ({
                     open={openDeleteProgramRestSnackBar}
                     autoHideDuration={5000}
                     onClose={closeDeleteProgramRestSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    anchorOrigin={{
+                        vertical: 'top',
+                        horizontal: 'center',
+                    }}
                     transitionDuration={300}
                 >
                     <Alert severity="warning">
