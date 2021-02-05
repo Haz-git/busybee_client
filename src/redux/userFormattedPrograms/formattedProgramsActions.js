@@ -17,7 +17,11 @@ export function getUserFormattedProgram(programId) {
     };
 }
 
-export function submitFormattedProgram(formattedProgramObject, programId) {
+export function submitFormattedProgram(
+    formattedProgramObject,
+    programId,
+    callback
+) {
     return async (dispatch) => {
         const response = await api.post('/user/programs/editformattedprogram', {
             programId,
@@ -28,5 +32,9 @@ export function submitFormattedProgram(formattedProgramObject, programId) {
             type: USER_EDIT_FORMATTED_PROGRAM,
             payload: response.data.userFormattedProgram.userFormattedPrograms,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
