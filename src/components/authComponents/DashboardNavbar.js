@@ -54,6 +54,7 @@ const MainContainer = styled.div`
     border-top-left-radius: 1.5em;
     border-top-right-radius: 1.5em;
     z-index: 99999 !important;
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 15px;
 `;
 
 const NavItemContainer = styled.div`
