@@ -10,6 +10,8 @@ import { v4 as uuid } from 'uuid';
 import SearchBar from './SearchBar';
 import AddButton from './AddButton';
 import StatCard from './StatCard';
+import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Styles:
 import styled from 'styled-components';
@@ -103,8 +105,16 @@ const StatCardContainer = styled.div``;
 //Render:
 
 const MainStats = ({ addNewStat, getUserStatData, stats }) => {
+    //Loading State:
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
-        getUserStatData();
+        const getUserExistingStats = async () => {
+            const bool = await getUserStatData();
+            setIsLoaded(bool);
+        };
+        getUserExistingStats();
     }, []);
 
     //States for SnackBars:
@@ -329,13 +339,25 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     <SearchBarContainer>
                         <SearchBar
                             placeholder="Total Stats"
-                            value={renderNumberOfStats()}
+                            value={
+                                isLoaded === true
+                                    ? renderNumberOfStats()
+                                    : '...'
+                            }
                             changeFunction={handleSearchBarChange}
                         />
                     </SearchBarContainer>
                     <AddButton clickFunction={openModal} />
                 </FlexWrapper>
-                <StatCardContainer>{renderStatCards()}</StatCardContainer>
+                <StatCardContainer>
+                    {isLoaded === true ? (
+                        renderStatCards()
+                    ) : (
+                        <LoadingContainer>
+                            <CustomLoadingDots />
+                        </LoadingContainer>
+                    )}
+                </StatCardContainer>
             </MainContainer>
             <Slide direction="right" in={openAddRecordSnackBar} timeout="exit">
                 <Snackbar
