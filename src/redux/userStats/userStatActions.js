@@ -18,6 +18,10 @@ export function getUserStatData() {
             type: USER_RETRIEVE_STATS,
             payload: response.data.userSavedStats,
         });
+
+        //true flag for isLoaded state in MainStats.js:
+
+        return true;
     };
 }
 
