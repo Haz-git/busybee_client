@@ -11,6 +11,7 @@ import styled from 'styled-components';
 import { PlayCircle } from '@styled-icons/boxicons-regular/PlayCircle';
 import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
 import { Numbers } from '@styled-icons/remix-fill/Numbers';
+import { Alarm } from '@styled-icons/boxicons-regular/Alarm';
 
 const PlayIcon = styled(PlayCircle)`
     height: 4em;
@@ -19,19 +20,25 @@ const PlayIcon = styled(PlayCircle)`
 `;
 
 const CalendarIcon = styled(Calendar)`
-    height: 1.8em;
-    width: 1.8em;
-    color: ${({ theme }) => theme.PlayIcon};
-    filter: invert(70%) sepia(51%) saturate(7494%) hue-rotate(244deg)
-        brightness(120%) contrast(94%);
+    height: 1.5em;
+    width: 1.5em;
+    color: ${({ theme }) => theme.ProgramIcon};
 `;
 
 const NumberIcon = styled(Numbers)`
-    height: 1.8em;
-    width: 1.8em;
-    color: ${({ theme }) => theme.PlayIcon};
-    filter: invert(26%) sepia(500%) saturate(5438%) hue-rotate(345deg)
-        brightness(100%) contrast(104%);
+    height: 1.5em;
+    width: 1.5em;
+    color: ${({ theme }) => theme.ProgramIcon};
+`;
+
+const AlarmIcon = styled(Alarm)`
+    height: 1.5em;
+    width: 1.5em;
+    color: ${({ theme }) => theme.ProgramIcon};
+
+    //Filter for gold, kept for reference:
+    /* filter: invert(39%) sepia(94%) saturate(4424%) hue-rotate(1deg)
+        brightness(170%) contrast(104%); */
 `;
 
 const ButtonContainer = styled.div``;
@@ -106,7 +113,7 @@ const DescText = styled.h3`
 
 const DetailLabel = styled.p`
     margin: 0 1em;
-    font-size: 0.9em;
+    font-size: 0.8em;
     font-weight: 700;
     font-family: 'Lato';
     color: ${({ theme }) => theme.ProgramCardDesc};
@@ -141,6 +148,12 @@ const ButtonPlayContainer = styled.div`
     border-bottom-right-radius: 0.4em;
 `;
 
+const StyledHr = styled.hr`
+    border: 1px solid ${({ theme }) => theme.LowerContainerBG};
+    max-width: 16.2em;
+    margin-bottom: 0.2em;
+`;
+
 const DeleteButton = styled.button`
     border: none;
     border-radius: 0.4em;
@@ -167,19 +180,19 @@ const ConfigureButton = styled(Link)`
     border-radius: 0.4em;
     padding: 0.68em 1.3em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #c99521;
+    background: #7d1b56;
     font-size: 1em;
     color: white;
     cursor: pointer;
 
     &:focus {
         outline: none;
-        background: #ffd45b;
+        background: #b95a94;
     }
 
     &:hover {
         outline: none;
-        background: #ffd45b;
+        background: #b95a94;
     }
 `;
 
@@ -286,6 +299,84 @@ const ProgramCard = ({
         }
     };
 
+    const calculateEstimatedTime = () => {
+        let totalTime = [];
+
+        console.log(programExercises);
+
+        programExercises.forEach((exercise) => {
+            if (
+                exercise.numRest !== undefined &&
+                exercise.numRest !== null &&
+                exercise.programExerciseId !== undefined &&
+                exercise.programExerciseId !== null
+            ) {
+                //Handles Multi-Set exercises with rest between sets:
+
+                //Find total rest time without exercises:
+                const totalSecsFromMin =
+                    parseInt(exercise.restLengthMinutePerSet) *
+                    60 *
+                    parseInt(exercise.numRest);
+
+                const totalSecs =
+                    parseInt(exercise.restLengthSecondPerSet) *
+                    parseInt(exercise.numRest);
+
+                //estimate time from sets and reps:
+
+                const secsFromRepsAndSets =
+                    parseInt(exercise.reps) * 4 * parseInt(exercise.sets);
+
+                const totalRestTimeCombinedSeconds =
+                    totalSecsFromMin + totalSecs + secsFromRepsAndSets;
+
+                totalTime.push(totalRestTimeCombinedSeconds);
+            } else if (
+                exercise.restId !== undefined &&
+                exercise.restId !== null
+            ) {
+                //Handles Rest periods
+
+                let timeFromMin;
+
+                if (exercise.restLengthMinute !== null) {
+                    timeFromMin = parseInt(exercise.restLengthMinute) * 60;
+                } else {
+                    timeFromMin = 0;
+                }
+
+                let seconds;
+
+                if (exercise.restLengthSecond !== null) {
+                    seconds = parseInt(exercise.restLengthSecond);
+                } else {
+                    seconds = 0;
+                }
+
+                const timeCombined = timeFromMin + seconds;
+
+                totalTime.push(timeCombined);
+            } else if (
+                exercise.programExerciseId !== undefined &&
+                exercise.programExerciseId !== null
+            ) {
+                //Handles single set exercises, or multi set exercises without rest between sets:
+                const secsFromRepsAndSets =
+                    parseInt(exercise.reps) * 4 * parseInt(exercise.sets);
+
+                totalTime.push(secsFromRepsAndSets);
+            }
+        });
+
+        const totalMinutes = Math.floor(
+            totalTime.reduce((a, b) => a + b, 0) / 60
+        );
+        const totalSeconds = totalTime.reduce((a, b) => a + b, 0) % 60;
+
+        return `${totalMinutes}m ${totalSeconds}s`;
+    };
+
     return (
         <>
             <StatCardModalDelete
@@ -319,6 +410,7 @@ const ProgramCard = ({
                     <DescContainer>
                         <DescText>{desc}</DescText>
                     </DescContainer>
+                    <StyledHr />
                     <ExercisesContainer>
                         <CalendarIcon />
                         <DetailLabel>
@@ -329,6 +421,12 @@ const ProgramCard = ({
                         <NumberIcon />
                         <DetailLabel>
                             Total Exercises: {findNumberOfExercises()}
+                        </DetailLabel>
+                    </DateContainer>
+                    <DateContainer>
+                        <AlarmIcon />
+                        <DetailLabel>
+                            Estimated Time: {calculateEstimatedTime()}
                         </DetailLabel>
                     </DateContainer>
                 </MainContainer>
