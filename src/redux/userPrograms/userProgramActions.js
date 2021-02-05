@@ -14,6 +14,10 @@ export function getUserProgramData() {
             type: USER_GET_EXISTING_PROGRAMS,
             payload: response.data.userPrograms,
         });
+
+        //true flag for isLoaded state in MainPrograms.js:
+
+        return true;
     };
 }
 
