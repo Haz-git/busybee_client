@@ -68,7 +68,7 @@ const NavItem = styled(NavLink)`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 1.2em 1.2em;
+    padding: 0.7em 1.2em;
 `;
 
 const NavLabel = styled.label`
