@@ -505,7 +505,6 @@ const ConfigureMain = ({
 
             Additionally, it's necessary to check if programExercises.programs === undefined since that's the value when you return to the page after adding exercises
         */
-        console.log(programExercises);
 
         // if (
         //     Object.keys(programExercises).length === 0 &&
