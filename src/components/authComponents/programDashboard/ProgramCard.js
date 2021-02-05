@@ -149,8 +149,10 @@ const ButtonPlayContainer = styled.div`
 `;
 
 const StyledHr = styled.hr`
+    text-align: left;
     border: 1px solid ${({ theme }) => theme.LowerContainerBG};
-    max-width: 16.2em;
+    width: 82%;
+    max-width: 90%;
     margin-bottom: 0.2em;
 `;
 
