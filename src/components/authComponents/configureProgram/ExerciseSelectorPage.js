@@ -49,6 +49,12 @@ const CustomMuiAlert = withStyles(() => ({
     },
 }))(MuiAlert);
 
+const CustomSnackBar = withStyles(() => ({
+    anchorOriginBottomCenter: {
+        marginBottom: '6em',
+    },
+}))(Snackbar);
+
 //Icons:
 const NewIcon = styled(NewReleases)`
     height: 4em;
@@ -383,18 +389,18 @@ const ExerciseSelectorPage = ({
                 submitHandler={handleExistingStatSubmission}
                 optionsDefaultValue="Main Lift"
             />
-            <Slide direction="bottom" in={openAddProgramExerciseSnackBar}>
-                <Snackbar
+            <Slide direction="up" in={openAddProgramExerciseSnackBar}>
+                <CustomSnackBar
                     open={openAddProgramExerciseSnackBar}
                     autoHideDuration={2400}
                     onClose={closeNewProgramExerciseSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                     transitionDuration={300}
                 >
                     <Alert severity="success">
                         Your Exercise Has Been Added.
                     </Alert>
-                </Snackbar>
+                </CustomSnackBar>
             </Slide>
         </>
     );
