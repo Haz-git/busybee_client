@@ -142,7 +142,7 @@ const ButtonPlayContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    padding: 1em 1em;
+    padding: 0.75em 0.8em;
     background: ${({ theme }) => theme.LowerContainerBG};
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
