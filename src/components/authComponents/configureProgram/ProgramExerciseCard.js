@@ -197,10 +197,9 @@ const ProgramExerciseCard = ({
     //Controller functions for rest period modal:
 
     const openRestModal = () => {
-        console.log(sets);
         if (parseInt(sets) > 1) {
             setStateRestTimeSelectModal(true);
-        } else if (parseInt(sets) < 1) {
+        } else if (parseInt(sets) <= 1) {
             setStateRestTimeSelectModal(false);
             alert(
                 'You cannot place rest periods between a single set. Please add a rest block!'
