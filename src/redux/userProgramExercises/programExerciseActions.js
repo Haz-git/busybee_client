@@ -18,6 +18,9 @@ export function getUserProgramExerciseData(programId) {
             type: USER_GET_PROGRAM_EXERCISES,
             payload: response.data.userProgramExercises,
         });
+
+        //this returns true for the loader flag in ConfigureMain:
+        return true;
     };
 }
 
