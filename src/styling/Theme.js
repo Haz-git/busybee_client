@@ -117,4 +117,7 @@ export const darkTheme = {
     CMHeaderC: '#fdbc3d',
     CMExerciseC: '#DA5930',
     AddMoreLabelC: '#26292F',
+
+    //Loader:
+    LoaderC: '#26292F',
 };
