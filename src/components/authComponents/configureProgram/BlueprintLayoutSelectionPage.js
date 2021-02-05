@@ -10,6 +10,8 @@ import {
 import { v4 as uuid } from 'uuid';
 import Fade from 'react-reveal/Fade';
 import dayjs from 'dayjs';
+import { LoadingContainer } from './ConfigureMain';
+import CustomLoadingDots from './CustomLoadingDots';
 
 //Styles:
 import styled from 'styled-components';
@@ -116,6 +118,12 @@ const FormatSpan = styled.span`
     text-shadow: 2px 2px 2px #14181f;
 `;
 
+const FormatSpanNegative = styled.span`
+    margin: 0 0.5em;
+    color: red;
+    text-shadow: 2px 2px 2px #14181f;
+`;
+
 const SelectorContainer = styled.div`
     display: block;
     padding: 0.5em 1.5em;
@@ -136,9 +144,18 @@ const BlueprintLayoutSelectionPage = ({
     submitFormattedProgram,
     formattedProgram,
 }) => {
+    const [isLoaded, setIsLoaded] = useState(false);
+
     useEffect(() => {
-        getUserProgramExerciseData(id);
-        getUserFormattedProgram(id);
+        const getUserFormattedData = async () => {
+            const bool1 = await getUserProgramExerciseData(id);
+            const bool2 = await getUserFormattedProgram(id);
+
+            if (bool1 === true && bool2 === true) {
+                setIsLoaded(bool1);
+            }
+        };
+        getUserFormattedData();
     }, []);
 
     //State snackbar:
@@ -301,6 +318,15 @@ const BlueprintLayoutSelectionPage = ({
                         </FormatSpan>
                     </FormattedText>
                 );
+            } else {
+                return (
+                    <FormattedText>
+                        Previous Format Saved On:
+                        <FormatSpanNegative>
+                            No Existing Record
+                        </FormatSpanNegative>
+                    </FormattedText>
+                );
             }
         }
     };
@@ -359,7 +385,15 @@ const BlueprintLayoutSelectionPage = ({
                         **Exercise 1 will begin first when program is ran!**
                     </InfoLabel>
                 </LabelContainer> */}
-                <SelectorContainer>{renderSelectorValues()}</SelectorContainer>
+                <SelectorContainer>
+                    {isLoaded === true ? (
+                        renderSelectorValues()
+                    ) : (
+                        <LoadingContainer>
+                            <CustomLoadingDots></CustomLoadingDots>
+                        </LoadingContainer>
+                    )}
+                </SelectorContainer>
                 <ButtonContainer>{renderSubmissionButton()}</ButtonContainer>
             </MainContainer>
             <Slide direction="up" in={openFormattedSnackbar}>
