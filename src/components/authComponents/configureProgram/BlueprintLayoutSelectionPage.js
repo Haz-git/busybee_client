@@ -223,10 +223,15 @@ const BlueprintLayoutSelectionPage = ({
             (element) => element.programExerciseId === selectedExerciseId
         );
 
+        const matchingRestIndex = programExercises.findIndex(
+            (element) => element.restId === selectedExerciseId
+        );
+        // console.log(programExercises)
         const newBlueprintObject = {
             orderId: selectId,
             programExerciseId: selectedExerciseId,
             exerciseDetails: programExercises[matchingExerciseIndex],
+            restDetails: programExercises[matchingRestIndex],
         };
 
         if (
