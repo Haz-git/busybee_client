@@ -1,10 +1,12 @@
 import React, { useState } from 'react';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
+import historyObject from '../../historyObject';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
+import ConfirmationModal from '../runProgramDashboard/ConfirmationModal';
 
 //Styles:
 import styled from 'styled-components';
@@ -230,7 +232,8 @@ const ProgramCard = ({
     editProgramSnackbar,
     deleteProgramSnackbar,
 }) => {
-    //States
+    //States:
+    const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
     const [stateEditModal, setStateEditModal] = useState(false);
     const [editModalName, setEditModalName] = useState(name);
     const [editModalDesc, setEditModalDesc] = useState(desc);
@@ -284,6 +287,21 @@ const ProgramCard = ({
 
     const deleteModalHandler = () => {
         deleteAction(programId, deleteProgramSnackbar);
+        setStateDeleteModal(false);
+    };
+
+    //Delete Modal Input handlers:
+
+    const openRunProgramModal = () => {
+        setStateRunProgramModal(true);
+    };
+
+    const closeRunProgramModal = () => {
+        setStateRunProgramModal(false);
+    };
+
+    const runProgramHandler = () => {
+        historyObject.push(`/runprogram/${name}/${programId}`);
         setStateDeleteModal(false);
     };
 
@@ -381,6 +399,15 @@ const ProgramCard = ({
 
     return (
         <>
+            <ConfirmationModal
+                openBoolean={stateRunProgramModal}
+                closeFunction={closeRunProgramModal}
+                buttonSubmitFunction={runProgramHandler}
+                modalHeader={`Initiate ${name}`}
+                modalDesc="Remember to stay hydrated."
+                ariaDesc="Modal for confirming intent to run selected program"
+                ariaLabel="Modal for confirming intent to run selected program"
+            />
             <StatCardModalDelete
                 openBoolean={stateDeleteModal}
                 closeFunction={closeDeleteModal}
@@ -403,7 +430,7 @@ const ProgramCard = ({
             />
             <WrapperContainer>
                 <MainContainer>
-                    <PlayButton>
+                    <PlayButton onClick={openRunProgramModal}>
                         <PlayIcon />
                     </PlayButton>
                     <HeaderContainer>
