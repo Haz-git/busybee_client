@@ -680,8 +680,12 @@ const ConfigureMain = ({
 
     const timeSelectorSubmitHandler = (e) => {
         e.preventDefault();
+
         addNewRestPeriod(id, minInput, secInput, showAddProgramRestSnackBar);
         setStateTimeSelectModal(false);
+
+        setMinInput(null);
+        setSecInput(null);
     };
 
     //Handles the visibility of the 'add more' label, this label should only be visible at the bottom of the card container.
