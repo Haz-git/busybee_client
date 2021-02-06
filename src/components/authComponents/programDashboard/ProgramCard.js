@@ -322,8 +322,6 @@ const ProgramCard = ({
     const calculateEstimatedTime = () => {
         let totalTime = [];
 
-        console.log(programExercises);
-
         programExercises.forEach((exercise) => {
             if (
                 exercise.numRest !== undefined &&
