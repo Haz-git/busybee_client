@@ -5,6 +5,7 @@ import { connect } from 'react-redux';
 import { getUserFormattedProgram } from '../../../redux/userFormattedPrograms/formattedProgramsActions';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import RunCards from '../runProgramDashboard/RunCards';
 
 //Styles:
 import styled from 'styled-components';
@@ -45,6 +46,8 @@ const AbortLabel = styled.p`
     text-shadow: 2px 2px 2px #14181f;
 `;
 
+const RunCardContainer = styled.div``;
+
 /*
     How will I make this page dynamic and interactive?
 
@@ -59,6 +62,7 @@ const AbortLabel = styled.p`
     3 Sets 3 Reps of Bench + RestBetweenSets ===
     [Set1, Rest, Set2, Rest, Set3]...Then we can iterate and work something out.
 
+    **Technique: Perhaps the easiest way of implementing this sort-of 'pagination' (move to the next item in the array upon completion) is to include a queue data structure.
 
     ///Features of this page:
 
@@ -83,9 +87,11 @@ const MainRunProgram = ({
 }) => {
     //LoaderState:
     const [isLoaded, setIsLoaded] = useState(false);
+    const [userProgramSequence, setUserProgramSequence] = useState(null);
+    const [exerciseIterator, setExerciseIterator] = useState(0);
 
     //CompletionState:
-    const [statusCompleted, setStatusCompleted] = useState(0);
+    const [statusCompleted, setStatusCompleted] = useState(false);
 
     useEffect(() => {
         const loadUserFormattedProgram = async () => {
@@ -96,14 +102,83 @@ const MainRunProgram = ({
         loadUserFormattedProgram();
     }, []);
 
-    const countProgramExercises = () => {
+    useEffect(() => {
+        //When is Loaded is true, we set the user's program sequence into the state:
         if (
-            formattedProgram.formattedProgram !== null &&
-            formattedProgram.formattedProgram !== undefined
+            formattedProgram.formattedProgram !== undefined &&
+            formattedProgram.formattedProgram !== null
+        ) {
+            setUserProgramSequence(
+                formattedProgram.formattedProgram.formattedProgram
+                    .programSequence
+            );
+        }
+    }, [isLoaded]);
+
+    const countProgramExercises = () => {
+        //Counts the total programs recieved and returns the length.
+        if (
+            formattedProgram.formattedProgram !== undefined &&
+            formattedProgram.formattedProgram !== null
         ) {
             return formattedProgram.formattedProgram.formattedProgram
                 .formattedExercises.length;
         }
+    };
+
+    if (userProgramSequence !== undefined && userProgramSequence !== null) {
+        console.log(userProgramSequence);
+    }
+
+    const renderRunCards = () => {
+        console.log(exerciseIterator);
+        if (userProgramSequence !== null && exerciseIterator !== null) {
+            const firstExercise = [userProgramSequence[exerciseIterator]];
+            return firstExercise.map((item) => (
+                <RunCards
+                    exerciseName={item.programExerciseName}
+                    exerciseId={item.programExerciseId}
+                    reps={item.reps}
+                    currentSet={item.currentSet}
+                    totalSets={item.totalSets}
+                    weight={item.weight}
+                    onNext={nextHandler}
+                    onPrev={prevHandler}
+                    onFinish={finishHandler}
+                    restLengthMinutePerSet={item.restLengthMinutePerSet}
+                    restLengthSecondPerSet={item.restLengthSecondPerSet}
+                    restNum={item.restNum}
+                    restLengthMinute={item.restLengthMinute}
+                    restLengthSecond={item.restLengthSecond}
+                    restId={item.restId}
+                    isFinal={statusCompleted}
+                />
+            ));
+        } else {
+            return null;
+        }
+    };
+
+    const nextHandler = () => {
+        if (exerciseIterator < userProgramSequence.length - 1) {
+            setExerciseIterator(exerciseIterator + 1);
+        } else if (exerciseIterator === userProgramSequence.length - 1) {
+            setStatusCompleted(true);
+        } else {
+            setExerciseIterator(userProgramSequence.length - 1);
+        }
+    };
+
+    const prevHandler = () => {
+        if (exerciseIterator > 0) {
+            setExerciseIterator(exerciseIterator - 1);
+        } else {
+            setExerciseItermator(0);
+        }
+    };
+
+    const finishHandler = () => {
+        console.log('do something as finisher!');
     };
 
     return (
@@ -122,13 +197,14 @@ const MainRunProgram = ({
                     </ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
-            {isLoaded === true ? (
-                <>LOADED</>
+            {userProgramSequence !== null ? (
+                <RunCardContainer>{renderRunCards()}</RunCardContainer>
             ) : (
                 <LoadingContainer>
                     <CustomLoadingDots />
                 </LoadingContainer>
             )}
+            {statusCompleted === true ? <>Congrats~~</> : null}
         </MainContainer>
     );
 };
