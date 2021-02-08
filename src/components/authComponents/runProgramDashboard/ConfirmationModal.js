@@ -22,6 +22,11 @@ const ConfirmationModalHeader = styled(ModalHeader)`
     white-space: normal;
 `;
 
+const ErrorModalHeader = styled(ModalHeader)`
+    white-space: normal;
+    color: red;
+`;
+
 const ConfirmationModalDesc = styled(ModalDesc)`
     margin: 1em 0;
     white-space: normal;
@@ -33,6 +38,10 @@ const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+`;
+
+const UnformattedErrorLabel = styled.p`
+    text-align: left;
 `;
 
 const StyledConfirmationButton = withStyles({
@@ -69,6 +78,8 @@ const ConfirmationModal = ({
     modalDesc,
     ariaLabel,
     ariaDesc,
+    isFormatted,
+    hasProgramExercises,
 }) => {
     return (
         <>
@@ -85,28 +96,71 @@ const ConfirmationModal = ({
             >
                 <Fade in={openBoolean}>
                     <ConfirmationModalContainer>
-                        <ConfirmationModalHeader>
-                            {modalHeader}
-                        </ConfirmationModalHeader>
-                        <ConfirmationModalDesc>
-                            {modalDesc}
-                        </ConfirmationModalDesc>
-                        <ButtonContainer>
-                            <StyledConfirmationButton
-                                size="large"
-                                variant="contained"
-                                onClick={buttonSubmitFunction}
-                            >
-                                I'm Ready
-                            </StyledConfirmationButton>
-                            <StyledDeletionButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                            >
-                                Nevermind
-                            </StyledDeletionButton>
-                        </ButtonContainer>
+                        {hasProgramExercises === true ? (
+                            <>
+                                <ConfirmationModalHeader>
+                                    {isFormatted === 'true'
+                                        ? modalHeader
+                                        : 'Error: Unformatted Program'}
+                                </ConfirmationModalHeader>
+                                <ConfirmationModalDesc>
+                                    {isFormatted === 'true' ? (
+                                        modalDesc
+                                    ) : (
+                                        <>
+                                            <UnformattedErrorLabel>
+                                                We're Sorry! You can't run this
+                                                program yet because it has not
+                                                been formatted.
+                                            </UnformattedErrorLabel>
+                                            <br />
+                                            <UnformattedErrorLabel>
+                                                Formatting a program lets us
+                                                know what order you want to run
+                                                the exercises on it.
+                                            </UnformattedErrorLabel>
+                                            <br />
+                                            <UnformattedErrorLabel>
+                                                Please format the program, and
+                                                try again!
+                                            </UnformattedErrorLabel>
+                                        </>
+                                    )}
+                                </ConfirmationModalDesc>
+                                <ButtonContainer>
+                                    {isFormatted === 'true' ? (
+                                        <>
+                                            <StyledConfirmationButton
+                                                size="large"
+                                                variant="contained"
+                                                onClick={buttonSubmitFunction}
+                                            >
+                                                I'm Ready
+                                            </StyledConfirmationButton>
+                                            <StyledDeletionButton
+                                                size="large"
+                                                variant="contained"
+                                                onClick={closeFunction}
+                                            >
+                                                Nevermind
+                                            </StyledDeletionButton>
+                                        </>
+                                    ) : (
+                                        <StyledDeletionButton
+                                            size="large"
+                                            variant="contained"
+                                            onClick={closeFunction}
+                                        >
+                                            Return
+                                        </StyledDeletionButton>
+                                    )}
+                                </ButtonContainer>
+                            </>
+                        ) : (
+                            <ErrorModalHeader>
+                                You cannot run a program with 0 exercises.
+                            </ErrorModalHeader>
+                        )}
                     </ConfirmationModalContainer>
                 </Fade>
             </Modal>
