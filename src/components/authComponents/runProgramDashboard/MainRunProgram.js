@@ -173,7 +173,7 @@ const MainRunProgram = ({
         if (exerciseIterator > 0) {
             setExerciseIterator(exerciseIterator - 1);
         } else {
-            setExerciseItermator(0);
+            setExerciseIterator(0);
         }
     };
 
