@@ -1,7 +1,9 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import historyObject from '../../historyObject';
+import { connect } from 'react-redux';
+import { getUserFormattedProgram } from '../../../redux/userFormattedPrograms/formattedProgramsActions';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
@@ -107,9 +109,9 @@ const DescContainer = styled.div`
 `;
 
 const DescText = styled.h3`
-    font-size: 0.9em;
+    font-size: 0.95em;
     font-family: 'Lato', 'Nunito';
-    font-weight: 500;
+    font-weight: 600;
     color: ${({ theme }) => theme.ProgramCardDesc};
 `;
 
@@ -231,7 +233,21 @@ const ProgramCard = ({
     deleteAction,
     editProgramSnackbar,
     deleteProgramSnackbar,
+    formattedProgram,
+    getUserFormattedProgram,
 }) => {
+    //LoaderState:
+
+    const [isLoaded, setIsLoaded] = useState(false);
+
+    useEffect(() => {
+        const checkUserFormattedData = async () => {
+            const bool = await getUserFormattedProgram(programId);
+            setIsLoaded(bool);
+        };
+
+        checkUserFormattedData();
+    }, []);
     //States:
     const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
     const [stateEditModal, setStateEditModal] = useState(false);
@@ -395,6 +411,8 @@ const ProgramCard = ({
         return `${totalMinutes}m ${totalSeconds}s`;
     };
 
+    console.log(programExercises);
+
     return (
         <>
             <ConfirmationModal
@@ -405,6 +423,17 @@ const ProgramCard = ({
                 modalDesc="Remember to stay hydrated."
                 ariaDesc="Modal for confirming intent to run selected program"
                 ariaLabel="Modal for confirming intent to run selected program"
+                isFormatted={
+                    isLoaded === true
+                        ? formattedProgram.formattedProgram.isFormatted
+                        : 'false'
+                }
+                hasProgramExercises={
+                    programExercises !== undefined &&
+                    programExercises.length > 0
+                        ? true
+                        : false
+                }
             />
             <StatCardModalDelete
                 openBoolean={stateDeleteModal}
@@ -428,7 +457,11 @@ const ProgramCard = ({
             />
             <WrapperContainer>
                 <MainContainer>
-                    <PlayButton onClick={openRunProgramModal}>
+                    <PlayButton
+                        onClick={
+                            isLoaded === true ? openRunProgramModal : undefined
+                        }
+                    >
                         <PlayIcon />
                     </PlayButton>
                     <HeaderContainer>
@@ -473,4 +506,18 @@ const ProgramCard = ({
     );
 };
 
-export default ProgramCard;
+const mapStateToProps = (state) => {
+    return {
+        formattedProgram: state.formattedProgram,
+    };
+};
+
+export default connect(mapStateToProps, { getUserFormattedProgram })(
+    ProgramCard
+);
+
+/*
+    Current BUgs:
+    1. Add a new program, add a couple of exercises --> modal allows start without format (sometimes???)
+    2. Configure a blueprint, press back fast, and modal doesn't allow... I think its cause it's still loading. Maybe make the modal look at the state slice???
+*/
