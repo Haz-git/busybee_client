@@ -6,6 +6,8 @@ import { getUserFormattedProgram } from '../../../redux/userFormattedPrograms/fo
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
 import RunCards from '../runProgramDashboard/RunCards';
+import FinishModal from './FinishModal';
+import historyObject from '../../../components/historyObject';
 
 //Styles:
 import styled from 'styled-components';
@@ -186,31 +188,51 @@ const MainRunProgram = ({
         console.log('do something as finisher!');
     };
 
+    //Finish Modal Handler:
+
+    const closeFinishModal = () => {
+        setStatusCompleted(false);
+    };
+
+    const finishSubmit = () => {
+        historyObject.push('/programs');
+    };
+
     return (
-        <MainContainer>
-            <HeaderContainer>
-                <Link to="/programs">
-                    <AbortButton>
-                        <CloseIcon />
-                        <AbortLabel>Abort</AbortLabel>
-                    </AbortButton>
-                </Link>
-                <FlexWrapper>
-                    <MainHeader>{name}</MainHeader>
-                    <ExerciseHeader>
-                        Complete {countProgramExercises()} Exercises
-                    </ExerciseHeader>
-                </FlexWrapper>
-            </HeaderContainer>
-            {isLoaded === true ? (
-                <RunCardContainer>{renderRunCards()}</RunCardContainer>
-            ) : (
-                <LoadingContainer>
-                    <CustomLoadingDots />
-                </LoadingContainer>
-            )}
-            {statusCompleted === true ? <>Congrats~~</> : null}
-        </MainContainer>
+        <>
+            <FinishModal
+                openBoolean={statusCompleted}
+                closeFunction={closeFinishModal}
+                ariaLabel="Modal for program completion"
+                ariaDesc="Modal for program completion"
+                modalHeader="Well Done!"
+                modalDesc={`Congratulations! You've finished the program: ${name}`}
+                buttonSubmitFunction={finishSubmit}
+            />
+            <MainContainer>
+                <HeaderContainer>
+                    <Link to="/programs">
+                        <AbortButton>
+                            <CloseIcon />
+                            <AbortLabel>Abort</AbortLabel>
+                        </AbortButton>
+                    </Link>
+                    <FlexWrapper>
+                        <MainHeader>{name}</MainHeader>
+                        <ExerciseHeader>
+                            Complete {countProgramExercises()} Exercises
+                        </ExerciseHeader>
+                    </FlexWrapper>
+                </HeaderContainer>
+                {isLoaded === true ? (
+                    <RunCardContainer>{renderRunCards()}</RunCardContainer>
+                ) : (
+                    <LoadingContainer>
+                        <CustomLoadingDots />
+                    </LoadingContainer>
+                )}
+            </MainContainer>
+        </>
     );
 };
 
