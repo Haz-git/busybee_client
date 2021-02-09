@@ -4,8 +4,30 @@ import Button from '@material-ui/core/Button';
 
 //Styles:
 import { Running } from '@styled-icons/fa-solid/Running';
-
+import { ArrowLeftCircle } from '@styled-icons/feather/ArrowLeftCircle';
+import { ArrowRightCircle } from '@styled-icons/feather/ArrowRightCircle';
+import { Coffee } from '@styled-icons/fa-solid/Coffee';
 //Icons:
+
+const CoffeeIcon = styled(Coffee)`
+    height: 3em;
+    width: 3em;
+    color: white;
+    margin-right: 1em;
+`;
+
+const ArrowLeft = styled(ArrowLeftCircle)`
+    height: 5.5em;
+    width: 5.5em;
+    color: #fdbc3d;
+`;
+
+const ArrowRight = styled(ArrowRightCircle)`
+    height: 5.5em;
+    width: 5.5em;
+    color: #fdbc3d;
+`;
+
 const ExerciseIcon = styled(Running)`
     height: 3em;
     width: 3em;
@@ -38,7 +60,7 @@ const ExerciseContainer = styled.div`
     padding: 0.7em 0.7em;
     border-top-left-radius: 0.4em;
     border-top-right-radius: 0.4em;
-    width: 95%;
+    width: 100%;
     /* box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px; */
 `;
 
@@ -68,15 +90,19 @@ const RepsContainer = styled.div`
     align-items: center;
     justify-content: space-evenly;
     box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px;
-    background: salmon;
-    width: 95%;
+    background: #080f1a;
+    width: 100%;
+    padding: 3em 1em;
+    border-bottom-left-radius: 0.4em;
+    border-bottom-right-radius: 0.4em;
 `;
 
 const RepsColumnContainer = styled.div`
     display: flex;
     flex-direction: column;
-    align-items: center;
-    margin: 0 1em;
+    /* align-items: baseline; */
+
+    /* margin: 0 1em; */
 `;
 
 const FlexWrapper = styled.div`
@@ -92,22 +118,20 @@ const DetailsContainer = styled.div`
 
 const RepsValue = styled.h3`
     font-family: 'Lato';
-    font-size: 7.5em;
+    font-size: 10em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    margin: -0.175em 0;
+    padding: 0;
 `;
 
 const WeightValue = styled.h3`
     font-family: 'Lato';
-    font-size: 4em;
+    font-size: 3.5em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
-`;
-
-const SetsContainer = styled.div`
-    margin: 0.5em 0;
 `;
 
 const SetsValue = styled.h3`
@@ -115,6 +139,38 @@ const SetsValue = styled.h3`
     font-size: 2.6em;
     font-weight: 900;
     color: #046184;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+`;
+
+const ButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    /* background: salmon; */
+    margin: 1em 0;
+    width: 100%;
+`;
+
+const MoveButton = styled.button`
+    background: #27303f;
+    border: none;
+    border-radius: 50%;
+    padding: 0.7em 0.7em;
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+`;
+
+const PrevExerciseLabel = styled.h4`
+    margin-top: 0.2em;
+    font-size: 1.4em;
+    color: red;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    color: ${({ theme }) => theme.AddMoreLabelC};
+`;
+
+const NextExerciseLabel = styled.h4`
+    margin-top: 0.2em;
+    font-size: 1.4em;
+    color: green;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 `;
 
@@ -140,6 +196,36 @@ const RunCards = ({
     nextExercise,
     prevExercise,
 }) => {
+    const processPrevExercise = () => {
+        if (prevExercise === 'No Previous Exercise') {
+            return 'None';
+        } else if (
+            prevExercise.programExerciseName !== undefined &&
+            prevExercise.programExerciseName !== null
+        ) {
+            return prevExercise.programExerciseName;
+        } else if (
+            prevExercise.restNum !== undefined &&
+            prevExercise.restNum !== null
+        ) {
+            return 'Rest';
+        }
+    };
+
+    const processNextExercise = () => {
+        if (
+            nextExercise.programExerciseName !== undefined &&
+            nextExercise.programExerciseName !== null
+        ) {
+            return nextExercise.programExerciseName;
+        } else if (
+            nextExercise.restNum !== undefined &&
+            nextExercise.restNum !== null
+        ) {
+            return 'Rest';
+        }
+    };
+
     const renderRestOrExercise = () => {
         if (
             restNum !== undefined &&
@@ -149,34 +235,46 @@ const RunCards = ({
             return (
                 //Render for rest between sets
                 <MainContainer>
-                    Rest Period: {restNum}
-                    <div>{restLengthMinutePerSet} Minutes</div>
-                    <div>{restLengthSecondPerSet} Seconds</div>
-                    <div>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={onPrev}
-                        >
-                            Previous
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={onNext}
-                        >
-                            next
-                        </Button>
-                        {isFinal === true ? (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={onFinish}
-                            >
-                                Finish
-                            </Button>
-                        ) : null}
-                    </div>
+                    <CardContainer>
+                        <ExerciseContainer>
+                            <CoffeeIcon />
+                            <ExerciseValue>
+                                Rest Period: {restNum}
+                            </ExerciseValue>
+                        </ExerciseContainer>
+                        <div>{restLengthMinutePerSet} Minutes</div>
+                        <div>{restLengthSecondPerSet} Seconds</div>
+
+                        <ButtonContainer>
+                            <div>
+                                <MoveButton onClick={onPrev}>
+                                    <ArrowLeft />
+                                </MoveButton>
+                                <PrevExerciseLabel>
+                                    {processPrevExercise()}
+                                </PrevExerciseLabel>
+                            </div>
+                            <div>
+                                <MoveButton onClick={onNext}>
+                                    <ArrowRight />
+                                </MoveButton>
+                                <NextExerciseLabel>
+                                    {processNextExercise()}
+                                </NextExerciseLabel>
+                            </div>
+                        </ButtonContainer>
+                        <div>
+                            {isFinal === true ? (
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={onFinish}
+                                >
+                                    Finish
+                                </Button>
+                            ) : null}
+                        </div>
+                    </CardContainer>
                 </MainContainer>
             );
         } else if (restId !== undefined && exerciseId === undefined) {
@@ -243,21 +341,25 @@ const RunCards = ({
                                 </DetailsContainer>
                             </FlexWrapper>
                         </RepsContainer>
+                        <ButtonContainer>
+                            <div>
+                                <MoveButton onClick={onPrev}>
+                                    <ArrowLeft />
+                                </MoveButton>
+                                <PrevExerciseLabel>
+                                    {processPrevExercise()}
+                                </PrevExerciseLabel>
+                            </div>
+                            <div>
+                                <MoveButton onClick={onNext}>
+                                    <ArrowRight />
+                                </MoveButton>
+                                <NextExerciseLabel>
+                                    {processNextExercise()}
+                                </NextExerciseLabel>
+                            </div>
+                        </ButtonContainer>
                         <div>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={onPrev}
-                            >
-                                Previous
-                            </Button>
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={onNext}
-                            >
-                                next
-                            </Button>
                             {isFinal === true ? (
                                 <Button
                                     variant="contained"
