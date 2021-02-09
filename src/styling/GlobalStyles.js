@@ -17,4 +17,18 @@ export const GlobalStyle = createGlobalStyle`
         text-decoration: none;
         color: inherit;
     }
+
+    h1 {
+        margin: 0;
+    }
+
+    h2 {
+        margin: 0;
+    }
+
+    h3 {
+        margin: 0;
+    }
+
+
 `;
