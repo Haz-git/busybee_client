@@ -152,6 +152,16 @@ const MainRunProgram = ({
                     restLengthSecond={item.restLengthSecond}
                     restId={item.restId}
                     isFinal={statusCompleted}
+                    nextExercise={
+                        userProgramSequence[exerciseIterator + 1] !== undefined
+                            ? userProgramSequence[exerciseIterator + 1]
+                            : 'Last Exercise'
+                    }
+                    prevExercise={
+                        userProgramSequence[exerciseIterator - 1] !== undefined
+                            ? userProgramSequence[exerciseIterator - 1]
+                            : 'No Previous Exercise'
+                    }
                 />
             ));
         } else {
