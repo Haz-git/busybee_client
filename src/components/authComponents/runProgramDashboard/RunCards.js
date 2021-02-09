@@ -430,17 +430,6 @@ const RunCards = ({
                                 </NextExerciseLabel>
                             </ButtonDivider>
                         </ButtonContainer>
-                        <div>
-                            {isFinal === true ? (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={onFinish}
-                                >
-                                    Finish
-                                </Button>
-                            ) : null}
-                        </div>
                     </CardContainer>
                 </MainContainer>
             );
@@ -480,17 +469,6 @@ const RunCards = ({
                                 </NextExerciseLabel>
                             </ButtonDivider>
                         </ButtonContainer>
-                        <div>
-                            {isFinal === true ? (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={onFinish}
-                                >
-                                    Finish
-                                </Button>
-                            ) : null}
-                        </div>
                     </CardContainer>
                 </MainContainer>
             );
@@ -539,17 +517,6 @@ const RunCards = ({
                                 </NextExerciseLabel>
                             </ButtonDivider>
                         </ButtonContainer>
-                        <div>
-                            {isFinal === true ? (
-                                <Button
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={onFinish}
-                                >
-                                    Finish
-                                </Button>
-                            ) : null}
-                        </div>
                     </CardContainer>
                 </MainContainer>
             );
