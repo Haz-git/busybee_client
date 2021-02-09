@@ -24,20 +24,20 @@ const PlayIcon = styled(PlayCircle)`
 `;
 
 const CalendarIcon = styled(Calendar)`
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.8em;
+    width: 1.8em;
     color: ${({ theme }) => theme.ProgramIcon};
 `;
 
 const NumberIcon = styled(Numbers)`
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.8em;
+    width: 1.8em;
     color: ${({ theme }) => theme.ProgramIcon};
 `;
 
 const AlarmIcon = styled(Alarm)`
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.8em;
+    width: 1.8em;
     color: ${({ theme }) => theme.ProgramIcon};
 
     //Filter for gold, kept for reference:
@@ -410,8 +410,6 @@ const ProgramCard = ({
 
         return `${totalMinutes}m ${totalSeconds}s`;
     };
-
-    console.log(programExercises);
 
     return (
         <>
