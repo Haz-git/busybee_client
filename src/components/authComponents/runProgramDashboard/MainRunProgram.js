@@ -202,7 +202,7 @@ const MainRunProgram = ({
                     </ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
-            {userProgramSequence !== null ? (
+            {isLoaded === true ? (
                 <RunCardContainer>{renderRunCards()}</RunCardContainer>
             ) : (
                 <LoadingContainer>
