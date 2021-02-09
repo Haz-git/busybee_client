@@ -126,12 +126,7 @@ const MainRunProgram = ({
         }
     };
 
-    if (userProgramSequence !== undefined && userProgramSequence !== null) {
-        console.log(userProgramSequence);
-    }
-
     const renderRunCards = () => {
-        console.log(exerciseIterator);
         if (userProgramSequence !== null && exerciseIterator !== null) {
             const firstExercise = [userProgramSequence[exerciseIterator]];
             return firstExercise.map((item) => (
