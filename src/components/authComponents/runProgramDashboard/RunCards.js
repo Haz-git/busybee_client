@@ -143,6 +143,16 @@ const DetailsContainer = styled.div`
     text-align: center;
 `;
 
+const RepsValueReduced = styled.h3`
+    font-family: 'Lato';
+    font-size: 4.5em;
+    font-weight: 900;
+    color: #046184;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    margin: -0.175em 0;
+    padding: 0;
+`;
+
 const RepsValue = styled.h3`
     font-family: 'Lato';
     font-size: 10em;
@@ -172,9 +182,13 @@ const SetsValue = styled.h3`
 const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
     /* background: salmon; */
     margin: 1em 0;
+    width: 100%;
+`;
+
+const ButtonDivider = styled.div`
     width: 100%;
 `;
 
@@ -276,8 +290,6 @@ const RunCards = ({
         setRenderEndRest(false);
     }, [exerciseId]);
 
-    console.log(nextExercise);
-
     //State for timer completion render:
     const [renderEndRest, setRenderEndRest] = useState(false);
 
@@ -324,8 +336,6 @@ const RunCards = ({
         const seconds = parseInt(restLengthSecondPerSet);
         totalSeconds = secondsFromMinutes + seconds;
 
-        console.log(totalSeconds);
-
         return totalSeconds * 1000;
     };
 
@@ -337,8 +347,6 @@ const RunCards = ({
         const secondsFromMinutes = parseInt(restLengthMinute) * 60;
         const seconds = parseInt(restLengthSecond);
         totalSeconds = secondsFromMinutes + seconds;
-
-        console.log(totalSeconds);
 
         return totalSeconds * 1000;
     };
@@ -369,6 +377,16 @@ const RunCards = ({
         }
     };
 
+    //Calculates the length of reps --> If the reps exceed double digits, then we change the rendering of the reps container to accomodate font-size:
+
+    const calculateRepsLength = () => {
+        if (reps.length >= 2) {
+            return <RepsValueReduced>{reps}</RepsValueReduced>;
+        } else {
+            return <RepsValue>{reps}</RepsValue>;
+        }
+    };
+
     const renderRestOrExercise = () => {
         if (
             restNum !== undefined &&
@@ -395,22 +413,22 @@ const RunCards = ({
                             {renderTimerCompleteLabel()}
                         </TimerContainer>
                         <ButtonContainer>
-                            <div>
+                            <ButtonDivider>
                                 <MoveButton onClick={onPrev}>
                                     <ArrowLeft />
                                 </MoveButton>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
-                            </div>
-                            <div>
+                            </ButtonDivider>
+                            <ButtonDivider>
                                 <MoveButton onClick={onNext}>
                                     <ArrowRight />
                                 </MoveButton>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
-                            </div>
+                            </ButtonDivider>
                         </ButtonContainer>
                         <div>
                             {isFinal === true ? (
@@ -445,22 +463,22 @@ const RunCards = ({
                             {renderTimerCompleteLabel()}
                         </TimerContainer>
                         <ButtonContainer>
-                            <div>
+                            <ButtonDivider>
                                 <MoveButton onClick={onPrev}>
                                     <ArrowLeft />
                                 </MoveButton>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
-                            </div>
-                            <div>
+                            </ButtonDivider>
+                            <ButtonDivider>
                                 <MoveButton onClick={onNext}>
                                     <ArrowRight />
                                 </MoveButton>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
-                            </div>
+                            </ButtonDivider>
                         </ButtonContainer>
                         <div>
                             {isFinal === true ? (
@@ -487,7 +505,7 @@ const RunCards = ({
                         </ExerciseContainer>
                         <RepsContainer>
                             <RepsColumnContainer>
-                                <RepsValue>{reps}</RepsValue>
+                                {calculateRepsLength()}
                                 <ItemLabel>Reps</ItemLabel>
                             </RepsColumnContainer>
                             <FlexWrapper>
@@ -504,22 +522,22 @@ const RunCards = ({
                             </FlexWrapper>
                         </RepsContainer>
                         <ButtonContainer>
-                            <div>
+                            <ButtonDivider>
                                 <MoveButton onClick={onPrev}>
                                     <ArrowLeft />
                                 </MoveButton>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
-                            </div>
-                            <div>
+                            </ButtonDivider>
+                            <ButtonDivider>
                                 <MoveButton onClick={onNext}>
                                     <ArrowRight />
                                 </MoveButton>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
-                            </div>
+                            </ButtonDivider>
                         </ButtonContainer>
                         <div>
                             {isFinal === true ? (
