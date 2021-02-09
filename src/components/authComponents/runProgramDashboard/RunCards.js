@@ -1,6 +1,8 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
+import { keyframes } from 'styled-components';
 import Button from '@material-ui/core/Button';
+import Countdown from 'react-countdown';
 
 //Styles:
 import { Running } from '@styled-icons/fa-solid/Running';
@@ -8,6 +10,16 @@ import { ArrowLeftCircle } from '@styled-icons/feather/ArrowLeftCircle';
 import { ArrowRightCircle } from '@styled-icons/feather/ArrowRightCircle';
 import { Coffee } from '@styled-icons/fa-solid/Coffee';
 //Icons:
+
+const fadeIn = keyframes`
+    from {
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+`;
 
 const CoffeeIcon = styled(Coffee)`
     height: 3em;
@@ -97,6 +109,19 @@ const RepsContainer = styled.div`
     border-bottom-right-radius: 0.4em;
 `;
 
+const TimerContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-evenly;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px;
+    background: #080f1a;
+    width: 100%;
+    padding: 3em 1em;
+    border-bottom-left-radius: 0.4em;
+    border-bottom-right-radius: 0.4em;
+`;
+
 const RepsColumnContainer = styled.div`
     display: flex;
     flex-direction: column;
@@ -157,6 +182,23 @@ const MoveButton = styled.button`
     border-radius: 50%;
     padding: 0.7em 0.7em;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+
+    &:hover {
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const StyledCountdown = styled(Countdown)`
+    color: white;
+    font-family: 'Lato';
+    font-size: 3em;
+    font-weight: 900;
+    color: #046184;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 `;
 
 const PrevExerciseLabel = styled.h4`
@@ -172,6 +214,25 @@ const NextExerciseLabel = styled.h4`
     font-size: 1.4em;
     color: green;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+`;
+
+const EndRestLabel = styled.p`
+    margin-top: 0.4em;
+    color: red;
+    font-size: 1.2em;
+    font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    opacity: 1;
+    animation: ${fadeIn} 0.5s ease;
+`;
+
+const EndRestLabelInvis = styled.p`
+    margin-top: 0.4em;
+    color: red;
+    font-size: 1.2em;
+    font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    opacity: 0;
 `;
 
 //Render:
@@ -196,6 +257,16 @@ const RunCards = ({
     nextExercise,
     prevExercise,
 }) => {
+    useEffect(() => {
+        //Since it appears that renderEndRest's state is conserved because the entire program sequence is mounted, we have to refresh the timer after every next button. In no way is this efficient, but it is progress. The ExerciseID should never be exactly the same, and so we can count on this value changing and causeing the useEffect hook to trigger a reset to the renderEndRest state..
+        setRenderEndRest(false);
+    }, [exerciseId]);
+
+    //State for timer completion render:
+    const [renderEndRest, setRenderEndRest] = useState(false);
+
+    //Utility functions:
+
     const processPrevExercise = () => {
         if (prevExercise === 'No Previous Exercise') {
             return 'None';
@@ -226,6 +297,46 @@ const RunCards = ({
         }
     };
 
+    //Processes required time in seconds for react-countdown:
+
+    const processTime = () => {
+        let totalSeconds;
+
+        const secondsFromMinutes = parseInt(restLengthMinutePerSet) * 60;
+        const seconds = parseInt(restLengthSecondPerSet);
+        totalSeconds = secondsFromMinutes + seconds;
+
+        console.log(totalSeconds);
+
+        return totalSeconds * 1000;
+    };
+
+    //Completion render function when timer is finished.
+
+    const onTimerCompletion = () => {
+        setRenderEndRest(true);
+    };
+
+    //Renders the error label on timer end:
+
+    const renderTimerCompleteLabel = () => {
+        if (renderEndRest === false) {
+            return (
+                <EndRestLabelInvis>
+                    Your rest period has ended. Please move on to the next
+                    exercise.
+                </EndRestLabelInvis>
+            );
+        } else if (renderEndRest === true) {
+            return (
+                <EndRestLabel>
+                    Your rest period has ended. Please move on to the next
+                    exercise.
+                </EndRestLabel>
+            );
+        }
+    };
+
     const renderRestOrExercise = () => {
         if (
             restNum !== undefined &&
@@ -242,9 +353,14 @@ const RunCards = ({
                                 Rest Period: {restNum}
                             </ExerciseValue>
                         </ExerciseContainer>
-                        <div>{restLengthMinutePerSet} Minutes</div>
-                        <div>{restLengthSecondPerSet} Seconds</div>
-
+                        <TimerContainer>
+                            <StyledCountdown
+                                precision={0}
+                                date={Date.now() + 2000}
+                                onComplete={onTimerCompletion}
+                            />
+                            {renderTimerCompleteLabel()}
+                        </TimerContainer>
                         <ButtonContainer>
                             <div>
                                 <MoveButton onClick={onPrev}>
