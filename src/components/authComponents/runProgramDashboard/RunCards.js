@@ -107,6 +107,7 @@ const RepsContainer = styled.div`
     padding: 3em 1em;
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
+    height: 16em;
 `;
 
 const TimerContainer = styled.div`
@@ -120,6 +121,7 @@ const TimerContainer = styled.div`
     padding: 3em 1em;
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
+    height: 16em;
 `;
 
 const RepsColumnContainer = styled.div`
@@ -195,7 +197,7 @@ const MoveButton = styled.button`
 const StyledCountdown = styled(Countdown)`
     color: white;
     font-family: 'Lato';
-    font-size: 3em;
+    font-size: 3.5em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
@@ -203,17 +205,29 @@ const StyledCountdown = styled(Countdown)`
 
 const PrevExerciseLabel = styled.h4`
     margin-top: 0.2em;
-    font-size: 1.4em;
+    font-weight: 900;
+    font-size: 1.1em;
     color: red;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
     color: ${({ theme }) => theme.AddMoreLabelC};
+    white-space: nowrap;
 `;
 
 const NextExerciseLabel = styled.h4`
     margin-top: 0.2em;
-    font-size: 1.4em;
+    font-weight: 900;
+    font-size: 1.1em;
     color: green;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    white-space: nowrap;
+`;
+
+const BreakLabel = styled.p`
+    color: white;
+    font-family: 'Lato';
+    font-size: 1.4em;
+    font-weight: 900;
+    margin-bottom: 0.5em;
 `;
 
 const EndRestLabel = styled.p`
@@ -262,6 +276,8 @@ const RunCards = ({
         setRenderEndRest(false);
     }, [exerciseId]);
 
+    console.log(nextExercise);
+
     //State for timer completion render:
     const [renderEndRest, setRenderEndRest] = useState(false);
 
@@ -294,6 +310,8 @@ const RunCards = ({
             nextExercise.restNum !== null
         ) {
             return 'Rest';
+        } else if (nextExercise === 'Last Exercise') {
+            return 'Finish!';
         }
     };
 
@@ -304,6 +322,20 @@ const RunCards = ({
 
         const secondsFromMinutes = parseInt(restLengthMinutePerSet) * 60;
         const seconds = parseInt(restLengthSecondPerSet);
+        totalSeconds = secondsFromMinutes + seconds;
+
+        console.log(totalSeconds);
+
+        return totalSeconds * 1000;
+    };
+
+    //Processes time for longer rest periods for react-countdown:
+
+    const processTimeRestPeriod = () => {
+        let totalSeconds;
+
+        const secondsFromMinutes = parseInt(restLengthMinute) * 60;
+        const seconds = parseInt(restLengthSecond);
         totalSeconds = secondsFromMinutes + seconds;
 
         console.log(totalSeconds);
@@ -350,13 +382,14 @@ const RunCards = ({
                         <ExerciseContainer>
                             <CoffeeIcon />
                             <ExerciseValue>
-                                Rest Period: {restNum}
+                                Rest Period - {restNum}
                             </ExerciseValue>
                         </ExerciseContainer>
                         <TimerContainer>
+                            <BreakLabel>Remember to stretch!</BreakLabel>
                             <StyledCountdown
                                 precision={0}
-                                date={Date.now() + 2000}
+                                date={Date.now() + processTime()}
                                 onComplete={onTimerCompletion}
                             />
                             {renderTimerCompleteLabel()}
@@ -397,37 +430,50 @@ const RunCards = ({
             return (
                 //Render for rest period (larger)
                 <MainContainer>
-                    <ExerciseContainer>
-                        <ItemLabel>Current Exercise</ItemLabel>
-                        <ExerciseValue>{exerciseName}</ExerciseValue>
-                    </ExerciseContainer>
-                    <div>{restLengthMinute} Minutes</div>
-                    <div>{restLengthSecond} Seconds</div>
-                    <div>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={onPrev}
-                        >
-                            Previous
-                        </Button>
-                        <Button
-                            variant="contained"
-                            color="primary"
-                            onClick={onNext}
-                        >
-                            next
-                        </Button>
-                        {isFinal === true ? (
-                            <Button
-                                variant="contained"
-                                color="primary"
-                                onClick={onFinish}
-                            >
-                                Finish
-                            </Button>
-                        ) : null}
-                    </div>
+                    <CardContainer>
+                        <ExerciseContainer>
+                            <CoffeeIcon />
+                            <ExerciseValue>{exerciseName}</ExerciseValue>
+                        </ExerciseContainer>
+                        <TimerContainer>
+                            <BreakLabel>Take a stroll !</BreakLabel>
+                            <StyledCountdown
+                                precision={0}
+                                date={Date.now() + processTimeRestPeriod()}
+                                onComplete={onTimerCompletion}
+                            />
+                            {renderTimerCompleteLabel()}
+                        </TimerContainer>
+                        <ButtonContainer>
+                            <div>
+                                <MoveButton onClick={onPrev}>
+                                    <ArrowLeft />
+                                </MoveButton>
+                                <PrevExerciseLabel>
+                                    {processPrevExercise()}
+                                </PrevExerciseLabel>
+                            </div>
+                            <div>
+                                <MoveButton onClick={onNext}>
+                                    <ArrowRight />
+                                </MoveButton>
+                                <NextExerciseLabel>
+                                    {processNextExercise()}
+                                </NextExerciseLabel>
+                            </div>
+                        </ButtonContainer>
+                        <div>
+                            {isFinal === true ? (
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={onFinish}
+                                >
+                                    Finish
+                                </Button>
+                            ) : null}
+                        </div>
+                    </CardContainer>
                 </MainContainer>
             );
         } else {
