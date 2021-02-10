@@ -213,9 +213,10 @@ const BlueprintLayoutSelectionPage = ({
         let userBlueprintArray = userBlueprint;
         console.log('Initial Array: ', userBlueprintArray);
         //Break apart the target value: We know the orderId will always be in index 0.
+        const userSelectionTargetValues = e.target.value.split(' ');
 
-        let selectId = e.target.value[0]; //Id of select
-        let selectedExerciseId = e.target.value.slice(1); //programExerciseId of the selected value
+        let selectId = userSelectionTargetValues[0]; //Id of select
+        let selectedExerciseId = userSelectionTargetValues[1]; //programExerciseId of the selected value
 
         //We'll find the exercise details within 'programExercises' and append it to the new object.
 
@@ -268,7 +269,9 @@ const BlueprintLayoutSelectionPage = ({
 
     const sortUserBlueprint = () => {
         //Sorts objects based on orderId.
-        return userBlueprint.sort((a, b) => (a.orderId > b.orderId ? 1 : -1));
+        return userBlueprint.sort((a, b) =>
+            parseInt(a.orderId) > parseInt(b.orderId) ? 1 : -1
+        );
     };
 
     const renderSelectorValues = () => {
@@ -385,11 +388,6 @@ const BlueprintLayoutSelectionPage = ({
                     </ProgramCounterLabel>
                 </ProgramCounterContainer>
                 <LabelContainer>{renderFormattedBefore()}</LabelContainer>
-                {/* <LabelContainer>
-                    <InfoLabel>
-                        **Exercise 1 will begin first when program is ran!**
-                    </InfoLabel>
-                </LabelContainer> */}
                 <SelectorContainer>
                     {isLoaded === true ? (
                         renderSelectorValues()
