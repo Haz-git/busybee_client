@@ -1,22 +1,37 @@
 import React from 'react';
+import CustomNumberField from '../../dashboardComponents/CustomNumberField';
+import SetConfig from './SetConfig';
 
 //Styles:
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 
+const carouselMovement = keyframes`
+    from {
+        opacity: 0;
+        transform: translate(2%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0,0);
+    }
+`;
+
+const MainContainer = styled.div`
+    animation: ${carouselMovement} 0.3s linear;
+`;
 const TitleHeader = styled.h1`
     color: white;
+    font-size: 1em;
 `;
 
 const PyramidSecondStep = ({ currentStep }) => {
     return (
         <>
             {currentStep !== 2 ? null : (
-                <TitleHeader>
-                    This is the pyramid's second step. After filling out # of
-                    sets and what exercise in the first form, this should
-                    dynamically render selectors for reps and weight for each
-                    set (as well as selector for lbs or kg)
-                </TitleHeader>
+                <MainContainer>
+                    <SetConfig />
+                </MainContainer>
             )}
         </>
     );
