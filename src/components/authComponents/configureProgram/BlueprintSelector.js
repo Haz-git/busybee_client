@@ -6,13 +6,15 @@ import styled from 'styled-components';
 const MainContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-contents: center;
+    justify-content: center;
     margin: 0.3em 0;
 `;
 
 const NumberLabelContainer = styled.div`
+    position: relative;
     margin-right: 0.5em;
-    padding: 0.5em 0.95em;
+    height: 2.5em;
+    width: 3em;
     background-color: #111a28;
     border: 1px solid #fdbc3d;
     border-radius: 50%;
@@ -20,7 +22,11 @@ const NumberLabelContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
 `;
 
-const NumberLabel = styled.label`
+const NumberLabel = styled.h4`
+    position: relative;
+    top: 50%;
+    transform: translateY(-50%);
+    margin: 0;
     font-size: 1.1em;
     color: #fdbc3d;
     font-weight: 900;
@@ -79,10 +85,13 @@ const BlueprintSelector = ({
                         <StyledOption
                             value={
                                 numId +
+                                ` ` +
                                 `${option.programExerciseId || option.restId}`
                             }
                         >
-                            {option.programExerciseName}
+                            {option.programExerciseId !== undefined
+                                ? `${option.programExerciseName}, ${option.weight} lbs, ${option.reps} reps, ${option.sets} sets`
+                                : option.programExerciseName}
                             {option.restLengthMinute &&
                             option.restLengthSecond !== undefined
                                 ? ` (${option.restLengthMinute}m ${option.restLengthSecond}s)`
