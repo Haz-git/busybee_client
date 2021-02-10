@@ -353,7 +353,9 @@ const ExerciseSelectorPage = ({
                         buttonLabel="Add a Pyramid Set"
                         icon={<PyramidIcon />}
                         clickFunction={() =>
-                            console.log('feature not implemented yet')
+                            history.push(
+                                `/programs/configure/select/pyramid/${name}/${id}`
+                            )
                         }
                     />
                 </OptionsContainer>
