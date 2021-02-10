@@ -26,6 +26,7 @@ import ConfigureMain from './authComponents/configureProgram/ConfigureMain';
 import ExerciseSelectorPage from './authComponents/configureProgram/ExerciseSelectorPage';
 import BlueprintLayoutSelectionPage from './authComponents/configureProgram/BlueprintLayoutSelectionPage';
 import MainRunProgram from './authComponents/runProgramDashboard/MainRunProgram';
+import PyramidMain from './authComponents/configureProgram/pyramidSetForm/PyramidMain';
 
 //Render
 
@@ -103,6 +104,11 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/programs/configure/blueprint/:name/:id"
                                     component={BlueprintLayoutSelectionPage}
+                                />
+                                <Route
+                                    exact
+                                    path="/programs/configure/select/pyramid/:name/:id"
+                                    component={PyramidMain}
                                 />
                                 <Route
                                     exact
