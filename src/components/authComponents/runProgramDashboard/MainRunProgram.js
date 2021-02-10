@@ -8,6 +8,7 @@ import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
 import RunCards from '../runProgramDashboard/RunCards';
 import FinishModal from './FinishModal';
 import historyObject from '../../../components/historyObject';
+import { v4 as uuid } from 'uuid';
 
 //Styles:
 import styled from 'styled-components';
@@ -133,6 +134,7 @@ const MainRunProgram = ({
             const firstExercise = [userProgramSequence[exerciseIterator]];
             return firstExercise.map((item) => (
                 <RunCards
+                    key={uuid()}
                     exerciseName={item.programExerciseName}
                     exerciseId={item.programExerciseId}
                     reps={item.reps}
@@ -141,7 +143,6 @@ const MainRunProgram = ({
                     weight={item.weight}
                     onNext={nextHandler}
                     onPrev={prevHandler}
-                    onFinish={finishHandler}
                     restLengthMinutePerSet={item.restLengthMinutePerSet}
                     restLengthSecondPerSet={item.restLengthSecondPerSet}
                     restNum={item.restNum}
@@ -182,10 +183,6 @@ const MainRunProgram = ({
         } else {
             setExerciseIterator(0);
         }
-    };
-
-    const finishHandler = () => {
-        console.log('do something as finisher!');
     };
 
     //Finish Modal Handler:
