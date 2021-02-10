@@ -38,7 +38,7 @@ const StyledOption = styled.option``;
 
 const CustomSelector = ({ changeFunc, optionsList, optionsDefaultValue }) => {
     const renderSelector = () => {
-        if (optionsList === null || optionsList === undefined) {
+        if (optionsList === undefined || optionsList === null) {
             return (
                 <StyledSelector onChange={changeFunc}>
                     <StyledOption value="Lbs">Lbs</StyledOption>
