@@ -20,6 +20,7 @@ import styled from 'styled-components';
 import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
 import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
 import { Columns } from '@styled-icons/boxicons-regular/Columns';
+import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -56,6 +57,12 @@ const CustomSnackBar = withStyles(() => ({
 }))(Snackbar);
 
 //Icons:
+const PyramidIcon = styled(Pyramid)`
+    height: 4em;
+    width: 4em;
+    color: #fdbc3d;
+`;
+
 const NewIcon = styled(NewReleases)`
     height: 4em;
     width: 4em;
@@ -341,6 +348,13 @@ const ExerciseSelectorPage = ({
                         buttonLabel="Use a Main Lift"
                         icon={<MainLiftIcon />}
                         clickFunction={openMainLiftModal}
+                    />
+                    <AddExerciseOptionButton
+                        buttonLabel="Add a Pyramid Set"
+                        icon={<PyramidIcon />}
+                        clickFunction={() =>
+                            console.log('feature not implemented yet')
+                        }
                     />
                 </OptionsContainer>
             </MainContainer>
