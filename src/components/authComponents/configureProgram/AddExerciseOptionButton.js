@@ -28,10 +28,10 @@ const CustomExerciseSelector = styled.button`
     border: none;
     cursor: pointer;
     /* background: #111a28; */
-    background: rgba(17, 26, 40, 1);
+    background: #1a222f;
     border-radius: 0.7em;
-    -webkit-box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
-    box-shadow: rgba(0, 0, 0, 0.9) 0px 3px 8px;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 3px 12px;
+    box-shadow: rgba(0, 0, 0, 0.6) 0px 3px 12px;
 
     &:hover {
         background: #1c2330;
