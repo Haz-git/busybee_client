@@ -11,6 +11,18 @@ import { ArrowRightCircle } from '@styled-icons/feather/ArrowRightCircle';
 import { Coffee } from '@styled-icons/fa-solid/Coffee';
 //Icons:
 
+const carouselMovement = keyframes`
+    from {
+        opacity: 0;
+        transform: translate(20%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(0,0);
+    }
+`;
+
 const fadeIn = keyframes`
     from {
         opacity: 0;
@@ -29,14 +41,14 @@ const CoffeeIcon = styled(Coffee)`
 `;
 
 const ArrowLeft = styled(ArrowLeftCircle)`
-    height: 5.5em;
-    width: 5.5em;
+    height: 4.5em;
+    width: 4.5em;
     color: #fdbc3d;
 `;
 
 const ArrowRight = styled(ArrowRightCircle)`
-    height: 5.5em;
-    width: 5.5em;
+    height: 4.5em;
+    width: 4.5em;
     color: #fdbc3d;
 `;
 
@@ -61,7 +73,7 @@ const CardContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 1em 1em;
+    padding: 0em 1em;
 `;
 
 const ExerciseContainer = styled.div`
@@ -74,6 +86,7 @@ const ExerciseContainer = styled.div`
     border-top-right-radius: 0.4em;
     width: 100%;
     /* box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px; */
+    animation: ${carouselMovement} 0.7s ease-in-out;
 `;
 
 const ItemLabel = styled.h3`
@@ -108,6 +121,7 @@ const RepsContainer = styled.div`
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
     height: 16em;
+    animation: ${carouselMovement} 0.7s ease-in-out;
 `;
 
 const TimerContainer = styled.div`
@@ -122,6 +136,7 @@ const TimerContainer = styled.div`
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
     height: 16em;
+    animation: ${carouselMovement} 0.7s ease-in-out;
 `;
 
 const RepsColumnContainer = styled.div`
@@ -182,21 +197,21 @@ const SetsValue = styled.h3`
 const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-between;
     /* background: salmon; */
     margin: 1em 0;
     width: 100%;
 `;
 
 const ButtonDivider = styled.div`
-    width: 100%;
+    /* width: 100%; */
 `;
 
 const MoveButton = styled.button`
     background: #27303f;
     border: none;
-    border-radius: 50%;
-    padding: 0.7em 0.7em;
+    border-radius: 0.4em;
+    padding: 0.7em 3.5em;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 
     &:hover {
@@ -281,7 +296,6 @@ const RunCards = ({
     restLengthSecond,
     isFinal,
     onPrev,
-    onFinish,
     nextExercise,
     prevExercise,
 }) => {
@@ -380,7 +394,7 @@ const RunCards = ({
     //Calculates the length of reps --> If the reps exceed double digits, then we change the rendering of the reps container to accomodate font-size:
 
     const calculateRepsLength = () => {
-        if (reps.length >= 2) {
+        if (reps.length > 2) {
             return <RepsValueReduced>{reps}</RepsValueReduced>;
         } else {
             return <RepsValue>{reps}</RepsValue>;
