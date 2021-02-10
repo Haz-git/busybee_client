@@ -210,7 +210,7 @@ const ButtonDivider = styled.div`
 const MoveButton = styled.button`
     background: #27303f;
     border: none;
-    border-radius: 0.4em;
+    border-radius: 1em;
     padding: 0.7em 3.5em;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 
