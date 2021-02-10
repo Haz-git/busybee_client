@@ -36,24 +36,32 @@ const InputContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 0 1em;
+    width: 100%;
 `;
 
 const InputDivider = styled.div`
-    margin: 0.6em 0;
+    margin: 0.3em 0;
+    width: 100%;
 `;
 
 const TitleInput = styled.input`
     margin: 0 auto;
     /* margin: 0.5em 0.5em; */
-    border: 1px solid white;
+    border: none;
     border-radius: 0.3em;
     background-color: inherit;
     color: white;
     padding: 0.5em 1em;
     width: 100%;
+    max-width: 100%;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 900;
     font-size: 1em;
+    background-color: #111a28;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
+    --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
 
     &:hover {
         outline: none;
@@ -72,16 +80,23 @@ const DescLabel = styled.label``;
 
 const DescInput = styled.textarea`
     margin: 0 auto;
-    border: 1px solid white;
+    border: none;
     border-radius: 0.3em;
     background-color: inherit;
     color: white;
-    padding: 0.5em 1em;
     width: 100%;
+    max-width: 100%;
+    padding: 0.5em 1em;
     height: 10em;
     font-family: 'Nunito', sans-serif, helvetica;
     font-weight: 300;
     font-size: 1em;
+    background-color: #111a28;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
+    resize: none;
+    --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
 
     &:hover {
         outline: none;
@@ -97,6 +112,7 @@ const DescInput = styled.textarea`
 `;
 
 const ButtonContainer = styled.div`
+    margin-top: 0.5em;
     display: flex;
     flex-direction: row;
     align-items: center;
