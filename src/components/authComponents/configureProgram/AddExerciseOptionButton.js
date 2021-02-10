@@ -48,7 +48,9 @@ const AddExerciseOptionButton = ({ buttonLabel, icon, clickFunction }) => {
         <>
             <CustomExerciseSelector onClick={clickFunction}>
                 {icon}
-                <ButtonLabel>{buttonLabel}</ButtonLabel>
+                <div>
+                    <ButtonLabel>{buttonLabel}</ButtonLabel>
+                </div>
             </CustomExerciseSelector>
         </>
     );
