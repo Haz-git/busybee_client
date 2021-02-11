@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import SetConfig from './SetConfig';
 import { v4 as uuid } from 'uuid';
 
@@ -32,6 +32,14 @@ const PyramidSecondStep = ({
     programId,
 }) => {
     const [setObjectsArray, setSetObjectsArray] = useState([]);
+
+    useEffect(() => {
+        //Issue: it turns out when the user changes his/her mind on how many sets a pyramid will be, YES it will render the accurate number of SetConfigs, but the previously added objects into setObjectArray will not be deleted!
+
+        //Therefore, we will utilize useEffect to check on 'valueSet' and if valueSet changes, we will reset the setObjectsArray state to default.
+
+        setSetObjectsArray([]);
+    }, [valueSet]);
     /*
         valueSet will be used to determine the number of SetConfigs to render:
 
