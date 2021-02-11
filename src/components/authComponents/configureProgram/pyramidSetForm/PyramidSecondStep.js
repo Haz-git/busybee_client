@@ -45,8 +45,8 @@ const PyramidSecondStep = ({
         }
     */
 
-    const sortUserPyramidArray = () => {
-        return setPyramidArray.sort((a, b) =>
+    const sortSetObjectsArray = () => {
+        return setObjectsArray.sort((a, b) =>
             parseInt(a.setId) > parseInt(b.setId) ? 1 : -1
         );
     };
