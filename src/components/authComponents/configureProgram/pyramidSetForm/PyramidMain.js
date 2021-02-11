@@ -59,10 +59,6 @@ const PyramidMain = ({
     const [exercise, setExercise] = useState('');
     const [sets, setSets] = useState('');
 
-    //SecondStep Handler:
-    const [weight, setWeight] = useState('');
-    const [reps, setReps] = useState('');
-
     //Submission Array handler:
     const [pyramidArray, setPyramidArray] = useState([]);
 
@@ -82,23 +78,6 @@ const PyramidMain = ({
     */
 
     //Pyramid Sorting Function:
-
-    const sortUserPyramidArray = () => {
-        return setPyramidArray.sort((a, b) =>
-            parseInt(a.setId) > parseInt(b.setId) ? 1 : -1
-        );
-    };
-
-    //User Input PyramidSecondStep Handlers:
-    //Here, create an algorithm to track user's inputs for each weight and rep. Should have the 'setId value', and so we can split() accordingly to obtain the values.
-
-    const handleUserWeightInput = (e) => {
-        setWeight(e.target.value);
-    };
-
-    const handleUserRepsInput = (e) => {
-        setReps(e.target.value);
-    };
 
     //User Input PyramidFirstStep Handlers:
 
@@ -130,8 +109,7 @@ const PyramidMain = ({
     //Render Buttons:
 
     const renderNextButton = () => {
-        // if (currentStep === 1 && exercise.trim() !== '' && sets.trim() !== '') {
-        if (currentStep === 1) {
+        if (currentStep === 1 && exercise.trim() !== '' && sets.trim() !== '') {
             return (
                 <Button
                     variant="contained"
@@ -187,8 +165,8 @@ const PyramidMain = ({
                     <PyramidSecondStep
                         currentStep={currentStep}
                         valueSet={sets}
-                        weightHandler={handleUserWeightInput}
-                        repHandler={handleUserRepsInput}
+                        valueExercise={exercise}
+                        programId={id}
                     />
                 </form>
             </FormContainer>
