@@ -15,8 +15,15 @@ import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
+import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
 
 //Icons:
+
+const PyramidIcon = styled(Pyramid)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+`;
 
 const EditIcon = styled(EditOutline)`
     height: 1.5em;
@@ -141,6 +148,29 @@ const ButtonContainer = styled.div`
     display: flex;
 `;
 
+const ObjectArrayContainer = styled.div`
+    display: block;
+`;
+
+const ObjectArrayItem = styled.div`
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    margin: 0.1em 0;
+`;
+
+const ObjectArrayText = styled.h3`
+    padding: 0.2em 0.2em;
+    color: white;
+    font-size: 1.025em;
+`;
+
+const PyramidIconDiv = styled.div`
+    right: 0.5em;
+    top: 0.6em;
+    position: absolute;
+    display: flex;
+`;
+
 //Render:
 
 const ProgramExerciseCard = ({
@@ -162,6 +192,7 @@ const ProgramExerciseCard = ({
     restMinutesPerSet,
     restSecondsPerSet,
     restNum,
+    setObjectsArray,
 }) => {
     const [stateRestTimeSelectModal, setStateRestTimeSelectModal] = useState(
         false
@@ -228,6 +259,25 @@ const ProgramExerciseCard = ({
         addNewRestPeriodBetweenSets(programId, exerciseId, userMin, userSec);
     };
 
+    //Render Set Object Array if the exercise is a Pyramid Set:
+
+    const renderSetObjectArrayDetails = () => {
+        if (setObjectsArray !== undefined && setObjectsArray.length !== 0) {
+            return setObjectsArray.map((set) => (
+                <ObjectArrayItem>
+                    <ObjectArrayText>Set: {set.setId}</ObjectArrayText>
+                    <ObjectArrayText>Reps: {set.reps}</ObjectArrayText>
+                    <ObjectArrayText>
+                        {set.weight}{' '}
+                        {set.unit !== undefined && set.unit !== null
+                            ? set.unit
+                            : 'Lbs'}
+                    </ObjectArrayText>
+                </ObjectArrayItem>
+            ));
+        }
+    };
+
     return (
         <>
             <MainContainer>
@@ -240,6 +290,9 @@ const ProgramExerciseCard = ({
                         {reps && <InfoText>Reps: {reps}</InfoText>}
                         {weight && <InfoText>Weight: {weight}</InfoText>}
                     </DetailContainer>
+                    <ObjectArrayContainer>
+                        {renderSetObjectArrayDetails()}
+                    </ObjectArrayContainer>
                     {restMinutesPerSet && restNum && restSecondsPerSet && (
                         <RestPerSetContainer>
                             <InfoText>Total Rest Periods: {restNum}</InfoText>
@@ -262,6 +315,12 @@ const ProgramExerciseCard = ({
                         <DelIcon />
                     </DeleteButton>
                 </ButtonContainer>
+                {setObjectsArray !== undefined &&
+                setObjectsArray.length !== 0 ? (
+                    <PyramidIconDiv>
+                        <PyramidIcon />
+                    </PyramidIconDiv>
+                ) : null}
             </MainContainer>
             {exerciseId && (
                 <StatCardModalDelete
