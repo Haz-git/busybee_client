@@ -25,13 +25,58 @@ const TitleHeader = styled.h1`
     font-size: 1em;
 `;
 
-const PyramidSecondStep = ({ currentStep }) => {
+const PyramidSecondStep = ({
+    currentStep,
+    valueSet,
+    weightHandler,
+    repHandler,
+}) => {
+    /*
+        valueSet will be used to determine the number of SetConfigs to render:
+
+        Loop through valueSet amount of time, and push and empty object into the array with:
+
+        {
+            valueId: [i],
+            weight: x,
+            reps: y,
+            unit: Lbs/Kgs
+        }
+    */
+
+    const createSetConfigArray = () => {
+        let setConfigArray = [];
+
+        for (let i = 0; i < valueSet; i++) {
+            setConfigArray.push({
+                setId: `${i}`,
+                weight: '',
+                reps: '',
+                unit: '',
+            });
+        }
+
+        return setConfigArray;
+    };
+
+    const renderSetConfigObjects = () => {
+        const configObjects = createSetConfigArray();
+
+        if (configObjects !== undefined && configObjects.length !== 0) {
+            return configObjects.map((config) => (
+                <SetConfig
+                    setNum={config.setId}
+                    weightHandler={weightHandler}
+                    repHandler={repHandler}
+                />
+            ));
+        }
+    };
+
     return (
         <>
             {currentStep !== 2 ? null : (
-                <MainContainer>
-                    <SetConfig />
-                </MainContainer>
+                <MainContainer>{renderSetConfigObjects()}</MainContainer>
             )}
         </>
     );
