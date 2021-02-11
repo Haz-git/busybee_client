@@ -605,6 +605,7 @@ const ConfigureMain = ({
                     restMinutesPerSet={programExercise.restLengthMinutePerSet}
                     restSecondsPerSet={programExercise.restLengthSecondPerSet}
                     restNum={programExercise.numRest}
+                    setObjectsArray={programExercise.setObjectsArray}
                 />
             ));
         } else {
