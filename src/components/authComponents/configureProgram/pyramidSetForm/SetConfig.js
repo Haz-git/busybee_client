@@ -35,7 +35,7 @@ const FieldSpacer = styled.div`
 
 //Render:
 
-const SetConfig = ({ setNum, weightHandler, repHandler }) => {
+const SetConfig = ({ setNum, weightHandler, repHandler, unitHandler }) => {
     return (
         <MainContainer>
             <SetLabel>Set: {setNum}</SetLabel>
@@ -43,14 +43,34 @@ const SetConfig = ({ setNum, weightHandler, repHandler }) => {
                 <FieldSpacer>
                     <CustomNumberField
                         placeholder="Weight"
-                        changeFunc={weightHandler}
+                        changeFunc={(e) =>
+                            weightHandler({
+                                setId: setNum,
+                                weight: e.target.value,
+                            })
+                        }
                     />
                 </FieldSpacer>
                 <FieldSpacer>
-                    <CustomSelector />
+                    <CustomSelector
+                        changeFunc={(e) => {
+                            unitHandler({
+                                setId: setNum,
+                                unit: e.target.value,
+                            });
+                        }}
+                    />
                 </FieldSpacer>
             </GridWrapper>
-            <CustomNumberField placeholder="Reps" changeFunc={repHandler} />
+            <CustomNumberField
+                placeholder="Reps"
+                changeFunc={(e) =>
+                    repHandler({
+                        setId: setNum,
+                        reps: e.target.value,
+                    })
+                }
+            />
         </MainContainer>
     );
 };
