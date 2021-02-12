@@ -1,7 +1,7 @@
 import React from 'react';
 import CustomNumberField from '../../dashboardComponents/CustomNumberField';
 import CustomTextField from '../../dashboardComponents/CustomTextField';
-import CustomSelector from '../../dashboardComponents/CustomSelector';
+import CustomSubmitButton from '../../dashboardComponents/CustomSubmitButton';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -19,17 +19,26 @@ const carouselMovement = keyframes`
 `;
 
 const MainContainer = styled.div`
+    margin-top: 2.5em;
     display: block;
     /* max-width: 100%;
     width: 100%; */
     animation: ${carouselMovement} 0.3s linear;
 `;
 
-const FieldContainer = styled.div``;
+const QuestionContainer = styled.div`
+    margin: 2em 0;
+`;
+
+const FieldContainer = styled.div`
+    margin: 0.8em 0;
+`;
 
 const TitleHeader = styled.h1`
     color: white;
-    font-size: 1.2em;
+    font-size: 1.3em;
+    font-family: 'Lato';
+    margin: 0;
 `;
 
 //Render:
@@ -44,26 +53,32 @@ const PyramidFirstStep = ({
         <>
             {currentStep !== 1 ? null : (
                 <MainContainer>
-                    <TitleHeader>Exercise Name</TitleHeader>
-                    <FieldContainer>
-                        <CustomTextField
-                            type="text"
-                            placeholder={
-                                valueName !== ''
-                                    ? valueName
-                                    : 'Exercise name...'
-                            }
-                            maxlength={17}
-                            changeFunc={nameHandler}
-                        />
-                    </FieldContainer>
-                    <TitleHeader>How many sets do you have?</TitleHeader>
-                    <FieldContainer>
-                        <CustomNumberField
-                            placeholder={valueSet !== '' ? valueSet : 'Sets'}
-                            changeFunc={setHandler}
-                        />
-                    </FieldContainer>
+                    <QuestionContainer>
+                        <TitleHeader>What's Your Exercise?</TitleHeader>
+                        <FieldContainer>
+                            <CustomTextField
+                                type="text"
+                                placeholder={
+                                    valueName !== ''
+                                        ? valueName
+                                        : 'Exercise name...'
+                                }
+                                maxlength={17}
+                                changeFunc={nameHandler}
+                            />
+                        </FieldContainer>
+                    </QuestionContainer>
+                    <QuestionContainer>
+                        <TitleHeader>How Many Sets Do You Have?</TitleHeader>
+                        <FieldContainer>
+                            <CustomNumberField
+                                placeholder={
+                                    valueSet !== '' ? valueSet : 'Sets'
+                                }
+                                changeFunc={setHandler}
+                            />
+                        </FieldContainer>
+                    </QuestionContainer>
                 </MainContainer>
             )}
         </>
