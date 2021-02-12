@@ -3,7 +3,7 @@ import styled from 'styled-components';
 
 //Styles:
 const StyledTextField = styled.input`
-    margin: 0.4em 0em;
+    margin: 0em 0em;
     border: none;
     border-radius: 5em;
     background-color: #111a28;
