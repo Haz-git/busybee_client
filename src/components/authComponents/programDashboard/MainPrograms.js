@@ -166,6 +166,7 @@ const MainPrograms = ({
                     deleteAction={deleteExistingProgram}
                     editProgramSnackbar={showEditProgramSnackBar}
                     deleteProgramSnackbar={showDeleteProgramSnackBar}
+                    isFormatted={program.isFormatted}
                 />
             ));
         } else if (
@@ -185,6 +186,7 @@ const MainPrograms = ({
                     deleteAction={deleteExistingProgram}
                     editProgramSnackbar={showEditProgramSnackBar}
                     deleteProgramSnackbar={showDeleteProgramSnackBar}
+                    isFormatted={program.isFormatted}
                 />
             ));
         } else {
