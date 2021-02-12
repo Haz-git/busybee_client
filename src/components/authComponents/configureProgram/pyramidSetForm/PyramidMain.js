@@ -4,6 +4,7 @@ import PyramidFirstStep from './PyramidFirstStep';
 import PyramidSecondStep from './PyramidSecondStep';
 import Button from '@material-ui/core/Button';
 import { v4 as uuid } from 'uuid';
+import CustomSubmitButton from '../../dashboardComponents/CustomSubmitButton';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -28,6 +29,18 @@ const carouselMovement = keyframes`
     }
 `;
 
+const fadeIn = keyframes`
+    from {
+        opacity: .2;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
+
 const MainContainer = styled.div`
     display: block;
     text-align: center;
@@ -37,14 +50,106 @@ const FormContainer = styled.div`
     padding: 1em 1em;
     width: 100%;
     max-width: 100%;
-    height: 17em;
     animation: ${carouselMovement} 0.5s linear;
 `;
 
 const ButtonContainer = styled.div`
+    position: fixed;
     display: flex;
     align-items: center;
     justify-content: center;
+    white-space: nowrap;
+    /* padding: 1em 1em; */
+    bottom: 5.5em;
+    left: 50%;
+    transform: translate(-50%, 0);
+`;
+
+const NextButton = styled.button`
+    animation: ${fadeIn} 0.2s linear;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 2em;
+    font-family: 'Lato';
+    font-size: 1.2em;
+    background: #096b27;
+    color: white;
+    padding: .8em 2.6em;
+    font-weight: 400
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        outline: none;
+        background: #62c267;
+    }
+`;
+
+const PreviousButton = styled.button`
+    animation: ${fadeIn} 0.2s linear;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0.5em;
+    font-family: 'Lato';
+    font-size: 0.85em;
+    background: #2c3243;
+    color: white;
+    padding: 0.8em 1em;
+    font-weight: 400;
+    margin: 0 0.3em;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        outline: none;
+        background: #2c3243;
+    }
+`;
+
+const SubmitButton = styled.button`
+    animation: ${fadeIn} 0.2s linear;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0.5em;
+    font-family: 'Lato';
+    font-size: 0.85em;
+    background: #096b27;
+    color: white;
+    padding: 0.8em 1em;
+    font-weight: 400;
+    margin: 0 0.3em;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        outline: none;
+        background: #096b27;
+    }
+`;
+
+const PreviousButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 5.98em;
+    left: 50%;
+    width: 100%;
+    max-width: 100%;
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+    padding: 1em 1em;
+    background: ${({ theme }) => theme.background};
+    z-index: 99 !important;
 `;
 
 const PyramidMain = ({
@@ -111,13 +216,9 @@ const PyramidMain = ({
     const renderNextButton = () => {
         if (currentStep === 1 && exercise.trim() !== '' && sets.trim() !== '') {
             return (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={nextFunction}
-                >
-                    Next
-                </Button>
+                <NextButton onClick={nextFunction}>
+                    Configure Reps and Weight
+                </NextButton>
             );
         } else {
             return null;
@@ -127,13 +228,12 @@ const PyramidMain = ({
     const renderPreviousButton = () => {
         if (currentStep === 2) {
             return (
-                <Button
-                    variant="contained"
-                    color="primary"
-                    onClick={prevFunction}
-                >
-                    Previous
-                </Button>
+                <>
+                    <PreviousButton onClick={prevFunction}>
+                        Return To Name and Sets
+                    </PreviousButton>
+                    <SubmitButton>Save Pyramid Set</SubmitButton>
+                </>
             );
         } else {
             return null;
@@ -150,9 +250,12 @@ const PyramidMain = ({
                 </Link>
                 <FlexWrapper>
                     <MainHeader>{name}</MainHeader>
-                    <ExerciseHeader>Create your Pyramid</ExerciseHeader>
+                    <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
+            <PreviousButtonContainer>
+                {renderPreviousButton()}
+            </PreviousButtonContainer>
             <FormContainer>
                 <form>
                     <PyramidFirstStep
@@ -170,12 +273,18 @@ const PyramidMain = ({
                     />
                 </form>
             </FormContainer>
-            <ButtonContainer>
-                {renderPreviousButton()}
-                {renderNextButton()}
-            </ButtonContainer>
+            <ButtonContainer>{renderNextButton()}</ButtonContainer>
         </MainContainer>
     );
 };
+
+/*
+    TODOS: 2/12
+
+    1. We have now verified that adding the pyramid set will so far have no bugs to rendering or saving to database.
+    2. We still need to create and plug in the 'addNewProgramPyramidSet' action creator to the second step.
+    3. We need a modal preventing user from saving the pyramid set if all fields are not filled out (save for selector)
+    4. We need to determine what happens on multi-save...
+*/
 
 export default PyramidMain;
