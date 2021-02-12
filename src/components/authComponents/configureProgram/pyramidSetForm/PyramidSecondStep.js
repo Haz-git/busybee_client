@@ -19,10 +19,11 @@ const carouselMovement = keyframes`
 
 const MainContainer = styled.div`
     animation: ${carouselMovement} 0.3s linear;
+    padding-top: 3.5em;
 `;
 
 const ConfigObjectContainer = styled.div`
-    padding-bottom: 4.5em;
+    /* padding-bottom: 4.5em; */
 `;
 
 const PyramidSecondStep = ({
