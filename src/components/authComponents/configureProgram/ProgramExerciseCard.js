@@ -230,12 +230,19 @@ const ProgramExerciseCard = ({
     const openRestModal = () => {
         if (parseInt(sets) > 1) {
             setStateRestTimeSelectModal(true);
+        } else if (
+            setObjectsArray !== undefined &&
+            setObjectsArray.length > 1 &&
+            sets === undefined
+        ) {
+            //This conditional checks for a pyramid set.
+            setStateRestTimeSelectModal(true);
         } else if (parseInt(sets) <= 1) {
             setStateRestTimeSelectModal(false);
             alert(
                 'You cannot place rest periods between a single set. Please add a rest block!'
             );
-        } else if (sets === undefined) {
+        } else if (restId !== undefined && sets === undefined) {
             setStateRestTimeSelectModal(false);
             alert(
                 `We're sorry, you can't place rest periods inside of a rest block.`
