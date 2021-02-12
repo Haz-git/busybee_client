@@ -91,7 +91,7 @@ const TimeContainer = styled.div`
 const RestPerSetContainer = styled.div`
     display: block;
     background: #121e31;
-    border-radius: 4em;
+    border-radius: 0.5em;
     margin: 0.3em 0;
     padding: 0.2em 0.4em;
     box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 4px;
