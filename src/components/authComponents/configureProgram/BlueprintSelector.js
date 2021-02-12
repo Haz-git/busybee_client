@@ -105,9 +105,9 @@ const BlueprintSelector = ({
                             }
                         >
                             {option.setObjectsArray !== undefined
-                                ? `(${
+                                ? `${
                                       option.programExerciseName
-                                  }) - ${extractSetObjectsArray(
+                                  } - (Pyramid) ${extractSetObjectsArray(
                                       option.setObjectsArray
                                   )}`
                                 : null}
