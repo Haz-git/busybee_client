@@ -340,6 +340,7 @@ const ProgramCard = ({
 
         programExercises.forEach((exercise) => {
             if (
+                exercise.setObjectsArray === undefined &&
                 exercise.numRest !== undefined &&
                 exercise.numRest !== null &&
                 exercise.programExerciseId !== undefined &&
@@ -366,6 +367,43 @@ const ProgramCard = ({
                     totalSecsFromMin + totalSecs + secsFromRepsAndSets;
 
                 totalTime.push(totalRestTimeCombinedSeconds);
+            } else if (
+                exercise.setObjectsArray !== undefined &&
+                exercise.numRest !== undefined &&
+                exercise.programExerciseId !== undefined
+            ) {
+                //Handles pyramid sets:
+
+                const totalSecsFromMin =
+                    parseInt(exercise.restLengthMinutePerSet) *
+                    60 *
+                    parseInt(exercise.numRest);
+
+                const totalSecs =
+                    parseInt(exercise.restLengthSecondPerSet) *
+                    parseInt(exercise.numRest);
+
+                //Find seconds per rep in each set of pyramid:
+
+                let secondsFromReps = [];
+
+                for (let i = 0; i < exercise.setObjectsArray.length; i++) {
+                    secondsFromReps.push(
+                        parseInt(exercise.setObjectsArray[i].reps) * 4
+                    );
+                }
+
+                const totalSecondsFromReps = secondsFromReps.reduce(
+                    (a, b) => a + b,
+                    0
+                );
+
+                const totalPyramidSetSeconds =
+                    totalSecsFromMin + totalSecs + totalSecondsFromReps;
+
+                totalTime.push(totalPyramidSetSeconds);
+
+                //Combine seconds within secondsFromReps:
             } else if (
                 exercise.restId !== undefined &&
                 exercise.restId !== null
