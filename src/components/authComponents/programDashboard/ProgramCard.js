@@ -2,8 +2,6 @@ import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import historyObject from '../../historyObject';
-import { connect } from 'react-redux';
-import { getUserFormattedProgram } from '../../../redux/userFormattedPrograms/formattedProgramsActions';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
@@ -235,19 +233,8 @@ const ProgramCard = ({
     deleteProgramSnackbar,
     formattedProgram,
     getUserFormattedProgram,
+    isFormatted,
 }) => {
-    //LoaderState:
-
-    const [isLoaded, setIsLoaded] = useState(false);
-
-    useEffect(() => {
-        const checkUserFormattedData = async () => {
-            const bool = await getUserFormattedProgram(programId);
-            setIsLoaded(bool);
-        };
-
-        checkUserFormattedData();
-    }, []);
     //States:
     const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
     const [stateEditModal, setStateEditModal] = useState(false);
@@ -459,11 +446,7 @@ const ProgramCard = ({
                 modalDesc="Remember to stay hydrated."
                 ariaDesc="Modal for confirming intent to run selected program"
                 ariaLabel="Modal for confirming intent to run selected program"
-                isFormatted={
-                    isLoaded === true
-                        ? formattedProgram.formattedProgram.isFormatted
-                        : 'false'
-                }
+                isFormatted={isFormatted === 'true' ? 'true' : 'false'}
                 hasProgramExercises={
                     programExercises !== undefined &&
                     programExercises.length > 0
@@ -493,11 +476,7 @@ const ProgramCard = ({
             />
             <WrapperContainer>
                 <MainContainer>
-                    <PlayButton
-                        onClick={
-                            isLoaded === true ? openRunProgramModal : undefined
-                        }
-                    >
+                    <PlayButton onClick={openRunProgramModal}>
                         <PlayIcon />
                     </PlayButton>
                     <HeaderContainer>
@@ -542,15 +521,7 @@ const ProgramCard = ({
     );
 };
 
-const mapStateToProps = (state) => {
-    return {
-        formattedProgram: state.formattedProgram,
-    };
-};
-
-export default connect(mapStateToProps, { getUserFormattedProgram })(
-    ProgramCard
-);
+export default ProgramCard;
 
 /*
     Current BUgs:
