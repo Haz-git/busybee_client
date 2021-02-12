@@ -71,6 +71,21 @@ const BlueprintSelector = ({
     numLabel,
     numId,
 }) => {
+    const extractSetObjectsArray = (array) => {
+        let returnArray = [];
+
+        for (let i = 0; i < array.length; i++) {
+            returnArray.push(`S: ${array[i].setId}`);
+            returnArray.push(`R: ${array[i].reps}`);
+            returnArray.push(`W: ${array[i].weight}`);
+            array[i].unit !== undefined
+                ? returnArray.push(array[i].unit)
+                : returnArray.push('Lbs');
+        }
+
+        return returnArray.join(' ');
+    };
+
     return (
         <>
             <MainContainer>
@@ -89,9 +104,17 @@ const BlueprintSelector = ({
                                 `${option.programExerciseId || option.restId}`
                             }
                         >
-                            {option.programExerciseId !== undefined
+                            {option.setObjectsArray !== undefined
+                                ? `(${
+                                      option.programExerciseName
+                                  }) - ${extractSetObjectsArray(
+                                      option.setObjectsArray
+                                  )}`
+                                : null}
+                            {option.programExerciseId !== undefined &&
+                            option.setObjectsArray === undefined
                                 ? `${option.programExerciseName}, ${option.weight} lbs, ${option.reps} reps, ${option.sets} sets`
-                                : option.programExerciseName}
+                                : null}
                             {option.restLengthMinute &&
                             option.restLengthSecond !== undefined
                                 ? ` (${option.restLengthMinute}m ${option.restLengthSecond}s)`
