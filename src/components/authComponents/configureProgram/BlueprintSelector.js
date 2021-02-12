@@ -113,11 +113,11 @@ const BlueprintSelector = ({
                                 : null}
                             {option.programExerciseId !== undefined &&
                             option.setObjectsArray === undefined
-                                ? `${option.programExerciseName}, ${option.weight} lbs, ${option.reps} reps, ${option.sets} sets`
+                                ? `${option.programExerciseName} : ${option.weight} lbs, ${option.reps} reps, ${option.sets} sets`
                                 : null}
                             {option.restLengthMinute &&
                             option.restLengthSecond !== undefined
-                                ? ` (${option.restLengthMinute}m ${option.restLengthSecond}s)`
+                                ? ` Rest Period: (${option.restLengthMinute}m ${option.restLengthSecond}s)`
                                 : null}
                         </StyledOption>
                     ))}
