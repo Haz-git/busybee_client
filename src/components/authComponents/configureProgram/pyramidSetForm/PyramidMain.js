@@ -2,12 +2,19 @@ import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PyramidFirstStep from './PyramidFirstStep';
 import PyramidSecondStep from './PyramidSecondStep';
+import { connect } from 'react-redux';
+import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
+import AddPyramidSetModal from './AddPyramidSetModal';
 import Button from '@material-ui/core/Button';
 import { v4 as uuid } from 'uuid';
 import CustomSubmitButton from '../../dashboardComponents/CustomSubmitButton';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
 import {
     HeaderContainer,
     MainHeader,
@@ -40,6 +47,28 @@ const fadeIn = keyframes`
         transform: translateY(0);
     }
 `;
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.9em .5em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
+
+const CustomSnackBar = withStyles(() => ({
+    anchorOriginBottomCenter: {
+        marginBottom: '6em',
+    },
+}))(Snackbar);
 
 const MainContainer = styled.div`
     display: block;
@@ -156,7 +185,14 @@ const PyramidMain = ({
     match: {
         params: { name, id },
     },
+    addNewPyramidSet,
 }) => {
+    //Modal State Controller:
+    const [statePyramidModal, setStatePyramidModal] = useState(false);
+
+    //Snackbar handler:
+    const [statePyramidSnackbar, setStatePyramidSnackbar] = useState(false);
+
     //Step Handler:
     const [currentStep, setCurrentStep] = useState(1);
 
@@ -182,7 +218,23 @@ const PyramidMain = ({
 
     */
 
-    //Pyramid Sorting Function:
+    //Snackbar handling functions:
+
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    const showPyramidSnackbar = (bool) => {
+        setStatePyramidSnackbar(bool);
+    };
+
+    const closePyramidSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setStatePyramidSnackbar(false);
+    };
 
     //User Input PyramidFirstStep Handlers:
 
@@ -225,14 +277,16 @@ const PyramidMain = ({
         }
     };
 
-    const renderPreviousButton = () => {
+    const renderPreviousAndSubmitButton = () => {
         if (currentStep === 2) {
             return (
                 <>
                     <PreviousButton onClick={prevFunction}>
                         Return To Name and Sets
                     </PreviousButton>
-                    <SubmitButton>Save Pyramid Set</SubmitButton>
+                    <SubmitButton onClick={checkUserFieldsBeforeSubmission}>
+                        Save Pyramid Set
+                    </SubmitButton>
                 </>
             );
         } else {
@@ -240,41 +294,97 @@ const PyramidMain = ({
         }
     };
 
+    //Field check:
+
+    const checkUserFieldsBeforeSubmission = () => {
+        if (parseInt(sets) === pyramidArray.length) {
+            addNewPyramidSet(id, exercise, pyramidArray, showPyramidSnackbar);
+        } else {
+            openPyramidModal();
+        }
+    };
+
+    //Callback function to retrieve object created in step two:
+
+    const setObjectSubmissionHandler = (object) => {
+        setPyramidArray(sortSetObjectsArray(object));
+    };
+
+    const sortSetObjectsArray = (array) => {
+        return array.sort((a, b) =>
+            parseInt(a.setId) > parseInt(b.setId) ? 1 : -1
+        );
+    };
+
+    //Modal Controllers:
+
+    const openPyramidModal = () => {
+        setStatePyramidModal(true);
+    };
+
+    const closePyramidModal = () => {
+        setStatePyramidModal(false);
+    };
+
     return (
-        <MainContainer>
-            <HeaderContainer>
-                <Link to={`/programs/configure/select/${name}/${id}`}>
-                    <BackButton>
-                        <BackIcon />
-                    </BackButton>
-                </Link>
-                <FlexWrapper>
-                    <MainHeader>{name}</MainHeader>
-                    <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
-                </FlexWrapper>
-            </HeaderContainer>
-            <PreviousButtonContainer>
-                {renderPreviousButton()}
-            </PreviousButtonContainer>
-            <FormContainer>
-                <form>
-                    <PyramidFirstStep
-                        currentStep={currentStep}
-                        nameHandler={handleUserExerciseName}
-                        setHandler={handleUserSetCount}
-                        valueName={exercise}
-                        valueSet={sets}
-                    />
-                    <PyramidSecondStep
-                        currentStep={currentStep}
-                        valueSet={sets}
-                        valueExercise={exercise}
-                        programId={id}
-                    />
-                </form>
-            </FormContainer>
-            <ButtonContainer>{renderNextButton()}</ButtonContainer>
-        </MainContainer>
+        <>
+            <MainContainer>
+                <HeaderContainer>
+                    <Link to={`/programs/configure/select/${name}/${id}`}>
+                        <BackButton>
+                            <BackIcon />
+                        </BackButton>
+                    </Link>
+                    <FlexWrapper>
+                        <MainHeader>{name}</MainHeader>
+                        <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
+                    </FlexWrapper>
+                </HeaderContainer>
+                <PreviousButtonContainer>
+                    {renderPreviousAndSubmitButton()}
+                </PreviousButtonContainer>
+                <FormContainer>
+                    <>
+                        <PyramidFirstStep
+                            currentStep={currentStep}
+                            nameHandler={handleUserExerciseName}
+                            setHandler={handleUserSetCount}
+                            valueName={exercise}
+                            valueSet={sets}
+                        />
+                        <PyramidSecondStep
+                            currentStep={currentStep}
+                            valueSet={sets}
+                            valueExercise={exercise}
+                            programId={id}
+                            setObjectHandler={setObjectSubmissionHandler}
+                        />
+                    </>
+                </FormContainer>
+                <ButtonContainer>{renderNextButton()}</ButtonContainer>
+            </MainContainer>
+            <AddPyramidSetModal
+                openBoolean={statePyramidModal}
+                closeFunction={closePyramidModal}
+                modalDesc="It appears that some of the fields for a set was left empty. Please fill out all of the fields before saving!"
+                modalHeader="Oops, Sorry!"
+                ariaLabel="Modal informing user that a number field is empty and cannot add pyramid set."
+                ariaDesc="Modal informing user that a number field is empty and cannot add pyramid set."
+            />
+            <Slide direction="up" in={statePyramidSnackbar}>
+                <CustomSnackBar
+                    open={statePyramidSnackbar}
+                    autoHideDuration={2400}
+                    onClose={closePyramidSnackbar}
+                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                    transitionDuration={300}
+                >
+                    <Alert severity="success">
+                        Your Pyramid Set Was Saved.
+                    </Alert>
+                </CustomSnackBar>
+            </Slide>
+        </>
     );
 };
 
@@ -287,4 +397,4 @@ const PyramidMain = ({
     4. We need to determine what happens on multi-save...
 */
 
-export default PyramidMain;
+export default connect(null, { addNewPyramidSet })(PyramidMain);
