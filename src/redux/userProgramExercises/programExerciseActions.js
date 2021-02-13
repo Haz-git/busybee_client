@@ -6,6 +6,7 @@ import {
     USER_ADD_REST,
     USER_DELETE_REST,
     USER_ADD_REST_BETWEEN_SETS,
+    USER_ADD_PYRAMID_SET,
 } from './programExerciseTypes';
 
 export function getUserProgramExerciseData(programId) {
@@ -144,6 +145,33 @@ export function deleteRestPeriod(programId, restId, callback) {
 
         dispatch({
             type: USER_DELETE_REST,
+            payload: response.data.userProgramExercises,
+        });
+
+        if (response) {
+            callback(true);
+        }
+    };
+}
+
+export function addNewPyramidSet(
+    programId,
+    programExerciseName,
+    setObjectsArray,
+    callback
+) {
+    return async (dispatch) => {
+        const response = await api.post(
+            `/user/programs/addnewprogrampyramidset`,
+            {
+                programId,
+                programExerciseName,
+                setObjectsArray,
+            }
+        );
+
+        dispatch({
+            type: USER_ADD_PYRAMID_SET,
             payload: response.data.userProgramExercises,
         });
 

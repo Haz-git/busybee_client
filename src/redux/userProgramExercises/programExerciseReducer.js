@@ -5,6 +5,7 @@ import {
     USER_ADD_REST,
     USER_DELETE_REST,
     USER_ADD_REST_BETWEEN_SETS,
+    USER_ADD_PYRAMID_SET,
 } from './programExerciseTypes';
 
 const initialState = {};
@@ -22,6 +23,8 @@ export default (state = initialState, action) => {
         case USER_DELETE_REST:
             return { ...state, programs: action.payload };
         case USER_ADD_REST_BETWEEN_SETS:
+            return { ...state, programs: action.payload };
+        case USER_ADD_PYRAMID_SET:
             return { ...state, programs: action.payload };
         default:
             return state;
