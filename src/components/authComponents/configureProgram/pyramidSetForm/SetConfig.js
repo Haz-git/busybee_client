@@ -11,7 +11,7 @@ const MainContainer = styled.div`
     align-items: center;
     justify-content: center;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
-    padding: 0.5em 1.3em;
+    padding: 0.8em 1.3em;
     border-radius: 1em;
     background: #1a222f;
     margin: 1em 0;
@@ -27,6 +27,7 @@ const SetLabel = styled.h2`
 const GridWrapper = styled.div`
     display: grid;
     grid-template-columns: 65% 35%;
+    align-items: center;
 `;
 
 const FieldSpacer = styled.div`
