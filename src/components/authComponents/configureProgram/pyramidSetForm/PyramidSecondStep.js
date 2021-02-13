@@ -26,12 +26,7 @@ const ConfigObjectContainer = styled.div`
     /* padding-bottom: 4.5em; */
 `;
 
-const PyramidSecondStep = ({
-    currentStep,
-    valueSet,
-    valueExercise,
-    programId,
-}) => {
+const PyramidSecondStep = ({ currentStep, valueSet, setObjectHandler }) => {
     const [setObjectsArray, setSetObjectsArray] = useState([]);
 
     useEffect(() => {
@@ -53,12 +48,6 @@ const PyramidSecondStep = ({
             unit: Lbs/Kgs
         }
     */
-
-    const sortSetObjectsArray = () => {
-        return setObjectsArray.sort((a, b) =>
-            parseInt(a.setId) > parseInt(b.setId) ? 1 : -1
-        );
-    };
 
     const handleOnChangeSelector = (unitObject) => {
         //This function serves to handle the onChange event for unit selection:
@@ -89,9 +78,8 @@ const PyramidSecondStep = ({
             tempObjectsArray[targetIndex]['unit'] = unit;
         }
 
-        console.log(tempObjectsArray);
-
         setSetObjectsArray(tempObjectsArray);
+        setObjectHandler(tempObjectsArray);
     };
 
     const handleOnChangeWeight = (weightObject) => {
@@ -119,9 +107,8 @@ const PyramidSecondStep = ({
             tempObjectsArray[targetIndex]['weight'] = weight;
         }
 
-        console.log(tempObjectsArray);
-
         setSetObjectsArray(tempObjectsArray);
+        setObjectHandler(tempObjectsArray);
     };
 
     const handleOnChangeReps = (repsObject) => {
@@ -150,9 +137,8 @@ const PyramidSecondStep = ({
             tempObjectsArray[targetIndex]['reps'] = reps;
         }
 
-        console.log(tempObjectsArray);
-
         setSetObjectsArray(tempObjectsArray);
+        setObjectHandler(tempObjectsArray);
     };
 
     const createSetConfigArray = () => {
