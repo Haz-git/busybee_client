@@ -355,8 +355,6 @@ const PyramidMain = ({
                         <PyramidSecondStep
                             currentStep={currentStep}
                             valueSet={sets}
-                            valueExercise={exercise}
-                            programId={id}
                             setObjectHandler={setObjectSubmissionHandler}
                         />
                     </>
