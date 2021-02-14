@@ -4,7 +4,7 @@ import styled from 'styled-components';
 //Styles:
 
 const StyledSelector = styled.select`
-    margin: 0.4em 0em;
+    margin: 0em 0em;
     border: none;
     width: 100%;
     border-radius: 5em;
