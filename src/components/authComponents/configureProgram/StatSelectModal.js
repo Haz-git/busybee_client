@@ -45,6 +45,10 @@ const InputDivider = styled.div`
     margin: 0.3em 0.3em;
 `;
 
+const FieldDivider = styled.div`
+    margin: 0.8em 0;
+`;
+
 const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
@@ -121,24 +125,32 @@ const StatSelectModal = ({
                         </SelectorContainer>
                         <InputContainer>
                             <InputDivider>
-                                <CustomNumberField
-                                    type="number"
-                                    placeholder="Weight"
-                                    changeFunc={weightFunction}
-                                />
-                                <CustomNumberField
-                                    type="number"
-                                    placeholder="Sets"
-                                    changeFunc={setsFunction}
-                                />
+                                <FieldDivider>
+                                    <CustomNumberField
+                                        type="number"
+                                        placeholder="Weight"
+                                        changeFunc={weightFunction}
+                                    />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <CustomNumberField
+                                        type="number"
+                                        placeholder="Sets"
+                                        changeFunc={setsFunction}
+                                    />
+                                </FieldDivider>
                             </InputDivider>
                             <InputDivider>
-                                <CustomSelector changeFunc={unitFunction} />
-                                <CustomNumberField
-                                    type="number"
-                                    placeholder="Reps"
-                                    changeFunc={repsFunction}
-                                />
+                                <FieldDivider>
+                                    <CustomSelector changeFunc={unitFunction} />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <CustomNumberField
+                                        type="number"
+                                        placeholder="Reps"
+                                        changeFunc={repsFunction}
+                                    />
+                                </FieldDivider>
                             </InputDivider>
                         </InputContainer>
                         <ButtonContainer>
