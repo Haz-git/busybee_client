@@ -237,6 +237,16 @@ const ProgramExerciseCard = ({
         ) {
             //This conditional checks for a pyramid set.
             setStateRestTimeSelectModal(true);
+        } else if (
+            setObjectsArray !== undefined &&
+            setObjectsArray.length <= 1 &&
+            sets === undefined
+        ) {
+            //This conditional checks for a pyramid set with a single set.
+            setStateRestTimeSelectModal(false);
+            alert(
+                'You cannot place rest periods between a single set. Please add a rest block!'
+            );
         } else if (parseInt(sets) <= 1) {
             setStateRestTimeSelectModal(false);
             alert(
