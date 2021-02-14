@@ -109,7 +109,8 @@ const MainRunProgram = ({
         //When is Loaded is true, we set the user's program sequence into the state:
         if (
             formattedProgram.formattedProgram !== undefined &&
-            formattedProgram.formattedProgram !== null
+            formattedProgram.formattedProgram !== null &&
+            formattedProgram.formattedProgram.formattedProgram !== undefined
         ) {
             setUserProgramSequence(
                 formattedProgram.formattedProgram.formattedProgram
@@ -151,12 +152,16 @@ const MainRunProgram = ({
                     restId={item.restId}
                     isFinal={statusCompleted}
                     nextExercise={
-                        userProgramSequence[exerciseIterator + 1] !== undefined
+                        userProgramSequence[exerciseIterator + 1] !==
+                            undefined &&
+                        userProgramSequence[exerciseIterator + 1] !== null
                             ? userProgramSequence[exerciseIterator + 1]
                             : 'Last Exercise'
                     }
                     prevExercise={
-                        userProgramSequence[exerciseIterator - 1] !== undefined
+                        userProgramSequence[exerciseIterator - 1] !==
+                            undefined &&
+                        userProgramSequence[exerciseIterator + 1] !== null
                             ? userProgramSequence[exerciseIterator - 1]
                             : 'No Previous Exercise'
                     }
@@ -216,9 +221,15 @@ const MainRunProgram = ({
                     </Link>
                     <FlexWrapper>
                         <MainHeader>{name}</MainHeader>
-                        <ExerciseHeader>
-                            Complete {countProgramExercises()} Exercises
-                        </ExerciseHeader>
+                        {isLoaded === true ? (
+                            <ExerciseHeader>
+                                Complete {countProgramExercises()} Exercises
+                            </ExerciseHeader>
+                        ) : (
+                            <LoadingContainer>
+                                <CustomLoadingDots />
+                            </LoadingContainer>
+                        )}
                     </FlexWrapper>
                 </HeaderContainer>
                 {isLoaded === true ? (
