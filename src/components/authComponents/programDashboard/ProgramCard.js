@@ -356,6 +356,27 @@ const ProgramCard = ({
                 totalTime.push(totalRestTimeCombinedSeconds);
             } else if (
                 exercise.setObjectsArray !== undefined &&
+                exercise.numRest === undefined &&
+                exercise.programExerciseId !== undefined
+            ) {
+                //This should handle pyramid sets without rest between sets:
+
+                let secondsFromReps = [];
+
+                for (let i = 0; i < exercise.setObjectsArray.length; i++) {
+                    secondsFromReps.push(
+                        parseInt(exercise.setObjectsArray[i].reps) * 4
+                    );
+                }
+
+                const totalSecondsFromReps = secondsFromReps.reduce(
+                    (a, b) => a + b,
+                    0
+                );
+
+                totalTime.push(totalSecondsFromReps);
+            } else if (
+                exercise.setObjectsArray !== undefined &&
                 exercise.numRest !== undefined &&
                 exercise.programExerciseId !== undefined
             ) {
