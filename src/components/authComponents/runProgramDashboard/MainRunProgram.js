@@ -133,6 +133,7 @@ const MainRunProgram = ({
     const renderRunCards = () => {
         if (userProgramSequence !== null && exerciseIterator !== null) {
             const firstExercise = [userProgramSequence[exerciseIterator]];
+            console.log(firstExercise);
             return firstExercise.map((item) => (
                 <RunCards
                     key={uuid()}
