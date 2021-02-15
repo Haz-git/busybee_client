@@ -37,7 +37,6 @@ const App = withRouter(({ location }) => {
         async function initialState() {
             const initialModeValue = await getMode();
             setAppTheme(initialModeValue);
-            console.log(appTheme);
         }
 
         initialState();

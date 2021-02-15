@@ -8,7 +8,8 @@ export const getMode = () => {
 };
 
 export const useDarkMode = () => {
-    const [theme, setTheme] = useState('light');
+    //Using dark mode as initial mode due to more completeness. When program is nearing final stages, we will use 'light' mode for default again.
+    const [theme, setTheme] = useState('dark');
     const [componentMounted, setComponentMounted] = useState(false);
 
     const setMode = (mode) => {
