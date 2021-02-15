@@ -1,20 +1,30 @@
 import React, { useState } from 'react';
 
 //Styles:
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Edit } from '@styled-icons/fa-solid/Edit';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import bicep from '../../../imgs/bicep.png';
-//Originally it's Fade, but MUI has taken that name:
-import FadeRR from 'react-reveal/Fade';
 
 //Components:
 import CustomSubmitButton from './CustomSubmitButton';
 import CustomNumberField from './CustomNumberField';
 import CustomSelector from './CustomSelector';
 import RecentWeightBox from './RecentWeightBox';
+
+const fadeIn = keyframes`
+    from {
+        transform: translateY(-10%);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+`;
 
 const WrapperContainer = styled.div`
     display: flex;
@@ -31,6 +41,7 @@ const MainContainer = styled.div`
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     z-index: 1;
+    animation: ${fadeIn} 0.3s ease;
 
     @media only screen and (min-width: 375px) {
         padding: 0.6em 1.5em;
@@ -39,6 +50,7 @@ const MainContainer = styled.div`
 
 const RecentWeightContainer = styled.div`
     text-align: center;
+    animation: ${fadeIn} 0.3s ease;
 `;
 
 const EditCorner = styled.button`
@@ -299,29 +311,25 @@ const UserPowerStatCard = ({
                 </Fade>
             </Modal>
             <WrapperContainer>
-                <FadeRR>
-                    <MainContainer>
-                        <EditCorner type="button" onClick={handleOpen}>
-                            <StyledEditIcon />
-                        </EditCorner>
-                        <MainHeader>{header}</MainHeader>
-                        <ImgContainer>
-                            <ExerciseImg src={img} />
-                        </ImgContainer>
-                        <DescContainer>
-                            <DescLabel>{renderExistingStatLbs()} lbs</DescLabel>
-                            <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
-                        </DescContainer>
-                    </MainContainer>
-                </FadeRR>
-                <FadeRR top>
-                    <RecentWeightContainer>
-                        <RecentWeightBox
-                            time={recentStatTimeChange}
-                            weight={recentStatWeightChange}
-                        />
-                    </RecentWeightContainer>
-                </FadeRR>
+                <MainContainer>
+                    <EditCorner type="button" onClick={handleOpen}>
+                        <StyledEditIcon />
+                    </EditCorner>
+                    <MainHeader>{header}</MainHeader>
+                    <ImgContainer>
+                        <ExerciseImg src={img} />
+                    </ImgContainer>
+                    <DescContainer>
+                        <DescLabel>{renderExistingStatLbs()} lbs</DescLabel>
+                        <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
+                    </DescContainer>
+                </MainContainer>
+                <RecentWeightContainer>
+                    <RecentWeightBox
+                        time={recentStatTimeChange}
+                        weight={recentStatWeightChange}
+                    />
+                </RecentWeightContainer>
             </WrapperContainer>
         </>
     );
