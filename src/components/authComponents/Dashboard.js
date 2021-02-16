@@ -13,32 +13,11 @@ import CustomLoadingDots from '../authComponents/configureProgram/CustomLoadingD
 
 //Styles:
 import styled from 'styled-components';
-import CircularProgress from '@material-ui/core/CircularProgress';
-import { withStyles } from '@material-ui/core/styles';
-
-const LoaderContainer = styled.div`
-    position: relative;
-    top: 60vh;
-    -webkit-transform: translateY(-20vh);
-    -moz-transform: translateY(-20vh);
-    -ms-transform: translateY(-20vh);
-    -o-transform: translateY(-20vh);
-    transform: translateY(-20vh);
-    text-align: center;
-    color: ${({ theme }) => theme.DashSpinnerColor};
-`;
-
-const LoaderCharacters = styled.h1`
-    margin-top: 0.5em;
-    font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 1em;
-    font-weight: 900;
-    color: ${({ theme }) => theme.DashSpinnerCharacter};
-`;
 
 const MainContainer = styled.div`
     text-align: center;
     padding: 1em 1em;
+    margin-bottom: 5em;
 `;
 
 //Render:
