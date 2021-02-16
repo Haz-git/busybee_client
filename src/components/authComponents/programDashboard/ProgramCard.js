@@ -2,6 +2,8 @@ import React, { useState, useEffect } from 'react';
 import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import historyObject from '../../historyObject';
+import { connect } from 'react-redux';
+import { addToUserProgramCount } from '../../../redux/userPrograms/userProgramActions';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
@@ -232,6 +234,7 @@ const ProgramCard = ({
     editProgramSnackbar,
     deleteProgramSnackbar,
     isFormatted,
+    addToUserProgramCount,
 }) => {
     //States:
     const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
@@ -302,6 +305,11 @@ const ProgramCard = ({
     };
 
     const runProgramHandler = () => {
+        //Increment or add program count:
+        addToUserProgramCount(programId);
+
+        //Push to new page to run program:
+
         historyObject.push(`/runprogram/${name}/${programId}`);
         setStateDeleteModal(false);
     };
@@ -540,7 +548,7 @@ const ProgramCard = ({
     );
 };
 
-export default ProgramCard;
+export default connect(null, { addToUserProgramCount })(ProgramCard);
 
 /*
     Current BUgs:
