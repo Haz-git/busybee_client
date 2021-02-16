@@ -326,7 +326,6 @@ const RunCards = ({
     };
 
     const processNextExercise = () => {
-        console.log(nextExercise);
         if (
             nextExercise.programExerciseName !== undefined &&
             nextExercise.programExerciseName !== null
