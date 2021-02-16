@@ -4,6 +4,7 @@ import {
     USER_ADD_NEW_PROGRAM,
     USER_EDIT_PROGRAM,
     USER_DELETE_PROGRAM,
+    USER_ADD_TO_PROGRAM_COUNT,
 } from './userProgramTypes';
 
 export function getUserProgramData() {
@@ -18,6 +19,19 @@ export function getUserProgramData() {
         //true flag for isLoaded state in MainPrograms.js:
 
         return true;
+    };
+}
+
+export function addToUserProgramCount(programId) {
+    return async (dispatch) => {
+        const response = await api.post(`/user/increaseprogramruncount`, {
+            programId,
+        });
+
+        dispatch({
+            type: USER_ADD_TO_PROGRAM_COUNT,
+            payload: response.data.userPrograms,
+        });
     };
 }
 

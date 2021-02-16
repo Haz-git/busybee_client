@@ -3,6 +3,7 @@ import {
     USER_ADD_NEW_PROGRAM,
     USER_EDIT_PROGRAM,
     USER_DELETE_PROGRAM,
+    USER_ADD_TO_PROGRAM_COUNT,
 } from './userProgramTypes';
 
 const initialState = {};
@@ -16,6 +17,8 @@ export default (state = initialState, action) => {
         case USER_EDIT_PROGRAM:
             return { ...state, programs: action.payload };
         case USER_DELETE_PROGRAM:
+            return { ...state, programs: action.payload };
+        case USER_ADD_TO_PROGRAM_COUNT:
             return { ...state, programs: action.payload };
         default:
             return state;
