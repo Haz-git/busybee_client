@@ -20,16 +20,26 @@ import {
 //Styles:
 import styled from 'styled-components';
 
-const MainContainer = styled.div`
+export const MainContainer = styled.div`
     margin-top: 1em;
     text-align: left;
 `;
 
-const MainHeader = styled.h2`
+export const MainHeader = styled.h2`
     font-family: 'Lato';
     font-size: 1.1em;
     color: ${({ theme }) => theme.UserPowerHeaderColor};
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+`;
+
+export const StyledDivider = styled.hr`
+    border: 0;
+    margin: 0.5em 0;
+    height: 3px;
+    width: 100%;
+    background: ${({ theme }) => theme.AddMoreLabelC};
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
 `;
 
 const StatCardContainer = styled.div`
@@ -55,7 +65,8 @@ const UserPowerStats = ({
     return (
         <>
             <MainContainer>
-                <MainHeader>Your main lifts</MainHeader>
+                <MainHeader>Your Main Lifts</MainHeader>
+                <StyledDivider />
                 <StatCardContainer>
                     <UserPowerStatCard
                         header="Deadlift"
