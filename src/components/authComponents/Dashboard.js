@@ -43,7 +43,7 @@ const MainContainer = styled.div`
 
 //Render:
 
-const Dashboard = ({ user }) => {
+const Dashboard = ({ user, programs, getUserProgramData }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
@@ -78,19 +78,14 @@ const Dashboard = ({ user }) => {
                         userName={userName}
                     />
                     <UserPowerStats />
-                    <UserTopPrograms />
+                    <UserTopPrograms userPrograms={programs.programs} />
                 </MainContainer>
             );
         } else {
             return (
-                <LoaderContainer>
-                    <CircularProgress
-                        size={70}
-                        color="inherit"
-                        thickness={2.5}
-                    />
-                    <LoaderCharacters>Grabbing your stuff...</LoaderCharacters>
-                </LoaderContainer>
+                <LoadingContainer>
+                    <CustomLoadingDots />
+                </LoadingContainer>
             );
         }
     };
@@ -101,6 +96,7 @@ const Dashboard = ({ user }) => {
 const mapStateToProps = (state) => {
     return {
         user: state.auth,
+        programs: state.programs,
     };
 };
 
