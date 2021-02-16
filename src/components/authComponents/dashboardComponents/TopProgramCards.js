@@ -20,7 +20,7 @@ const NameLabel = styled.h2`
     font-size: 1em;
     font-weight: 700;
     color: white;
-    text-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    text-shadow: rgba(0, 0, 0, 0.8) 0px 1px 2px;
 `;
 
 const CountLabel = styled.h2`
@@ -28,7 +28,7 @@ const CountLabel = styled.h2`
     font-size: 1em;
     font-weight: 700;
     color: white;
-    text-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    text-shadow: rgba(0, 0, 0, 0.8) 0px 1px 2px;
 `;
 
 //Render:
