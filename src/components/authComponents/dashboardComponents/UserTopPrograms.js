@@ -6,13 +6,13 @@ import TopProgramCards from './TopProgramCards';
 import styled from 'styled-components';
 import { MainHeader, MainContainer, StyledDivider } from './UserPowerStats';
 
-const LabelContainer = styled.div`
+export const LabelContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
 `;
 
-const InfoLabel = styled.h3`
+export const InfoLabel = styled.h3`
     font-size: 0.8em;
     font-weight: 900;
     color: ${({ theme }) => theme.AddMoreLabelC};
