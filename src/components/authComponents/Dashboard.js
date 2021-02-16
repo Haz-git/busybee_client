@@ -3,11 +3,13 @@ import React, { useEffect, useState } from 'react';
 //Redux Actions:
 import { connect } from 'react-redux';
 import { getUserProgramData } from '../../redux/userPrograms/userProgramActions';
+import { getUserStatData } from '../../redux/userStats/userStatActions';
 
 //Components:
 import UserGreeting from './dashboardComponents/UserGreeting';
 import UserPowerStats from './dashboardComponents/UserPowerStats';
 import UserTopPrograms from './dashboardComponents/UserTopPrograms';
+import UserRecentStats from './dashboardComponents/UserRecentStats';
 import { LoadingContainer } from '../authComponents/configureProgram/ConfigureMain';
 import CustomLoadingDots from '../authComponents/configureProgram/CustomLoadingDots';
 
@@ -22,13 +24,23 @@ const MainContainer = styled.div`
 
 //Render:
 
-const Dashboard = ({ user, programs, getUserProgramData }) => {
+const Dashboard = ({
+    user,
+    programs,
+    stats,
+    getUserProgramData,
+    getUserStatData,
+}) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
         const getUserExistingProgramData = async () => {
-            const bool = await getUserProgramData();
-            setIsLoaded(bool);
+            const boolProgramData = await getUserProgramData();
+            const boolStatData = await getUserStatData();
+
+            if (boolStatData === true && boolProgramData === true) {
+                setIsLoaded(boolProgramData);
+            }
         };
 
         getUserExistingProgramData();
@@ -58,6 +70,7 @@ const Dashboard = ({ user, programs, getUserProgramData }) => {
                     />
                     <UserPowerStats />
                     <UserTopPrograms userPrograms={programs.programs} />
+                    <UserRecentStats userStats={stats.stats} />
                 </MainContainer>
             );
         } else {
@@ -76,7 +89,11 @@ const mapStateToProps = (state) => {
     return {
         user: state.auth,
         programs: state.programs,
+        stats: state.stats,
     };
 };
 
-export default connect(mapStateToProps, { getUserProgramData })(Dashboard);
+export default connect(mapStateToProps, {
+    getUserProgramData,
+    getUserStatData,
+})(Dashboard);
