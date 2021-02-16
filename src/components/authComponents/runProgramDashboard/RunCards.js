@@ -197,9 +197,9 @@ const SetsValue = styled.h3`
 const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-around;
     /* background: salmon; */
-    margin: 1em 0;
+    margin: 1.8em 0;
     width: 100%;
 `;
 
@@ -211,7 +211,7 @@ const MoveButton = styled.button`
     background: #27303f;
     border: none;
     border-radius: 1em;
-    padding: 0.7em 3.5em;
+    padding: 0.8em 1em;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 
     &:hover {
@@ -235,8 +235,7 @@ const StyledCountdown = styled(Countdown)`
 const PrevExerciseLabel = styled.h4`
     margin-top: 0.2em;
     font-weight: 900;
-    font-size: 1.1em;
-    color: red;
+    font-size: 1em;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
     color: ${({ theme }) => theme.AddMoreLabelC};
     white-space: nowrap;
@@ -245,7 +244,7 @@ const PrevExerciseLabel = styled.h4`
 const NextExerciseLabel = styled.h4`
     margin-top: 0.2em;
     font-weight: 900;
-    font-size: 1.1em;
+    font-size: 1em;
     color: green;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
     white-space: nowrap;

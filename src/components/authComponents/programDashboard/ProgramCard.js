@@ -231,8 +231,6 @@ const ProgramCard = ({
     deleteAction,
     editProgramSnackbar,
     deleteProgramSnackbar,
-    formattedProgram,
-    getUserFormattedProgram,
     isFormatted,
 }) => {
     //States:
