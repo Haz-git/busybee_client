@@ -52,6 +52,7 @@ const DescLabelImprove = styled.label`
     font-size: 0.75em;
     color: green;
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
 `;
 
 const DescLabelFail = styled.label`
@@ -60,6 +61,7 @@ const DescLabelFail = styled.label`
     font-size: 0.75em;
     color: red;
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
 `;
 
 const DescLabelNone = styled.label`
@@ -68,6 +70,7 @@ const DescLabelNone = styled.label`
     font-size: 0.75em;
     color: rgba(15.7, 18.8, 24.3, 1);
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
 `;
 
 const DescLabelTime = styled.label`
@@ -76,6 +79,7 @@ const DescLabelTime = styled.label`
     font-size: 0.75em;
     color: white;
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
 `;
 
 //Render:
