@@ -39,7 +39,7 @@ export const StyledDivider = styled.hr`
     height: 3px;
     width: 100%;
     background: ${({ theme }) => theme.AddMoreLabelC};
-    box-shadow: rgba(0, 0, 0, 0.3) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
 `;
 
 const StatCardContainer = styled.div`
