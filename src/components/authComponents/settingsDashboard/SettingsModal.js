@@ -7,6 +7,11 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
+import Accordion from '@material-ui/core/Accordion';
+import AccordionSummary from '@material-ui/core/AccordionSummary';
+import AccordionDetails from '@material-ui/core/AccordionDetails';
+import Typography from '@material-ui/core/Typography';
+// import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {
     ModalContainer,
@@ -40,11 +45,11 @@ const ButtonDivider = styled.div`
     margin: 0.6em 0;
 `;
 
-const PasswordFieldDivider = styled.div`
+const FieldDivider = styled.div`
     margin: 0.4em 0;
 `;
 
-const PasswordFieldLabel = styled.h3`
+const FieldLabel = styled.h3`
     font-size: 0.9em;
     font-family: 'Lato';
     color: white;
@@ -54,7 +59,7 @@ const PasswordFieldLabel = styled.h3`
     margin-left: 1em;
 `;
 
-const PasswordField = styled.input`
+const Field = styled.input`
     border: none;
     border-radius: 5em;
     background-color: #111a28;
@@ -92,6 +97,8 @@ const SettingsModal = ({
     ariaDesc,
     isSignOutModal,
     isPasswordModal,
+    isEmailModal,
+    isUserDetailsModal,
 }) => {
     return (
         <>
@@ -131,24 +138,20 @@ const SettingsModal = ({
                         ) : null}
                         {isPasswordModal === 'true' ? (
                             <>
-                                <PasswordFieldDivider>
-                                    <PasswordFieldLabel>
-                                        Current Password
-                                    </PasswordFieldLabel>
-                                    <PasswordField type="password" />
-                                </PasswordFieldDivider>
-                                <PasswordFieldDivider>
-                                    <PasswordFieldLabel>
-                                        New Password
-                                    </PasswordFieldLabel>
-                                    <PasswordField type="password" />
-                                </PasswordFieldDivider>
-                                <PasswordFieldDivider>
-                                    <PasswordFieldLabel>
+                                <FieldDivider>
+                                    <FieldLabel>Current Password</FieldLabel>
+                                    <Field type="password" />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <FieldLabel>New Password</FieldLabel>
+                                    <Field type="password" />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <FieldLabel>
                                         Confirm New Password
-                                    </PasswordFieldLabel>
-                                    <PasswordField type="password" />
-                                </PasswordFieldDivider>
+                                    </FieldLabel>
+                                    <Field type="password" />
+                                </FieldDivider>
                                 <ButtonContainer>
                                     <Button variant="contained" color="primary">
                                         Save Changes
@@ -161,6 +164,42 @@ const SettingsModal = ({
                                         Nevermind
                                     </Button>
                                 </ButtonContainer>
+                            </>
+                        ) : null}
+                        {isEmailModal === 'true' ? (
+                            <>
+                                <FieldDivider>
+                                    <FieldLabel>New Email Address</FieldLabel>
+                                    <Field type="text" />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <FieldLabel>
+                                        Confirm New Email Address
+                                    </FieldLabel>
+                                    <Field type="text" />
+                                </FieldDivider>
+                                <ButtonContainer>
+                                    <Button variant="contained" color="primary">
+                                        Save Changes
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={closeFunction}
+                                    >
+                                        Nevermind
+                                    </Button>
+                                </ButtonContainer>
+                            </>
+                        ) : null}
+                        {isUserDetailsModal === 'true' ? (
+                            <>
+                                <Accordion>
+                                    <AccordionSummary>Test</AccordionSummary>
+                                    <AccordionDetails>
+                                        Change FirstName
+                                    </AccordionDetails>
+                                </Accordion>
                             </>
                         ) : null}
                     </SettingsModalContainer>
