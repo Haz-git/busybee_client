@@ -54,7 +54,7 @@ const UserTopPrograms = ({ userPrograms }) => {
     //Sort array from high --> low based on runCount
 
     const sortedArray = filteredArray.sort((a, b) =>
-        parseInt(a.orderId) > parseInt(b.orderId) ? 1 : -1
+        parseInt(a.orderId) > parseInt(b.orderId) ? -1 : 1
     );
 
     //Render top 5 objects in array into cards -->
