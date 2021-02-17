@@ -35,6 +35,45 @@ const ButtonContainer = styled.div`
     justify-content: space-evenly;
 `;
 
+const PasswordFieldDivider = styled.div`
+    margin: 0.7em 0;
+`;
+
+const PasswordFieldLabel = styled.h3`
+    font-size: 0.5em;
+    font-family: 'Lato';
+    color: white;
+    font-weight: 700;
+`;
+
+const PasswordField = styled.input`
+    border: none;
+    border-radius: 5em;
+    background-color: #111a28;
+    color: white;
+    padding: 0.3em 1.4em;
+    width: 100%;
+    font-family: 'Nunito', sans-serif, helvetica;
+    font-weight: 900;
+    font-size: 0.7em;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
+    --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
+
+    &:hover {
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+
+    @media only screen and (min-width: 375px) {
+        font-size: 1.3em;
+    }
+`;
+
 const SettingsModal = ({
     openBoolean,
     closeFunction,
@@ -44,6 +83,7 @@ const SettingsModal = ({
     ariaLabel,
     ariaDesc,
     isSignOutModal,
+    isPasswordModal,
 }) => {
     return (
         <>
@@ -61,14 +101,25 @@ const SettingsModal = ({
                 <Fade in={openBoolean}>
                     <SettingsModalContainer>
                         <SettingsModalHeader>{modalHeader}</SettingsModalHeader>
+                        <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
                         {isSignOutModal === 'true' ? (
                             <Button
                                 variant="contained"
                                 color="secondary"
                                 onClick={buttonSubmitFunction}
                             >
-                                Sign Me Out
+                                Yes, Sign Me Out
                             </Button>
+                        ) : null}
+                        {isPasswordModal === 'true' ? (
+                            <>
+                                <PasswordFieldDivider>
+                                    <PasswordField type="password" />
+                                </PasswordFieldDivider>
+                                <PasswordFieldDivider>
+                                    <PasswordField type="password" />
+                                </PasswordFieldDivider>
+                            </>
                         ) : null}
                     </SettingsModalContainer>
                 </Fade>
