@@ -17,6 +17,15 @@ const MainContainer = styled.button`
     padding: 0.8em 0.8em;
     background: #1a222f;
     cursor: pointer;
+    transition: 0.1s linear;
+
+    &:hover {
+        transform: scale(1.1);
+    }
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const IconContainer = styled.div``;
@@ -33,9 +42,9 @@ const TextLabel = styled.h2`
     text-shadow: rgba(0, 0, 0, 0.8) 0px 2px 4px;
 `;
 
-const SettingsCard = ({ icon, textLabel }) => {
+const SettingsCard = ({ icon, textLabel, clickFunc }) => {
     return (
-        <MainContainer>
+        <MainContainer onClick={clickFunc}>
             <IconContainer>{icon}</IconContainer>
             <TextContainer>
                 <TextLabel>{textLabel}</TextLabel>
