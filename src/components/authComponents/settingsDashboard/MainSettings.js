@@ -54,6 +54,7 @@ const SettingOptionsContainer = styled.div`
     width: 19em;
     margin: 0 auto;
     margin-top: 2.5em;
+    margin-bottom: 1.8em;
     display: -ms-grid;
     display: grid;
     justify-items: center;
@@ -107,6 +108,7 @@ const MainSettings = () => {
                     textLabel="Edit Password"
                 />
             </SettingOptionsContainer>
+            <MainHeader>Theme</MainHeader>
         </MainContainer>
     );
 };
