@@ -60,7 +60,6 @@ const UserTopPrograms = ({ userPrograms }) => {
     //Render top 5 objects in array into cards -->
 
     const renderTopProgramCards = () => {
-        console.log(sortedArray);
         if (sortedArray !== undefined && sortedArray.length !== 0) {
             return sortedArray
                 .slice(0, 5)
