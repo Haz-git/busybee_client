@@ -210,4 +210,17 @@ const MainSettings = () => {
     );
 };
 
+/*
+Todo 2/17/2021
+
+1. Finish creating modal (esp for user details)
+2. Create all text handlers
+3. Backend -- Create routes for changing user settings -- test via postman
+4. Create action creators for changing user Settings
+5. Link all action creators
+6. Create snackbars for letting user know that details have been updated.
+7. Create Theme switcher using hook.
+
+*/
+
 export default MainSettings;
