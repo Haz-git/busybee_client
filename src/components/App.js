@@ -22,6 +22,7 @@ import Dashboard from './authComponents/Dashboard';
 import DashboardNavbar from './authComponents/DashboardNavbar';
 import MainPrograms from './authComponents/programDashboard/MainPrograms';
 import MainStats from './authComponents/statsDashboard/MainStats';
+import MainSettings from './authComponents/settingsDashboard/MainSettings';
 import ConfigureMain from './authComponents/configureProgram/ConfigureMain';
 import ExerciseSelectorPage from './authComponents/configureProgram/ExerciseSelectorPage';
 import BlueprintLayoutSelectionPage from './authComponents/configureProgram/BlueprintLayoutSelectionPage';
@@ -88,6 +89,11 @@ const App = withRouter(({ location }) => {
                                     exact
                                     path="/stats"
                                     component={MainStats}
+                                />
+                                <Route
+                                    exact
+                                    path="/settings"
+                                    component={MainSettings}
                                 />
                                 <Route
                                     exact
