@@ -13,6 +13,7 @@ import {
     ModalHeader,
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
+import { ButtonBase } from '@material-ui/core';
 
 const SettingsModalContainer = styled(ModalContainer)`
     width: 92.5%;
@@ -29,21 +30,28 @@ const SettingsModalDesc = styled(ModalDesc)`
 `;
 
 const ButtonContainer = styled.div`
-    margin-top: 1em;
+    margin: 1em 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
 `;
 
+const ButtonDivider = styled.div`
+    margin: 0.6em 0;
+`;
+
 const PasswordFieldDivider = styled.div`
-    margin: 0.7em 0;
+    margin: 0.4em 0;
 `;
 
 const PasswordFieldLabel = styled.h3`
-    font-size: 0.5em;
+    font-size: 0.9em;
     font-family: 'Lato';
     color: white;
     font-weight: 700;
+    text-align: left;
+    margin-bottom: 0.5em;
+    margin-left: 1em;
 `;
 
 const PasswordField = styled.input`
@@ -103,22 +111,56 @@ const SettingsModal = ({
                         <SettingsModalHeader>{modalHeader}</SettingsModalHeader>
                         <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
                         {isSignOutModal === 'true' ? (
-                            <Button
-                                variant="contained"
-                                color="secondary"
-                                onClick={buttonSubmitFunction}
-                            >
-                                Yes, Sign Me Out
-                            </Button>
+                            <>
+                                <Button
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    Yes, Sign Me Out
+                                </Button>
+                                <ButtonDivider />
+                                <Button
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={closeFunction}
+                                >
+                                    No, Keep Me Logged In
+                                </Button>
+                            </>
                         ) : null}
                         {isPasswordModal === 'true' ? (
                             <>
                                 <PasswordFieldDivider>
+                                    <PasswordFieldLabel>
+                                        Current Password
+                                    </PasswordFieldLabel>
                                     <PasswordField type="password" />
                                 </PasswordFieldDivider>
                                 <PasswordFieldDivider>
+                                    <PasswordFieldLabel>
+                                        New Password
+                                    </PasswordFieldLabel>
                                     <PasswordField type="password" />
                                 </PasswordFieldDivider>
+                                <PasswordFieldDivider>
+                                    <PasswordFieldLabel>
+                                        Confirm New Password
+                                    </PasswordFieldLabel>
+                                    <PasswordField type="password" />
+                                </PasswordFieldDivider>
+                                <ButtonContainer>
+                                    <Button variant="contained" color="primary">
+                                        Save Changes
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={closeFunction}
+                                    >
+                                        Nevermind
+                                    </Button>
+                                </ButtonContainer>
                             </>
                         ) : null}
                     </SettingsModalContainer>
