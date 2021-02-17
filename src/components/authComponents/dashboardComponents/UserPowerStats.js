@@ -35,7 +35,8 @@ export const MainHeader = styled.h2`
 
 export const StyledDivider = styled.hr`
     border: 0;
-    margin: 0.5em 0;
+    margin-top: 0.5em;
+    margin-bottom: 0.2em;
     height: 1px;
     width: 100%;
     background: ${({ theme }) => theme.AddMoreLabelC};
