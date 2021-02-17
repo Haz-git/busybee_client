@@ -116,7 +116,7 @@ const DashboardNavbar = () => {
                         <NavLabel>Dashboard</NavLabel>
                     </NavItem>
                     <NavItem
-                        to="/unmade"
+                        to="/settings"
                         activeStyle={{
                             filter:
                                 'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
