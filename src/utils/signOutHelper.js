@@ -13,6 +13,8 @@ export const userSignOut = () => {
 
     localStorage.removeItem('persist:root');
 
+    //We will not use localStorage.clear() because we want to keep the theme.
+
     //Push user to login page:
     historyObject.push('/login');
 };
