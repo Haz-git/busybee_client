@@ -36,7 +36,7 @@ export const MainHeader = styled.h2`
 export const StyledDivider = styled.hr`
     border: 0;
     margin: 0.5em 0;
-    height: 3px;
+    height: 1px;
     width: 100%;
     background: ${({ theme }) => theme.AddMoreLabelC};
     box-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
