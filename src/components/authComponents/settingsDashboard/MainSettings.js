@@ -1,5 +1,6 @@
 import React from 'react';
 import SettingsCard from './SettingsCard';
+import { userSignOut } from '../../../utils/signOutHelper';
 
 //Styles:
 import styled from 'styled-components';
@@ -91,7 +92,11 @@ const MainSettings = () => {
                 Change your user preferences.
             </SecondarySettingsHeader>
             <SettingOptionsContainer>
-                <SettingsCard icon={<LogOutIcon />} textLabel="Log out" />
+                <SettingsCard
+                    icon={<LogOutIcon />}
+                    textLabel="Sign Out"
+                    clickFunc={userSignOut}
+                />
                 <SettingsCard
                     icon={<UserDetailIcon />}
                     textLabel="Edit User Details"
