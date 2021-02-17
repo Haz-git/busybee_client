@@ -190,6 +190,8 @@ const MainSettings = () => {
                 ariaLabel="Modal for editing user Password used for sign in"
                 ariaDesc="Modal for editing user Password used for sign in"
                 modalHeader="Edit Password"
+                modalDesc="Please enter your current password and your desired new password."
+                isPasswordModal="true"
             />
             <SettingsModal
                 openBoolean={stateSignOutModal}
@@ -197,6 +199,7 @@ const MainSettings = () => {
                 ariaLabel="Modal for confirming user sign out"
                 ariaDesc="Modal for confirming user sign out"
                 modalHeader="Confirm Sign Out"
+                modalDesc="Are you sure you want to sign out? You will have to sign back in to view your account details."
                 buttonSubmitFunction={signOutHandler}
                 isSignOutModal="true"
             />
