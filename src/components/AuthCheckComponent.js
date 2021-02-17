@@ -38,8 +38,6 @@ class AuthenticatedComponents extends Component {
                 complete: true,
             });
 
-            console.log(decodedToken);
-
             const dateNow = new Date();
 
             //Check for manipulated JWT:
