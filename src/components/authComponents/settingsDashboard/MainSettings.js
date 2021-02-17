@@ -176,6 +176,7 @@ const MainSettings = () => {
                 ariaLabel="Modal for editing user details, such as firstname, lastname, username"
                 ariaDesc="Modal for editing user details, such as firstname, lastname, username"
                 modalHeader="Edit User Details"
+                isUserDetailsModal="true"
             />
             <SettingsModal
                 openBoolean={stateEditEmailModal}
@@ -183,6 +184,8 @@ const MainSettings = () => {
                 ariaLabel="Modal for editing user email address used for sign in"
                 ariaDesc="Modal for editing user email address used for sign in"
                 modalHeader="Edit Email Address"
+                modalDesc="Changing your email address will also change your sign in credentials."
+                isEmailModal="true"
             />
             <SettingsModal
                 openBoolean={stateEditPasswordModal}
