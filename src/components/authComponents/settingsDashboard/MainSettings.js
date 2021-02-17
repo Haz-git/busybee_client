@@ -17,6 +17,15 @@ const SecondarySettingsHeader = styled(MainHeader)`
     margin: 0.7em 0;
 `;
 
+const SettingOptionsContainer = styled.div``;
+
+/*
+    This settings page should have the following features:
+    1. Change first name, last name, user name (minor changes)
+    2. Change e-mail (This changes the username, so be sure to let user know about this...)
+    3. Change password (Important... we should have an initial check I.E check if the user knows the current password.)
+*/
+
 const MainSettings = () => {
     return (
         <MainContainer>
@@ -24,6 +33,7 @@ const MainSettings = () => {
             <SecondarySettingsHeader>
                 Change your user preferences.
             </SecondarySettingsHeader>
+            <SettingOptionsContainer></SettingOptionsContainer>
         </MainContainer>
     );
 };
