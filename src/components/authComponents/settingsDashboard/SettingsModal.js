@@ -43,6 +43,7 @@ const SettingsModal = ({
     modalDesc,
     ariaLabel,
     ariaDesc,
+    isSignOutModal,
 }) => {
     return (
         <>
@@ -58,9 +59,22 @@ const SettingsModal = ({
                 }}
             >
                 <Fade in={openBoolean}>
-                    <SettingsModalContainer></SettingsModalContainer>
+                    <SettingsModalContainer>
+                        <SettingsModalHeader>{modalHeader}</SettingsModalHeader>
+                        {isSignOutModal === 'true' ? (
+                            <Button
+                                variant="contained"
+                                color="secondary"
+                                onClick={buttonSubmitFunction}
+                            >
+                                Sign Me Out
+                            </Button>
+                        ) : null}
+                    </SettingsModalContainer>
                 </Fade>
             </Modal>
         </>
     );
 };
+
+export default SettingsModal;
