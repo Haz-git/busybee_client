@@ -5,8 +5,21 @@ import dayjs from 'dayjs';
 //Styles:
 import styled from 'styled-components';
 import { MainHeader, MainContainer, StyledDivider } from './UserPowerStats';
-import { LabelContainer, InfoLabel } from './UserTopPrograms';
+import {
+    LabelContainer,
+    InfoLabel,
+    EmptyLabel,
+    EmptyLabelContainer,
+} from './UserTopPrograms';
 import RecentStatCard from './RecentStatCard';
+import { MoodNeutralOutline } from '@styled-icons/zondicons/MoodNeutralOutline';
+
+const NeutralIcon = styled(MoodNeutralOutline)`
+    height: 2em;
+    width: 2em;
+    color: white;
+    margin-bottom: 0.5em;
+`;
 
 const UserRecentStats = ({ userStats }) => {
     //Sort date from most recent --> latest;
@@ -26,6 +39,15 @@ const UserRecentStats = ({ userStats }) => {
                         date={dayjs(stat.dateUpdated).format('MM/DD/YYYY')}
                     />
                 ));
+        } else {
+            return (
+                <EmptyLabelContainer>
+                    <NeutralIcon />
+                    <EmptyLabel>
+                        Looks like you haven't saved a stat yet.
+                    </EmptyLabel>
+                </EmptyLabelContainer>
+            );
         }
     };
 
