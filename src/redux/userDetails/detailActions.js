@@ -24,48 +24,57 @@ export function getUserExistingDetails() {
 //Although it is possible to write a single dispatch function for all user detail edits, three are created below for increased readability.
 
 export function userEditGeneralInfo(
-    type,
+    requestType,
     newUserName,
     newFirstName,
     newLastName
 ) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
-            type,
+            requestType,
             newUserName,
             newFirstName,
             newLastName,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_EDIT_GENERAL_INFO,
+            payload: response.data.user,
+        });
     };
 }
 
-export function userEditEmail(type, newEmail) {
+export function userEditEmail(requestType, newEmail) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
-            type,
+            requestType,
             newEmail,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_EDIT_EMAIL,
+            payload: response.data.user,
+        });
     };
 }
 
 export function userEditPassword(
-    type,
+    requestType,
     newPassword,
     newPasswordConfirm,
     currentPassword
 ) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
-            type,
+            requestType,
             newPassword,
             newPasswordConfirm,
             currentPassword,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_EDIT_PASSWORD,
+            payload: response.data.user,
+        });
     };
 }
