@@ -7,10 +7,6 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
-import Accordion from '@material-ui/core/Accordion';
-import AccordionSummary from '@material-ui/core/AccordionSummary';
-import AccordionDetails from '@material-ui/core/AccordionDetails';
-import Typography from '@material-ui/core/Typography';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
 
 import {
@@ -99,6 +95,10 @@ const SettingsModal = ({
     isPasswordModal,
     isEmailModal,
     isUserDetailsModal,
+    existingUserName,
+    existingFirstName,
+    existingLastName,
+    existingEmail,
 }) => {
     return (
         <>
@@ -170,7 +170,10 @@ const SettingsModal = ({
                             <>
                                 <FieldDivider>
                                     <FieldLabel>New Email Address</FieldLabel>
-                                    <Field type="text" />
+                                    <Field
+                                        type="text"
+                                        placeholder={existingEmail}
+                                    />
                                 </FieldDivider>
                                 <FieldDivider>
                                     <FieldLabel>
@@ -194,12 +197,39 @@ const SettingsModal = ({
                         ) : null}
                         {isUserDetailsModal === 'true' ? (
                             <>
-                                <Accordion>
-                                    <AccordionSummary>Test</AccordionSummary>
-                                    <AccordionDetails>
-                                        Change FirstName
-                                    </AccordionDetails>
-                                </Accordion>
+                                <FieldDivider>
+                                    <FieldLabel>New Username</FieldLabel>
+                                    <Field
+                                        type="text"
+                                        placeholder={existingUserName}
+                                    />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <FieldLabel>New First Name</FieldLabel>
+                                    <Field
+                                        type="text"
+                                        placeholder={existingFirstName}
+                                    />
+                                </FieldDivider>
+                                <FieldDivider>
+                                    <FieldLabel>New Last Name</FieldLabel>
+                                    <Field
+                                        type="text"
+                                        placeholder={existingLastName}
+                                    />
+                                </FieldDivider>
+                                <ButtonContainer>
+                                    <Button variant="contained" color="primary">
+                                        Save Changes
+                                    </Button>
+                                    <Button
+                                        variant="contained"
+                                        color="secondary"
+                                        onClick={closeFunction}
+                                    >
+                                        Nevermind
+                                    </Button>
+                                </ButtonContainer>
                             </>
                         ) : null}
                     </SettingsModalContainer>
