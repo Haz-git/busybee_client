@@ -1,7 +1,7 @@
 import React from 'react';
 
 //Styles:
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -16,6 +16,16 @@ import {
 } from '../dashboardComponents/UserPowerStatCard';
 import { ButtonBase } from '@material-ui/core';
 
+const fadeInError = keyframes`
+    from { 
+        opacity: 0;
+    }
+
+    to {
+        opacity: 1;
+    }
+`;
+
 const SettingsModalContainer = styled(ModalContainer)`
     width: 92.5%;
 `;
@@ -25,7 +35,7 @@ const SettingsModalHeader = styled(ModalHeader)`
 `;
 
 const SettingsModalDesc = styled(ModalDesc)`
-    margin: 1em 0;
+    margin: 0.7em 0;
     white-space: normal;
     text-align: center;
 `;
@@ -39,6 +49,25 @@ const ButtonContainer = styled.div`
 
 const ButtonDivider = styled.div`
     margin: 0.6em 0;
+`;
+
+const ErrorLabel = styled.h3`
+    font-size: 0.9em;
+    font-family: 'Lato';
+    color: red;
+    font-weight: 700;
+    margin: 0.2em 0;
+    opacity: 1;
+    animation: ${fadeInError} 0.4s ease-in;
+`;
+
+const ErrorLabelInvi = styled.h3`
+    font-size: 0.9em;
+    font-family: 'Lato';
+    color: red;
+    font-weight: 700;
+    margin: 0.2em 0;
+    opacity: 0;
 `;
 
 const FieldDivider = styled.div`
@@ -110,6 +139,7 @@ const SettingsModal = ({
     userDetailSubmissionHandler,
     userEmailSubmissionHandler,
     userPasswordSubmissionHandler,
+    hasPasswordError,
 }) => {
     return (
         <>
@@ -149,6 +179,15 @@ const SettingsModal = ({
                         ) : null}
                         {isPasswordModal === 'true' ? (
                             <>
+                                {hasPasswordError === true ? (
+                                    <ErrorLabel>
+                                        Your current password is incorrect.
+                                    </ErrorLabel>
+                                ) : (
+                                    <ErrorLabelInvi>
+                                        Your current password is incorrect.
+                                    </ErrorLabelInvi>
+                                )}
                                 <FieldDivider>
                                     <FieldLabel>Current Password</FieldLabel>
                                     <Field
