@@ -278,7 +278,7 @@ const MainSettings = ({ authDetails }) => {
 Todo 2/17/2021
 
 1. Finish creating modal (esp for user details) -- done
-2. Create all text handlers
+2. Create all text handlers -- done
 3. Backend -- Create routes for changing user settings -- test via postman
 4. Create action creators for changing user Settings
 5. Link all action creators
