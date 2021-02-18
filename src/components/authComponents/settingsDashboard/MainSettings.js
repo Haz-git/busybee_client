@@ -87,7 +87,7 @@ const SettingOptionsContainer = styled.div`
       []
 */
 
-const MainSettings = ({ authDetails }) => {
+const MainSettings = ({ user }) => {
     //User's auth details should be persisted, and so no need for a loader state..
 
     //Modal open/close state handlers:
@@ -188,7 +188,7 @@ const MainSettings = ({ authDetails }) => {
     };
 
     //Destructuring variables from store:
-    const { firstName, lastName, userName, email } = authDetails.userLogIn.user;
+    const { firstName, lastName, userName, email } = user.user;
 
     return (
         <>
@@ -279,7 +279,8 @@ Todo 2/17/2021
 
 1. Finish creating modal (esp for user details) -- done
 2. Create all text handlers -- done
-3. Backend -- Create routes for changing user settings -- test via postman
+3. Backend -- Create routes for changing user settings -- test via postman -- done
+3.5. Switch UserGreeting to depend on a separate reducer other than auth. Currently, upon user detail changes the values do not update.
 4. Create action creators for changing user Settings
 5. Link all action creators
 6. Create snackbars for letting user know that details have been updated.
@@ -289,7 +290,7 @@ Todo 2/17/2021
 
 const mapStateToProps = (state) => {
     return {
-        authDetails: state.auth,
+        user: state.user,
     };
 };
 
