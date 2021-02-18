@@ -4,6 +4,7 @@ import React, { useEffect, useState } from 'react';
 import { connect } from 'react-redux';
 import { getUserProgramData } from '../../redux/userPrograms/userProgramActions';
 import { getUserStatData } from '../../redux/userStats/userStatActions';
+import { getUserExistingDetails } from '../../redux/userDetails/detailActions';
 
 //Components:
 import UserGreeting from './dashboardComponents/UserGreeting';
@@ -30,6 +31,7 @@ const Dashboard = ({
     stats,
     getUserProgramData,
     getUserStatData,
+    getUserExistingDetails,
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -37,8 +39,13 @@ const Dashboard = ({
         const getUserExistingProgramData = async () => {
             const boolProgramData = await getUserProgramData();
             const boolStatData = await getUserStatData();
+            const boolUserDetails = await getUserExistingDetails();
 
-            if (boolStatData === true && boolProgramData === true) {
+            if (
+                boolStatData === true &&
+                boolProgramData === true &&
+                boolUserDetails === true
+            ) {
                 setIsLoaded(boolProgramData);
             }
         };
@@ -48,24 +55,17 @@ const Dashboard = ({
 
     const renderLoadingIfNoUserDetails = () => {
         if (
-            user.userLogIn !== undefined &&
-            user.userLogIn !== null &&
+            user.user !== undefined &&
+            user.user !== null &&
             isLoaded !== false
         ) {
-            const {
-                firstName,
-                lastName,
-                userName,
-                email,
-                _id,
-            } = user.userLogIn.user;
+            const { firstName, lastName, userName, email } = user.user;
             return (
                 <MainContainer>
                     <UserGreeting
                         firstName={firstName}
                         lastName={lastName}
                         email={email}
-                        userID={_id}
                         userName={userName}
                     />
                     <UserPowerStats />
@@ -87,7 +87,7 @@ const Dashboard = ({
 
 const mapStateToProps = (state) => {
     return {
-        user: state.auth,
+        user: state.user,
         programs: state.programs,
         stats: state.stats,
     };
@@ -96,4 +96,5 @@ const mapStateToProps = (state) => {
 export default connect(mapStateToProps, {
     getUserProgramData,
     getUserStatData,
+    getUserExistingDetails,
 })(Dashboard);
