@@ -90,13 +90,26 @@ const SettingOptionsContainer = styled.div`
 const MainSettings = ({ authDetails }) => {
     //User's auth details should be persisted, and so no need for a loader state..
 
-    //Modal state handlers:
+    //Modal open/close state handlers:
     const [stateEditUserDetailsModal, setStateEditUserDetailsModal] = useState(
         false
     );
     const [stateEditEmailModal, setStateEditEmailModal] = useState(false);
     const [stateEditPasswordModal, setStateEditPasswordModal] = useState(false);
     const [stateSignOutModal, setStateSignOutModal] = useState(false);
+
+    //User text input state handlers:
+
+    const [currentPassword, setCurrentPassword] = useState('');
+    const [newPassword, setNewPassword] = useState('');
+    const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+
+    const [newEmail, setNewEmail] = useState('');
+    const [newEmailConfirm, setNewEmailConfirm] = useState('');
+
+    const [newFirstName, setNewFirstName] = useState('');
+    const [newLastName, setNewLastName] = useState('');
+    const [newUserName, setNewUserName] = useState('');
 
     //EditUserDetailsModal handlers:
 
@@ -106,6 +119,18 @@ const MainSettings = ({ authDetails }) => {
 
     const closeEditUserDetailsModal = () => {
         setStateEditUserDetailsModal(false);
+    };
+
+    const handleNewFirstNameChange = (e) => {
+        setNewFirstName(e.target.value);
+    };
+
+    const handleNewLastNameChange = (e) => {
+        setNewLastName(e.target.value);
+    };
+
+    const handleNewUserNameChange = (e) => {
+        setNewUserName(e.target.value);
     };
 
     //EditEmailModal handlers:
@@ -118,6 +143,14 @@ const MainSettings = ({ authDetails }) => {
         setStateEditEmailModal(false);
     };
 
+    const handleNewEmailChange = (e) => {
+        setNewEmail(e.target.value);
+    };
+
+    const handleNewEmailConfirmChange = (e) => {
+        setNewEmailConfirm(e.target.value);
+    };
+
     //EditPasswordModal handlers:
 
     const openEditPasswordModal = () => {
@@ -126,6 +159,18 @@ const MainSettings = ({ authDetails }) => {
 
     const closeEditPasswordModal = () => {
         setStateEditPasswordModal(false);
+    };
+
+    const handleCurrentPasswordChange = (e) => {
+        setCurrentPassword(e.target.value);
+    };
+
+    const handleNewPasswordChange = (e) => {
+        setNewPassword(e.target.value);
+    };
+
+    const handleNewPasswordConfirmChange = (e) => {
+        setNewPasswordConfirm(e.target.value);
     };
 
     //Sign Out Modal handlers:
@@ -187,6 +232,9 @@ const MainSettings = ({ authDetails }) => {
                 existingUserName={userName}
                 existingFirstName={firstName}
                 existingLastName={lastName}
+                editFirstNameHandler={handleNewFirstNameChange}
+                editLastNameHandler={handleNewLastNameChange}
+                editUserNameHandler={handleNewUserNameChange}
             />
             <SettingsModal
                 openBoolean={stateEditEmailModal}
@@ -197,6 +245,8 @@ const MainSettings = ({ authDetails }) => {
                 modalDesc="Changing your email address will also change your sign in credentials."
                 isEmailModal="true"
                 existingEmail={email}
+                editEmailHandler={handleNewEmailChange}
+                editEmailConfirmHandler={handleNewEmailConfirmChange}
             />
             <SettingsModal
                 openBoolean={stateEditPasswordModal}
@@ -206,6 +256,9 @@ const MainSettings = ({ authDetails }) => {
                 modalHeader="Edit Password"
                 modalDesc="Please enter your current password and your desired new password."
                 isPasswordModal="true"
+                editCurrentPasswordHandler={handleCurrentPasswordChange}
+                editNewPasswordHandler={handleNewPasswordChange}
+                editNewPasswordConfirmHandler={handleNewPasswordConfirmChange}
             />
             <SettingsModal
                 openBoolean={stateSignOutModal}
@@ -224,7 +277,7 @@ const MainSettings = ({ authDetails }) => {
 /*
 Todo 2/17/2021
 
-1. Finish creating modal (esp for user details)
+1. Finish creating modal (esp for user details) -- done
 2. Create all text handlers
 3. Backend -- Create routes for changing user settings -- test via postman
 4. Create action creators for changing user Settings
