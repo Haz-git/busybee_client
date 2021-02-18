@@ -99,6 +99,14 @@ const SettingsModal = ({
     existingFirstName,
     existingLastName,
     existingEmail,
+    editFirstNameHandler,
+    editLastNameHandler,
+    editUserNameHandler,
+    editEmailHandler,
+    editEmailConfirmHandler,
+    editCurrentPasswordHandler,
+    editNewPasswordHandler,
+    editNewPasswordConfirmHandler,
 }) => {
     return (
         <>
@@ -140,17 +148,26 @@ const SettingsModal = ({
                             <>
                                 <FieldDivider>
                                     <FieldLabel>Current Password</FieldLabel>
-                                    <Field type="password" />
+                                    <Field
+                                        type="password"
+                                        onChange={editCurrentPasswordHandler}
+                                    />
                                 </FieldDivider>
                                 <FieldDivider>
                                     <FieldLabel>New Password</FieldLabel>
-                                    <Field type="password" />
+                                    <Field
+                                        type="password"
+                                        onChange={editNewPasswordHandler}
+                                    />
                                 </FieldDivider>
                                 <FieldDivider>
                                     <FieldLabel>
                                         Confirm New Password
                                     </FieldLabel>
-                                    <Field type="password" />
+                                    <Field
+                                        type="password"
+                                        onChange={editNewPasswordConfirmHandler}
+                                    />
                                 </FieldDivider>
                                 <ButtonContainer>
                                     <Button variant="contained" color="primary">
@@ -173,13 +190,19 @@ const SettingsModal = ({
                                     <Field
                                         type="text"
                                         placeholder={existingEmail}
+                                        onChange={editEmailHandler}
+                                        maxLength="20"
                                     />
                                 </FieldDivider>
                                 <FieldDivider>
                                     <FieldLabel>
                                         Confirm New Email Address
                                     </FieldLabel>
-                                    <Field type="text" />
+                                    <Field
+                                        type="text"
+                                        onChange={editEmailConfirmHandler}
+                                        maxLength="20"
+                                    />
                                 </FieldDivider>
                                 <ButtonContainer>
                                     <Button variant="contained" color="primary">
@@ -202,6 +225,8 @@ const SettingsModal = ({
                                     <Field
                                         type="text"
                                         placeholder={existingUserName}
+                                        onChange={editUserNameHandler}
+                                        maxLength="15"
                                     />
                                 </FieldDivider>
                                 <FieldDivider>
@@ -209,6 +234,8 @@ const SettingsModal = ({
                                     <Field
                                         type="text"
                                         placeholder={existingFirstName}
+                                        onChange={editFirstNameHandler}
+                                        maxLength="15"
                                     />
                                 </FieldDivider>
                                 <FieldDivider>
@@ -216,6 +243,8 @@ const SettingsModal = ({
                                     <Field
                                         type="text"
                                         placeholder={existingLastName}
+                                        onChange={editLastNameHandler}
+                                        maxLength="15"
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
