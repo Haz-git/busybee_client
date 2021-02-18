@@ -107,6 +107,9 @@ const SettingsModal = ({
     editCurrentPasswordHandler,
     editNewPasswordHandler,
     editNewPasswordConfirmHandler,
+    userDetailSubmissionHandler,
+    userEmailSubmissionHandler,
+    userPasswordSubmissionHandler,
 }) => {
     return (
         <>
@@ -170,7 +173,11 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={userPasswordSubmissionHandler}
+                                    >
                                         Save Changes
                                     </Button>
                                     <Button
@@ -205,7 +212,11 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={userEmailSubmissionHandler}
+                                    >
                                         Save Changes
                                     </Button>
                                     <Button
@@ -248,7 +259,11 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button variant="contained" color="primary">
+                                    <Button
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={userDetailSubmissionHandler}
+                                    >
                                         Save Changes
                                     </Button>
                                     <Button
