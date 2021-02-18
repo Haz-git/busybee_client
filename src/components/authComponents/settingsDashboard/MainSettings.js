@@ -119,6 +119,7 @@ const MainSettings = ({
     const [currentPassword, setCurrentPassword] = useState('');
     const [newPassword, setNewPassword] = useState('');
     const [newPasswordConfirm, setNewPasswordConfirm] = useState('');
+    const [hasPasswordError, setHasPasswordError] = useState(false);
 
     const [newEmail, setNewEmail] = useState('');
     const [newEmailConfirm, setNewEmailConfirm] = useState('');
@@ -200,6 +201,9 @@ const MainSettings = ({
 
     const closeEditPasswordModal = () => {
         setStateEditPasswordModal(false);
+
+        //Reset the hasPassword state on close.
+        setHasPasswordError(false);
     };
 
     const handleCurrentPasswordChange = (e) => {
@@ -214,16 +218,24 @@ const MainSettings = ({
         setNewPasswordConfirm(e.target.value);
     };
 
+    const handlePasswordError = (bool) => {
+        setHasPasswordError(bool);
+
+        //In event of an error, we want to keep modal open and display errorlabel:
+        setStateEditPasswordModal(bool);
+    };
+
     const handlePasswordSubmission = () => {
         if (newPassword === newPasswordConfirm) {
             userEditPassword(
                 PASSWORD_CHANGE,
                 newPassword,
                 newPasswordConfirm,
-                currentPassword
+                currentPassword,
+                handlePasswordError
             );
 
-            setStateEditPasswordModal(false);
+            //Closing of the modal is handled by handle Password Error currently.
         } else {
             alert('Your passwords do not match!');
         }
@@ -318,6 +330,7 @@ const MainSettings = ({
                 editNewPasswordHandler={handleNewPasswordChange}
                 editNewPasswordConfirmHandler={handleNewPasswordConfirmChange}
                 userPasswordSubmissionHandler={handlePasswordSubmission}
+                hasPasswordError={hasPasswordError}
             />
             <SettingsModal
                 openBoolean={stateSignOutModal}
