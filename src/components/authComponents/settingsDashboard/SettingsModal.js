@@ -188,7 +188,7 @@ const SettingsModal = ({
                                 <FieldDivider>
                                     <FieldLabel>New Email Address</FieldLabel>
                                     <Field
-                                        type="text"
+                                        type="email"
                                         placeholder={existingEmail}
                                         onChange={editEmailHandler}
                                         maxLength="20"
@@ -199,7 +199,7 @@ const SettingsModal = ({
                                         Confirm New Email Address
                                     </FieldLabel>
                                     <Field
-                                        type="text"
+                                        type="email"
                                         onChange={editEmailConfirmHandler}
                                         maxLength="20"
                                     />
