@@ -149,6 +149,21 @@ const MainSettings = ({
         setNewUserName(e.target.value);
     };
 
+    const handleUserDetailSubmission = () => {
+        if (newUserName === '' && newFirstName === '' && newLastName === '') {
+            alert('Please input one value you want to change.');
+        } else {
+            userEditGeneralInfo(
+                USER_INFO_CHANGE,
+                newUserName,
+                newFirstName,
+                newLastName
+            );
+
+            setStateEditUserDetailsModal(false);
+        }
+    };
+
     //EditEmailModal handlers:
 
     const openEditEmailModal = () => {
@@ -165,6 +180,16 @@ const MainSettings = ({
 
     const handleNewEmailConfirmChange = (e) => {
         setNewEmailConfirm(e.target.value);
+    };
+
+    const handleEmailSubmission = () => {
+        if (newEmailConfirm === newEmail) {
+            userEditEmail(EMAIL_CHANGE, newEmail);
+
+            setStateEditEmailModal(false);
+        } else {
+            alert('Your emails do not match!');
+        }
     };
 
     //EditPasswordModal handlers:
@@ -187,6 +212,21 @@ const MainSettings = ({
 
     const handleNewPasswordConfirmChange = (e) => {
         setNewPasswordConfirm(e.target.value);
+    };
+
+    const handlePasswordSubmission = () => {
+        if (newPassword === newPasswordConfirm) {
+            userEditPassword(
+                PASSWORD_CHANGE,
+                newPassword,
+                newPasswordConfirm,
+                currentPassword
+            );
+
+            setStateEditPasswordModal(false);
+        } else {
+            alert('Your passwords do not match!');
+        }
     };
 
     //Sign Out Modal handlers:
@@ -251,6 +291,7 @@ const MainSettings = ({
                 editFirstNameHandler={handleNewFirstNameChange}
                 editLastNameHandler={handleNewLastNameChange}
                 editUserNameHandler={handleNewUserNameChange}
+                userDetailSubmissionHandler={handleUserDetailSubmission}
             />
             <SettingsModal
                 openBoolean={stateEditEmailModal}
@@ -263,6 +304,7 @@ const MainSettings = ({
                 existingEmail={email}
                 editEmailHandler={handleNewEmailChange}
                 editEmailConfirmHandler={handleNewEmailConfirmChange}
+                userEmailSubmissionHandler={handleEmailSubmission}
             />
             <SettingsModal
                 openBoolean={stateEditPasswordModal}
@@ -275,6 +317,7 @@ const MainSettings = ({
                 editCurrentPasswordHandler={handleCurrentPasswordChange}
                 editNewPasswordHandler={handleNewPasswordChange}
                 editNewPasswordConfirmHandler={handleNewPasswordConfirmChange}
+                userPasswordSubmissionHandler={handlePasswordSubmission}
             />
             <SettingsModal
                 openBoolean={stateSignOutModal}
@@ -297,8 +340,9 @@ Todo 2/17/2021
 2. Create all text handlers -- done
 3. Backend -- Create routes for changing user settings -- test via postman -- done
 3.5. Switch UserGreeting to depend on a separate reducer other than auth. Currently, upon user detail changes the values do not update. -- done.
-4. Create action creators for changing user Settings
-5. Link all action creators
+4. Create action creators for changing user Settings --done
+5. Link all action creators --done
+5.5. Include error handler for wrong current password
 6. Create snackbars for letting user know that details have been updated.
 7. Create Theme switcher using hook.
 
