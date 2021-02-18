@@ -3,6 +3,11 @@ import SettingsCard from './SettingsCard';
 import { userSignOut } from '../../../utils/signOutHelper';
 import SettingsModal from './SettingsModal';
 import { connect } from 'react-redux';
+import {
+    userEditGeneralInfo,
+    userEditEmail,
+    userEditPassword,
+} from '../../../redux/userDetails/detailActions';
 
 //Styles:
 import styled from 'styled-components';
@@ -11,6 +16,12 @@ import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { Email } from '@styled-icons/material-outlined/Email';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import { LogOut } from '@styled-icons/boxicons-regular/LogOut';
+
+//Initiating constants for edit types:
+
+const PASSWORD_CHANGE = 'PASSWORD_CHANGE';
+const EMAIL_CHANGE = 'EMAIL_CHANGE';
+const USER_INFO_CHANGE = 'USER_INFO_CHANGE';
 
 //Icons:
 
@@ -87,7 +98,12 @@ const SettingOptionsContainer = styled.div`
       []
 */
 
-const MainSettings = ({ user }) => {
+const MainSettings = ({
+    user,
+    userEditGeneralInfo,
+    userEditEmail,
+    userEditPassword,
+}) => {
     //User's auth details should be persisted, and so no need for a loader state..
 
     //Modal open/close state handlers:
@@ -280,7 +296,7 @@ Todo 2/17/2021
 1. Finish creating modal (esp for user details) -- done
 2. Create all text handlers -- done
 3. Backend -- Create routes for changing user settings -- test via postman -- done
-3.5. Switch UserGreeting to depend on a separate reducer other than auth. Currently, upon user detail changes the values do not update.
+3.5. Switch UserGreeting to depend on a separate reducer other than auth. Currently, upon user detail changes the values do not update. -- done.
 4. Create action creators for changing user Settings
 5. Link all action creators
 6. Create snackbars for letting user know that details have been updated.
@@ -294,4 +310,8 @@ const mapStateToProps = (state) => {
     };
 };
 
-export default connect(mapStateToProps)(MainSettings);
+export default connect(mapStateToProps, {
+    userEditGeneralInfo,
+    userEditEmail,
+    userEditPassword,
+})(MainSettings);
