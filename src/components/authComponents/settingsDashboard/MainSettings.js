@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import SettingsCard from './SettingsCard';
 import { userSignOut } from '../../../utils/signOutHelper';
 import SettingsModal from './SettingsModal';
+import { connect } from 'react-redux';
 
 //Styles:
 import styled from 'styled-components';
@@ -86,7 +87,9 @@ const SettingOptionsContainer = styled.div`
       []
 */
 
-const MainSettings = () => {
+const MainSettings = ({ authDetails }) => {
+    //User's auth details should be persisted, and so no need for a loader state..
+
     //Modal state handlers:
     const [stateEditUserDetailsModal, setStateEditUserDetailsModal] = useState(
         false
@@ -139,6 +142,9 @@ const MainSettings = () => {
         userSignOut();
     };
 
+    //Destructuring variables from store:
+    const { firstName, lastName, userName, email } = authDetails.userLogIn.user;
+
     return (
         <>
             <MainContainer>
@@ -176,7 +182,11 @@ const MainSettings = () => {
                 ariaLabel="Modal for editing user details, such as firstname, lastname, username"
                 ariaDesc="Modal for editing user details, such as firstname, lastname, username"
                 modalHeader="Edit User Details"
+                modalDesc="Change your desired user details."
                 isUserDetailsModal="true"
+                existingUserName={userName}
+                existingFirstName={firstName}
+                existingLastName={lastName}
             />
             <SettingsModal
                 openBoolean={stateEditEmailModal}
@@ -186,6 +196,7 @@ const MainSettings = () => {
                 modalHeader="Edit Email Address"
                 modalDesc="Changing your email address will also change your sign in credentials."
                 isEmailModal="true"
+                existingEmail={email}
             />
             <SettingsModal
                 openBoolean={stateEditPasswordModal}
@@ -223,4 +234,10 @@ Todo 2/17/2021
 
 */
 
-export default MainSettings;
+const mapStateToProps = (state) => {
+    return {
+        authDetails: state.auth,
+    };
+};
+
+export default connect(mapStateToProps)(MainSettings);
