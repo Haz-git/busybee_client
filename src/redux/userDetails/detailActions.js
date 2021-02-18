@@ -27,7 +27,8 @@ export function userEditGeneralInfo(
     requestType,
     newUserName,
     newFirstName,
-    newLastName
+    newLastName,
+    callback
 ) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
@@ -41,10 +42,14 @@ export function userEditGeneralInfo(
             type: USER_EDIT_GENERAL_INFO,
             payload: response.data.user,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
-export function userEditEmail(requestType, newEmail) {
+export function userEditEmail(requestType, newEmail, callback) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
             requestType,
@@ -55,6 +60,10 @@ export function userEditEmail(requestType, newEmail) {
             type: USER_EDIT_EMAIL,
             payload: response.data.user,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
@@ -62,19 +71,34 @@ export function userEditPassword(
     requestType,
     newPassword,
     newPasswordConfirm,
-    currentPassword
+    currentPassword,
+    errorCallback,
+    callback
 ) {
     return async (dispatch) => {
-        const response = await api.post('/user/settings/edituserdetails', {
-            requestType,
-            newPassword,
-            newPasswordConfirm,
-            currentPassword,
-        });
+        const response = await api
+            .post('/user/settings/edituserdetails', {
+                requestType,
+                newPassword,
+                newPasswordConfirm,
+                currentPassword,
+            })
+            .catch((err) => {
+                console.log(err);
 
-        dispatch({
-            type: USER_EDIT_PASSWORD,
-            payload: response.data.user,
-        });
+                //Notifies error callback if error is present (probably cause current password is not matching)
+                errorCallback(true);
+            });
+
+        if (response !== undefined) {
+            dispatch({
+                type: USER_EDIT_PASSWORD,
+                payload: response.data.user,
+            });
+        }
+
+        if (response) {
+            callback(true);
+        }
     };
 }
