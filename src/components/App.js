@@ -93,7 +93,12 @@ const App = withRouter(({ location }) => {
                                 <Route
                                     exact
                                     path="/settings"
-                                    component={MainSettings}
+                                    render={(props) => (
+                                        <MainSettings
+                                            {...props}
+                                            modeStatus={changeModeStatus}
+                                        />
+                                    )}
                                 />
                                 <Route
                                     exact
