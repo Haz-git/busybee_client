@@ -110,11 +110,16 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const getUserExistingStats = async () => {
-            const bool = await getUserStatData();
-            setIsLoaded(bool);
-        };
-        getUserExistingStats();
+        if (stats.stats === undefined || stats.stats === null) {
+            //If these are undefined, that means programs were not persisted and will need retrieval.
+            const getUserExistingStats = async () => {
+                const bool = await getUserStatData();
+                setIsLoaded(bool);
+            };
+            getUserExistingStats();
+        } else if (stats.stats !== undefined) {
+            setIsLoaded(true);
+        }
     }, []);
 
     //States for SnackBars:
@@ -359,7 +364,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     )}
                 </StatCardContainer>
             </MainContainer>
-            <Slide direction="right" in={openAddRecordSnackBar} timeout="exit">
+            <Slide direction="right" in={openAddRecordSnackBar}>
                 <Snackbar
                     open={openAddRecordSnackBar}
                     autoHideDuration={1000}
@@ -372,7 +377,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     </Alert>
                 </Snackbar>
             </Slide>
-            <Slide direction="right" in={openEditRecordSnackBar} timeout="exit">
+            <Slide direction="right" in={openEditRecordSnackBar}>
                 <Snackbar
                     open={openEditRecordSnackBar}
                     autoHideDuration={1000}
@@ -383,11 +388,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     <Alert severity="info">Your edits have been saved.</Alert>
                 </Snackbar>
             </Slide>
-            <Slide
-                direction="right"
-                in={openDeleteRecordSnackBar}
-                timeout="exit"
-            >
+            <Slide direction="right" in={openDeleteRecordSnackBar}>
                 <Snackbar
                     open={openDeleteRecordSnackBar}
                     autoHideDuration={1000}
