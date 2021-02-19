@@ -16,6 +16,10 @@ import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { Email } from '@styled-icons/material-outlined/Email';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import { LogOut } from '@styled-icons/boxicons-regular/LogOut';
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
 
 //Initiating constants for edit types:
 
@@ -49,6 +53,22 @@ const EmailIcon = styled(Email)`
     width: 5em;
     color: white;
 `;
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.9em .5em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+}))(MuiAlert);
 
 const MainContainer = styled.div`
     display: block;
@@ -106,6 +126,16 @@ const MainSettings = ({
 }) => {
     //User's auth details should be persisted, and so no need for a loader state..
 
+    //Snackbar open/close state handlers:
+
+    const [stateEditDetailSnackBar, setStateEditDetailSnackBar] = useState(
+        false
+    );
+    const [stateEditPasswordSnackBar, setStateEditPasswordSnackBar] = useState(
+        false
+    );
+    const [stateEditEmailSnackBar, setStateEditEmailSnackBar] = useState(false);
+
     //Modal open/close state handlers:
     const [stateEditUserDetailsModal, setStateEditUserDetailsModal] = useState(
         false
@@ -158,7 +188,8 @@ const MainSettings = ({
                 USER_INFO_CHANGE,
                 newUserName,
                 newFirstName,
-                newLastName
+                newLastName,
+                showEditDetailSnackBar
             );
 
             setStateEditUserDetailsModal(false);
@@ -185,7 +216,7 @@ const MainSettings = ({
 
     const handleEmailSubmission = () => {
         if (newEmailConfirm === newEmail) {
-            userEditEmail(EMAIL_CHANGE, newEmail);
+            userEditEmail(EMAIL_CHANGE, newEmail, showEditEmailSnackBar);
 
             setStateEditEmailModal(false);
         } else {
@@ -232,7 +263,8 @@ const MainSettings = ({
                 newPassword,
                 newPasswordConfirm,
                 currentPassword,
-                handlePasswordError
+                handlePasswordError,
+                showEditPasswordSnackBar
             );
 
             //Closing of the modal is handled by handle Password Error currently.
@@ -253,6 +285,49 @@ const MainSettings = ({
 
     const signOutHandler = () => {
         userSignOut();
+    };
+
+    //Alert function for snackbars:
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    //SnackBar Handlers:
+
+    const showEditDetailSnackBar = (bool) => {
+        setStateEditDetailSnackBar(bool);
+    };
+
+    const closeEditDetailSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setStateEditDetailSnackBar(false);
+    };
+
+    const showEditPasswordSnackBar = (bool) => {
+        setStateEditPasswordSnackBar(bool);
+    };
+
+    const closeEditPasswordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setStateEditPasswordSnackBar(false);
+    };
+
+    const showEditEmailSnackBar = (bool) => {
+        setStateEditEmailSnackBar(bool);
+    };
+
+    const closeEditEmailSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setStateEditEmailSnackBar(false);
     };
 
     //Destructuring variables from store:
@@ -342,6 +417,43 @@ const MainSettings = ({
                 buttonSubmitFunction={signOutHandler}
                 isSignOutModal="true"
             />
+            <Slide direction="down" in={stateEditDetailSnackBar}>
+                <Snackbar
+                    open={stateEditDetailSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeEditDetailSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={350}
+                >
+                    <Alert severity="success">Your User Edits Are Saved.</Alert>
+                </Snackbar>
+            </Slide>
+            <Slide direction="down" in={stateEditEmailSnackBar}>
+                <Snackbar
+                    open={stateEditEmailSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeEditEmailSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={350}
+                >
+                    <Alert severity="success">
+                        Your New Email Has Been Saved.
+                    </Alert>
+                </Snackbar>
+            </Slide>
+            <Slide direction="down" in={stateEditPasswordSnackBar}>
+                <Snackbar
+                    open={stateEditPasswordSnackBar}
+                    autoHideDuration={5000}
+                    onClose={closeEditPasswordSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    transitionDuration={350}
+                >
+                    <Alert severity="success">
+                        Your Password Has Been Updated.
+                    </Alert>
+                </Snackbar>
+            </Slide>
         </>
     );
 };
