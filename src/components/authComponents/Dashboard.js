@@ -36,21 +36,33 @@ const Dashboard = ({
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const getUserExistingProgramData = async () => {
-            const boolProgramData = await getUserProgramData();
-            const boolStatData = await getUserStatData();
-            const boolUserDetails = await getUserExistingDetails();
+        if (
+            user.user === undefined ||
+            stats.stats === undefined ||
+            programs.programs === undefined
+        ) {
+            const getUserExistingProgramData = async () => {
+                const boolProgramData = await getUserProgramData();
+                const boolStatData = await getUserStatData();
+                const boolUserDetails = await getUserExistingDetails();
 
-            if (
-                boolStatData === true &&
-                boolProgramData === true &&
-                boolUserDetails === true
-            ) {
-                setIsLoaded(boolProgramData);
-            }
-        };
+                if (
+                    boolStatData === true &&
+                    boolProgramData === true &&
+                    boolUserDetails === true
+                ) {
+                    setIsLoaded(boolProgramData);
+                }
+            };
 
-        getUserExistingProgramData();
+            getUserExistingProgramData();
+        } else if (
+            user.user !== undefined &&
+            stats.stats !== undefined &&
+            programs.programs !== undefined
+        ) {
+            setIsLoaded(true);
+        }
     }, []);
 
     const renderLoadingIfNoUserDetails = () => {
