@@ -23,10 +23,11 @@ const persistConfig = {
     whitelist: [
         'auth',
         'user',
-        // 'powerStats',
-        // 'stats',
-        // 'programs',
-        // 'programExercises',
+        'powerStats',
+        'stats',
+        'programs',
+        'programExercises',
+        'formattedProgram',
     ],
 };
 
