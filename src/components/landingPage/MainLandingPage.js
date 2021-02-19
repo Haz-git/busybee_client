@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import {
     BrowserView,
     MobileView,
@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { getJWT } from '../../utils/jwthelper';
 import history from '../historyObject';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
+import PWAPrompt from 'react-ios-pwa-prompt';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -157,6 +158,8 @@ const CustomJoinButton = styled.button`
 
 //Render:
 const MainLandingPage = () => {
+    const [statePopup, setStatePopup] = useState(false);
+
     useEffect(() => {
         //This useEffect serves to check if the user has a JWT. If avaliable --> send to AuthCheck to check to expiration.
 
@@ -171,6 +174,12 @@ const MainLandingPage = () => {
         if (isMobile) {
             return (
                 <MobileView>
+                    <PWAPrompt
+                        promptOnVisit={1}
+                        timesToShow={3}
+                        copyClosePrompt="Close"
+                        permanentlyHideOnDismiss={false}
+                    />
                     <MobMainContainer>
                         <MobWrapper>
                             <MobHeaderContainer>
