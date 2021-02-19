@@ -29,7 +29,7 @@ import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        padding: '.9em .5em',
+        padding: '.4em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -40,14 +40,20 @@ const CustomMuiAlert = withStyles(() => ({
         '& .MuiAlert-action': {
             fontSize: '.85em',
         },
+        // '& .MuiAlert-filledSuccess': {
+        //     background: '#156711',
+        // },
+    },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
     },
 }))(MuiAlert);
-
-const CustomSnackBar = withStyles({
-    root: {
-        backgroundColor: 'red',
-    },
-})(Snackbar);
 
 const MainContainer = styled.div`
     display: block;
@@ -112,21 +118,12 @@ const MainPrograms = ({
                 const bool = await getUserProgramData();
                 setIsLoaded(bool);
             };
+
             getUserExistingProgramData();
         } else if (programs.programs !== undefined) {
             setIsLoaded(true);
         }
     }, []);
-
-    // useEffect(() => {
-    //     console.log('re-render');
-    //     const getUserNewProgramData = async () => {
-    //         const bool = await getUserProgramData();
-    //         setIsLoaded(bool);
-    //     };
-
-    //     getUserNewProgramData();
-    // }, [programs.programs]);
 
     //This state controls snackbars:
     const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
@@ -263,7 +260,7 @@ const MainPrograms = ({
     };
 
     //Alert function for snackbars:
-    const Alert = (props) => {
+    const Alert = (props, type) => {
         return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
     };
 
@@ -401,7 +398,7 @@ const MainPrograms = ({
                         justifyContent: 'center',
                     }}
                     message={
-                        <Alert severity="warning">
+                        <Alert severity="error">
                             Your Program has been removed.
                         </Alert>
                     }
