@@ -20,6 +20,7 @@ import { LogOut } from '@styled-icons/boxicons-regular/LogOut';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
+import { SnackbarContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 
 //Initiating constants for edit types:
@@ -57,8 +58,7 @@ const EmailIcon = styled(Email)`
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        background: '#246803',
-        padding: '.9em .5em',
+        padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -69,6 +69,15 @@ const CustomMuiAlert = withStyles(() => ({
         '& .MuiAlert-action': {
             fontSize: '.85em',
         },
+    },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
     },
 }))(MuiAlert);
 
@@ -119,6 +128,21 @@ const SettingOptionsContainer = styled.div`
     [] []
       []
 */
+
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
 
 const MainSettings = ({
     user,
@@ -423,43 +447,69 @@ const MainSettings = ({
                 buttonSubmitFunction={signOutHandler}
                 isSignOutModal="true"
             />
-            <Slide direction="down" in={stateEditDetailSnackBar}>
-                <Snackbar
-                    open={stateEditDetailSnackBar}
-                    autoHideDuration={5000}
-                    onClose={closeEditDetailSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={350}
-                >
-                    <Alert severity="success">Your User Edits Are Saved.</Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="down" in={stateEditEmailSnackBar}>
-                <Snackbar
-                    open={stateEditEmailSnackBar}
-                    autoHideDuration={5000}
-                    onClose={closeEditEmailSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={350}
-                >
-                    <Alert severity="success">
-                        Your New Email Has Been Saved.
-                    </Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="down" in={stateEditPasswordSnackBar}>
-                <Snackbar
-                    open={stateEditPasswordSnackBar}
-                    autoHideDuration={5000}
-                    onClose={closeEditPasswordSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={350}
-                >
-                    <Alert severity="success">
-                        Your Password Has Been Updated.
-                    </Alert>
-                </Snackbar>
-            </Slide>
+            <Snackbar
+                open={stateEditDetailSnackBar}
+                autoHideDuration={4000}
+                onClose={closeEditDetailSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your User Edits Are Saved.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={stateEditEmailSnackBar}
+                autoHideDuration={4000}
+                onClose={closeEditEmailSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your New Email Has Been Saved.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={stateEditPasswordSnackBar}
+                autoHideDuration={4000}
+                onClose={closeEditPasswordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your Password Has Been Updated.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
         </>
     );
 };
