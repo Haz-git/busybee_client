@@ -25,6 +25,7 @@ import { withStyles } from '@material-ui/core/styles';
 //Styles:
 import styled from 'styled-components';
 import { MainHeader } from '../dashboardComponents/UserGreeting';
+import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
@@ -41,6 +42,12 @@ const CustomMuiAlert = withStyles(() => ({
         },
     },
 }))(MuiAlert);
+
+const CustomSnackBar = withStyles({
+    root: {
+        backgroundColor: 'red',
+    },
+})(Snackbar);
 
 const MainContainer = styled.div`
     display: block;
@@ -72,6 +79,19 @@ const ProgramCardContainer = styled.div`
     padding-bottom: 3.5em;
 `;
 
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
+
 //Render:
 const MainPrograms = ({
     addNewProgram,
@@ -85,12 +105,28 @@ const MainPrograms = ({
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        const getUserExistingProgramData = async () => {
-            const bool = await getUserProgramData();
-            setIsLoaded(bool);
-        };
-        getUserExistingProgramData();
+        if (programs.programs === undefined || programs.programs === null) {
+            //If these are undefined, that means programs were not persisted and will need retrieval.
+
+            const getUserExistingProgramData = async () => {
+                const bool = await getUserProgramData();
+                setIsLoaded(bool);
+            };
+            getUserExistingProgramData();
+        } else if (programs.programs !== undefined) {
+            setIsLoaded(true);
+        }
     }, []);
+
+    // useEffect(() => {
+    //     console.log('re-render');
+    //     const getUserNewProgramData = async () => {
+    //         const bool = await getUserProgramData();
+    //         setIsLoaded(bool);
+    //     };
+
+    //     getUserNewProgramData();
+    // }, [programs.programs]);
 
     //This state controls snackbars:
     const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
@@ -310,51 +346,67 @@ const MainPrograms = ({
                     )}
                 </ProgramCardContainer>
             </MainContainer>
-            <Slide direction="right" in={openAddProgramSnackBar} timeout="exit">
-                <Snackbar
-                    open={openAddProgramSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeNewProgramSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="success">
-                        Your Program has been added.
-                    </Alert>
-                </Snackbar>
-            </Slide>
-            <Slide
-                direction="right"
-                in={openEditProgramSnackBar}
-                timeout="exit"
+            <Snackbar
+                open={openAddProgramSnackBar}
+                autoHideDuration={4000}
+                onClose={closeNewProgramSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
             >
-                <Snackbar
-                    open={openEditProgramSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeEditProgramSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="info">Your edits have been saved.</Alert>
-                </Snackbar>
-            </Slide>
-            <Slide
-                direction="right"
-                in={openDeleteProgramSnackBar}
-                timeout="exit"
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your Program has been added.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openEditProgramSnackBar}
+                autoHideDuration={4000}
+                onClose={closeEditProgramSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
             >
-                <Snackbar
-                    open={openDeleteProgramSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeDeleteProgramSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="warning">
-                        Your Program has been removed.
-                    </Alert>
-                </Snackbar>
-            </Slide>
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="info">
+                            Your edits have been saved.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openDeleteProgramSnackBar}
+                autoHideDuration={4000}
+                onClose={closeDeleteProgramSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="warning">
+                            Your Program has been removed.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
         </>
     );
 };
