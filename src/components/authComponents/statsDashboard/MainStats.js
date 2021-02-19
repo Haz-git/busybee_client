@@ -30,10 +30,11 @@ import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
 import { withStyles } from '@material-ui/core/styles';
+import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        padding: '.9em .5em',
+        padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -44,6 +45,15 @@ const CustomMuiAlert = withStyles(() => ({
         '& .MuiAlert-action': {
             fontSize: '.85em',
         },
+    },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
     },
 }))(MuiAlert);
 
@@ -101,6 +111,21 @@ const ButtonContainer = styled.div`
 `;
 
 const StatCardContainer = styled.div``;
+
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
 
 //Render:
 
@@ -364,43 +389,69 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     )}
                 </StatCardContainer>
             </MainContainer>
-            <Slide direction="right" in={openAddRecordSnackBar}>
-                <Snackbar
-                    open={openAddRecordSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeNewRecordSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="success">
-                        Your record has been added.
-                    </Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="right" in={openEditRecordSnackBar}>
-                <Snackbar
-                    open={openEditRecordSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeEditRecordSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="info">Your edits have been saved.</Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="right" in={openDeleteRecordSnackBar}>
-                <Snackbar
-                    open={openDeleteRecordSnackBar}
-                    autoHideDuration={1000}
-                    onClose={closeDeleteRecordSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    transitionDuration={100}
-                >
-                    <Alert severity="warning">
-                        Your record has been removed.
-                    </Alert>
-                </Snackbar>
-            </Slide>
+            <Snackbar
+                open={openAddRecordSnackBar}
+                autoHideDuration={1000}
+                onClose={closeNewRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your record has been added.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openEditRecordSnackBar}
+                autoHideDuration={1000}
+                onClose={closeEditRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="info">
+                            Your edits have been saved.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openDeleteRecordSnackBar}
+                autoHideDuration={1000}
+                onClose={closeDeleteRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="error">
+                            Your record has been removed.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
         </>
     );
 };

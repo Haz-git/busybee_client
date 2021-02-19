@@ -353,6 +353,8 @@ const MainPrograms = ({
                     style={{
                         boxShadow: 'none',
                         background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
                     message={
                         <Alert severity="success">
