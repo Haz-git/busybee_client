@@ -29,7 +29,7 @@ import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        padding: '.4em .8em',
+        padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -40,9 +40,6 @@ const CustomMuiAlert = withStyles(() => ({
         '& .MuiAlert-action': {
             fontSize: '.85em',
         },
-        // '& .MuiAlert-filledSuccess': {
-        //     background: '#156711',
-        // },
     },
     filledSuccess: {
         background: '#156711',
@@ -84,6 +81,8 @@ const SearchBarContainer = styled.div`
 const ProgramCardContainer = styled.div`
     padding-bottom: 3.5em;
 `;
+
+//Slide transition function for MUI:
 
 function slideTransition(props) {
     return (
