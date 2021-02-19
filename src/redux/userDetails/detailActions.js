@@ -90,15 +90,11 @@ export function userEditPassword(
                 errorCallback(true);
             });
 
-        if (response !== undefined) {
-            dispatch({
-                type: USER_EDIT_PASSWORD,
-                payload: response.data.user,
-            });
-        }
+        //If there is no error:
+        errorCallback(false);
 
-        if (response) {
-            callback(true);
-        }
+        //No need for a dispatch.
+
+        callback(true);
     };
 }
