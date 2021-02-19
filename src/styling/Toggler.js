@@ -8,8 +8,8 @@ const Button = styled.button`
     color: ${({ theme }) => theme.generalText};
     border-radius: 30px;
     cursor: pointer;
-    font-size: 0.8rem;
-    padding: 0.4rem;
+    font-size: 0.8em;
+    padding: 0.8em;
     transition: all 0.5s linear;
     margin-left: 0.5em;
     margin-right: 0.5em;
