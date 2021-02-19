@@ -8,6 +8,7 @@ import {
     userEditEmail,
     userEditPassword,
 } from '../../../redux/userDetails/detailActions';
+import ThemeToggler from './ThemeToggler';
 
 //Styles:
 import styled from 'styled-components';
@@ -56,6 +57,7 @@ const EmailIcon = styled(Email)`
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
+        background: '#246803',
         padding: '.9em .5em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
@@ -123,6 +125,7 @@ const MainSettings = ({
     userEditGeneralInfo,
     userEditEmail,
     userEditPassword,
+    modeStatus,
 }) => {
     //User's auth details should be persisted, and so no need for a loader state..
 
@@ -363,6 +366,9 @@ const MainSettings = ({
                     />
                 </SettingOptionsContainer>
                 <MainHeader>Theme</MainHeader>
+                <div>
+                    <ThemeToggler modeStatus={modeStatus} />
+                </div>
             </MainContainer>
             <SettingsModal
                 openBoolean={stateEditUserDetailsModal}
@@ -467,8 +473,8 @@ Todo 2/17/2021
 3.5. Switch UserGreeting to depend on a separate reducer other than auth. Currently, upon user detail changes the values do not update. -- done.
 4. Create action creators for changing user Settings --done
 5. Link all action creators --done
-5.5. Include error handler for wrong current password
-6. Create snackbars for letting user know that details have been updated.
+5.5. Include error handler for wrong current password -- done
+6. Create snackbars for letting user know that details have been updated. -- done
 7. Create Theme switcher using hook.
 
 */
