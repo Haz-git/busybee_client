@@ -24,6 +24,7 @@ import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
+import { SnackbarContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
 import {
     HeaderContainer,
@@ -36,7 +37,7 @@ import {
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        padding: '.9em .5em',
+        padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -48,11 +49,20 @@ const CustomMuiAlert = withStyles(() => ({
             fontSize: '.85em',
         },
     },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
+    },
 }))(MuiAlert);
 
 const CustomSnackBar = withStyles(() => ({
     anchorOriginBottomCenter: {
-        marginBottom: '6em',
+        marginBottom: '4.5em',
     },
 }))(Snackbar);
 
@@ -107,6 +117,21 @@ const mainLiftOptions = [
         exerciseName: 'Deadlift',
     },
 ];
+
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="up"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
 
 const ExerciseSelectorPage = ({
     match: {
@@ -405,19 +430,27 @@ const ExerciseSelectorPage = ({
                 submitHandler={handleExistingStatSubmission}
                 optionsDefaultValue="Main Lift"
             />
-            <Slide direction="up" in={openAddProgramExerciseSnackBar}>
-                <CustomSnackBar
-                    open={openAddProgramExerciseSnackBar}
-                    autoHideDuration={2400}
-                    onClose={closeNewProgramExerciseSnackBar}
-                    anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
-                    transitionDuration={300}
-                >
-                    <Alert severity="success">
-                        Your Exercise Has Been Added.
-                    </Alert>
-                </CustomSnackBar>
-            </Slide>
+            <CustomSnackBar
+                open={openAddProgramExerciseSnackBar}
+                autoHideDuration={4000}
+                onClose={closeNewProgramExerciseSnackBar}
+                anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your Exercise Has Been Added.
+                        </Alert>
+                    }
+                />
+            </CustomSnackBar>
         </>
     );
 };
