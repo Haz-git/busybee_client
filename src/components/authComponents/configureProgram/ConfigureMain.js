@@ -29,10 +29,11 @@ import Slide from '@material-ui/core/Slide';
 import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomLoadingDots from './CustomLoadingDots';
 import { withStyles } from '@material-ui/core/styles';
+import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
-        padding: '.9em .5em',
+        padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
         },
@@ -44,8 +45,16 @@ const CustomMuiAlert = withStyles(() => ({
             fontSize: '.85em',
         },
     },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
+    },
 }))(MuiAlert);
-
 //Icons:
 
 const SortIcon = styled(SortAlt2)`
@@ -496,6 +505,22 @@ export const LoadingContainer = styled.div`
     left: 50%;
     transform: translate(-50%, -50%);
 `;
+
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
+
 //Render:
 
 const ConfigureMain = ({
@@ -791,52 +816,69 @@ const ConfigureMain = ({
                     </AddButton>
                 )}
             </ButtonContainer>
-            <Slide direction="down" in={openDeleteProgramExerciseSnackBar}>
-                <Snackbar
-                    open={openDeleteProgramExerciseSnackBar}
-                    autoHideDuration={3000}
-                    onClose={closeDeleteProgramExerciseSnackBar}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
+            <Snackbar
+                open={openDeleteProgramExerciseSnackBar}
+                autoHideDuration={4000}
+                onClose={closeDeleteProgramExerciseSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
-                    transitionDuration={400}
-                >
-                    <Alert severity="warning">
-                        Your Exercise Has Been Removed.
-                    </Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="down" in={openAddProgramRestSnackBar}>
-                <Snackbar
-                    open={openAddProgramRestSnackBar}
-                    autoHideDuration={5000}
-                    onClose={closeAddProgramRestSnackBar}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
+                    message={
+                        <Alert severity="error">
+                            Exercise Has Been Removed.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openAddProgramRestSnackBar}
+                autoHideDuration={4000}
+                onClose={closeAddProgramRestSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
-                    transitionDuration={300}
-                >
-                    <Alert severity="info">Rest Period Has Been Added.</Alert>
-                </Snackbar>
-            </Slide>
-            <Slide direction="down" in={openDeleteProgramRestSnackBar}>
-                <Snackbar
-                    open={openDeleteProgramRestSnackBar}
-                    autoHideDuration={5000}
-                    onClose={closeDeleteProgramRestSnackBar}
-                    anchorOrigin={{
-                        vertical: 'top',
-                        horizontal: 'center',
+                    message={
+                        <Alert severity="info">
+                            Rest Period Has Been Added.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openDeleteProgramRestSnackBar}
+                autoHideDuration={4000}
+                onClose={closeDeleteProgramRestSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
                     }}
-                    transitionDuration={300}
-                >
-                    <Alert severity="warning">
-                        Rest Period Has Been Deleted.
-                    </Alert>
-                </Snackbar>
-            </Slide>
+                    message={
+                        <Alert severity="error">
+                            Rest Period Has Been Deleted.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
             <TimeSelectModal
                 openBoolean={stateTimeSelectModal}
                 closeFunction={closeTimeSelectorModal}
