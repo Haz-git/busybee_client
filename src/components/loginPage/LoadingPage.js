@@ -5,17 +5,15 @@ import styled, { keyframes } from 'styled-components';
 import { CircularProgress } from '@material-ui/core';
 
 const fadeLoading = keyframes`
-    0% { opacity: 0 }
-    10% { opacity: 0.1}
-    20% { opacity: 0.2}
-    30% { opacity: 0.3 }
-    40% { opacity: 0.4 }
-    50% { opacity: 0.5 }
-    60% { opacity: 0.6 }
-    70% { opacity: 0.7 }
-    80% { opacity: 0.8 }
-    90% { opacity: 0.9 }
-    100% { opacity: 1 }
+    from {
+        opacity: 0;
+        transform: translateY(-400%);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 const MainContainer = styled.div`
@@ -24,12 +22,12 @@ const MainContainer = styled.div`
     height: 100vh;
     width: 100vw;
     background-color: ${({ theme }) => theme.background};
-    animation-name: ${fadeLoading};
-    -webkit-animation: fadeLoading 0.8s; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: fadeLoading 0.8s; /* Firefox < 16 */
-    -ms-animation: fadeLoading 0.8s; /* Internet Explorer */
-    -o-animation: fadeLoading 0.8s; /* Opera < 12.1 */
-    animation: fadeLoading 0.8s ease;
+    /* animation-name: ${fadeLoading}; */
+    -webkit-animation: ${fadeLoading} 1.5s ease; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: ${fadeLoading} 1.5s ease; /* Firefox < 16 */
+    -ms-animation: ${fadeLoading} 1.5s ease; /* Internet Explorer */
+    -o-animation: ${fadeLoading} 1.5s ease; /* Opera < 12.1 */
+    animation: ${fadeLoading} 1.5s ease;
     z-index: 9999;
 `;
 
@@ -43,7 +41,7 @@ const SpinnerContainer = styled.div`
 
 const LoadingCharacterContainer = styled.div`
     position: fixed;
-    top: 54%;
+    top: 60%;
     left: 50%;
     transform: translate(-50%, -50%);
     white-space: nowrap;
@@ -51,8 +49,8 @@ const LoadingCharacterContainer = styled.div`
 
 const LoadingCharacters = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 1em;
-    font-weight: 100;
+    font-size: 1.5em;
+    font-weight: 900;
     color: ${({ theme }) => theme.SpinnerCharacter};
 `;
 
@@ -65,14 +63,14 @@ const LoadingPage = ({ renderLoading }) => {
                 <MainContainer>
                     <SpinnerContainer>
                         <CircularProgress
-                            size={50}
+                            size={120}
                             color="inherit"
-                            thickness={2}
+                            thickness={1}
                         />
                     </SpinnerContainer>
                     <LoadingCharacterContainer>
                         <LoadingCharacters>
-                            Re-racking dumbbells...
+                            Re-racking Dumbbells...
                         </LoadingCharacters>
                     </LoadingCharacterContainer>
                 </MainContainer>
