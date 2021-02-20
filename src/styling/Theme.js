@@ -111,7 +111,7 @@ export const darkTheme = {
     ProgramCardDesc: 'white',
     ProgramCardDescBG: '#041839',
     PlayIcon: 'white',
-    ProgramIcon: '#fdbc3d',
+    ProgramIcon: '#17B3B8',
     LowerContainerBG: '#1A222F',
 
     //ConfigureMain:
