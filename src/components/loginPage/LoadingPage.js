@@ -7,12 +7,10 @@ import { CircularProgress } from '@material-ui/core';
 const fadeLoading = keyframes`
     from {
         opacity: 0;
-        transform: translateY(-400%);
     }
 
     to {
         opacity: 1;
-        transform: translateY(0);
     }
 `;
 
@@ -23,11 +21,11 @@ const MainContainer = styled.div`
     width: 100vw;
     background-color: ${({ theme }) => theme.background};
     /* animation-name: ${fadeLoading}; */
-    -webkit-animation: ${fadeLoading} 1.5s ease; /* Safari, Chrome and Opera > 12.1 */
-    -moz-animation: ${fadeLoading} 1.5s ease; /* Firefox < 16 */
-    -ms-animation: ${fadeLoading} 1.5s ease; /* Internet Explorer */
-    -o-animation: ${fadeLoading} 1.5s ease; /* Opera < 12.1 */
-    animation: ${fadeLoading} 1.5s ease;
+    -webkit-animation: ${fadeLoading} 0.4s linear; /* Safari, Chrome and Opera > 12.1 */
+    -moz-animation: ${fadeLoading} 0.4s linear; /* Firefox < 16 */
+    -ms-animation: ${fadeLoading} 0.4s linear; /* Internet Explorer */
+    -o-animation: ${fadeLoading} 0.4s linear; /* Opera < 12.1 */
+    animation: ${fadeLoading} 0.4s linear;
     z-index: 9999;
 `;
 

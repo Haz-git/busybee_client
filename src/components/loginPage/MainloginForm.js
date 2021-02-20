@@ -138,7 +138,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
                         setRenderLoading(false);
                     }
                 });
-            }, 3500);
+            }, 3000);
         }
     };
 
