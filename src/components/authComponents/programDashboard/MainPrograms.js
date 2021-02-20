@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
@@ -118,11 +118,21 @@ const MainPrograms = ({
                 setIsLoaded(bool);
             };
 
+            console.log(programs.programs);
+
             getUserExistingProgramData();
         } else if (programs.programs !== undefined) {
             setIsLoaded(true);
         }
     }, []);
+
+    useEffect(() => {
+        //Normally, the data is retrieved on component mount. However, when the user configured his/her program and has formatted it, this component does not update to the correct value because programs.program !== undefined is true.
+
+        //This useEffect serves to handle that, and upon formattedExercise change will update to the correct values enabling program to run.
+
+        getUserProgramData();
+    }, [programs.programs.length]);
 
     //This state controls snackbars:
     const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
