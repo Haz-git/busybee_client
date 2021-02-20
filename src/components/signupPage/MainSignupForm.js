@@ -21,6 +21,7 @@ import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { UserCircle } from '@styled-icons/boxicons-solid/UserCircle';
 import { Lock2 } from '@styled-icons/remix-fill/Lock2';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
+import { SnackbarContent } from '@material-ui/core';
 
 const MainContainer = styled.div`
     background: ${(props) => props.theme.background};
@@ -135,6 +136,7 @@ const CustomMuiAlert = withStyles(() => ({
         alignContent: 'center',
         backgroundColor: '#136539',
         padding: '.8em .8em',
+        textShadow: 'rgba(0, 0, 0, 0.9) 0px 2px 2px',
         '& .MuiAlert-icon': {
             fontSize: '1.25em',
         },
@@ -145,15 +147,42 @@ const CustomMuiAlert = withStyles(() => ({
             margin: '0',
             padding: '0',
         },
-        '@media only screen and (min-width: 375px)': {
+        '@media only screen and (max-width: 375px)': {
             padding: '.8em .8em',
             '& .MuiAlert-icon': {
-                fontSize: '2.7em',
+                fontSize: '2.9em',
+            },
+            '& .MuiAlert-message': {
+                fontSize: '1.1em',
+            },
+        },
+        '@media only screen and (max-width: 320px)': {
+            padding: '.8em .8em',
+            '& .MuiAlert-icon': {
+                fontSize: '2.2em',
+            },
+            '& .MuiAlert-message': {
+                fontSize: '.85em',
+            },
+        },
+        '@media only screen and (max-width: 414px)': {
+            padding: '.8em .8em',
+            '& .MuiAlert-icon': {
+                fontSize: '3.5em',
             },
             '& .MuiAlert-message': {
                 fontSize: '1.2em',
             },
         },
+    },
+    filledSuccess: {
+        background: '#156711',
+    },
+    filledError: {
+        background: '#76251F',
+    },
+    filledInfo: {
+        background: '#083768',
     },
 }))(MuiAlert);
 
@@ -170,13 +199,39 @@ const CustomAlertButton = withStyles(() => ({
         textTransform: 'capitalize',
         boxShadow: 'rgba(0, 0, 0, 0.7) 0px 3px 8px',
 
-        '@media only screen and (min-width: 375px)': {
-            fontSize: '1.5em',
+        '@media only screen and (max-width: 375px)': {
+            fontSize: '1.2em',
             padding: '1.3em 2em',
+            margin: '0 0',
+        },
+
+        '@media only screen and (max-width: 320px)': {
+            fontSize: '1em',
+            padding: '1.3em 2em',
+            margin: '0 0',
+        },
+        '@media only screen and (max-width: 414px)': {
+            fontSize: '1.4em',
+            padding: '1.3em 1.2em',
             margin: '0 0',
         },
     },
 }))(Button);
+
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
 
 //Helper functions:
 const Alert = (props) => {
@@ -189,7 +244,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
     //Client Verification Handlers:
     //We will use the browser to handle verification.
     //Snackbar controls the label that indicates proper user regristration.
-    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [openSnackBar, setOpenSnackBar] = useState(true);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
         undefined
@@ -393,31 +448,40 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                         <PromptLink to="/login">Login here.</PromptLink>
                     </NoticeContainer>
                 </WrapperContainer>
-                <Slide direction="right" in={openSnackBar} timeout="exit">
-                    <Snackbar
-                        open={openSnackBar}
-                        autoHideDuration={20000}
-                        onClose={closeSnackBar}
-                        anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    >
-                        <Alert
-                            severity="success"
-                            action={
-                                <Link to="/login">
-                                    <CustomAlertButton
-                                        variant="contained"
-                                        color="primary"
-                                        size="small"
-                                    >
-                                        Login
-                                    </CustomAlertButton>
-                                </Link>
-                            }
-                        >
-                            Your account has been successfully created!
-                        </Alert>
-                    </Snackbar>
-                </Slide>
+                <Snackbar
+                    open={openSnackBar}
+                    autoHideDuration={600000000}
+                    onClose={closeSnackBar}
+                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                    TransitionComponent={slideTransition}
+                >
+                    <SnackbarContent
+                        style={{
+                            boxShadow: 'none',
+                            background: 'none',
+                            display: 'flex',
+                            justifyContent: 'center',
+                        }}
+                        message={
+                            <Alert
+                                severity="success"
+                                action={
+                                    <Link to="/login">
+                                        <CustomAlertButton
+                                            variant="contained"
+                                            color="primary"
+                                            size="small"
+                                        >
+                                            Login
+                                        </CustomAlertButton>
+                                    </Link>
+                                }
+                            >
+                                Your account has been successfully created!
+                            </Alert>
+                        }
+                    />
+                </Snackbar>
             </MainContainer>
         </>
     );
