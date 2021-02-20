@@ -244,7 +244,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
     //Client Verification Handlers:
     //We will use the browser to handle verification.
     //Snackbar controls the label that indicates proper user regristration.
-    const [openSnackBar, setOpenSnackBar] = useState(true);
+    const [openSnackBar, setOpenSnackBar] = useState(false);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
         undefined
@@ -450,7 +450,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                 </WrapperContainer>
                 <Snackbar
                     open={openSnackBar}
-                    autoHideDuration={600000000}
+                    autoHideDuration={60000}
                     onClose={closeSnackBar}
                     anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
                     TransitionComponent={slideTransition}
