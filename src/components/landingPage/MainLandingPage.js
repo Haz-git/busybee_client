@@ -176,7 +176,7 @@ const MainLandingPage = () => {
                 <MobileView>
                     <PWAPrompt
                         promptOnVisit={1}
-                        timesToShow={3}
+                        timesToShow={5000}
                         copyClosePrompt="Close"
                         permanentlyHideOnDismiss={false}
                     />
