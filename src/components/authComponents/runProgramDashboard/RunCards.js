@@ -6,15 +6,15 @@ import Countdown from 'react-countdown';
 
 //Styles:
 import { Running } from '@styled-icons/fa-solid/Running';
-import { ArrowLeftCircle } from '@styled-icons/feather/ArrowLeftCircle';
-import { ArrowRightCircle } from '@styled-icons/feather/ArrowRightCircle';
+import { ArrowLongLeft } from '@styled-icons/entypo/ArrowLongLeft';
+import { ArrowLongRight } from '@styled-icons/entypo/ArrowLongRight';
 import { Coffee } from '@styled-icons/fa-solid/Coffee';
 //Icons:
 
 const carouselMovement = keyframes`
     from {
         opacity: 0;
-        transform: translate(20%);
+        transform: translate(10%);
     }
 
     to {
@@ -40,15 +40,15 @@ const CoffeeIcon = styled(Coffee)`
     margin-right: 1em;
 `;
 
-const ArrowLeft = styled(ArrowLeftCircle)`
-    height: 4.5em;
-    width: 4.5em;
+const ArrowLeft = styled(ArrowLongLeft)`
+    height: 6em;
+    width: 6em;
     color: #fdbc3d;
 `;
 
-const ArrowRight = styled(ArrowRightCircle)`
-    height: 4.5em;
-    width: 4.5em;
+const ArrowRight = styled(ArrowLongRight)`
+    height: 6em;
+    width: 6em;
     color: #fdbc3d;
 `;
 
@@ -118,8 +118,8 @@ const RepsContainer = styled.div`
     background: #080f1a;
     width: 100%;
     padding: 3em 1em;
-    border-bottom-left-radius: 0.4em;
-    border-bottom-right-radius: 0.4em;
+    /* border-bottom-left-radius: 0.4em;
+    border-bottom-right-radius: 0.4em; */
     height: 16em;
     animation: ${carouselMovement} 0.7s ease-in-out;
 `;
@@ -195,24 +195,47 @@ const SetsValue = styled.h3`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-around;
-    /* background: salmon; */
-    margin: 1.8em 0;
+    position: fixed;
+    bottom: 5em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    /* align-items: center;
+    justify-content: center; */
+    padding: 0em 1em;
+    /* background: #27303f; */
     width: 100%;
 `;
-
 const ButtonDivider = styled.div`
     /* width: 100%; */
 `;
 
-const MoveButton = styled.button`
+const MoveButtonRight = styled.button`
     background: #27303f;
     border: none;
-    border-radius: 1em;
-    padding: 0.8em 1em;
-    box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    padding: 0em 0em;
+    box-shadow: rgba(0, 0, 0, 0.4) 5px 5px 10px;
+    width: 100%;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    border-left: 1px solid #26292f;
+
+    &:hover {
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const MoveButtonLeft = styled.button`
+    background: #27303f;
+    border: none;
+    padding: 0em 0em;
+    box-shadow: rgba(0, 0, 0, 0.4) -4px 5px 10px;
+    width: 100%;
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
 
     &:hover {
         outline: none;
@@ -427,17 +450,17 @@ const RunCards = ({
                         </TimerContainer>
                         <ButtonContainer>
                             <ButtonDivider>
-                                <MoveButton onClick={onPrev}>
+                                <MoveButtonLeft onClick={onPrev}>
                                     <ArrowLeft />
-                                </MoveButton>
+                                </MoveButtonLeft>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
                             </ButtonDivider>
                             <ButtonDivider>
-                                <MoveButton onClick={onNext}>
+                                <MoveButtonRight onClick={onNext}>
                                     <ArrowRight />
-                                </MoveButton>
+                                </MoveButtonRight>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
@@ -466,17 +489,17 @@ const RunCards = ({
                         </TimerContainer>
                         <ButtonContainer>
                             <ButtonDivider>
-                                <MoveButton onClick={onPrev}>
+                                <MoveButtonLeft onClick={onPrev}>
                                     <ArrowLeft />
-                                </MoveButton>
+                                </MoveButtonLeft>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
                             </ButtonDivider>
                             <ButtonDivider>
-                                <MoveButton onClick={onNext}>
+                                <MoveButtonRight onClick={onNext}>
                                     <ArrowRight />
-                                </MoveButton>
+                                </MoveButtonRight>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
@@ -514,17 +537,17 @@ const RunCards = ({
                         </RepsContainer>
                         <ButtonContainer>
                             <ButtonDivider>
-                                <MoveButton onClick={onPrev}>
+                                <MoveButtonLeft onClick={onPrev}>
                                     <ArrowLeft />
-                                </MoveButton>
+                                </MoveButtonLeft>
                                 <PrevExerciseLabel>
                                     {processPrevExercise()}
                                 </PrevExerciseLabel>
                             </ButtonDivider>
                             <ButtonDivider>
-                                <MoveButton onClick={onNext}>
+                                <MoveButtonRight onClick={onNext}>
                                     <ArrowRight />
-                                </MoveButton>
+                                </MoveButtonRight>
                                 <NextExerciseLabel>
                                     {processNextExercise()}
                                 </NextExerciseLabel>
