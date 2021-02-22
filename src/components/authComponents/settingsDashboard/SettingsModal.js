@@ -14,7 +14,6 @@ import {
     ModalHeader,
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
-import { ButtonBase } from '@material-ui/core';
 
 const fadeInError = keyframes`
     from { 
@@ -40,11 +39,48 @@ const SettingsModalDesc = styled(ModalDesc)`
     text-align: center;
 `;
 
+const CustomConfirmButton = styled.button`
+    border: none;
+    border-radius: 0.5em;
+    color: white;
+    background: #156711;
+    font-family: 'Nunito', sans-serif, helvetica;
+    font-weight: 300;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    padding: 0.8em 1em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
+
+    &:hover {
+        background: #14a84b;
+    }
+`;
+
+const CustomCancelButton = styled.button`
+    border: none;
+    border-radius: 0.5em;
+    color: white;
+    background: #90130c;
+    font-family: 'Nunito', sans-serif, helvetica;
+    font-weight: 300;
+    font-size: 1em;
+    letter-spacing: 0.05em;
+    padding: 0.8em 1em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.3) 0px 5px 10px;
+
+    &:hover {
+        background: #cb484f;
+    }
+`;
+
 const ButtonContainer = styled.div`
     margin: 1em 0;
     display: flex;
     align-items: center;
     justify-content: space-evenly;
+    /* flex-direction: column; */
 `;
 
 const ButtonDivider = styled.div`
@@ -160,21 +196,21 @@ const SettingsModal = ({
                         <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
                         {isSignOutModal === 'true' ? (
                             <>
-                                <Button
+                                <CustomCancelButton
                                     variant="contained"
                                     color="secondary"
                                     onClick={buttonSubmitFunction}
                                 >
                                     Yes, Sign Me Out
-                                </Button>
+                                </CustomCancelButton>
                                 <ButtonDivider />
-                                <Button
+                                <CustomConfirmButton
                                     variant="contained"
                                     color="primary"
                                     onClick={closeFunction}
                                 >
                                     No, Keep Me Logged In
-                                </Button>
+                                </CustomConfirmButton>
                             </>
                         ) : null}
                         {isPasswordModal === 'true' ? (
@@ -212,20 +248,20 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button
+                                    <CustomConfirmButton
                                         variant="contained"
                                         color="primary"
                                         onClick={userPasswordSubmissionHandler}
                                     >
                                         Save Changes
-                                    </Button>
-                                    <Button
+                                    </CustomConfirmButton>
+                                    <CustomCancelButton
                                         variant="contained"
                                         color="secondary"
                                         onClick={closeFunction}
                                     >
                                         Nevermind
-                                    </Button>
+                                    </CustomCancelButton>
                                 </ButtonContainer>
                             </>
                         ) : null}
@@ -251,20 +287,20 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button
+                                    <CustomConfirmButton
                                         variant="contained"
                                         color="primary"
                                         onClick={userEmailSubmissionHandler}
                                     >
                                         Save Changes
-                                    </Button>
-                                    <Button
+                                    </CustomConfirmButton>
+                                    <CustomCancelButton
                                         variant="contained"
                                         color="secondary"
                                         onClick={closeFunction}
                                     >
                                         Nevermind
-                                    </Button>
+                                    </CustomCancelButton>
                                 </ButtonContainer>
                             </>
                         ) : null}
@@ -298,20 +334,20 @@ const SettingsModal = ({
                                     />
                                 </FieldDivider>
                                 <ButtonContainer>
-                                    <Button
+                                    <CustomConfirmButton
                                         variant="contained"
                                         color="primary"
                                         onClick={userDetailSubmissionHandler}
                                     >
                                         Save Changes
-                                    </Button>
-                                    <Button
+                                    </CustomConfirmButton>
+                                    <CustomCancelButton
                                         variant="contained"
                                         color="secondary"
                                         onClick={closeFunction}
                                     >
                                         Nevermind
-                                    </Button>
+                                    </CustomCancelButton>
                                 </ButtonContainer>
                             </>
                         ) : null}
