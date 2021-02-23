@@ -61,17 +61,13 @@ const Dashboard = ({
             stats.stats !== undefined &&
             programs.programs !== undefined
         ) {
+            //This means that either the user has changed (logging into a different user) --> Or the component has been re-mounted.
+            getUserExistingDetails();
+            getUserStatData();
+            getUserProgramData();
             setIsLoaded(true);
         }
     }, []);
-
-    useEffect(() => {
-        if (user.user.email !== undefined && user.user.email !== null) {
-            getUserProgramData();
-            getUserStatData();
-            getUserExistingDetails();
-        }
-    }, [user.user.email]);
 
     const renderLoadingIfNoUserDetails = () => {
         if (
