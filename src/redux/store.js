@@ -17,7 +17,7 @@ import userDetailReducer from './userDetails/detailReducer';
 import storage from 'redux-persist/lib/storage';
 
 //Persist Configuration:
-const persistConfig = {
+export const persistConfig = {
     key: 'root',
     storage,
     whitelist: [
