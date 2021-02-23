@@ -123,8 +123,6 @@ const UserPowerStats = ({
         return results.length;
     };
 
-    console.log(checkUserPowerLiftData());
-
     return (
         <>
             <MainContainer>
