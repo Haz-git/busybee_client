@@ -1,4 +1,5 @@
 import historyObject from '../components/historyObject';
+import { store, persistor } from '../redux/store';
 
 //Utility function designed to help user sign out. Should remove JWT from localstorage + persisted items, and push user to the main login page....
 
@@ -13,12 +14,18 @@ export const userSignOut = () => {
 
     localStorage.removeItem('persist:root');
 
+    //Purge stored redux-state:
+
+    const purge = async () => {
+        await persistor.purge();
+        await persistor.purge();
+        console.log('Redux persist purged');
+    };
+
+    setTimeout(() => purge(), 200);
+
     //We will not use localStorage.clear() because we want to keep the theme.
 
     //Push user to login page:
     historyObject.push('/login');
-
-    //This reload will reset the redux-persist state... working temp for now.
-
-    window.location.reload();
 };
