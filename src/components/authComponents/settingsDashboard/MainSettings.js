@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import SettingsCard from './SettingsCard';
-import { userSignOut } from '../../../utils/signOutHelper';
 import SettingsModal from './SettingsModal';
 import { connect } from 'react-redux';
 import {
@@ -8,6 +7,7 @@ import {
     userEditEmail,
     userEditPassword,
 } from '../../../redux/userDetails/detailActions';
+import { userLogout } from '../../../redux/userLogout/userLogoutActions';
 import ThemeToggler from './ThemeToggler';
 
 //Styles:
@@ -149,6 +149,7 @@ const MainSettings = ({
     userEditGeneralInfo,
     userEditEmail,
     userEditPassword,
+    userLogout,
     modeStatus,
 }) => {
     //User's auth details should be persisted, and so no need for a loader state..
@@ -444,7 +445,7 @@ const MainSettings = ({
                 ariaDesc="Modal for confirming user sign out"
                 modalHeader="Confirm Sign Out"
                 modalDesc="Are you sure you want to sign out? You will have to sign back in to view your account details."
-                buttonSubmitFunction={signOutHandler}
+                buttonSubmitFunction={userLogout}
                 isSignOutModal="true"
             />
             <Snackbar
@@ -539,4 +540,5 @@ export default connect(mapStateToProps, {
     userEditGeneralInfo,
     userEditEmail,
     userEditPassword,
+    userLogout,
 })(MainSettings);
