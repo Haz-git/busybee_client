@@ -3,6 +3,7 @@ import { reducer as formReducer } from 'redux-form';
 import reduxThunk from 'redux-thunk';
 import { persistStore } from 'redux-persist';
 import { persistReducer } from 'redux-persist';
+import { USER_LOGOUT } from '../redux/userLogout/userLogoutTypes';
 
 //Reducers:
 import authReducer from './authReducer/authReducer';
@@ -36,7 +37,7 @@ const composeEnhancers = window.__REDUX_DEVTOOLS_EXTENSION_COMPOSE__ || compose;
 
 //RootReducer:
 
-const rootReducer = combineReducers({
+const appReducer = combineReducers({
     form: formReducer,
     auth: authReducer,
     powerStats: powerStatReducer,
@@ -46,6 +47,14 @@ const rootReducer = combineReducers({
     formattedProgram: formattedProgramReducer,
     user: userDetailReducer,
 });
+
+const rootReducer = (state, action) => {
+    if (action.type === USER_LOGOUT) {
+        state = undefined;
+    }
+
+    return appReducer(state, action);
+};
 
 //Persisting RootReducer:
 const persistRootReducer = persistReducer(persistConfig, rootReducer);
