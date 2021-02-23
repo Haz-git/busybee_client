@@ -19,6 +19,8 @@ import {
 
 //Styles:
 import styled from 'styled-components';
+import { LineChart } from '@styled-icons/boxicons-regular/LineChart';
+import { Edit } from '@styled-icons/fa-solid/Edit';
 
 export const MainContainer = styled.div`
     margin-top: 1em;
@@ -50,6 +52,34 @@ const StatCardContainer = styled.div`
     align-content: center;
 `;
 
+const EmptyMainLiftContainer = styled.div`
+    text-align: center;
+`;
+
+const EditExampleIcon = styled(Edit)`
+    height: 1.3em;
+    width: 1.3em;
+    color: white;
+    vertical-align: bottom;
+    margin-left: 0.3em;
+`;
+
+const LineChartIcon = styled(LineChart)`
+    height: 2.2em;
+    width: 2.2em;
+    color: white;
+    margin-bottom: 0.5em;
+`;
+
+const EmptyLabel = styled.h3`
+    font-size: 0.8em;
+    font-weight: 700;
+    font-family: 'Lato';
+    letter-spacing: 1px;
+    color: white;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+`;
+
 //Render:
 
 const UserPowerStats = ({
@@ -62,6 +92,38 @@ const UserPowerStats = ({
     useEffect(() => {
         getUserLiftingData();
     }, []);
+
+    const checkUserPowerLiftData = () => {
+        let results = [];
+
+        if (
+            existingStats.powerLiftStats !== undefined &&
+            existingStats.powerLiftStats !== null
+        ) {
+            if (
+                existingStats.powerLiftStats.userExistingPLStats.bench === 'NA'
+            ) {
+                results.push(1);
+            }
+
+            if (
+                existingStats.powerLiftStats.userExistingPLStats.squat === 'NA'
+            ) {
+                results.push(1);
+            }
+
+            if (
+                existingStats.powerLiftStats.userExistingPLStats.deadlift ===
+                'NA'
+            ) {
+                results.push(1);
+            }
+        }
+
+        return results.length;
+    };
+
+    console.log(checkUserPowerLiftData());
 
     return (
         <>
@@ -148,6 +210,15 @@ const UserPowerStats = ({
                         }
                     />
                 </StatCardContainer>
+                {checkUserPowerLiftData() !== 3 ? null : (
+                    <EmptyMainLiftContainer>
+                        <LineChartIcon />
+                        <EmptyLabel>
+                            Keep track of your main lifts with 'edit'
+                            {<EditExampleIcon />}
+                        </EmptyLabel>
+                    </EmptyMainLiftContainer>
+                )}
             </MainContainer>
         </>
     );
