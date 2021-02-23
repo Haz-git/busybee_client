@@ -311,10 +311,6 @@ const MainSettings = ({
         setStateSignOutModal(false);
     };
 
-    const signOutHandler = () => {
-        userSignOut();
-    };
-
     //Alert function for snackbars:
     const Alert = (props) => {
         return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
