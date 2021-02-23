@@ -13,6 +13,7 @@ import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Components:
+import { ProjectDiagram } from '@styled-icons/fa-solid/ProjectDiagram';
 import SearchBar from '../statsDashboard/SearchBar';
 import CreateProgramButton from './CreateProgramButton';
 import CreateProgramModal from './CreateProgramModal';
@@ -51,6 +52,26 @@ const CustomMuiAlert = withStyles(() => ({
         background: '#083768',
     },
 }))(MuiAlert);
+
+const EmptyProgramIcon = styled(ProjectDiagram)`
+    height: 7em;
+    width: 7em;
+    color: #26292f;
+    /* margin: -1.8em 0; */
+`;
+
+const EmptyProgramContainer = styled.div`
+    text-align: center;
+    margin: 3em 0;
+`;
+
+const EmptyProgramLabel = styled.h3`
+    font-family: 'Lato', 'Nunito';
+    font-weight: 600;
+    font-size: 1em;
+    margin: 0.4em 0;
+    color: #26292f;
+`;
 
 const MainContainer = styled.div`
     display: block;
@@ -192,6 +213,7 @@ const MainPrograms = ({
 
     const renderProgramCards = () => {
         if (
+            renderNumberOfPrograms() !== 0 &&
             programs.programs !== undefined &&
             programs.programs !== null &&
             userSearchArray === null
@@ -212,6 +234,7 @@ const MainPrograms = ({
                 />
             ));
         } else if (
+            renderNumberOfPrograms() !== 0 &&
             programs.programs !== undefined &&
             programs.programs !== null &&
             userSearchArray !== null
@@ -231,8 +254,22 @@ const MainPrograms = ({
                     isFormatted={program.isFormatted}
                 />
             ));
-        } else {
-            return null;
+        } else if (
+            renderNumberOfPrograms() === 0 &&
+            programs.programs !== undefined &&
+            programs.programs !== null
+        ) {
+            return (
+                <EmptyProgramContainer>
+                    <EmptyProgramIcon />
+                    <EmptyProgramLabel>
+                        <em>Breeze</em> through your workout with a program.
+                    </EmptyProgramLabel>
+                    <EmptyProgramLabel>
+                        Use 'Create' to make a new one.
+                    </EmptyProgramLabel>
+                </EmptyProgramContainer>
+            );
         }
     };
 
