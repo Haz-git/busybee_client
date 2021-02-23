@@ -153,7 +153,9 @@ const RecentWeightBox = ({ time, weight }) => {
         <>
             <MainContainer>
                 <IconContainer>{renderIcon()}</IconContainer>
-                <DescContainer>{renderDesc()}</DescContainer>
+                <DescContainer>
+                    {time !== 'NA' && weight !== 'NA' ? renderDesc() : null}
+                </DescContainer>
             </MainContainer>
         </>
     );
