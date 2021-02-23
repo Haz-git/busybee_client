@@ -48,8 +48,6 @@ const App = withRouter(({ location }) => {
         setAppTheme(modeValue);
     };
 
-    console.log(appTheme);
-
     const grabbedTheme = appTheme === 'light' ? lightTheme : darkTheme;
 
     const renderApp = () => {

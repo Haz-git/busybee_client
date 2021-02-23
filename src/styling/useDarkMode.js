@@ -4,7 +4,11 @@ import { useEffect, useState } from 'react';
 
 export const getMode = () => {
     const getTheme = window.localStorage.getItem('theme');
-    return getTheme;
+    if (getTheme !== null) {
+        return getTheme;
+    } else {
+        return 'dark';
+    }
 };
 
 export const useDarkMode = () => {
