@@ -62,9 +62,6 @@ const Dashboard = ({
             programs.programs !== undefined
         ) {
             //This means that either the user has changed (logging into a different user) --> Or the component has been re-mounted.
-            getUserExistingDetails();
-            getUserStatData();
-            getUserProgramData();
             setIsLoaded(true);
         }
     }, []);
