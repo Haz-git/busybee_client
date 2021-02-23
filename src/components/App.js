@@ -49,7 +49,12 @@ const App = withRouter(({ location }) => {
     };
 
     const grabbedTheme =
-        appTheme === 'light' || appTheme === '' ? lightTheme : darkTheme;
+        appTheme === 'light' ||
+        appTheme === '' ||
+        appTheme === undefined ||
+        appTheme === null
+            ? lightTheme
+            : darkTheme;
 
     const renderApp = () => {
         if (appTheme === '') {
