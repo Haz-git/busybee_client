@@ -15,6 +15,7 @@ import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Styles:
 import styled from 'styled-components';
+import { Stats } from '@styled-icons/boxicons-regular/Stats';
 import { MainHeader } from '../dashboardComponents/UserGreeting';
 import {
     ModalContainer,
@@ -56,6 +57,26 @@ const CustomMuiAlert = withStyles(() => ({
         background: '#083768',
     },
 }))(MuiAlert);
+
+const EmptyStatsIcon = styled(Stats)`
+    height: 10em;
+    width: 10em;
+    color: #26292f;
+    margin: -1.8em 0;
+`;
+
+const EmptyStatContainer = styled.div`
+    text-align: center;
+    margin: 3em 0;
+`;
+
+const EmptyStatLabel = styled.h3`
+    font-family: 'Lato', 'Nunito';
+    font-weight: 600;
+    font-size: 1em;
+    margin: 0.4em 0;
+    color: #26292f;
+`;
 
 const MainContainer = styled.div`
     display: block;
@@ -202,6 +223,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
 
     const renderStatCards = () => {
         if (
+            renderNumberOfStats() !== 0 &&
             stats.stats !== undefined &&
             stats.stats !== null &&
             userSearchArray === null
@@ -219,6 +241,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 />
             ));
         } else if (
+            renderNumberOfStats() !== 0 &&
             stats.stats !== undefined &&
             stats.stats !== null &&
             userSearchArray !== null
@@ -235,8 +258,22 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
-        } else {
-            return null;
+        } else if (
+            renderNumberOfStats() === 0 &&
+            stats.stats !== undefined &&
+            stats.stats !== null
+        ) {
+            return (
+                <EmptyStatContainer>
+                    <EmptyStatsIcon />
+                    <EmptyStatLabel>
+                        Stats track your progressive overload.
+                    </EmptyStatLabel>
+                    <EmptyStatLabel>
+                        Use 'Add' to save a new one.
+                    </EmptyStatLabel>
+                </EmptyStatContainer>
+            );
         }
     };
 
