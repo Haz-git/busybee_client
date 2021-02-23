@@ -66,9 +66,11 @@ const Dashboard = ({
     }, []);
 
     useEffect(() => {
-        getUserProgramData();
-        getUserStatData();
-        getUserExistingDetails();
+        if (user.user.email !== undefined && user.user.email !== null) {
+            getUserProgramData();
+            getUserStatData();
+            getUserExistingDetails();
+        }
     }, [user.user.email]);
 
     const renderLoadingIfNoUserDetails = () => {
