@@ -15,10 +15,9 @@ export function userLogout() {
 
         localStorage.removeItem('persist:root');
 
-        //Purge stored redux-state:
-
         //We will not use localStorage.clear() because we want to keep the theme.
 
+        //Purge stored redux-state:
         dispatch({
             type: USER_LOGOUT,
         });
