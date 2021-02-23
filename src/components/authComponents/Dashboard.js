@@ -65,6 +65,12 @@ const Dashboard = ({
         }
     }, []);
 
+    useEffect(() => {
+        getUserProgramData();
+        getUserStatData();
+        getUserExistingDetails();
+    }, [user.user.email]);
+
     const renderLoadingIfNoUserDetails = () => {
         if (
             user.user !== undefined &&
