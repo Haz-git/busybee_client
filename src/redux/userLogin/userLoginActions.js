@@ -2,6 +2,18 @@ import { USER_LOG_IN } from './userLoginTypes';
 import history from '../../components/historyObject';
 import api from '../../api';
 
+//Async Await LocalStorage:
+const asyncLocalStorage = {
+    setItem: async function (key, value) {
+        await null;
+        return localStorage.setItem(key, value);
+    },
+    getItem: async function (key) {
+        await null;
+        return localStorage.getItem(key);
+    },
+};
+
 const userLogin = (formValues) => async (dispatch) => {
     let response;
 
@@ -19,18 +31,15 @@ const userLogin = (formValues) => async (dispatch) => {
 
     if (response) {
         try {
-            localStorage.setItem('jwt', JSON.stringify(response.data.token));
-            history.push('/dashboard');
-
-            //This is not REACT-like nor efficient in the slightest way...however if enables the user's data to be rendered while logging in. I have not yet figured out a way to solve this issue:
-
-            //When the user's log in is successful, it pushes the user to the dashboard. However, it seems like the 'Bearer xxx' token stored in the localstorage is NOT grabbed by axios in time before sending the inital request to the server. Because this token is undefined, passport doesn't authorize--causing no user data to be sent back and rendered.
-
-            //The only solution that enables progress for now is to immediately force-refresh the page after going to dashboard.
-
-            //Server-sided rendering seems to be some sort of a solution.
-
-            window.location.reload();
+            asyncLocalStorage
+                .setItem('jwt', JSON.stringify(response.data.token))
+                .then(() => {
+                    return asyncLocalStorage.getItem('jwt').then((value) => {
+                        if (value !== undefined && value !== null) {
+                            history.push('/dashboard');
+                        }
+                    });
+                });
         } catch (e) {
             if (e.name === 'QuotaExceededError') {
                 localStorage.clear();
