@@ -17,4 +17,8 @@ export const userSignOut = () => {
 
     //Push user to login page:
     historyObject.push('/login');
+
+    //This reload will reset the redux-persist state... working temp for now.
+
+    window.location.reload();
 };
