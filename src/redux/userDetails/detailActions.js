@@ -4,6 +4,7 @@ import {
     USER_EDIT_GENERAL_INFO,
     USER_EDIT_EMAIL,
     USER_EDIT_PASSWORD,
+    USER_CHANGE_ISNEWUSER_VALUE,
 } from './detailTypes';
 
 export function getUserExistingDetails() {
@@ -18,6 +19,27 @@ export function getUserExistingDetails() {
         if (response) {
             return true;
         }
+    };
+}
+
+export function getIsNewUserValue() {
+    return async (dispatch) => {
+        const response = await api.get('/user/getisnewuservalue');
+
+        if (response) {
+            return response.data.isNewUserValue;
+        }
+    };
+}
+
+export function changeIsNewUserValue(booleanValue) {
+    return async (dispatch) => {
+        const response = await api.post('/user/setisnewuser', { booleanValue });
+
+        dispatch({
+            type: USER_CHANGE_ISNEWUSER_VALUE,
+            payload: response.data.user,
+        });
     };
 }
 
