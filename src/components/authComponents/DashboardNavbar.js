@@ -2,13 +2,25 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 
 //Styles:
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 //Icons:
 import { Home } from '@styled-icons/ionicons-solid/Home';
 import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
 import { StatsChart } from '@styled-icons/ionicons-solid/StatsChart';
 import { UserCog } from '@styled-icons/fa-solid/UserCog';
 import { Barbell } from '@styled-icons/ionicons-solid/Barbell';
+
+const fadeUp = keyframes`
+    from {
+        opacity: 0;
+        transform: translateY(100%)
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+`;
 
 const StyledHomeIcon = styled(Home)`
     height: 2em;
@@ -55,6 +67,7 @@ const MainContainer = styled.div`
     border-top-right-radius: 1.5em;
     z-index: 99999 !important;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 15px;
+    animation: ${fadeUp} 0.5s ease;
 `;
 
 const NavItemContainer = styled.div`
