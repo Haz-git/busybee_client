@@ -79,7 +79,7 @@ const UserDetailLabel = styled.h2`
 
 const LogoContainer = styled.div``;
 
-const StyledLogo = styled.img`
+export const StyledLogo = styled.img`
     object-fit: cover;
     height: 6.7em;
     width: 6.7em;

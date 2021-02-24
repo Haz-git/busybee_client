@@ -53,8 +53,9 @@ const TutorialModalHeader = styled(ModalHeader)`
 `;
 
 const TutorialModalDescHeader = styled(ModalDesc)`
-    white-space: nowrap;
+    white-space: normal;
     text-align: center;
+    font-weight: 900;
 `;
 
 const TutorialModalDesc = styled(ModalDesc)`
@@ -106,7 +107,7 @@ const TutorialModal = ({
                             <HappyIcon />
                         </IconContainer>
                         <TutorialModalDescHeader>
-                            We're very glad you decided to join us.
+                            Thank you for joining us!
                         </TutorialModalDescHeader>
                         <TutorialModalDesc>
                             Our goal is to improve your workout flow no matter
