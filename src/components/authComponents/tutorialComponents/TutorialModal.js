@@ -117,20 +117,11 @@ const TutorialModal = ({
                             tutorial makes using GymJot easier!
                         </TutorialModalDesc>
                         <ButtonContainer>
-                            <CustomConfirmButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                onClick={buttonSubmitFunction}
-                            >
+                            <CustomConfirmButton onClick={buttonSubmitFunction}>
                                 Yes, Take Me To The Tutorial
                             </CustomConfirmButton>
                             <ButtonDivider />
-                            <CustomCancelButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                            >
+                            <CustomCancelButton onClick={closeFunction}>
                                 No, Don't Show Me This Again
                             </CustomCancelButton>
                         </ButtonContainer>
