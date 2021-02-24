@@ -5,7 +5,11 @@ import historyObject from '../historyObject';
 import { connect } from 'react-redux';
 import { getUserProgramData } from '../../redux/userPrograms/userProgramActions';
 import { getUserStatData } from '../../redux/userStats/userStatActions';
-import { getUserExistingDetails } from '../../redux/userDetails/detailActions';
+import {
+    getUserExistingDetails,
+    changeIsNewUserValue,
+    getIsNewUserValue,
+} from '../../redux/userDetails/detailActions';
 
 //Components:
 import TutorialModal from './tutorialComponents/TutorialModal';
@@ -34,6 +38,8 @@ const Dashboard = ({
     getUserProgramData,
     getUserStatData,
     getUserExistingDetails,
+    changeIsNewUserValue,
+    getIsNewUserValue,
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stateTutorialModal, setStateTutorialModal] = useState(false);
@@ -48,15 +54,16 @@ const Dashboard = ({
                 const boolProgramData = await getUserProgramData();
                 const boolStatData = await getUserStatData();
                 const boolUserDetails = await getUserExistingDetails();
-
+                const isNewUserValue = await getIsNewUserValue();
                 if (
                     boolStatData === true &&
                     boolProgramData === true &&
-                    boolUserDetails === true
+                    boolUserDetails === true &&
+                    isNewUserValue !== undefined &&
+                    isNewUserValue !== null
                 ) {
                     setIsLoaded(boolProgramData);
-                    console.log(user.user.isNewUser);
-                    setStateTutorialModal(user.user.isNewUser);
+                    setStateTutorialModal(isNewUserValue);
                 }
             };
 
@@ -73,6 +80,7 @@ const Dashboard = ({
     }, []);
 
     const closeTutorialModal = () => {
+        changeIsNewUserValue(false);
         setStateTutorialModal(false);
 
         //Needs to send dispatch here to change value of isNewUser to false;
@@ -135,4 +143,6 @@ export default connect(mapStateToProps, {
     getUserProgramData,
     getUserStatData,
     getUserExistingDetails,
+    changeIsNewUserValue,
+    getIsNewUserValue,
 })(Dashboard);
