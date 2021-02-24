@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import historyObject from '../historyObject';
 
 //Redux Actions:
 import { connect } from 'react-redux';
@@ -7,6 +8,7 @@ import { getUserStatData } from '../../redux/userStats/userStatActions';
 import { getUserExistingDetails } from '../../redux/userDetails/detailActions';
 
 //Components:
+import TutorialModal from './tutorialComponents/TutorialModal';
 import UserGreeting from './dashboardComponents/UserGreeting';
 import UserPowerStats from './dashboardComponents/UserPowerStats';
 import UserTopPrograms from './dashboardComponents/UserTopPrograms';
@@ -34,6 +36,7 @@ const Dashboard = ({
     getUserExistingDetails,
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
+    const [stateTutorialModal, setStateTutorialModal] = useState(false);
 
     useEffect(() => {
         if (
@@ -52,6 +55,8 @@ const Dashboard = ({
                     boolUserDetails === true
                 ) {
                     setIsLoaded(boolProgramData);
+                    console.log(user.user.isNewUser);
+                    setStateTutorialModal(user.user.isNewUser);
                 }
             };
 
@@ -62,9 +67,20 @@ const Dashboard = ({
             programs.programs !== undefined
         ) {
             //This means that either the user has changed (logging into a different user) --> Or the component has been re-mounted.
+            setStateTutorialModal(user.user.isNewUser);
             setIsLoaded(true);
         }
     }, []);
+
+    const closeTutorialModal = () => {
+        setStateTutorialModal(false);
+
+        //Needs to send dispatch here to change value of isNewUser to false;
+    };
+
+    const sendUserToTutorialPage = () => {
+        historyObject.push('/newUserTutorial');
+    };
 
     const renderLoadingIfNoUserDetails = () => {
         if (
@@ -73,18 +89,27 @@ const Dashboard = ({
             isLoaded !== false
         ) {
             const { firstName, lastName, userName, email } = user.user;
+
             return (
-                <MainContainer>
-                    <UserGreeting
+                <>
+                    <MainContainer>
+                        <UserGreeting
+                            firstName={firstName}
+                            lastName={lastName}
+                            email={email}
+                            userName={userName}
+                        />
+                        <UserPowerStats />
+                        <UserTopPrograms userPrograms={programs.programs} />
+                        <UserRecentStats userStats={stats.stats} />
+                    </MainContainer>
+                    <TutorialModal
+                        openBoolean={stateTutorialModal}
+                        closeFunction={closeTutorialModal}
+                        buttonSubmitFunction={sendUserToTutorialPage}
                         firstName={firstName}
-                        lastName={lastName}
-                        email={email}
-                        userName={userName}
                     />
-                    <UserPowerStats />
-                    <UserTopPrograms userPrograms={programs.programs} />
-                    <UserRecentStats userStats={stats.stats} />
-                </MainContainer>
+                </>
             );
         } else {
             return (
