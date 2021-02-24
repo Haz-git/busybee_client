@@ -22,7 +22,7 @@ import {
 
 import { Close } from '@styled-icons/ionicons-solid/Close';
 
-const CloseIcon = styled(Close)`
+export const CloseIcon = styled(Close)`
     height: 4em;
     width: 4.5em;
 `;
@@ -33,7 +33,7 @@ const MainContainer = styled.div`
     text-align: center;
 `;
 
-const AbortButton = styled(BackButton)`
+export const AbortButton = styled(BackButton)`
     display: block;
     background: #90130c;
     padding: 0.5em 0.5em;
@@ -43,7 +43,7 @@ const AbortButton = styled(BackButton)`
     }
 `;
 
-const AbortLabel = styled.p`
+export const AbortLabel = styled.p`
     font-size: 1.2em;
     color: white;
     text-shadow: 2px 2px 2px #14181f;
