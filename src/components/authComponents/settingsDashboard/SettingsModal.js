@@ -39,7 +39,7 @@ const SettingsModalDesc = styled(ModalDesc)`
     text-align: center;
 `;
 
-const CustomConfirmButton = styled.button`
+export const CustomConfirmButton = styled.button`
     border: none;
     border-radius: 0.5em;
     color: white;
@@ -57,7 +57,7 @@ const CustomConfirmButton = styled.button`
     }
 `;
 
-const CustomCancelButton = styled.button`
+export const CustomCancelButton = styled.button`
     border: none;
     border-radius: 0.5em;
     color: white;
@@ -75,7 +75,7 @@ const CustomCancelButton = styled.button`
     }
 `;
 
-const ButtonContainer = styled.div`
+export const ButtonContainer = styled.div`
     margin: 1em 0;
     display: flex;
     align-items: center;
@@ -83,7 +83,7 @@ const ButtonContainer = styled.div`
     /* flex-direction: column; */
 `;
 
-const ButtonDivider = styled.div`
+export const ButtonDivider = styled.div`
     margin: 0.6em 0;
 `;
 
