@@ -3,6 +3,7 @@ import React from 'react';
 //Styles:
 import styled from 'styled-components';
 import {
+    MainTutorialContainer,
     TutorialHeader,
     TutorialImage,
     TutorialDescriptionContainer,
@@ -14,15 +15,9 @@ import top_stats_none from '../../../imgs/tutorial_imgs/top_stats_none.png';
 
 //Render:
 
-const MainContainer = styled.div`
-    display: block;
-    text-align: center;
-    margin: 1em 0;
-`;
-
 const DashboardInfo = () => {
     return (
-        <MainContainer>
+        <MainTutorialContainer>
             <TutorialHeader>The Dashboard</TutorialHeader>
             <TutorialImage
                 src={main_stats_none}
@@ -64,7 +59,7 @@ const DashboardInfo = () => {
                     this!
                 </TutorialInfoText>
             </TutorialDescriptionContainer>
-        </MainContainer>
+        </MainTutorialContainer>
     );
 };
 
