@@ -40,6 +40,10 @@ export function changeIsNewUserValue(booleanValue) {
             type: USER_CHANGE_ISNEWUSER_VALUE,
             payload: response.data.user,
         });
+
+        if (response) {
+            return true;
+        }
     };
 }
 
