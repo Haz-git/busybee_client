@@ -13,7 +13,7 @@ import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Components:
-import { ProjectDiagram } from '@styled-icons/fa-solid/ProjectDiagram';
+import { Diagram3Fill } from '@styled-icons/bootstrap/Diagram3Fill';
 import SearchBar from '../statsDashboard/SearchBar';
 import CreateProgramButton from './CreateProgramButton';
 import CreateProgramModal from './CreateProgramModal';
@@ -53,7 +53,7 @@ const CustomMuiAlert = withStyles(() => ({
     },
 }))(MuiAlert);
 
-const EmptyProgramIcon = styled(ProjectDiagram)`
+const EmptyProgramIcon = styled(Diagram3Fill)`
     height: 7em;
     width: 7em;
     color: #26292f;
