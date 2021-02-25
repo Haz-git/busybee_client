@@ -2,9 +2,12 @@ import React from 'react';
 import Button from '@material-ui/core/Button';
 import historyObject from '../../historyObject';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
+import { changeIsNewUserValue } from '../../../redux/userDetails/detailActions';
 
 import DashboardInfo from './DashboardInfo';
 import ProgramInfo from './ProgramInfo';
+import StatLogAndSettingsInfo from './StatLogAndSettingsInfo';
 
 import styled from 'styled-components';
 import {
@@ -54,7 +57,7 @@ export const TutorialHeader = styled.h2`
     /* color: #fdbc3d; */
     color: white;
     font-size: 2.5em;
-    text-align: left;
+    text-align: center;
     margin-bottom: 0.8em;
     font-weight: 900;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
@@ -77,7 +80,7 @@ export const TutorialImage = styled.img`
 
 export const TutorialDescriptionContainer = styled.div`
     text-align: left;
-    padding: 0.3em 0.5em;
+    padding: 0.3em 0.8em;
     margin: 0.5em 0;
 `;
 
@@ -91,7 +94,27 @@ export const TutorialInfoText = styled.p`
     text-shadow: rgba(0, 0, 0, 0.9) 0px 3px 5px;
 `;
 
-const TutorialMain = () => {
+const TutorialEndText = styled.h2`
+    color: #156711;
+    font-size: 1.5em;
+    font-weight: 900;
+    hyphens: auto;
+    word-break: break-word;
+    margin-bottom: 0.4em;
+    text-shadow: rgba(0, 0, 0, 0.9) 0px 3px 5px;
+`;
+
+const TutorialEndLabel = styled.h3`
+    color: #90130c;
+    font-size: 1em;
+    font-weight: 900;
+    hyphens: auto;
+    word-break: break-word;
+    margin-bottom: 0.4em;
+    text-shadow: rgba(0, 0, 0, 0.9) 0px 3px 5px;
+`;
+
+const TutorialMain = ({ changeIsNewUserValue }) => {
     /*
         Should probably have something similar to pyramid main, like a form wizard where the user can look at images and such....
 
@@ -101,33 +124,53 @@ const TutorialMain = () => {
 
     */
 
+    const changeIsNewUserValueAndNavigateToDashboard = () => {
+        const confirmStatus = confirm(
+            'You will not be able to return to this tutorial after leaving. Are you sure you want to exit?'
+        );
+
+        const disableTutorial = async () => {
+            const isValueChanged = await changeIsNewUserValue(false);
+
+            if (isValueChanged === true) {
+                historyObject.push('/dashboard');
+            }
+        };
+
+        if (confirmStatus === true) {
+            disableTutorial();
+        }
+    };
+
     return (
         <MainContainer>
             <HeaderContainer>
-                <Link to="/dashboard">
-                    <AbortButton>
-                        <CloseIcon />
-                        <AbortLabel>Exit</AbortLabel>
-                    </AbortButton>
-                </Link>
+                <AbortButton
+                    onClick={changeIsNewUserValueAndNavigateToDashboard}
+                >
+                    <CloseIcon />
+                    <AbortLabel>Exit</AbortLabel>
+                </AbortButton>
                 <FlexWrapper>
                     <MainHeader>Tutorial Phase</MainHeader>
                     <ExerciseHeader>Documentation</ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
-            {/* <LandingContainer>
-                <MainText>Welcome to GymJot Tutorial</MainText>
-                <LogoContainer>
-                    <StyledLogo src={gymjot_logo} alt="gymjot logo" />
-                </LogoContainer>
-                <InfoText>We'll show you what we have to offer.</InfoText>
-            </LandingContainer> */}
             <TutorialCardContainer>
                 <DashboardInfo />
                 <ProgramInfo />
+                <StatLogAndSettingsInfo />
+                <TutorialEndText>Congratulations!</TutorialEndText>
+                <TutorialEndText>
+                    You've completed the Tutorial!
+                </TutorialEndText>
+                <TutorialEndLabel>
+                    Please press <em>Exit</em> to leave. This tutorial cannot be
+                    accessed after leaving, review carefully!
+                </TutorialEndLabel>
             </TutorialCardContainer>
         </MainContainer>
     );
 };
 
-export default TutorialMain;
+export default connect(null, { changeIsNewUserValue })(TutorialMain);
