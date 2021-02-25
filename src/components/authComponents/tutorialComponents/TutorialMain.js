@@ -16,6 +16,7 @@ import {
     AbortLabel,
 } from '../runProgramDashboard/MainRunProgram';
 import gymjot_logo from '../../../imgs/gymjot_transparent.png';
+import main_stats_none from '../../../imgs/tutorial_imgs/main_stats_none.png';
 import { StyledLogo } from '../dashboardComponents/UserGreeting';
 
 const MainContainer = styled.div`
@@ -25,6 +26,8 @@ const MainContainer = styled.div`
 const LandingContainer = styled.div`
     margin-top: 2em;
 `;
+
+const TutorialCardContainer = styled.div``;
 
 const LogoContainer = styled.div`
     margin: 1.3em 0;
@@ -40,6 +43,14 @@ const InfoText = styled.h3`
     font-family: 'Lato';
     color: white;
     font-size: 1em;
+`;
+
+const TutorialImage = styled.img`
+    object-fit: fill;
+    height: 15em;
+    width: 19em;
+    border-radius: 0.4em;
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 4px;
 `;
 
 const TutorialMain = () => {
@@ -73,6 +84,13 @@ const TutorialMain = () => {
                 </LogoContainer>
                 <InfoText>We'll show you what we have to offer.</InfoText>
             </LandingContainer>
+            <TutorialCardContainer>
+                <MainText>The Dashboard</MainText>
+                <TutorialImage
+                    src={main_stats_none}
+                    alt="dashboard main stats empty image"
+                />
+            </TutorialCardContainer>
         </MainContainer>
     );
 };
