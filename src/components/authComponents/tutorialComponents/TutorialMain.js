@@ -4,6 +4,7 @@ import historyObject from '../../historyObject';
 import { Link } from 'react-router-dom';
 
 import DashboardInfo from './DashboardInfo';
+import ProgramInfo from './ProgramInfo';
 
 import styled from 'styled-components';
 import {
@@ -22,6 +23,12 @@ import { StyledLogo } from '../dashboardComponents/UserGreeting';
 
 const MainContainer = styled.div`
     text-align: center;
+`;
+
+export const MainTutorialContainer = styled.div`
+    display: block;
+    text-align: center;
+    margin: 1em 0;
 `;
 
 const LandingContainer = styled.div`
@@ -50,6 +57,7 @@ export const TutorialHeader = styled.h2`
     text-align: left;
     margin-bottom: 0.8em;
     font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 `;
 
 const InfoText = styled.h3`
@@ -80,6 +88,7 @@ export const TutorialInfoText = styled.p`
     hyphens: auto;
     word-break: break-word;
     margin-bottom: 0.4em;
+    text-shadow: rgba(0, 0, 0, 0.9) 0px 3px 5px;
 `;
 
 const TutorialMain = () => {
@@ -102,8 +111,8 @@ const TutorialMain = () => {
                     </AbortButton>
                 </Link>
                 <FlexWrapper>
-                    <MainHeader>Tutorial</MainHeader>
-                    <ExerciseHeader>1/2 Steps</ExerciseHeader>
+                    <MainHeader>Tutorial Phase</MainHeader>
+                    <ExerciseHeader>Documentation</ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
             {/* <LandingContainer>
@@ -115,6 +124,7 @@ const TutorialMain = () => {
             </LandingContainer> */}
             <TutorialCardContainer>
                 <DashboardInfo />
+                <ProgramInfo />
             </TutorialCardContainer>
         </MainContainer>
     );
