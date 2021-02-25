@@ -125,7 +125,7 @@ const TutorialMain = ({ changeIsNewUserValue }) => {
     */
 
     const changeIsNewUserValueAndNavigateToDashboard = () => {
-        const confirmStatus = confirm(
+        const confirmStatus = window.confirm(
             'You will not be able to return to this tutorial after leaving. Are you sure you want to exit?'
         );
 
