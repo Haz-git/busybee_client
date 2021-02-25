@@ -227,7 +227,7 @@ const MainLandingPage = () => {
                                 <MobHeader>GymJot</MobHeader>
                                 <MobLabel>
                                     We're Sorry! GymJot does not have browser
-                                    support...yet!
+                                    support...yet! Try again on a mobile device.
                                 </MobLabel>
                             </MobHeaderContainer>
                         </MobWrapper>
