@@ -119,11 +119,11 @@ const TutorialModal = ({
                         </TutorialModalDesc>
                         <ButtonContainer>
                             <CustomConfirmButton onClick={buttonSubmitFunction}>
-                                Yes, Take Me To The Tutorial
+                                Yes, take me to the tutorial
                             </CustomConfirmButton>
                             <ButtonDivider />
                             <CustomCancelButton onClick={closeFunction}>
-                                No, Don't Show Me This Again
+                                No, don't show me this again
                             </CustomCancelButton>
                         </ButtonContainer>
                     </TutorialModalContainer>
