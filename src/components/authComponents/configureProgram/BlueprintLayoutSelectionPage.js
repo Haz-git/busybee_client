@@ -65,6 +65,7 @@ const MainContainer = styled.div`
     display: block;
     text-align: center;
     padding-bottom: 5em;
+    overflow-x: hidden;
 `;
 
 const ProgramCounterContainer = styled.div`
