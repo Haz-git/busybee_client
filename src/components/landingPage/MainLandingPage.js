@@ -214,10 +214,25 @@ const MainLandingPage = () => {
             );
         } else {
             return (
-                <h1>
-                    This is browser view, it has not yet been implemented.
-                    Sorry!
-                </h1>
+                <BrowserView>
+                    <MobMainContainer>
+                        <MobWrapper>
+                            <MobHeaderContainer>
+                                <LogoContainer>
+                                    <StyledMainLogo
+                                        src={gymjot_logo}
+                                        alt="gymjot logo"
+                                    />
+                                </LogoContainer>
+                                <MobHeader>GymJot</MobHeader>
+                                <MobLabel>
+                                    We're Sorry! GymJot does not have browser
+                                    support...yet!
+                                </MobLabel>
+                            </MobHeaderContainer>
+                        </MobWrapper>
+                    </MobMainContainer>
+                </BrowserView>
             );
         }
     };
