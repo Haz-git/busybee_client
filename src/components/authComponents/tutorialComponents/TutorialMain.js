@@ -3,6 +3,8 @@ import Button from '@material-ui/core/Button';
 import historyObject from '../../historyObject';
 import { Link } from 'react-router-dom';
 
+import DashboardInfo from './DashboardInfo';
+
 import styled from 'styled-components';
 import {
     HeaderContainer,
@@ -16,7 +18,6 @@ import {
     AbortLabel,
 } from '../runProgramDashboard/MainRunProgram';
 import gymjot_logo from '../../../imgs/gymjot_transparent.png';
-import main_stats_none from '../../../imgs/tutorial_imgs/main_stats_none.png';
 import { StyledLogo } from '../dashboardComponents/UserGreeting';
 
 const MainContainer = styled.div`
@@ -27,7 +28,9 @@ const LandingContainer = styled.div`
     margin-top: 2em;
 `;
 
-const TutorialCardContainer = styled.div``;
+const TutorialCardContainer = styled.div`
+    margin: 0 1em;
+`;
 
 const LogoContainer = styled.div`
     margin: 1.3em 0;
@@ -39,18 +42,44 @@ const MainText = styled.h1`
     font-size: 1.6em;
 `;
 
+export const TutorialHeader = styled.h2`
+    font-family: 'Lato';
+    /* color: #fdbc3d; */
+    color: white;
+    font-size: 2.5em;
+    text-align: left;
+    margin-bottom: 0.8em;
+    font-weight: 900;
+`;
+
 const InfoText = styled.h3`
     font-family: 'Lato';
     color: white;
     font-size: 1em;
 `;
 
-const TutorialImage = styled.img`
-    object-fit: fill;
-    height: 15em;
-    width: 19em;
-    border-radius: 0.4em;
+export const TutorialImage = styled.img`
+    object-fit: contain;
+    /* height: 16em; */
+    width: 100%;
+    border-radius: 1em;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 4px;
+    border: 1px solid #fdbc3d;
+`;
+
+export const TutorialDescriptionContainer = styled.div`
+    text-align: left;
+    padding: 0.3em 0.5em;
+    margin: 0.5em 0;
+`;
+
+export const TutorialInfoText = styled.p`
+    color: white;
+    font-size: 1em;
+    font-weight: 900;
+    hyphens: auto;
+    word-break: break-word;
+    margin-bottom: 0.4em;
 `;
 
 const TutorialMain = () => {
@@ -77,19 +106,15 @@ const TutorialMain = () => {
                     <ExerciseHeader>1/2 Steps</ExerciseHeader>
                 </FlexWrapper>
             </HeaderContainer>
-            <LandingContainer>
+            {/* <LandingContainer>
                 <MainText>Welcome to GymJot Tutorial</MainText>
                 <LogoContainer>
                     <StyledLogo src={gymjot_logo} alt="gymjot logo" />
                 </LogoContainer>
                 <InfoText>We'll show you what we have to offer.</InfoText>
-            </LandingContainer>
+            </LandingContainer> */}
             <TutorialCardContainer>
-                <MainText>The Dashboard</MainText>
-                <TutorialImage
-                    src={main_stats_none}
-                    alt="dashboard main stats empty image"
-                />
+                <DashboardInfo />
             </TutorialCardContainer>
         </MainContainer>
     );
