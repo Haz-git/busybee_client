@@ -766,7 +766,7 @@ const ConfigureMain = ({
             <EmptyExerciseContainer>
                 <EmptyExerciseIcon />
                 <EmptyExerciseLabel>
-                    Looks a bit empty here. Stack your favorite exercises and
+                    Looks a bit empty here... Stack your favorite exercises and
                     rest periods!
                 </EmptyExerciseLabel>
             </EmptyExerciseContainer>
