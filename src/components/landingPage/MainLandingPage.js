@@ -179,6 +179,7 @@ const MainLandingPage = () => {
                         timesToShow={40000}
                         copyClosePrompt="Close"
                         permanentlyHideOnDismiss={false}
+                        copyBody="This web application provides mobile app capabilities on Safari. Add it to your home screen for optimal experience."
                     />
                     <MobMainContainer>
                         <MobWrapper>
