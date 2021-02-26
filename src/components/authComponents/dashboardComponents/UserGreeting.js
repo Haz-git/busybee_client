@@ -56,7 +56,7 @@ export const MainHeader = styled.h1`
     font-weight: 900;
     margin-bottom: 0.2em;
     animation: ${fadeIn} 0.2s ease;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 4px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 
     @media only screen and (min-width: 375px) {
         font-size: 2em;
@@ -70,7 +70,7 @@ const UserDetailLabel = styled.h2`
     color: ${({ theme }) => theme.UserGreetingColor};
     font-weight: 500;
     white-space: nowrap;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 4px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 
     @media only screen and (min-width: 375px) {
         font-size: 1.2em;

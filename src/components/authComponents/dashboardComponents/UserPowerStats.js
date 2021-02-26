@@ -32,7 +32,7 @@ export const MainHeader = styled.h2`
     font-size: 1.1em;
     color: ${({ theme }) => theme.UserPowerHeaderColor};
     font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 export const StyledDivider = styled.hr`
@@ -77,7 +77,7 @@ const EmptyLabel = styled.h3`
     font-family: 'Lato';
     letter-spacing: 1px;
     color: white;
-    text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 //Render:

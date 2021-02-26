@@ -45,7 +45,7 @@ export const StyledField = styled(Field)`
     margin: 0.1em 0;
     display: inline-block;
     border: none;
-    border-bottom: 1px solid #e8e8e8;
+    border-bottom: 1px solid ${(props) => props.theme.inputFieldBottomBorderC};
     box-sizing: border-box;
     color: ${(props) => props.theme.inputFieldColor};
     background: transparent;

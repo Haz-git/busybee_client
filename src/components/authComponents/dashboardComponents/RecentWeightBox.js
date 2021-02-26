@@ -52,7 +52,7 @@ const DescLabelImprove = styled.label`
     font-size: 0.75em;
     color: green;
     font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 const DescLabelFail = styled.label`
@@ -61,7 +61,7 @@ const DescLabelFail = styled.label`
     font-size: 0.75em;
     color: red;
     font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 const DescLabelNone = styled.label`
@@ -70,16 +70,16 @@ const DescLabelNone = styled.label`
     font-size: 0.75em;
     color: rgba(15.7, 18.8, 24.3, 1);
     font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 const DescLabelTime = styled.label`
     white-space: nowrap;
     margin: 0.15em 0;
     font-size: 0.75em;
-    color: white;
+    color: ${({ theme }) => theme.generalText};
     font-weight: 900;
-    text-shadow: rgba(0, 0, 0, 1) 0px 3px 8px;
+    text-shadow: ${({ theme }) => theme.textShadow};
 `;
 
 //Render:

@@ -2,12 +2,13 @@
 
 export const lightTheme = {
     //Generals:
-    background: '#f6f9fc',
+    background: '#D6DEE6',
     generalText: '#1c1e37',
     navBottomBorder: '#1c1e37',
     inputFieldLabel: 'black',
     inputFieldColor: 'black',
-    inputFieldBG: 'white',
+    inputFieldBG: 'black',
+    inputFieldBottomBorderC: 'black',
     //MainMobilePage:
     mainMobBackground: '#335c67',
     mainMobHeaderColor: '#1c1e37',
@@ -28,6 +29,7 @@ export const lightTheme = {
     UserGreetingColor: 'black',
     UserGreetingBG: '#293241',
     LogoShadow: 'rgba(0, 0, 0, 0.24) 0px 3px 8px',
+    textShadow: 'none',
     //UserPowerStats:
     UserPowerHeaderColor: 'black',
     //UserPowerStatsModal:
@@ -65,6 +67,7 @@ export const darkTheme = {
     inputFieldLabel: '#E8E8E8',
     inputFieldColor: 'white',
     inputFieldBG: 'inherit',
+    inputFieldBottomBorderC: '#e8e8e8',
     //MainMobilePage:
     mainMobBackground: '#0d1b2a',
     mainMobHeaderColor: '#e0e1dd',
@@ -85,6 +88,7 @@ export const darkTheme = {
     UserGreetingColor: 'white',
     UserGreetingBG: '#293241',
     LogoShadow: 'rgba(0, 0, 0, 0.9) 0px 3px 8px',
+    textShadow: 'rgba(0, 0, 0, 1) 0px 3px 4px',
     //UserPowerStats:
     UserPowerHeaderColor: '#fdbc3d',
     //UserPowerStatsModal:

@@ -557,7 +557,6 @@ const ConfigureMain = ({
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
-        console.log('useEffect');
         const getUserInfo = async () => {
             const bool = await getUserProgramExerciseData(id);
             setIsLoaded(bool);
@@ -734,6 +733,7 @@ const ConfigureMain = ({
     //Handles the visibility of the 'add more' label, this label should only be visible at the bottom of the card container.
 
     const handleScroll = (e) => {
+        //This handleScroll doesn't seem to register correctly in Chrome:
         const windowHeight =
             'innerHeight' in window
                 ? window.innerHeight
@@ -748,8 +748,6 @@ const ConfigureMain = ({
             html.offsetHeight
         );
         const windowBottom = windowHeight + window.pageYOffset;
-
-        console.log(windowBottom, docHeight);
 
         if (windowBottom >= docHeight) {
             //Shouldn't change the state, cause that will cause component re-render and therefore GET request again.
