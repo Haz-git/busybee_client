@@ -139,8 +139,6 @@ const MainPrograms = ({
                 setIsLoaded(bool);
             };
 
-            console.log(programs.programs);
-
             getUserExistingProgramData();
         } else if (programs.programs !== undefined) {
             setIsLoaded(true);
