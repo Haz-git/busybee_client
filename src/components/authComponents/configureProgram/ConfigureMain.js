@@ -30,6 +30,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomLoadingDots from './CustomLoadingDots';
 import { withStyles } from '@material-ui/core/styles';
 import { SnackbarContent } from '@material-ui/core';
+import { Stack } from '@styled-icons/remix-fill/Stack';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
@@ -56,6 +57,24 @@ const CustomMuiAlert = withStyles(() => ({
     },
 }))(MuiAlert);
 //Icons:
+const EmptyExerciseIcon = styled(Stack)`
+    height: 6em;
+    width: 6em;
+    color: #26292f;
+`;
+
+const EmptyExerciseContainer = styled.div`
+    text-align: center;
+    margin: 3em 0;
+`;
+
+const EmptyExerciseLabel = styled.h3`
+    font-family: 'Lato', 'Nunito';
+    font-weight: 600;
+    font-size: 1.1em;
+    margin: 0.4em 0;
+    color: #26292f;
+`;
 
 const SortIcon = styled(SortAlt2)`
     height: 1.5em;
@@ -740,6 +759,20 @@ const ConfigureMain = ({
         }
     };
 
+    //Render function for no exercises--
+
+    const renderEmptyConfigureMain = () => {
+        return (
+            <EmptyExerciseContainer>
+                <EmptyExerciseIcon />
+                <EmptyExerciseLabel>
+                    Looks a bit empty here. Stack your favorite exercises and
+                    rest periods!
+                </EmptyExerciseLabel>
+            </EmptyExerciseContainer>
+        );
+    };
+
     return (
         <>
             <MainContainer>
@@ -756,7 +789,11 @@ const ConfigureMain = ({
                         </ExerciseHeader>
                     </FlexWrapper>
                 </HeaderContainer>
-                <CardContainer>{renderProgramExerciseCards()}</CardContainer>
+                <CardContainer>
+                    {returnArrayCount() !== 0
+                        ? renderProgramExerciseCards()
+                        : renderEmptyConfigureMain()}
+                </CardContainer>
             </MainContainer>
             {stateCardEndLabel && (
                 <LabelContainer>
