@@ -557,6 +557,7 @@ const ConfigureMain = ({
     const [isLoaded, setIsLoaded] = useState(false);
 
     useEffect(() => {
+        console.log('useEffect');
         const getUserInfo = async () => {
             const bool = await getUserProgramExerciseData(id);
             setIsLoaded(bool);
@@ -628,9 +629,10 @@ const ConfigureMain = ({
 
     const renderProgramExerciseCards = () => {
         if (
+            isLoaded === true &&
             programExercises.programs !== undefined &&
             programExercises.programs !== null &&
-            isLoaded === true
+            returnArrayCount() !== 0
         ) {
             return programExercises.programs.map((programExercise) => (
                 <ProgramExerciseCard
@@ -652,12 +654,8 @@ const ConfigureMain = ({
                     setObjectsArray={programExercise.setObjectsArray}
                 />
             ));
-        } else {
-            return (
-                <LoadingContainer>
-                    <CustomLoadingDots />
-                </LoadingContainer>
-            );
+        } else if (isLoaded === true && returnArrayCount() === 0) {
+            return renderEmptyConfigureMain();
         }
     };
 
@@ -751,6 +749,8 @@ const ConfigureMain = ({
         );
         const windowBottom = windowHeight + window.pageYOffset;
 
+        console.log(windowBottom, docHeight);
+
         if (windowBottom >= docHeight) {
             //Shouldn't change the state, cause that will cause component re-render and therefore GET request again.
             setStateCardEndLabel(true);
@@ -790,9 +790,13 @@ const ConfigureMain = ({
                     </FlexWrapper>
                 </HeaderContainer>
                 <CardContainer>
-                    {returnArrayCount() !== 0
-                        ? renderProgramExerciseCards()
-                        : renderEmptyConfigureMain()}
+                    {isLoaded !== false ? (
+                        renderProgramExerciseCards()
+                    ) : (
+                        <LoadingContainer>
+                            <CustomLoadingDots />
+                        </LoadingContainer>
+                    )}
                 </CardContainer>
             </MainContainer>
             {stateCardEndLabel && (
