@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import TimeSelectModal from './TimeSelectModal';
 
+//Constants:
+import {
+    NEW_PROGRAM_EXERCISE,
+    MAIN_LIFT_PROGRAM_EXERCISE,
+    EXISTING_STAT_PROGRAM_EXERCISE,
+    PYRAMID_PROGRAM_EXERCISE,
+} from './programExerciseTypes';
+
 //Redux:
 import { connect } from 'react-redux';
 import {
@@ -15,11 +23,40 @@ import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
+
+import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
+import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
+import { Columns } from '@styled-icons/boxicons-regular/Columns';
 import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
+import { Run } from '@styled-icons/boxicons-regular/Run';
 
 //Icons:
 
-const PyramidIcon = styled(Pyramid)`
+const MiniPyramidIcon = styled(Pyramid)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+`;
+
+const MiniNewIcon = styled(NewReleases)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+`;
+
+const MiniRunIcon = styled(Run)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+`;
+
+const MiniLogIcon = styled(Notepad)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+`;
+
+const MiniMainLiftIcon = styled(Columns)`
     height: 1.5em;
     width: 1.6em;
     color: white;
@@ -164,7 +201,7 @@ const ObjectArrayText = styled.h3`
     font-size: 1.025em;
 `;
 
-const PyramidIconDiv = styled.div`
+const IconDiv = styled.div`
     right: 0.5em;
     top: 0.6em;
     position: absolute;
@@ -192,6 +229,7 @@ const ProgramExerciseCard = ({
     restMinutesPerSet,
     restSecondsPerSet,
     restNum,
+    programExerciseType,
     setObjectsArray,
 }) => {
     const [stateRestTimeSelectModal, setStateRestTimeSelectModal] = useState(
@@ -295,6 +333,30 @@ const ProgramExerciseCard = ({
         }
     };
 
+    //Renders the mini card icon:
+    const renderMiniCardIcon = () => {
+        switch (programExerciseType) {
+            case NEW_PROGRAM_EXERCISE:
+                return <MiniNewIcon />;
+                break;
+
+            case EXISTING_STAT_PROGRAM_EXERCISE:
+                return <MiniLogIcon />;
+                break;
+
+            case PYRAMID_PROGRAM_EXERCISE:
+                return <MiniPyramidIcon />;
+                break;
+
+            case MAIN_LIFT_PROGRAM_EXERCISE:
+                return <MiniMainLiftIcon />;
+                break;
+
+            default:
+                return null;
+        }
+    };
+
     return (
         <>
             <MainContainer>
@@ -332,12 +394,7 @@ const ProgramExerciseCard = ({
                         <DelIcon />
                     </DeleteButton>
                 </ButtonContainer>
-                {setObjectsArray !== undefined &&
-                setObjectsArray.length !== 0 ? (
-                    <PyramidIconDiv>
-                        <PyramidIcon />
-                    </PyramidIconDiv>
-                ) : null}
+                <IconDiv>{renderMiniCardIcon()}</IconDiv>
             </MainContainer>
             {exerciseId && (
                 <StatCardModalDelete
