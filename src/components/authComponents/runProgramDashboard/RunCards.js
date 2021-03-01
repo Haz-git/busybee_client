@@ -300,6 +300,25 @@ const EndRestLabelInvis = styled.p`
     opacity: 0;
 `;
 
+const EndCardioLabel = styled.p`
+    margin-top: 0.4em;
+    color: #096b27;
+    font-size: 1.2em;
+    font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    opacity: 1;
+    animation: ${fadeIn} 0.5s ease;
+`;
+
+const EndCardioLabelInvis = styled.p`
+    margin-top: 0.4em;
+    color: #096b27;
+    font-size: 1.2em;
+    font-weight: 900;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    opacity: 0;
+`;
+
 //Render:
 
 const RunCards = ({
@@ -327,10 +346,12 @@ const RunCards = ({
     useEffect(() => {
         //Since it appears that renderEndRest's state is conserved because the entire program sequence is mounted, we have to refresh the timer after every next button. In no way is this efficient, but it is progress. The ExerciseID should never be exactly the same, and so we can count on this value changing and causeing the useEffect hook to trigger a reset to the renderEndRest state..
         setRenderEndRest(false);
+        setRenderEndCardio(false);
     }, [exerciseId]);
 
     //State for timer completion render:
     const [renderEndRest, setRenderEndRest] = useState(false);
+    const [renderEndCardio, setRenderEndCardio] = useState(false);
 
     //Utility functions:
 
@@ -408,6 +429,10 @@ const RunCards = ({
         setRenderEndRest(true);
     };
 
+    const onCardioCompletion = () => {
+        setRenderEndCardio(true);
+    };
+
     //Renders the error label on timer end:
 
     const renderTimerCompleteLabel = () => {
@@ -428,6 +453,27 @@ const RunCards = ({
         }
     };
 
+    //Renders complete label on timer end for cardio:
+
+    const renderCardioCompleteLabel = () => {
+        console.log('test');
+        if (renderEndCardio === false) {
+            return (
+                <EndCardioLabelInvis>
+                    Congratulations! You've finished your cardio session. Please
+                    proceed to the next exercise!
+                </EndCardioLabelInvis>
+            );
+        } else if (renderEndCardio === true) {
+            return (
+                <EndCardioLabel>
+                    Congratulations! You've finished your cardio session. Please
+                    proceed to the next exercise!
+                </EndCardioLabel>
+            );
+        }
+    };
+
     //Calculates the length of reps --> If the reps exceed double digits, then we change the rendering of the reps container to accomodate font-size:
 
     const calculateRepsLength = () => {
@@ -437,8 +483,6 @@ const RunCards = ({
             return <RepsValue>{reps}</RepsValue>;
         }
     };
-
-    console.log(programExerciseType);
 
     const renderRestOrExercise = () => {
         if (
@@ -505,9 +549,9 @@ const RunCards = ({
                             <StyledCountdown
                                 precision={0}
                                 date={Date.now() + processTimeCardioSession()}
-                                onComplete={onTimerCompletion}
+                                onComplete={onCardioCompletion}
                             />
-                            {renderTimerCompleteLabel()}
+                            {renderCardioCompleteLabel()}
                         </TimerContainer>
                         <ButtonContainer>
                             <ButtonDivider>
