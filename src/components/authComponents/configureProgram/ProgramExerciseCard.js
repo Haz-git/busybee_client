@@ -7,6 +7,7 @@ import {
     MAIN_LIFT_PROGRAM_EXERCISE,
     EXISTING_STAT_PROGRAM_EXERCISE,
     PYRAMID_PROGRAM_EXERCISE,
+    CARDIO_PROGRAM_EXERCISE,
 } from './programExerciseConstants';
 
 //Redux:
@@ -231,6 +232,8 @@ const ProgramExerciseCard = ({
     restNum,
     programExerciseType,
     setObjectsArray,
+    cardioMinutes,
+    cardioSeconds,
 }) => {
     const [stateRestTimeSelectModal, setStateRestTimeSelectModal] = useState(
         false
@@ -295,6 +298,11 @@ const ProgramExerciseCard = ({
             alert(
                 `We're sorry, you can't place rest periods inside of a rest block.`
             );
+        } else if (programExerciseType === 'CARDIO_PROGRAM_EXERCISE') {
+            setStateRestTimeSelectModal(false);
+            alert(
+                `We're sorry, you can't place rest periods inside of a cardio block.`
+            );
         }
     };
 
@@ -351,7 +359,9 @@ const ProgramExerciseCard = ({
             case MAIN_LIFT_PROGRAM_EXERCISE:
                 return <MiniMainLiftIcon />;
                 break;
-
+            case CARDIO_PROGRAM_EXERCISE:
+                return <MiniRunIcon />;
+                break;
             default:
                 return null;
         }
@@ -384,6 +394,12 @@ const ProgramExerciseCard = ({
                     <TimeContainer>
                         {minutes && <InfoText>Minutes: {minutes}</InfoText>}
                         {seconds && <InfoText>Seconds: {seconds}</InfoText>}
+                        {cardioMinutes && (
+                            <InfoText>Minutes: {cardioMinutes}</InfoText>
+                        )}
+                        {cardioSeconds && (
+                            <InfoText>Seconds: {cardioSeconds}</InfoText>
+                        )}
                     </TimeContainer>
                 </InfoBlock>
                 <ButtonContainer>
