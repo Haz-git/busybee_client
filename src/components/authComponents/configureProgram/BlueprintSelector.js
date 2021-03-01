@@ -112,12 +112,20 @@ const BlueprintSelector = ({
                                   )}`
                                 : null}
                             {option.programExerciseId !== undefined &&
-                            option.setObjectsArray === undefined
+                            option.setObjectsArray === undefined &&
+                            option.programExerciseType !==
+                                'CARDIO_PROGRAM_EXERCISE'
                                 ? `${option.programExerciseName} : ${option.weight} lbs, ${option.reps} reps, ${option.sets} sets`
                                 : null}
                             {option.restLengthMinute &&
                             option.restLengthSecond !== undefined
                                 ? ` Rest Period: (${option.restLengthMinute}m ${option.restLengthSecond}s)`
+                                : null}
+                            {option.programExerciseType ===
+                                'CARDIO_PROGRAM_EXERCISE' &&
+                            option.cardioMinutes &&
+                            option.cardioSeconds !== undefined
+                                ? ` Cardio Session: (${option.cardioMinutes}m ${option.cardioSeconds}s)`
                                 : null}
                         </StyledOption>
                     ))}
