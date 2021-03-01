@@ -653,6 +653,8 @@ const ConfigureMain = ({
                     restNum={programExercise.numRest}
                     programExerciseType={programExercise.programExerciseType}
                     setObjectsArray={programExercise.setObjectsArray}
+                    cardioMinutes={programExercise.cardioMinutes}
+                    cardioSeconds={programExercise.cardioSeconds}
                 />
             ));
         } else if (isLoaded === true && returnArrayCount() === 0) {
