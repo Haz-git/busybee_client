@@ -204,6 +204,13 @@ export function addNewCardio(
             cardioSeconds,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_ADD_PYRAMID_SET,
+            payload: response.data.userProgramExercises,
+        });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
