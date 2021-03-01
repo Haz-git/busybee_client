@@ -136,6 +136,7 @@ const MainRunProgram = ({
             return firstExercise.map((item) => (
                 <RunCards
                     key={uuid()}
+                    programExerciseType={item.programExerciseType}
                     exerciseName={item.programExerciseName}
                     exerciseId={item.programExerciseId}
                     reps={item.reps}
@@ -149,6 +150,8 @@ const MainRunProgram = ({
                     restNum={item.restNum}
                     restLengthMinute={item.restLengthMinute}
                     restLengthSecond={item.restLengthSecond}
+                    cardioMinutes={item.cardioMinutes}
+                    cardioSeconds={item.cardioSeconds}
                     restId={item.restId}
                     isFinal={statusCompleted}
                     nextExercise={
