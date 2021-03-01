@@ -21,6 +21,7 @@ import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
 import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
 import { Columns } from '@styled-icons/boxicons-regular/Columns';
 import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
+import { Run } from '@styled-icons/boxicons-regular/Run';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
@@ -67,6 +68,13 @@ const CustomSnackBar = withStyles(() => ({
 }))(Snackbar);
 
 //Icons:
+
+const RunIcon = styled(Run)`
+    height: 4em;
+    width: 4em;
+    color: #fdbc3d;
+`;
+
 const PyramidIcon = styled(Pyramid)`
     height: 4em;
     width: 4em;
@@ -102,6 +110,7 @@ const OptionsContainer = styled.div`
     align-items: center;
     justify-content: center;
     padding: 1em 1.5em;
+    margin-bottom: 2.5em;
 `;
 
 //Options for MainLiftModal:
@@ -380,6 +389,15 @@ const ExerciseSelectorPage = ({
                         clickFunction={() =>
                             history.push(
                                 `/programs/configure/select/pyramid/${name}/${id}`
+                            )
+                        }
+                    />
+                    <AddExerciseOptionButton
+                        buttonLabel="Add Cardio Session"
+                        icon={<RunIcon />}
+                        clickFunction={() =>
+                            window.alert(
+                                'This is currently under construction. Sorry!'
                             )
                         }
                     />
