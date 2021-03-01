@@ -375,7 +375,8 @@ const ExerciseSelectorPage = ({
                     CARDIO_PROGRAM_EXERCISE,
                     cardioExerciseName,
                     cardioMinutes,
-                    cardioSeconds
+                    cardioSeconds,
+                    showNewProgramExerciseSnackBar
                 );
 
                 //Refresh all states:
