@@ -333,6 +333,7 @@ const ProgramCard = ({
 
         programExercises.forEach((exercise) => {
             if (
+                exercise.programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
                 exercise.setObjectsArray === undefined &&
                 exercise.numRest !== undefined &&
                 exercise.numRest !== null &&
@@ -361,6 +362,31 @@ const ProgramCard = ({
 
                 totalTime.push(totalRestTimeCombinedSeconds);
             } else if (
+                exercise.programExerciseType === 'CARDIO_PROGRAM_EXERCISE' &&
+                exercise.cardioMinutes !== undefined &&
+                exercise.cardioSeconds !== undefined
+            ) {
+                let timeFromMin;
+
+                if (exercise.cardioMinutes !== null) {
+                    timeFromMin = parseInt(exercise.cardioMinutes) * 60;
+                } else {
+                    timeFromMin = 0;
+                }
+
+                let seconds;
+
+                if (exercise.cardioSeconds !== null) {
+                    seconds = parseInt(exercise.cardioSeconds);
+                } else {
+                    seconds = 0;
+                }
+
+                const timeCombined = timeFromMin + seconds;
+
+                totalTime.push(timeCombined);
+            } else if (
+                exercise.programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
                 exercise.setObjectsArray !== undefined &&
                 exercise.numRest === undefined &&
                 exercise.programExerciseId !== undefined
@@ -382,6 +408,7 @@ const ProgramCard = ({
 
                 totalTime.push(totalSecondsFromReps);
             } else if (
+                exercise.programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
                 exercise.setObjectsArray !== undefined &&
                 exercise.numRest !== undefined &&
                 exercise.programExerciseId !== undefined
@@ -419,6 +446,7 @@ const ProgramCard = ({
 
                 //Combine seconds within secondsFromReps:
             } else if (
+                exercise.programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
                 exercise.restId !== undefined &&
                 exercise.restId !== null
             ) {
@@ -444,6 +472,7 @@ const ProgramCard = ({
 
                 totalTime.push(timeCombined);
             } else if (
+                exercise.programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
                 exercise.programExerciseId !== undefined &&
                 exercise.programExerciseId !== null
             ) {
