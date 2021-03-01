@@ -186,3 +186,24 @@ export function addNewPyramidSet(
         }
     };
 }
+
+export function addNewCardio(
+    programId,
+    programExerciseType,
+    programExerciseName,
+    cardioMinutes,
+    cardioSeconds,
+    callback
+) {
+    return async (dispatch) => {
+        const response = await api.post(`/user/programs/addnewprogramcardio`, {
+            programId,
+            programExerciseType,
+            programExerciseName,
+            cardioMinutes,
+            cardioSeconds,
+        });
+
+        console.log(response);
+    };
+}
