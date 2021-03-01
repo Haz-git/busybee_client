@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
 import TimeSelectModal from './TimeSelectModal';
-import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseTypes';
+import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseConstants';
 
 //Redux:
 import {
@@ -27,7 +27,6 @@ import { SortAlt2 } from '@styled-icons/boxicons-regular/SortAlt2';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
-import CircularProgress from '@material-ui/core/CircularProgress';
 import CustomLoadingDots from './CustomLoadingDots';
 import { withStyles } from '@material-ui/core/styles';
 import { SnackbarContent } from '@material-ui/core';

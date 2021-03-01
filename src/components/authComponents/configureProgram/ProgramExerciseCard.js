@@ -7,7 +7,7 @@ import {
     MAIN_LIFT_PROGRAM_EXERCISE,
     EXISTING_STAT_PROGRAM_EXERCISE,
     PYRAMID_PROGRAM_EXERCISE,
-} from './programExerciseTypes';
+} from './programExerciseConstants';
 
 //Redux:
 import { connect } from 'react-redux';

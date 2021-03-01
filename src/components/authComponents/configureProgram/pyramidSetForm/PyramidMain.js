@@ -5,7 +5,7 @@ import PyramidSecondStep from './PyramidSecondStep';
 import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
-import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseTypes';
+import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseConstants';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
