@@ -4,6 +4,7 @@ import { Link } from 'react-router-dom';
 import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
 import TimeSelectModal from './TimeSelectModal';
+import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseTypes';
 
 //Redux:
 import {
@@ -723,7 +724,13 @@ const ConfigureMain = ({
     const timeSelectorSubmitHandler = (e) => {
         e.preventDefault();
 
-        addNewRestPeriod(id, minInput, secInput, showAddProgramRestSnackBar);
+        addNewRestPeriod(
+            id,
+            REST_PERIOD_PROGRAM_EXERCISE,
+            minInput,
+            secInput,
+            showAddProgramRestSnackBar
+        );
         setStateTimeSelectModal(false);
 
         setMinInput(null);
