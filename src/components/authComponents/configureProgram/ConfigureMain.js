@@ -141,6 +141,7 @@ export const MainHeader = styled.h1`
     font-weight: 900;
     margin-bottom: 0.2em;
     text-shadow: 2px 2px 2px #14181f;
+    white-space: nowrap;
 
     @media only screen and (min-width: 375px) {
         font-size: 2em;
