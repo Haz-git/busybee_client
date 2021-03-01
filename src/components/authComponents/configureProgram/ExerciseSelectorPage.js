@@ -4,6 +4,13 @@ import { Link } from 'react-router-dom';
 import AddExerciseOptionButton from './AddExerciseOptionButton';
 import history from '../../../components/historyObject';
 
+//Importing Constants:
+import {
+    NEW_PROGRAM_EXERCISE,
+    EXISTING_STAT_PROGRAM_EXERCISE,
+    MAIN_LIFT_PROGRAM_EXERCISE,
+} from './programExerciseTypes';
+
 //Redux:
 import { addNewProgramExercise } from '../../../redux/userProgramExercises/programExerciseActions';
 import { getUserStatData } from '../../../redux/userStats/userStatActions';
@@ -243,6 +250,7 @@ const ExerciseSelectorPage = ({
             ) {
                 addNewProgramExercise(
                     id,
+                    NEW_PROGRAM_EXERCISE,
                     setsInput,
                     repsInput,
                     exerciseName,
@@ -284,15 +292,34 @@ const ExerciseSelectorPage = ({
                 setsInput.trim() !== '' &&
                 repsInput.trim() !== ''
             ) {
-                addNewProgramExercise(
-                    id,
-                    setsInput,
-                    repsInput,
-                    statSelected,
-                    weightInput,
-                    unitSelect,
-                    showNewProgramExerciseSnackBar
-                );
+                if (stateStatModal === true && stateMainLiftModal !== true) {
+                    //Must mean information is derived from stat modal:
+                    addNewProgramExercise(
+                        id,
+                        EXISTING_STAT_PROGRAM_EXERCISE,
+                        setsInput,
+                        repsInput,
+                        statSelected,
+                        weightInput,
+                        unitSelect,
+                        showNewProgramExerciseSnackBar
+                    );
+                } else if (
+                    stateMainLiftModal === true &&
+                    stateStatModal !== true
+                ) {
+                    //Indicates information is dervied from main lift modal:
+                    addNewProgramExercise(
+                        id,
+                        MAIN_LIFT_PROGRAM_EXERCISE,
+                        setsInput,
+                        repsInput,
+                        statSelected,
+                        weightInput,
+                        unitSelect,
+                        showNewProgramExerciseSnackBar
+                    );
+                }
 
                 //Refresh all states:
                 setSetsInput(null);
@@ -313,6 +340,8 @@ const ExerciseSelectorPage = ({
             alert('Please input values, or press cancel to exit.');
         }
     };
+
+    //Main lift submission handler:
 
     //Handlers for adding from stat log:
 
