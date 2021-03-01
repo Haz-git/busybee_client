@@ -82,6 +82,7 @@ export function deleteProgramExercise(programId, programExerciseId, callback) {
 
 export function addNewRestPeriod(
     programId,
+    programExerciseType,
     restLengthMinute,
     restLengthSecond,
     callback
@@ -89,6 +90,7 @@ export function addNewRestPeriod(
     return async (dispatch) => {
         const response = await api.post(`/user/programs/addnewrestperiod`, {
             programId,
+            programExerciseType,
             restLengthMinute,
             restLengthSecond,
         });
