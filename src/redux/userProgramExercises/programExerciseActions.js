@@ -160,6 +160,7 @@ export function deleteRestPeriod(programId, restId, callback) {
 
 export function addNewPyramidSet(
     programId,
+    programExerciseType,
     programExerciseName,
     setObjectsArray,
     callback
@@ -169,6 +170,7 @@ export function addNewPyramidSet(
             `/user/programs/addnewprogrampyramidset`,
             {
                 programId,
+                programExerciseType,
                 programExerciseName,
                 setObjectsArray,
             }
