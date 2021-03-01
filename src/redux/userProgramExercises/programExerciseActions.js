@@ -27,6 +27,7 @@ export function getUserProgramExerciseData(programId) {
 
 export function addNewProgramExercise(
     programId,
+    programExerciseType,
     sets,
     reps,
     programExerciseName,
@@ -39,6 +40,7 @@ export function addNewProgramExercise(
             '/user/programs/addnewprogramexercise',
             {
                 programId,
+                programExerciseType,
                 sets,
                 reps,
                 programExerciseName,
