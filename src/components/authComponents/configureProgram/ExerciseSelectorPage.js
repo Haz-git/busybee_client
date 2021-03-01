@@ -22,6 +22,9 @@ import RecordCardAddModal from '../statsDashboard/RecordCardAddModal';
 //AddStatModal:
 import StatSelectModal from './StatSelectModal';
 
+//import CardioSelectModal for cardio exercises:
+import CardioSelectModal from './CardioSelectModal';
+
 //Styles:
 import styled from 'styled-components';
 import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
@@ -179,14 +182,13 @@ const ExerciseSelectorPage = ({
         setOpenAddProgramExerciseSnackBar,
     ] = useState(false);
 
-    //State controls each modal:
+    //Modal States:
     const [stateAddNewExerciseModal, setStateAddNewExerciseModal] = useState(
         false
     );
-
     const [stateStatModal, setStateStatModal] = useState(false);
-
     const [stateMainLiftModal, setStateMainLiftModal] = useState(false);
+    const [stateCardioModal, setStateCardioModal] = useState(false);
 
     //State for add New Exercise Modal:
     const [exerciseName, setExerciseName] = useState(null);
@@ -363,6 +365,16 @@ const ExerciseSelectorPage = ({
         setStateMainLiftModal(false);
     };
 
+    //Handlers for opening/closing cardio modal:
+
+    const openCardioModal = () => {
+        setStateCardioModal(true);
+    };
+
+    const closeCardioModal = () => {
+        setStateCardioModal(false);
+    };
+
     //Handler Functions for snackbars:
     const Alert = (props) => {
         return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
@@ -424,11 +436,7 @@ const ExerciseSelectorPage = ({
                     <AddExerciseOptionButton
                         buttonLabel="Add Cardio Session"
                         icon={<RunIcon />}
-                        clickFunction={() =>
-                            window.alert(
-                                'This is currently under construction. Sorry!'
-                            )
-                        }
+                        clickFunction={openCardioModal}
                     />
                 </OptionsContainer>
             </MainContainer>
@@ -476,6 +484,14 @@ const ExerciseSelectorPage = ({
                 unitFunction={handleUnitSelect}
                 submitHandler={handleExistingStatSubmission}
                 optionsDefaultValue="Main Lift"
+            />
+            <CardioSelectModal
+                ariaLab="Modal for selecting a Cardio exercise"
+                ariaDesc="Modal for selecting a Cardio exercise"
+                modalHeader="Cardio Creation"
+                openBoolean={stateCardioModal}
+                closeFunction={closeCardioModal}
+                maxTextLength={16}
             />
             <CustomSnackBar
                 open={openAddProgramExerciseSnackBar}
