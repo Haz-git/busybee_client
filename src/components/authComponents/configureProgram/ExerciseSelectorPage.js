@@ -197,6 +197,11 @@ const ExerciseSelectorPage = ({
     const [repsInput, setRepsInput] = useState(null);
     const [unitSelect, setUnitSelect] = useState(null);
 
+    //State for adding a new Cardio Exercise:
+    const [cardioExerciseName, setCardioExerciseName] = useState(null);
+    const [cardioMinutes, setCardioMinutes] = useState(null);
+    const [cardioSeconds, setCardioSeconds] = useState(null);
+
     //Stat select handler state:
     const [statSelected, setStatSelected] = useState(null);
 
@@ -343,7 +348,43 @@ const ExerciseSelectorPage = ({
         }
     };
 
-    //Main lift submission handler:
+    //Cardio Modal submission handler:
+
+    const handleCardioSubmission = (e) => {
+        e.preventDefault();
+
+        if (
+            cardioExerciseName !== null &&
+            cardioMinutes !== null &&
+            cardioSeconds !== null
+        ) {
+            if (
+                cardioExerciseName.trim() !== '' &&
+                cardioMinutes.trim() !== '' &&
+                cardioSeconds.trim() !== ''
+            ) {
+                //Attach action creator here:
+
+                console.log('Cardio Values should be submitted');
+
+                //Refresh all states:
+                setCardioExerciseName(null);
+                setCardioMinutes(null);
+                setCardioSeconds(null);
+
+                //Closing cardio modal:
+                setStateCardioModal(false);
+            } else {
+                alert(
+                    'Please input values in all fields, or press cancel to exit.'
+                );
+            }
+        } else {
+            alert(
+                'Please input values in all fields, or press cancel to exit.'
+            );
+        }
+    };
 
     //Handlers for adding from stat log:
 
@@ -365,7 +406,19 @@ const ExerciseSelectorPage = ({
         setStateMainLiftModal(false);
     };
 
-    //Handlers for opening/closing cardio modal:
+    //Handlers for cardio modal:
+
+    const handleCardioNameInput = (e) => {
+        setCardioExerciseName(e.target.value);
+    };
+
+    const handleCardioMinuteInput = (e) => {
+        setCardioMinutes(e.target.value);
+    };
+
+    const handleCardioSecondInput = (e) => {
+        setCardioSeconds(e.target.value);
+    };
 
     const openCardioModal = () => {
         setStateCardioModal(true);
@@ -491,6 +544,10 @@ const ExerciseSelectorPage = ({
                 modalHeader="Cardio Creation"
                 openBoolean={stateCardioModal}
                 closeFunction={closeCardioModal}
+                submitHandler={handleCardioSubmission}
+                nameFunction={handleCardioNameInput}
+                minHandler={handleCardioMinuteInput}
+                secHandler={handleCardioSecondInput}
                 maxTextLength={16}
             />
             <CustomSnackBar
