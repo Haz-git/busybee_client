@@ -316,7 +316,10 @@ const RunCards = ({
     restId,
     restLengthMinute,
     restLengthSecond,
+    cardioMinutes,
+    cardioSeconds,
     isFinal,
+    programExerciseType,
     onPrev,
     nextExercise,
     prevExercise,
@@ -387,6 +390,18 @@ const RunCards = ({
         return totalSeconds * 1000;
     };
 
+    //Processes time for Cardio Exercise:
+
+    const processTimeCardioSession = () => {
+        let totalSeconds;
+
+        const secondsFromMinutes = parseInt(cardioMinutes) * 60;
+        const seconds = parseInt(cardioSeconds);
+        totalSeconds = secondsFromMinutes + seconds;
+
+        return totalSeconds * 1000;
+    };
+
     //Completion render function when timer is finished.
 
     const onTimerCompletion = () => {
@@ -423,8 +438,11 @@ const RunCards = ({
         }
     };
 
+    console.log(programExerciseType);
+
     const renderRestOrExercise = () => {
         if (
+            programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
             restNum !== undefined &&
             restLengthMinutePerSet !== undefined &&
             restLengthSecondPerSet !== undefined
@@ -469,7 +487,54 @@ const RunCards = ({
                     </CardContainer>
                 </MainContainer>
             );
-        } else if (restId !== undefined && exerciseId === undefined) {
+        } else if (
+            programExerciseType === 'CARDIO_PROGRAM_EXERCISE' &&
+            cardioMinutes !== undefined &&
+            cardioSeconds !== undefined
+        ) {
+            //Render for cardio sessions:
+            return (
+                <MainContainer>
+                    <CardContainer>
+                        <ExerciseContainer>
+                            <ExerciseIcon />
+                            <ExerciseValue>{exerciseName}</ExerciseValue>
+                        </ExerciseContainer>
+                        <TimerContainer>
+                            <BreakLabel>Cardio Session</BreakLabel>
+                            <StyledCountdown
+                                precision={0}
+                                date={Date.now() + processTimeCardioSession()}
+                                onComplete={onTimerCompletion}
+                            />
+                            {renderTimerCompleteLabel()}
+                        </TimerContainer>
+                        <ButtonContainer>
+                            <ButtonDivider>
+                                <MoveButtonLeft onClick={onPrev}>
+                                    <ArrowLeft />
+                                </MoveButtonLeft>
+                                <PrevExerciseLabel>
+                                    {processPrevExercise()}
+                                </PrevExerciseLabel>
+                            </ButtonDivider>
+                            <ButtonDivider>
+                                <MoveButtonRight onClick={onNext}>
+                                    <ArrowRight />
+                                </MoveButtonRight>
+                                <NextExerciseLabel>
+                                    {processNextExercise()}
+                                </NextExerciseLabel>
+                            </ButtonDivider>
+                        </ButtonContainer>
+                    </CardContainer>
+                </MainContainer>
+            );
+        } else if (
+            programExerciseType !== 'CARDIO_PROGRAM_EXERCISE' &&
+            restId !== undefined &&
+            exerciseId === undefined
+        ) {
             return (
                 //Render for rest period (larger)
                 <MainContainer>
@@ -508,7 +573,7 @@ const RunCards = ({
                     </CardContainer>
                 </MainContainer>
             );
-        } else {
+        } else if (programExerciseType !== 'CARDIO_PROGRAM_EXERCISE') {
             return (
                 //Render for exercises:
                 <MainContainer>
