@@ -5,9 +5,7 @@ import PyramidSecondStep from './PyramidSecondStep';
 import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
-import Button from '@material-ui/core/Button';
-import { v4 as uuid } from 'uuid';
-import CustomSubmitButton from '../../dashboardComponents/CustomSubmitButton';
+import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseTypes';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -323,7 +321,13 @@ const PyramidMain = ({
 
     const checkUserFieldsBeforeSubmission = () => {
         if (parseInt(sets) === pyramidArray.length) {
-            addNewPyramidSet(id, exercise, pyramidArray, showPyramidSnackbar);
+            addNewPyramidSet(
+                id,
+                PYRAMID_PROGRAM_EXERCISE,
+                exercise,
+                pyramidArray,
+                showPyramidSnackbar
+            );
         } else {
             openPyramidModal();
         }
