@@ -9,10 +9,14 @@ import {
     NEW_PROGRAM_EXERCISE,
     EXISTING_STAT_PROGRAM_EXERCISE,
     MAIN_LIFT_PROGRAM_EXERCISE,
-} from './programExerciseTypes';
+    CARDIO_PROGRAM_EXERCISE,
+} from './programExerciseConstants';
 
 //Redux:
-import { addNewProgramExercise } from '../../../redux/userProgramExercises/programExerciseActions';
+import {
+    addNewProgramExercise,
+    addNewCardio,
+} from '../../../redux/userProgramExercises/programExerciseActions';
 import { getUserStatData } from '../../../redux/userStats/userStatActions';
 import { getUserLiftingData } from '../../../redux/userPowerLifts/powerLiftActions';
 
@@ -161,6 +165,7 @@ const ExerciseSelectorPage = ({
     getUserLiftingData,
     stats,
     powerStats,
+    addNewCardio,
 }) => {
     //From match and params, name === programName and id === programId.
     /* 
@@ -365,7 +370,13 @@ const ExerciseSelectorPage = ({
             ) {
                 //Attach action creator here:
 
-                console.log('Cardio Values should be submitted');
+                addNewCardio(
+                    id,
+                    CARDIO_PROGRAM_EXERCISE,
+                    cardioExerciseName,
+                    cardioMinutes,
+                    cardioSeconds
+                );
 
                 //Refresh all states:
                 setCardioExerciseName(null);
@@ -584,6 +595,7 @@ const mapStateToProps = (state) => {
 
 export default connect(mapStateToProps, {
     addNewProgramExercise,
+    addNewCardio,
     getUserStatData,
     getUserLiftingData,
 })(ExerciseSelectorPage);
