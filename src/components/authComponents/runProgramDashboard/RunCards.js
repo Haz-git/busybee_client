@@ -90,14 +90,11 @@ const ExerciseContainer = styled.div`
 `;
 
 const ItemLabel = styled.h3`
-    display: flex;
-    justify-content: center;
-    /* align-items: baseline; */
-    /* justify-content: center; */
     font-family: 'Lato';
-    font-size: 1em;
+    font-size: 1.8em;
     font-weight: 900;
     color: white;
+    text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
 `;
 
 const ExerciseValue = styled.h3`
@@ -110,17 +107,11 @@ const ExerciseValue = styled.h3`
 `;
 
 const RepsContainer = styled.div`
-    display: flex;
-    /* flex-direction: column; */
-    align-items: center;
-    justify-content: space-evenly;
+    padding-left: 1em;
     box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px;
     background: #080f1a;
     width: 100%;
-    padding: 3em 1em;
-    /* border-bottom-left-radius: 0.4em;
-    border-bottom-right-radius: 0.4em; */
-    height: 16em;
+    height: 48vh;
     animation: ${carouselMovement} 0.7s ease-in-out;
 `;
 
@@ -133,48 +124,34 @@ const TimerContainer = styled.div`
     background: #080f1a;
     width: 100%;
     padding: 3em 1em;
+    height: 48vh;
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
-    height: 16em;
     animation: ${carouselMovement} 0.7s ease-in-out;
 `;
 
-const RepsColumnContainer = styled.div`
-    display: flex;
-    flex-direction: column;
-    /* align-items: baseline; */
-
-    /* margin: 0 1em; */
-`;
-
-const FlexWrapper = styled.div`
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-`;
-
 const DetailsContainer = styled.div`
-    text-align: center;
+    display: grid;
+    grid-template-columns: 35% 65%;
+    align-items: center;
+    justify-items: start;
 `;
 
 const RepsValueReduced = styled.h3`
     font-family: 'Lato';
-    font-size: 4.5em;
+    font-size: 5em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
-    margin: -0.175em 0;
     padding: 0;
 `;
 
 const RepsValue = styled.h3`
     font-family: 'Lato';
-    font-size: 10em;
+    font-size: 3.5em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
-    margin: -0.175em 0;
     padding: 0;
 `;
 
@@ -188,7 +165,7 @@ const WeightValue = styled.h3`
 
 const SetsValue = styled.h3`
     font-family: 'Lato';
-    font-size: 2.6em;
+    font-size: 3.5em;
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
@@ -456,7 +433,6 @@ const RunCards = ({
     //Renders complete label on timer end for cardio:
 
     const renderCardioCompleteLabel = () => {
-        console.log('test');
         if (renderEndCardio === false) {
             return (
                 <EndCardioLabelInvis>
@@ -482,6 +458,12 @@ const RunCards = ({
         } else {
             return <RepsValue>{reps}</RepsValue>;
         }
+    };
+
+    //Converts weight to kg
+
+    const convertWeightToKg = (lb) => {
+        return (lb / 2.205).toFixed(1);
     };
 
     const renderRestOrExercise = () => {
@@ -627,22 +609,26 @@ const RunCards = ({
                             <ExerciseValue>{exerciseName}</ExerciseValue>
                         </ExerciseContainer>
                         <RepsContainer>
-                            <RepsColumnContainer>
-                                {calculateRepsLength()}
+                            <DetailsContainer>
                                 <ItemLabel>Reps</ItemLabel>
-                            </RepsColumnContainer>
-                            <FlexWrapper>
-                                <DetailsContainer>
-                                    <SetsValue>
-                                        {currentSet}/{totalSets}
-                                    </SetsValue>
-                                    <ItemLabel>Set</ItemLabel>
-                                </DetailsContainer>
-                                <DetailsContainer>
-                                    <WeightValue>{weight}</WeightValue>
-                                    <ItemLabel>Weight (Lb)</ItemLabel>
-                                </DetailsContainer>
-                            </FlexWrapper>
+                                {calculateRepsLength()}
+                            </DetailsContainer>
+                            <DetailsContainer>
+                                <ItemLabel>Set #</ItemLabel>
+                                <SetsValue>
+                                    {currentSet}/{totalSets}
+                                </SetsValue>
+                            </DetailsContainer>
+                            <DetailsContainer>
+                                <ItemLabel>Lbs</ItemLabel>
+                                <WeightValue>{weight}</WeightValue>
+                            </DetailsContainer>
+                            <DetailsContainer>
+                                <ItemLabel>Kgs</ItemLabel>
+                                <WeightValue>
+                                    {convertWeightToKg(weight)}
+                                </WeightValue>
+                            </DetailsContainer>
                         </RepsContainer>
                         <ButtonContainer>
                             <ButtonDivider>
