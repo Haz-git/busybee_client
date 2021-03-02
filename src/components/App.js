@@ -33,6 +33,7 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 //Render
 
 const App = withRouter(({ location }) => {
+    //'dark' state value is temporary, should be set to '' on proper light/dark mode switching.
     const [appTheme, setAppTheme] = useState('dark');
 
     useEffect(() => {
