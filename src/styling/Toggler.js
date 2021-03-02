@@ -34,7 +34,15 @@ const Toggle = ({ theme, toggleTheme, callBack }) => {
 
     //Inputting callback function supplied by 'App' parent component in order to change theme from settings.
     return (
-        <Button onClick={() => toggleTheme(callBack)}>
+        // <Button onClick={() => toggleTheme(callBack)}>
+        //     {renderThemeTitle()}
+        // </Button>
+
+        <Button
+            onClick={() =>
+                alert(`We're sorry! This feature is currently in-the-works.`)
+            }
+        >
             {renderThemeTitle()}
         </Button>
     );

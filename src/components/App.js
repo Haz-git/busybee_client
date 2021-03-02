@@ -33,7 +33,7 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 //Render
 
 const App = withRouter(({ location }) => {
-    const [appTheme, setAppTheme] = useState('');
+    const [appTheme, setAppTheme] = useState('dark');
 
     useEffect(() => {
         async function initialState() {
@@ -49,7 +49,9 @@ const App = withRouter(({ location }) => {
         setAppTheme(modeValue);
     };
 
-    const grabbedTheme = appTheme === 'light' ? lightTheme : darkTheme;
+    const grabbedTheme = appTheme === 'light' ? darkTheme : darkTheme;
+
+    //For only now, we'll make the availiable theme Dark. We'll work on the light theme later.
 
     const renderApp = () => {
         if (appTheme === '') {
