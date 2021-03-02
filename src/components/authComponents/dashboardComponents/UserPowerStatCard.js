@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
-import { Edit } from '@styled-icons/fa-solid/Edit';
+import { NewMessage } from '@styled-icons/entypo/NewMessage';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
@@ -56,8 +56,8 @@ const RecentWeightContainer = styled.div`
 const EditCorner = styled.button`
     text-align: center;
     position: absolute;
-    height: 3em;
-    width: 3em;
+    height: 2.8em;
+    width: 2.8em;
     top: 0;
     right: 0;
     border-top-right-radius: 20em;
@@ -78,19 +78,19 @@ const EditCorner = styled.button`
     }
 `;
 
-const StyledEditIcon = styled(Edit)`
-    height: 1.5em;
-    width: 1.5em;
+const StyledEditIcon = styled(NewMessage)`
+    height: 2em;
+    width: 2em;
     position: absolute;
     top: 0.4em;
     right: 0.4em;
     color: black;
 
     @media only screen and (min-width: 375px) {
-        height: 1.7em;
-        width: 1.7em;
-        top: 0.45em;
-        right: 0.45em;
+        height: 1.9em;
+        width: 1.9em;
+        top: 0.4em;
+        right: 0.4em;
     }
 `;
 
