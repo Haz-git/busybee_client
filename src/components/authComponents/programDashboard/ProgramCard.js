@@ -97,6 +97,10 @@ const NameHeader = styled.h2`
     font-size: 1.4em;
     font-weight: 900;
     text-shadow: 2px 2px 2px #14181f;
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.6em;
+    }
 `;
 
 const DescContainer = styled.div`
@@ -113,6 +117,10 @@ const DescText = styled.h3`
     font-family: 'Lato', 'Nunito';
     font-weight: 600;
     color: ${({ theme }) => theme.ProgramCardDesc};
+
+    @media screen and (min-width: 414px) {
+        font-size: 1em;
+    }
 `;
 
 const DetailLabel = styled.p`
@@ -122,6 +130,10 @@ const DetailLabel = styled.p`
     font-family: 'Lato';
     color: ${({ theme }) => theme.ProgramCardDesc};
     text-shadow: 2px 2px 2px #14181f;
+
+    @media screen and (min-width: 414px) {
+        font-size: 0.95em;
+    }
 `;
 
 const DateContainer = styled.div`
