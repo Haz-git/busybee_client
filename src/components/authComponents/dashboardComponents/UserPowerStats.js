@@ -33,6 +33,9 @@ export const MainHeader = styled.h2`
     color: ${({ theme }) => theme.UserPowerHeaderColor};
     font-weight: 900;
     text-shadow: ${({ theme }) => theme.textShadow};
+    @media screen and (min-width: 414px) {
+        font-size: 1.3em;
+    }
 `;
 
 export const StyledDivider = styled.hr`

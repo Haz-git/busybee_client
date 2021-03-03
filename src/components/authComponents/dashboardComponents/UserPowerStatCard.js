@@ -46,6 +46,11 @@ const MainContainer = styled.div`
     @media only screen and (min-width: 375px) {
         padding: 0.6em 1.5em;
     }
+
+    @media screen and (min-width: 414px) {
+        margin: 0 0.25em;
+        padding: 0.8em 1.7em;
+    }
 `;
 
 const RecentWeightContainer = styled.div`

@@ -26,6 +26,9 @@ export const MainContainer = styled.div`
     border: none;
     margin: 0.5em 0;
     animation: ${fadeIn} 0.3s ease;
+    @media screen and (min-width: 414px) {
+        padding: 1em 0.7em;
+    }
 `;
 
 export const NameLabel = styled.h2`
@@ -34,6 +37,10 @@ export const NameLabel = styled.h2`
     font-weight: 400;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.1em;
+    }
 `;
 
 export const CountLabel = styled.h2`
@@ -42,6 +49,10 @@ export const CountLabel = styled.h2`
     font-weight: 700;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.1em;
+    }
 `;
 
 //Render:

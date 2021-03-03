@@ -61,6 +61,10 @@ export const MainHeader = styled.h1`
     @media only screen and (min-width: 375px) {
         font-size: 2em;
     }
+
+    @media screen and (min-width: 414px) {
+        font-size: 2.35em;
+    }
 `;
 
 const UserDetailLabel = styled.h2`
@@ -74,6 +78,10 @@ const UserDetailLabel = styled.h2`
 
     @media only screen and (min-width: 375px) {
         font-size: 1.2em;
+    }
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.35em;
     }
 `;
 
@@ -90,6 +98,11 @@ export const StyledLogo = styled.img`
     @media only screen and (min-width: 375px) {
         height: 7.2em;
         width: 7.2em;
+    }
+
+    @media screen and (min-width: 414px) {
+        height: 8em;
+        width: 8em;
     }
 `;
 
