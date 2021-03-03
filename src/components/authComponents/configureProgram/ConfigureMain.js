@@ -143,7 +143,11 @@ export const MainHeader = styled.h1`
     white-space: nowrap;
 
     @media only screen and (min-width: 375px) {
-        font-size: 2em;
+        font-size: 1.75em;
+    }
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.9em;
     }
 `;
 

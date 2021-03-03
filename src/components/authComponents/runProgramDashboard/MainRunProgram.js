@@ -24,7 +24,7 @@ import { Close } from '@styled-icons/ionicons-solid/Close';
 
 export const CloseIcon = styled(Close)`
     height: 4em;
-    width: 4.5em;
+    width: 4em;
 `;
 
 const MainContainer = styled.div`
@@ -36,7 +36,7 @@ const MainContainer = styled.div`
 export const AbortButton = styled(BackButton)`
     display: block;
     background: #90130c;
-    padding: 0.5em 0.5em;
+    padding: 0.5em 0.35em;
 
     &:hover {
         background: #cb484f;
@@ -44,7 +44,7 @@ export const AbortButton = styled(BackButton)`
 `;
 
 export const AbortLabel = styled.p`
-    font-size: 1.2em;
+    font-size: 1.1em;
     color: white;
     text-shadow: 2px 2px 2px #14181f;
 `;
@@ -219,7 +219,7 @@ const MainRunProgram = ({
                     <Link to="/programs">
                         <AbortButton>
                             <CloseIcon />
-                            <AbortLabel>Abort</AbortLabel>
+                            <AbortLabel>Exit</AbortLabel>
                         </AbortButton>
                     </Link>
                     <FlexWrapper>
