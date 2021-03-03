@@ -9,6 +9,7 @@ import { Link } from 'react-router-dom';
 import { getJWT } from '../../utils/jwthelper';
 import history from '../historyObject';
 import gymjot_logo from '../../imgs/gymjot_transparent.png';
+import gymjot_splash from '../../imgs/gymjot_kettle_splash_sqush.jpg';
 import PWAPrompt from 'react-ios-pwa-prompt';
 
 //Styles:
@@ -77,6 +78,56 @@ const MobWrapper = styled.div`
 const MobHeaderContainer = styled.div``;
 
 const LogoContainer = styled.div``;
+
+const DeskUserCredentialsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10em 10em;
+`;
+
+const DeskSplashScreenContainer = styled.div``;
+
+const DeskSplashScreenImg = styled.img`
+    object-fit: cover;
+    height: 25em;
+    width: 16em;
+    border-radius: 1em;
+`;
+
+const DeskLoginFieldsContainer = styled.div`
+    height: 25em;
+    width: 17em;
+    max-width: 17em;
+    border-radius: 1em;
+    border: 1px solid gray;
+    padding: 1em 1em;
+`;
+
+const DeskStyledMainLogo = styled.img`
+    object-fit: cover;
+    height: 8em;
+    width: 8em;
+    border-radius: 50%;
+    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    animation: ${rotateAnimate} 1s ease;
+`;
+
+const DeskHeader = styled.h1`
+    font-family: 'Nunito', sans-serif, helvetica;
+    font-size: 2em;
+    font-weight: 900;
+    color: ${(props) => props.theme.mainMobHeaderColor};
+    animation: ${fadeIn} 0.5s ease;
+`;
+
+const DeskLabel = styled.label`
+    font-family: 'Nunito', sans-serif, helvetica;
+    font-size: 1em;
+    font-weight: 900;
+    color: ${(props) => props.theme.mainMobHeaderColor};
+    animation: ${fadeIn} 0.5s ease;
+`;
 
 export const StyledMainLogo = styled.img`
     object-fit: cover;
@@ -218,19 +269,28 @@ const MainLandingPage = () => {
                 <BrowserView>
                     <MobMainContainer>
                         <MobWrapper>
-                            <MobHeaderContainer>
-                                <LogoContainer>
-                                    <StyledMainLogo
-                                        src={gymjot_logo}
-                                        alt="gymjot logo"
+                            <DeskUserCredentialsContainer>
+                                <DeskSplashScreenContainer>
+                                    <DeskSplashScreenImg
+                                        src={gymjot_splash}
+                                        alt="gymjot splash screen"
                                     />
-                                </LogoContainer>
-                                <MobHeader>GymJot</MobHeader>
-                                <MobLabel>
-                                    We're Sorry! GymJot does not have browser
-                                    support...yet! Try again on a mobile device.
-                                </MobLabel>
-                            </MobHeaderContainer>
+                                </DeskSplashScreenContainer>
+                                <DeskLoginFieldsContainer>
+                                    <LogoContainer>
+                                        <DeskStyledMainLogo
+                                            src={gymjot_logo}
+                                            alt="gymjot logo"
+                                        />
+                                    </LogoContainer>
+                                    <DeskHeader>GymJot</DeskHeader>
+                                    <DeskLabel>
+                                        We're Sorry! GymJot does not have
+                                        browser support...yet! Try again on a
+                                        mobile device.
+                                    </DeskLabel>
+                                </DeskLoginFieldsContainer>
+                            </DeskUserCredentialsContainer>
                         </MobWrapper>
                     </MobMainContainer>
                 </BrowserView>
