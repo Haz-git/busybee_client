@@ -38,6 +38,11 @@ const NameHeader = styled.h2`
     font-size: 1.2em;
     font-weight: 400;
     text-shadow: 2px 2px 2px #14181f;
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.4em;
+        font-weight: 600;
+    }
 `;
 
 const DateContainer = styled.div`
@@ -50,6 +55,9 @@ const DateText = styled.h2`
     font-size: 0.9em;
     text-align: left;
     font-weight: 400;
+    @media screen and (min-width: 414px) {
+        font-size: 1em;
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -60,18 +68,33 @@ const TrashIcon = styled(Trash)`
     height: 3em;
     width: 3em;
     color: ${({ theme }) => theme.TrashIcon};
+
+    @media screen and (min-width: 414px) {
+        height: 3.5em;
+        width: 3.5em;
+    }
 `;
 
 const EditIcon = styled(Pencil)`
     height: 3em;
     width: 3em;
     color: ${({ theme }) => theme.EditIcon};
+
+    @media screen and (min-width: 414px) {
+        height: 3.5em;
+        width: 3.5em;
+    }
 `;
 
 const CaretIcon = styled(ChevronDown)`
     height: 3em;
     width: 3em;
     color: ${({ theme }) => theme.CaretIcon};
+
+    @media screen and (min-width: 414px) {
+        height: 3.5em;
+        width: 3.5em;
+    }
 `;
 
 const StyledButton = styled.button`
