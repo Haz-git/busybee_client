@@ -26,6 +26,11 @@ const MainContainer = styled.button`
     &:focus {
         outline: none;
     }
+
+    @media screen and (min-width: 414px) {
+        height: 14em;
+        width: 14em;
+    }
 `;
 
 const IconContainer = styled.div``;
@@ -40,6 +45,10 @@ const TextLabel = styled.h2`
     font-size: 1.2em;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.8) 0px 2px 4px;
+
+    @media screen and (min-width: 414px) {
+        font-size: 1.45em;
+    }
 `;
 
 const SettingsCard = ({ icon, textLabel, clickFunc }) => {
