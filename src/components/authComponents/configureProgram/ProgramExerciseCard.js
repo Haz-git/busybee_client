@@ -37,30 +37,50 @@ const MiniPyramidIcon = styled(Pyramid)`
     height: 1.5em;
     width: 1.6em;
     color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
 `;
 
 const MiniNewIcon = styled(NewReleases)`
     height: 1.5em;
     width: 1.6em;
     color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
 `;
 
 const MiniRunIcon = styled(Run)`
     height: 1.5em;
     width: 1.6em;
     color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
 `;
 
 const MiniLogIcon = styled(Notepad)`
     height: 1.5em;
     width: 1.6em;
     color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
 `;
 
 const MiniMainLiftIcon = styled(Columns)`
     height: 1.5em;
     width: 1.6em;
     color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
 `;
 
 const EditIcon = styled(EditOutline)`
@@ -101,6 +121,9 @@ const HeaderText = styled.h2`
     font-weight: 500;
     color: #fcac49;
     font-size: 1.2em;
+    @media screen and (min-width: 414px) {
+        font-size: 1.35em;
+    }
 `;
 
 const InfoBlock = styled.div`
@@ -112,6 +135,9 @@ const InfoText = styled.h3`
     color: white;
     font-size: 1.025em;
     /* white-space: nowrap; */
+    @media screen and (min-width: 414px) {
+        font-size: 1.1em;
+    }
 `;
 
 const DetailContainer = styled.div`
@@ -200,6 +226,9 @@ const ObjectArrayText = styled.h3`
     padding: 0.2em 0.2em;
     color: white;
     font-size: 1.025em;
+    @media screen and (min-width: 414px) {
+        font-size: 1.1em;
+    }
 `;
 
 const IconDiv = styled.div`
