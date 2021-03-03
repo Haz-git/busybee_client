@@ -10,7 +10,6 @@ const userRegistration = (formValues, callback) => async (dispatch) => {
     //There is currently no dispatch for this function in Redux. Perhaps later we will need something like that.
 
     if (response) {
-        console.log(response);
         //if response.ok === true, then the user's account has been created.
         callback(true);
     }
