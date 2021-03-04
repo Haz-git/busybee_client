@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import Popover from '@material-ui/core/Popover';
 import {
     BrowserView,
     MobileView,
@@ -292,9 +293,22 @@ const CopyrightText = styled.p`
     animation: ${fadeIn} 0.5s ease;
 `;
 
+const PopoverTextContainer = styled.div`
+    background: white;
+    padding: 0.5em 0.5em;
+    border: none;
+`;
+
+const PopoverText = styled.p`
+    font-family: 'Lato', sans-serif, helvetica;
+    font-size: 0.9em;
+    font-weight: 400;
+    color: black;
+`;
+
 //Render:
 const MainLandingPage = () => {
-    const [statePopup, setStatePopup] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     useEffect(() => {
         //This useEffect serves to check if the user has a JWT. If avaliable --> send to AuthCheck to check to expiration.
@@ -305,6 +319,16 @@ const MainLandingPage = () => {
             history.push('/dashboard');
         }
     }, []);
+
+    const handlePopoverOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+    };
+
+    const open = Boolean(anchorEl);
 
     const renderMainPage = () => {
         if (isMobile) {
@@ -388,10 +412,39 @@ const MainLandingPage = () => {
                                             </Link>
                                         </DeskButtonDiv>
                                     </DeskButtonContainer>
-                                    <DeskInfoContainer>
+                                    <DeskInfoContainer
+                                        aria-owns={
+                                            open
+                                                ? 'mouse-over-popover'
+                                                : undefined
+                                        }
+                                        aria-haspopup="true"
+                                        onMouseEnter={handlePopoverOpen}
+                                        onMouseLeave={handlePopoverClose}
+                                    >
                                         <InfoIcon />
                                         <DeskInfoText>
                                             This app is mobile optimized.
+                                            <Popover
+                                                open={open}
+                                                anchorEl={anchorEl}
+                                                anchorOrigin={{
+                                                    vertical: 'bottom',
+                                                    horizontal: 'center',
+                                                }}
+                                                onClose={handlePopoverClose}
+                                                disableRestoreFocus
+                                            >
+                                                <PopoverTextContainer>
+                                                    <PopoverText>
+                                                        GymJot was created
+                                                        mobile-first. For mobile
+                                                        use, please visit this
+                                                        website on your mobile
+                                                        browser.
+                                                    </PopoverText>
+                                                </PopoverTextContainer>
+                                            </Popover>
                                         </DeskInfoText>
                                     </DeskInfoContainer>
                                 </DeskLoginFieldsContainer>
