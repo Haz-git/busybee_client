@@ -380,7 +380,7 @@ const MainLandingPage = () => {
                     </MobMainContainer>
                 </MobileView>
             );
-        } else {
+        } else if (isBrowser) {
             return (
                 <BrowserView>
                     <MobMainContainer>
