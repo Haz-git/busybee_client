@@ -80,10 +80,13 @@ const MobHeaderContainer = styled.div``;
 const LogoContainer = styled.div``;
 
 const DeskUserCredentialsContainer = styled.div`
+    height: 30em;
+    width: 40em;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: 10em 10em;
+    /* padding: 10em 10em; */
+    margin: 0 auto;
 `;
 
 const DeskSplashScreenContainer = styled.div``;
@@ -93,6 +96,8 @@ const DeskSplashScreenImg = styled.img`
     height: 25em;
     width: 16em;
     border-radius: 1em;
+    margin: 1em 1em;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
 `;
 
 const DeskLoginFieldsContainer = styled.div`
@@ -100,8 +105,10 @@ const DeskLoginFieldsContainer = styled.div`
     width: 17em;
     max-width: 17em;
     border-radius: 1em;
-    border: 1px solid gray;
+    border: none;
     padding: 1em 1em;
+    margin: 1em 1em;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
 `;
 
 const DeskStyledMainLogo = styled.img`
@@ -154,6 +161,13 @@ const MobLabel = styled.label`
     animation: ${fadeIn} 0.5s ease;
 `;
 
+const DeskButtonContainer = styled.div`
+    padding: 0.7em 0.7em;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+`;
+
 const MobButtonContainer = styled.div`
     padding: 1em 1em;
     display: flex;
@@ -163,6 +177,10 @@ const MobButtonContainer = styled.div`
 
 const MobButtonDiv = styled.div`
     margin: 0.5em 0;
+`;
+
+const DeskButtonDiv = styled.div`
+    margin: 0.3em 0;
 `;
 
 const CustomLoginButton = styled.button`
@@ -186,6 +204,19 @@ const CustomLoginButton = styled.button`
     }
 `;
 
+const CustomDeskLoginButton = styled(CustomLoginButton)`
+    padding: 0.4em;
+    letter-spacing: 0.05em;
+    font-size: 1em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    cursor: pointer;
+    transition: 0.1s ease;
+
+    &:hover {
+        transform: scale(1.05);
+    }
+`;
+
 const CustomJoinButton = styled.button`
     color: white;
     max-width: 100%;
@@ -204,6 +235,19 @@ const CustomJoinButton = styled.button`
 
     &:hover {
         background: #5c677b;
+    }
+`;
+
+const CustomDeskJoinButton = styled(CustomJoinButton)`
+    padding: 0.4em;
+    letter-spacing: 0.05em;
+    font-size: 1em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    cursor: pointer;
+    transition: 0.1s ease;
+
+    &:hover {
+        transform: scale(1.05);
     }
 `;
 
@@ -285,10 +329,24 @@ const MainLandingPage = () => {
                                     </LogoContainer>
                                     <DeskHeader>GymJot</DeskHeader>
                                     <DeskLabel>
-                                        We're Sorry! GymJot does not have
-                                        browser support...yet! Try again on a
-                                        mobile device.
+                                        Train more efficiently.
                                     </DeskLabel>
+                                    <DeskButtonContainer>
+                                        <DeskButtonDiv>
+                                            <Link to="/login">
+                                                <CustomDeskLoginButton>
+                                                    Sign In
+                                                </CustomDeskLoginButton>
+                                            </Link>
+                                        </DeskButtonDiv>
+                                        <DeskButtonDiv>
+                                            <Link to="/signup">
+                                                <CustomDeskJoinButton>
+                                                    Join Us
+                                                </CustomDeskJoinButton>
+                                            </Link>
+                                        </DeskButtonDiv>
+                                    </DeskButtonContainer>
                                 </DeskLoginFieldsContainer>
                             </DeskUserCredentialsContainer>
                         </MobWrapper>
