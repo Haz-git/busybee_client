@@ -225,6 +225,9 @@ const CustomDeskLoginButton = styled(CustomLoginButton)`
     &:hover {
         transform: scale(1.05);
     }
+    &:focus {
+        outline: none;
+    }
 `;
 
 const CustomJoinButton = styled.button`
@@ -258,6 +261,10 @@ const CustomDeskJoinButton = styled(CustomJoinButton)`
 
     &:hover {
         transform: scale(1.05);
+    }
+
+    &:focus {
+        outline: none;
     }
 `;
 
