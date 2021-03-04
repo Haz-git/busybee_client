@@ -70,13 +70,13 @@ export const darkTheme = {
     inputFieldBottomBorderC: '#e8e8e8',
     //MainMobilePage:
     mainMobBackground: '#0d1b2a',
-    mainMobHeaderColor: '#e0e1dd',
+    mainMobHeaderColor: 'white',
     //Sign up:
     MobIconColor: 'white',
     MobPromptSpan: 'white',
     MobPromptLink: '#14A84B',
     //Login:
-    MobHeaderColor: '#E8E8E8',
+    MobHeaderColor: 'white',
     //Loading:
     SpinnerColor: 'white',
     SpinnerCharacter: 'white',

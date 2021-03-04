@@ -14,7 +14,15 @@ import PWAPrompt from 'react-ios-pwa-prompt';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
+import { InfoCircle } from '@styled-icons/bootstrap/InfoCircle';
 import Button from '@material-ui/core/Button';
+
+const InfoIcon = styled(InfoCircle)`
+    height: 1.3em;
+    width: 1.3em;
+    color: white;
+    margin: 0 0.2em;
+`;
 
 const rotateAnimate = keyframes`
     from {
@@ -80,8 +88,8 @@ const MobHeaderContainer = styled.div``;
 const LogoContainer = styled.div``;
 
 const DeskUserCredentialsContainer = styled.div`
-    height: 30em;
-    width: 40em;
+    height: 40em;
+    width: 60em;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -93,17 +101,17 @@ const DeskSplashScreenContainer = styled.div``;
 
 const DeskSplashScreenImg = styled.img`
     object-fit: cover;
-    height: 25em;
-    width: 16em;
+    height: 35em;
+    width: 25em;
     border-radius: 1em;
     margin: 1em 1em;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
 `;
 
 const DeskLoginFieldsContainer = styled.div`
-    height: 25em;
-    width: 17em;
-    max-width: 17em;
+    height: 35em;
+    width: 25em;
+    max-width: 25em;
     border-radius: 1em;
     border: none;
     padding: 1em 1em;
@@ -113,16 +121,16 @@ const DeskLoginFieldsContainer = styled.div`
 
 const DeskStyledMainLogo = styled.img`
     object-fit: cover;
-    height: 8em;
-    width: 8em;
+    height: 10em;
+    width: 10em;
     border-radius: 50%;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 3px;
     animation: ${rotateAnimate} 1s ease;
 `;
 
 const DeskHeader = styled.h1`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 2em;
+    font-size: 3em;
     font-weight: 900;
     color: ${(props) => props.theme.mainMobHeaderColor};
     animation: ${fadeIn} 0.5s ease;
@@ -130,7 +138,7 @@ const DeskHeader = styled.h1`
 
 const DeskLabel = styled.label`
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 1em;
+    font-size: 1.5em;
     font-weight: 900;
     color: ${(props) => props.theme.mainMobHeaderColor};
     animation: ${fadeIn} 0.5s ease;
@@ -166,6 +174,7 @@ const DeskButtonContainer = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    margin: 1em 0;
 `;
 
 const MobButtonContainer = styled.div`
@@ -180,7 +189,7 @@ const MobButtonDiv = styled.div`
 `;
 
 const DeskButtonDiv = styled.div`
-    margin: 0.3em 0;
+    margin: 0.4em 0;
 `;
 
 const CustomLoginButton = styled.button`
@@ -207,8 +216,8 @@ const CustomLoginButton = styled.button`
 const CustomDeskLoginButton = styled(CustomLoginButton)`
     padding: 0.4em;
     letter-spacing: 0.05em;
-    font-size: 1em;
-    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    font-size: 1.4em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1.5px 1.5px;
     cursor: pointer;
     transition: 0.1s ease;
 
@@ -241,14 +250,46 @@ const CustomJoinButton = styled.button`
 const CustomDeskJoinButton = styled(CustomJoinButton)`
     padding: 0.4em;
     letter-spacing: 0.05em;
-    font-size: 1em;
-    text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
+    font-size: 1.4em;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1.5px 1.5px;
     cursor: pointer;
     transition: 0.1s ease;
 
     &:hover {
         transform: scale(1.05);
     }
+`;
+
+const DeskInfoContainer = styled.div`
+    margin: 4.5em 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+`;
+
+const DeskInfoText = styled.p`
+    font-family: 'Lato', sans-serif, helvetica;
+    font-size: 1.1em;
+    font-weight: 400;
+    color: white;
+    animation: ${fadeIn} 0.5s ease;
+    margin: 0 0.2em;
+`;
+
+const CopyrightContainer = styled.div`
+    position: fixed;
+    margin-bottom: 1em;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+`;
+
+const CopyrightText = styled.p`
+    font-family: 'Lato', sans-serif, helvetica;
+    font-size: 1em;
+    font-weight: 400;
+    color: white;
+    animation: ${fadeIn} 0.5s ease;
 `;
 
 //Render:
@@ -347,10 +388,21 @@ const MainLandingPage = () => {
                                             </Link>
                                         </DeskButtonDiv>
                                     </DeskButtonContainer>
+                                    <DeskInfoContainer>
+                                        <InfoIcon />
+                                        <DeskInfoText>
+                                            This app is mobile optimized.
+                                        </DeskInfoText>
+                                    </DeskInfoContainer>
                                 </DeskLoginFieldsContainer>
                             </DeskUserCredentialsContainer>
                         </MobWrapper>
                     </MobMainContainer>
+                    <CopyrightContainer>
+                        <CopyrightText>
+                            <span>&#169;</span> 2021 Created By - Harry Zhou
+                        </CopyrightText>
+                    </CopyrightContainer>
                 </BrowserView>
             );
         }
