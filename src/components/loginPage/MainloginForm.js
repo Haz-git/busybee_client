@@ -59,7 +59,7 @@ const WrapperContainer = styled.div`
 
 const DeskWrapperContainer = styled.div`
     position: relative;
-    top: 50vh;
+    top: 35vh;
     -webkit-transform: translateY(-30vh);
     -moz-transform: translateY(-30vh);
     -ms-transform: translateY(-30vh);
@@ -200,7 +200,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
     const renderErrorText = () => {
         //This function renders the same verification error text, but with different opacities according to the hasErrors state.
         if (hasErrors === true) {
-            if (isMobile) {
+            if (isMobileOnly) {
                 return (
                     <Fade>
                         <ErrorTextVisible>
@@ -218,7 +218,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
                 );
             }
         } else {
-            if (isMobile) {
+            if (isMobileOnly) {
                 return (
                     <Fade>
                         <ErrorTextInvisible>
