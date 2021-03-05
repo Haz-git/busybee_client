@@ -4,6 +4,13 @@ import { connect } from 'react-redux';
 import userRegistration from '../../redux/userRegistration/userRegistrationActions';
 import { Link } from 'react-router-dom';
 
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobile,
+} from 'react-device-detect';
+
 //Components
 import InputField from './InputField';
 import SubmitButton from './SubmitButton';
@@ -38,6 +45,23 @@ const WrapperContainer = styled.div`
     @media only screen and (min-width: 375px) {
         top: 47vh;
     }
+`;
+
+const DeskWrapperContainer = styled.div`
+    position: relative;
+    top: 50vh;
+    transform: translateY(-45vh);
+    text-align: center;
+    padding: 0.5em 0;
+`;
+
+const DeskShadowContainer = styled.div`
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
+    max-width: 40em;
+    width: 40em;
+    margin: 0 auto;
+    padding: 2em 2em;
+    border-radius: 1em;
 `;
 
 const LogoContainer = styled(Link)`
@@ -363,128 +387,283 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
         setOpenSnackBar(false);
     };
 
-    return (
-        <>
-            <MainContainer>
-                <WrapperContainer>
-                    <LogoContainer to="/">
-                        <StyledLogo src={gymjot_logo} alt="gymjot logo" />
-                    </LogoContainer>
-                    <StyledSignUpHeader>
-                        Pleased to meet you, new GymJotter.
-                    </StyledSignUpHeader>
-                    <VerifyError
-                        title="Please fill in all fields."
-                        render={areFieldsEmpty}
-                        center="true"
-                    />
-                    <form
-                        onSubmit={handleSubmit(dispatchFormValues)}
-                        name="registerForm"
-                        id="regForm"
-                    >
-                        <FormContainer>
-                            <InputField
-                                formName="firstName"
-                                componentType="input"
-                                label="First Name"
-                            >
-                                <StyledPersonIcon />
-                            </InputField>
-                            <InputField
-                                formName="lastName"
-                                componentType="input"
-                                label="Last Name"
-                            >
-                                <StyledPersonIcon />
-                            </InputField>
-                            <InputField
-                                formName="userName"
-                                componentType="input"
-                                label="Username"
-                                errorTag="Your username must be 4 - 15 characters."
-                                renderError={hasInvalidUsernameLength}
-                            >
-                                <StyledUserIcon />
-                            </InputField>
-                            <InputField
-                                formName="email"
-                                componentType="input"
-                                label="Email Address"
-                                htmlType="email"
-                            >
-                                <StyledMailIcon />
-                            </InputField>
-                            <InputField
-                                formName="password"
-                                componentType="input"
-                                label="Password"
-                                errorTag="Your password must be 6 - 20 characters."
-                                htmlType="password"
-                                renderError={hasInvalidPasswordLength}
-                            >
-                                <StyledLockIcon />
-                            </InputField>
-                            <InputField
-                                formName="passwordConfirm"
-                                componentType="input"
-                                label="Confirm Password"
-                                errorTag="Your two passwords do not match!"
-                                htmlType="password"
-                                renderError={invalidPasswordMatch}
-                            >
-                                <StyledLockIcon />
-                            </InputField>
-                            <ButtonContainer>
-                                <SubmitButton
-                                    label="Create new account"
-                                    formID="regForm"
+    const renderMainSignupForm = () => {
+        if (isMobile) {
+            return (
+                <MobileView>
+                    <MainContainer>
+                        <WrapperContainer>
+                            <LogoContainer to="/">
+                                <StyledLogo
+                                    src={gymjot_logo}
+                                    alt="gymjot logo"
                                 />
-                            </ButtonContainer>
-                        </FormContainer>
-                    </form>
-                    <NoticeContainer>
-                        <PromptSpan>Already have an account?</PromptSpan>
-                        <PromptLink to="/login">Login here.</PromptLink>
-                    </NoticeContainer>
-                </WrapperContainer>
-                <Snackbar
-                    open={openSnackBar}
-                    autoHideDuration={60000}
-                    onClose={closeSnackBar}
-                    anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                    TransitionComponent={slideTransition}
-                >
-                    <SnackbarContent
-                        style={{
-                            boxShadow: 'none',
-                            background: 'none',
-                            display: 'flex',
-                            justifyContent: 'center',
-                        }}
-                        message={
-                            <Alert
-                                severity="success"
-                                action={
-                                    <Link to="/login">
-                                        <CustomAlertButton
-                                            variant="contained"
-                                            color="primary"
-                                            size="small"
-                                        >
-                                            Login
-                                        </CustomAlertButton>
-                                    </Link>
-                                }
+                            </LogoContainer>
+                            <StyledSignUpHeader>
+                                Pleased to meet you, new GymJotter.
+                            </StyledSignUpHeader>
+                            <VerifyError
+                                title="Please fill in all fields."
+                                render={areFieldsEmpty}
+                                center="true"
+                            />
+                            <form
+                                onSubmit={handleSubmit(dispatchFormValues)}
+                                name="registerForm"
+                                id="regForm"
                             >
-                                Your account has been successfully created!
-                            </Alert>
-                        }
-                    />
-                </Snackbar>
-            </MainContainer>
-        </>
-    );
+                                <FormContainer>
+                                    <InputField
+                                        formName="firstName"
+                                        componentType="input"
+                                        label="First Name"
+                                    >
+                                        <StyledPersonIcon />
+                                    </InputField>
+                                    <InputField
+                                        formName="lastName"
+                                        componentType="input"
+                                        label="Last Name"
+                                    >
+                                        <StyledPersonIcon />
+                                    </InputField>
+                                    <InputField
+                                        formName="userName"
+                                        componentType="input"
+                                        label="Username"
+                                        errorTag="Your username must be 4 - 15 characters."
+                                        renderError={hasInvalidUsernameLength}
+                                    >
+                                        <StyledUserIcon />
+                                    </InputField>
+                                    <InputField
+                                        formName="email"
+                                        componentType="input"
+                                        label="Email Address"
+                                        htmlType="email"
+                                    >
+                                        <StyledMailIcon />
+                                    </InputField>
+                                    <InputField
+                                        formName="password"
+                                        componentType="input"
+                                        label="Password"
+                                        errorTag="Your password must be 6 - 20 characters."
+                                        htmlType="password"
+                                        renderError={hasInvalidPasswordLength}
+                                    >
+                                        <StyledLockIcon />
+                                    </InputField>
+                                    <InputField
+                                        formName="passwordConfirm"
+                                        componentType="input"
+                                        label="Confirm Password"
+                                        errorTag="Your two passwords do not match!"
+                                        htmlType="password"
+                                        renderError={invalidPasswordMatch}
+                                    >
+                                        <StyledLockIcon />
+                                    </InputField>
+                                    <ButtonContainer>
+                                        <SubmitButton
+                                            label="Create new account"
+                                            formID="regForm"
+                                        />
+                                    </ButtonContainer>
+                                </FormContainer>
+                            </form>
+                            <NoticeContainer>
+                                <PromptSpan>
+                                    Already have an account?
+                                </PromptSpan>
+                                <PromptLink to="/login">Login here.</PromptLink>
+                            </NoticeContainer>
+                        </WrapperContainer>
+                        <Snackbar
+                            open={openSnackBar}
+                            autoHideDuration={60000}
+                            onClose={closeSnackBar}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            TransitionComponent={slideTransition}
+                        >
+                            <SnackbarContent
+                                style={{
+                                    boxShadow: 'none',
+                                    background: 'none',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                }}
+                                message={
+                                    <Alert
+                                        severity="success"
+                                        action={
+                                            <Link to="/login">
+                                                <CustomAlertButton
+                                                    variant="contained"
+                                                    color="primary"
+                                                    size="small"
+                                                >
+                                                    Login
+                                                </CustomAlertButton>
+                                            </Link>
+                                        }
+                                    >
+                                        Your account has been successfully
+                                        created!
+                                    </Alert>
+                                }
+                            />
+                        </Snackbar>
+                    </MainContainer>
+                </MobileView>
+            );
+        } else if (isBrowser) {
+            return (
+                <BrowserView>
+                    <MainContainer>
+                        <DeskWrapperContainer>
+                            <DeskShadowContainer>
+                                <LogoContainer to="/">
+                                    <StyledLogo
+                                        src={gymjot_logo}
+                                        alt="gymjot logo"
+                                    />
+                                </LogoContainer>
+                                <StyledSignUpHeader>
+                                    Pleased to meet you, new GymJotter.
+                                </StyledSignUpHeader>
+                                <VerifyError
+                                    title="Please fill in all fields."
+                                    render={areFieldsEmpty}
+                                    center="true"
+                                />
+                                <form
+                                    onSubmit={handleSubmit(dispatchFormValues)}
+                                    name="registerForm"
+                                    id="regForm"
+                                >
+                                    <FormContainer>
+                                        <InputField
+                                            formName="firstName"
+                                            componentType="input"
+                                            label="First Name"
+                                        >
+                                            <StyledPersonIcon />
+                                        </InputField>
+                                        <InputField
+                                            formName="lastName"
+                                            componentType="input"
+                                            label="Last Name"
+                                        >
+                                            <StyledPersonIcon />
+                                        </InputField>
+                                        <InputField
+                                            formName="userName"
+                                            componentType="input"
+                                            label="Username"
+                                            errorTag="Your username must be 4 - 15 characters."
+                                            renderError={
+                                                hasInvalidUsernameLength
+                                            }
+                                        >
+                                            <StyledUserIcon />
+                                        </InputField>
+                                        <InputField
+                                            formName="email"
+                                            componentType="input"
+                                            label="Email Address"
+                                            htmlType="email"
+                                        >
+                                            <StyledMailIcon />
+                                        </InputField>
+                                        <InputField
+                                            formName="password"
+                                            componentType="input"
+                                            label="Password"
+                                            errorTag="Your password must be 6 - 20 characters."
+                                            htmlType="password"
+                                            renderError={
+                                                hasInvalidPasswordLength
+                                            }
+                                        >
+                                            <StyledLockIcon />
+                                        </InputField>
+                                        <InputField
+                                            formName="passwordConfirm"
+                                            componentType="input"
+                                            label="Confirm Password"
+                                            errorTag="Your two passwords do not match!"
+                                            htmlType="password"
+                                            renderError={invalidPasswordMatch}
+                                        >
+                                            <StyledLockIcon />
+                                        </InputField>
+                                        <ButtonContainer>
+                                            <SubmitButton
+                                                label="Create new account"
+                                                formID="regForm"
+                                            />
+                                        </ButtonContainer>
+                                    </FormContainer>
+                                </form>
+                                <NoticeContainer>
+                                    <PromptSpan>
+                                        Already have an account?
+                                    </PromptSpan>
+                                    <PromptLink to="/login">
+                                        Login here.
+                                    </PromptLink>
+                                </NoticeContainer>
+                            </DeskShadowContainer>
+                        </DeskWrapperContainer>
+                        <Snackbar
+                            open={openSnackBar}
+                            autoHideDuration={60000}
+                            onClose={closeSnackBar}
+                            anchorOrigin={{
+                                vertical: 'top',
+                                horizontal: 'center',
+                            }}
+                            TransitionComponent={slideTransition}
+                        >
+                            <SnackbarContent
+                                style={{
+                                    boxShadow: 'none',
+                                    background: 'none',
+                                    display: 'flex',
+                                    justifyContent: 'center',
+                                }}
+                                message={
+                                    <Alert
+                                        severity="success"
+                                        action={
+                                            <Link to="/login">
+                                                <CustomAlertButton
+                                                    variant="contained"
+                                                    color="primary"
+                                                    size="small"
+                                                >
+                                                    Login
+                                                </CustomAlertButton>
+                                            </Link>
+                                        }
+                                    >
+                                        Your account has been successfully
+                                        created!
+                                    </Alert>
+                                }
+                            />
+                        </Snackbar>
+                    </MainContainer>
+                </BrowserView>
+            );
+        }
+    };
+
+    return <>{renderMainSignupForm()}</>;
 };
 
 //Connecting to Redux and Redux-form:
