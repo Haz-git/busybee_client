@@ -6,7 +6,7 @@ import {
     BrowserView,
     MobileView,
     isBrowser,
-    isMobile,
+    isMobileOnly,
 } from 'react-device-detect';
 
 //Styles:
@@ -102,7 +102,7 @@ const DeskStyledTextInvisible = styled.label`
 
 const VerifyError = ({ title, render, center }) => {
     const renderError = () => {
-        if (isMobile) {
+        if (isMobileOnly) {
             if (render === undefined || render === false) {
                 return (
                     <Wrapper>
