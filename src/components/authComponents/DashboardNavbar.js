@@ -1,5 +1,11 @@
 import React from 'react';
 import { NavLink } from 'react-router-dom';
+import {
+    BrowserView,
+    MobileView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -57,6 +63,18 @@ const StyledBarbellIcon = styled(Barbell)`
     cursor: pointer;
 `;
 
+const BrowserMainContainer = styled.div`
+    background: ${({ theme }) => theme.NavColor};
+    overflow: hidden;
+    position: fixed;
+    left: 0;
+    height: 100%;
+    /* width: 100%; */
+    z-index: 99999 !important;
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 15px;
+    /* animation: ${fadeUp} 0.5s ease; */
+`;
+
 const MainContainer = styled.div`
     background: ${({ theme }) => theme.NavColor};
     overflow: hidden;
@@ -68,6 +86,14 @@ const MainContainer = styled.div`
     z-index: 99999 !important;
     box-shadow: rgba(0, 0, 0, 1) 0px 3px 15px;
     animation: ${fadeUp} 0.5s ease;
+`;
+
+const BrowserNavItemContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 1em;
 `;
 
 const NavItemContainer = styled.div`
@@ -94,54 +120,108 @@ const NavLabel = styled.label`
 //Render:
 
 const DashboardNavbar = () => {
-    return (
-        <>
-            <MainContainer>
-                <NavItemContainer>
-                    <NavItem
-                        to="/stats"
-                        activeStyle={{
-                            filter:
-                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
-                        }}
-                    >
-                        <StyledStatsIcon />
-                        <NavLabel>Stats</NavLabel>
-                    </NavItem>
-                    <NavItem
-                        to="/programs"
-                        activeStyle={{
-                            filter:
-                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
-                        }}
-                    >
-                        <StyledBarbellIcon />
-                        <NavLabel>Programs</NavLabel>
-                    </NavItem>
-                    <NavItem
-                        to="/dashboard"
-                        activeStyle={{
-                            filter:
-                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
-                        }}
-                    >
-                        <StyledHomeIcon />
-                        <NavLabel>Dashboard</NavLabel>
-                    </NavItem>
-                    <NavItem
-                        to="/settings"
-                        activeStyle={{
-                            filter:
-                                'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
-                        }}
-                    >
-                        <StyledUserCogIcon />
-                        <NavLabel>Settings</NavLabel>
-                    </NavItem>
-                </NavItemContainer>
-            </MainContainer>
-        </>
-    );
+    const renderDashboardNavbarComponent = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileView>
+                    <MainContainer>
+                        <NavItemContainer>
+                            <NavItem
+                                to="/stats"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledStatsIcon />
+                                <NavLabel>Stats</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/programs"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledBarbellIcon />
+                                <NavLabel>Programs</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/dashboard"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledHomeIcon />
+                                <NavLabel>Dashboard</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/settings"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledUserCogIcon />
+                                <NavLabel>Settings</NavLabel>
+                            </NavItem>
+                        </NavItemContainer>
+                    </MainContainer>
+                </MobileView>
+            );
+        } else if (isBrowser) {
+            return (
+                <BrowserView>
+                    <BrowserMainContainer>
+                        <BrowserNavItemContainer>
+                            <NavItem
+                                to="/dashboard"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledHomeIcon />
+                                <NavLabel>Dashboard</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/stats"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledStatsIcon />
+                                <NavLabel>Stats</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/programs"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledBarbellIcon />
+                                <NavLabel>Programs</NavLabel>
+                            </NavItem>
+                            <NavItem
+                                to="/settings"
+                                activeStyle={{
+                                    filter:
+                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                }}
+                            >
+                                <StyledUserCogIcon />
+                                <NavLabel>Settings</NavLabel>
+                            </NavItem>
+                        </BrowserNavItemContainer>
+                    </BrowserMainContainer>
+                </BrowserView>
+            );
+        }
+    };
+    return <>{renderDashboardNavbarComponent()}</>;
 };
 
 export default DashboardNavbar;
