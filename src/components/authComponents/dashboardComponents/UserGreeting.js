@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -47,6 +53,14 @@ const MainContainer = styled.div`
     } */
 `;
 
+const BrowserMainContainer = styled.div`
+    display: flex;
+    text-align: left;
+    justify-content: left;
+    align-items: center;
+    margin-bottom: 1.5em;
+`;
+
 const DetailsContainer = styled.div``;
 
 export const MainHeader = styled.h1`
@@ -87,6 +101,10 @@ const UserDetailLabel = styled.h2`
 
 const LogoContainer = styled.div``;
 
+const BrowserLogoContainer = styled.div`
+    margin-left: 2em;
+`;
+
 export const StyledLogo = styled.img`
     object-fit: cover;
     height: 6.7em;
@@ -109,20 +127,41 @@ export const StyledLogo = styled.img`
 //Render:
 
 const UserGreeting = ({ firstName, lastName, userName, email, _id }) => {
-    return (
-        <>
-            <MainContainer>
-                <DetailsContainer>
-                    <MainHeader>Hello, {firstName}!</MainHeader>
-                    <UserDetailLabel>{email}</UserDetailLabel>
-                    <UserDetailLabel>@{userName}</UserDetailLabel>
-                </DetailsContainer>
-                <LogoContainer>
-                    <StyledLogo src={gymjot_logo} alt="gymjot logo" />
-                </LogoContainer>
-            </MainContainer>
-        </>
-    );
+    const renderUserGreeting = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileOnlyView>
+                    <MainContainer>
+                        <DetailsContainer>
+                            <MainHeader>Hello, {firstName}!</MainHeader>
+                            <UserDetailLabel>{email}</UserDetailLabel>
+                            <UserDetailLabel>@{userName}</UserDetailLabel>
+                        </DetailsContainer>
+                        <LogoContainer>
+                            <StyledLogo src={gymjot_logo} alt="gymjot logo" />
+                        </LogoContainer>
+                    </MainContainer>
+                </MobileOnlyView>
+            );
+        } else if (isBrowser) {
+            return (
+                <BrowserView>
+                    <BrowserMainContainer>
+                        <DetailsContainer>
+                            <MainHeader>Hello, {firstName}!</MainHeader>
+                            <UserDetailLabel>{email}</UserDetailLabel>
+                            <UserDetailLabel>@{userName}</UserDetailLabel>
+                        </DetailsContainer>
+                        <BrowserLogoContainer>
+                            <StyledLogo src={gymjot_logo} alt="gymjot logo" />
+                        </BrowserLogoContainer>
+                    </BrowserMainContainer>
+                </BrowserView>
+            );
+        }
+    };
+
+    return <>{renderUserGreeting()}</>;
 };
 
 export default UserGreeting;
