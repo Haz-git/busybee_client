@@ -332,6 +332,7 @@ const MainLandingPage = () => {
     };
 
     const handlePopoverClose = () => {
+        console.log('test no hover');
         setAnchorEl(null);
     };
 
