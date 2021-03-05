@@ -2,7 +2,7 @@ import React from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     isBrowser,
     isMobileOnly,
 } from 'react-device-detect';
@@ -123,7 +123,7 @@ const DashboardNavbar = () => {
     const renderDashboardNavbarComponent = () => {
         if (isMobileOnly) {
             return (
-                <MobileView>
+                <MobileOnlyView>
                     <MainContainer>
                         <NavItemContainer>
                             <NavItem
@@ -168,7 +168,7 @@ const DashboardNavbar = () => {
                             </NavItem>
                         </NavItemContainer>
                     </MainContainer>
-                </MobileView>
+                </MobileOnlyView>
             );
         } else if (isBrowser) {
             return (
