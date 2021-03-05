@@ -5,9 +5,9 @@ import { reduxForm } from 'redux-form';
 
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     isBrowser,
-    isMobile,
+    isMobileOnly,
 } from 'react-device-detect';
 
 import LoadingPage from './LoadingPage';
@@ -239,9 +239,9 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
     };
 
     const renderMainLoginForm = () => {
-        if (isMobile) {
+        if (isMobileOnly) {
             return (
-                <MobileView>
+                <MobileOnlyView>
                     <LoadingPage renderLoading={renderLoading} />
                     <MainContainer>
                         <WrapperContainer>
@@ -286,7 +286,7 @@ const MainLoginForm = ({ handleSubmit, userLogin }) => {
                             </div>
                         </WrapperContainer>
                     </MainContainer>
-                </MobileView>
+                </MobileOnlyView>
             );
         } else if (isBrowser) {
             return (

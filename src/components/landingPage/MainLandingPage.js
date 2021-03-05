@@ -2,9 +2,9 @@ import React, { useState, useEffect } from 'react';
 import Popover from '@material-ui/core/Popover';
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     isBrowser,
-    isMobile,
+    isMobileOnly,
 } from 'react-device-detect';
 import { Link } from 'react-router-dom';
 import { getJWT } from '../../utils/jwthelper';
@@ -339,9 +339,9 @@ const MainLandingPage = () => {
     const open = Boolean(anchorEl);
 
     const renderMainPage = () => {
-        if (isMobile) {
+        if (isMobileOnly) {
             return (
-                <MobileView>
+                <MobileOnlyView>
                     <PWAPrompt
                         promptOnVisit={1}
                         timesToShow={40000}
@@ -379,7 +379,7 @@ const MainLandingPage = () => {
                             </MobButtonContainer>
                         </MobWrapper>
                     </MobMainContainer>
-                </MobileView>
+                </MobileOnlyView>
             );
         } else if (isBrowser) {
             return (

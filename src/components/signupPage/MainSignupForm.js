@@ -6,9 +6,9 @@ import { Link } from 'react-router-dom';
 
 import {
     BrowserView,
-    MobileView,
+    MobileOnlyView,
     isBrowser,
-    isMobile,
+    isMobileOnly,
 } from 'react-device-detect';
 
 //Components
@@ -388,9 +388,9 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
     };
 
     const renderMainSignupForm = () => {
-        if (isMobile) {
+        if (isMobileOnly) {
             return (
-                <MobileView>
+                <MobileOnlyView>
                     <MainContainer>
                         <WrapperContainer>
                             <LogoContainer to="/">
@@ -518,7 +518,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                             />
                         </Snackbar>
                     </MainContainer>
-                </MobileView>
+                </MobileOnlyView>
             );
         } else if (isBrowser) {
             return (
