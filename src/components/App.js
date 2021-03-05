@@ -1,8 +1,15 @@
 //Dependencies
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styling:
+import styled from 'styled-components';
 import { ThemeProvider } from 'styled-components';
 import { lightTheme, darkTheme } from '../styling/Theme';
 import { getMode } from '../styling/useDarkMode';
@@ -30,6 +37,13 @@ import BlueprintLayoutSelectionPage from './authComponents/configureProgram/Blue
 import MainRunProgram from './authComponents/runProgramDashboard/MainRunProgram';
 import PyramidMain from './authComponents/configureProgram/pyramidSetForm/PyramidMain';
 
+//Device-containers:
+
+const AppBrowserContainer = styled.div`
+    //Margin for navbar.
+    margin-left: 7em;
+`;
+
 //Render
 
 const App = withRouter(({ location }) => {
@@ -55,11 +69,95 @@ const App = withRouter(({ location }) => {
     //For only now, we'll make the availiable theme Dark. We'll work on the light theme later.
 
     const renderApp = () => {
-        if (appTheme === '') {
-            return null;
-        } else {
+        if (isBrowser) {
             return (
-                <>
+                <BrowserView>
+                    <ThemeProvider theme={grabbedTheme}>
+                        <GlobalStyle />
+                        {location.pathname !== '/login' &&
+                            location.pathname !== '/signup' &&
+                            location.pathname !== '/' &&
+                            location.pathname !== '/newUserTutorial' && (
+                                <DashboardNavbar />
+                            )}
+                        <Switch>
+                            <Route exact path="/" component={MainLandingPage} />
+                            <Route
+                                exact
+                                path="/login"
+                                component={MainloginForm}
+                            />
+                            <Route
+                                exact
+                                path="/signup"
+                                component={MainSignupForm}
+                            />
+                            <AuthCheckComponent>
+                                <AppBrowserContainer>
+                                    <Route
+                                        exact
+                                        path="/dashboard"
+                                        component={Dashboard}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/newUserTutorial"
+                                        component={TutorialMain}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/programs"
+                                        component={MainPrograms}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/stats"
+                                        component={MainStats}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/settings"
+                                        render={(props) => (
+                                            <MainSettings
+                                                {...props}
+                                                modeStatus={changeModeStatus}
+                                            />
+                                        )}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/programs/configure/:name/:id"
+                                        component={ConfigureMain}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/programs/configure/select/:name/:id"
+                                        component={ExerciseSelectorPage}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/programs/configure/blueprint/:name/:id"
+                                        component={BlueprintLayoutSelectionPage}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/programs/configure/select/pyramid/:name/:id"
+                                        component={PyramidMain}
+                                    />
+                                    <Route
+                                        exact
+                                        path="/runprogram/:name/:id"
+                                        component={MainRunProgram}
+                                    />
+                                </AppBrowserContainer>
+                            </AuthCheckComponent>
+                        </Switch>
+                    </ThemeProvider>
+                </BrowserView>
+            );
+        } else if (isMobileOnly) {
+            return (
+                <MobileOnlyView>
                     <ThemeProvider theme={grabbedTheme}>
                         <GlobalStyle />
                         {location.pathname !== '/login' &&
@@ -139,7 +237,7 @@ const App = withRouter(({ location }) => {
                             </AuthCheckComponent>
                         </Switch>
                     </ThemeProvider>
-                </>
+                </MobileOnlyView>
             );
         }
     };
