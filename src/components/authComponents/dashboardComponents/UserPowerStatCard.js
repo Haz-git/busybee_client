@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -51,6 +57,20 @@ const MainContainer = styled.div`
         margin: 0 0.25em;
         padding: 0.8em 1.7em;
     }
+`;
+
+const BrowserMainContainer = styled.div`
+    position: relative;
+    text-align: center;
+    padding: 0.6em 1em;
+    border-radius: 0.5em;
+    background: #27303f;
+    margin: 0 0.8em;
+    border: 1px solid #fdbc3d;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 3px;
+    z-index: 1;
+    animation: ${fadeIn} 0.3s ease;
+    width: 11em;
 `;
 
 const RecentWeightContainer = styled.div`
@@ -109,8 +129,22 @@ const MainHeader = styled.h2`
     z-index: 4;
 `;
 
+const BrowserMainHeader = styled.h2`
+    margin-top: 0.9em;
+    font-size: 1.5em;
+    font-weight: 700;
+    /* color: ${({ theme }) => theme.UserPowerHeaderColor}; */
+    color: white;
+    text-shadow: 2px 2px 2px #14181f;
+    z-index: 4;
+`;
+
 const ImgContainer = styled.div`
     margin-top: 0.3em;
+`;
+
+const BrowserImgContainer = styled.div`
+    margin-top: 0.6em;
 `;
 
 const ExerciseImg = styled.img`
@@ -124,13 +158,31 @@ const ExerciseImg = styled.img`
     }
 `;
 
+const BrowserExerciseImg = styled.img`
+    height: 7em;
+    width: 7em;
+    filter: invert(100%) sepia(100%) saturate(2%) hue-rotate(289deg)
+        brightness(103%) contrast(101%);
+`;
+
 const DescContainer = styled.div`
     max-width: 4em;
     text-align: center;
 `;
 
+const BrowserDescContainer = styled.div`
+    text-align: center;
+`;
+
 const DescLabel = styled.p`
     font-size: 0.8em;
+    color: white;
+    font-weight: 900;
+    white-space: nowrap;
+`;
+
+const BrowserDescLabel = styled.p`
+    font-size: 1em;
     color: white;
     font-weight: 900;
     white-space: nowrap;
@@ -278,66 +330,149 @@ const UserPowerStatCard = ({
         }
     };
 
-    return (
-        <>
-            <Modal
-                aria-labelledby="powerlift-modal"
-                aria-describedby="powerlifts modal for user input"
-                // className={classes.modal}
-                open={modalOpen}
-                onClose={handleClose}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={modalOpen}>
-                    <ModalContainer>
-                        <ModalHeader>Oh, a new score?</ModalHeader>
-                        <ModalPicture src={bicep} />
-                        <ModalDesc>Let us know how you're doing.</ModalDesc>
-                        <form onSubmit={handleNewStatSubmit}>
-                            <ModalInputContainer>
-                                <CustomNumberField
-                                    placeholder="Weight"
-                                    existingStat={existingStat}
-                                    changeFunc={handleTextFieldChange}
-                                />
-                                <CustomSelector changeFunc={handleSelect} />
-                            </ModalInputContainer>
-                            <CustomSubmitButton
-                                variant="contained"
-                                label="Save"
-                                type="submit"
+    const renderUserPowerStatCard = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileOnlyView>
+                    <Modal
+                        aria-labelledby="powerlift-modal"
+                        aria-describedby="powerlifts modal for user input"
+                        // className={classes.modal}
+                        open={modalOpen}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={modalOpen}>
+                            <ModalContainer>
+                                <ModalHeader>Oh, a new score?</ModalHeader>
+                                <ModalPicture src={bicep} />
+                                <ModalDesc>
+                                    Let us know how you're doing.
+                                </ModalDesc>
+                                <form onSubmit={handleNewStatSubmit}>
+                                    <ModalInputContainer>
+                                        <CustomNumberField
+                                            placeholder="Weight"
+                                            existingStat={existingStat}
+                                            changeFunc={handleTextFieldChange}
+                                        />
+                                        <CustomSelector
+                                            changeFunc={handleSelect}
+                                        />
+                                    </ModalInputContainer>
+                                    <CustomSubmitButton
+                                        variant="contained"
+                                        label="Save"
+                                        type="submit"
+                                    />
+                                </form>
+                            </ModalContainer>
+                        </Fade>
+                    </Modal>
+                    <WrapperContainer>
+                        <MainContainer>
+                            <EditCorner type="button" onClick={handleOpen}>
+                                <StyledEditIcon />
+                            </EditCorner>
+                            <MainHeader>{header}</MainHeader>
+                            <ImgContainer>
+                                <ExerciseImg src={img} />
+                            </ImgContainer>
+                            <DescContainer>
+                                <DescLabel>
+                                    {renderExistingStatLbs()} lbs
+                                </DescLabel>
+                                <DescLabel>
+                                    {renderExistingStatKgs()} kg
+                                </DescLabel>
+                            </DescContainer>
+                        </MainContainer>
+                        <RecentWeightContainer>
+                            <RecentWeightBox
+                                time={recentStatTimeChange}
+                                weight={recentStatWeightChange}
                             />
-                        </form>
-                    </ModalContainer>
-                </Fade>
-            </Modal>
-            <WrapperContainer>
-                <MainContainer>
-                    <EditCorner type="button" onClick={handleOpen}>
-                        <StyledEditIcon />
-                    </EditCorner>
-                    <MainHeader>{header}</MainHeader>
-                    <ImgContainer>
-                        <ExerciseImg src={img} />
-                    </ImgContainer>
-                    <DescContainer>
-                        <DescLabel>{renderExistingStatLbs()} lbs</DescLabel>
-                        <DescLabel>{renderExistingStatKgs()} kg</DescLabel>
-                    </DescContainer>
-                </MainContainer>
-                <RecentWeightContainer>
-                    <RecentWeightBox
-                        time={recentStatTimeChange}
-                        weight={recentStatWeightChange}
-                    />
-                </RecentWeightContainer>
-            </WrapperContainer>
-        </>
-    );
+                        </RecentWeightContainer>
+                    </WrapperContainer>
+                </MobileOnlyView>
+            );
+        } else if (isBrowser) {
+            return (
+                <BrowserView>
+                    <Modal
+                        aria-labelledby="powerlift-modal"
+                        aria-describedby="powerlifts modal for user input"
+                        // className={classes.modal}
+                        open={modalOpen}
+                        onClose={handleClose}
+                        closeAfterTransition
+                        BackdropComponent={Backdrop}
+                        BackdropProps={{
+                            timeout: 500,
+                        }}
+                    >
+                        <Fade in={modalOpen}>
+                            <ModalContainer>
+                                <ModalHeader>Oh, a new score?</ModalHeader>
+                                <ModalPicture src={bicep} />
+                                <ModalDesc>
+                                    Let us know how you're doing.
+                                </ModalDesc>
+                                <form onSubmit={handleNewStatSubmit}>
+                                    <ModalInputContainer>
+                                        <CustomNumberField
+                                            placeholder="Weight"
+                                            existingStat={existingStat}
+                                            changeFunc={handleTextFieldChange}
+                                        />
+                                        <CustomSelector
+                                            changeFunc={handleSelect}
+                                        />
+                                    </ModalInputContainer>
+                                    <CustomSubmitButton
+                                        variant="contained"
+                                        label="Save"
+                                        type="submit"
+                                    />
+                                </form>
+                            </ModalContainer>
+                        </Fade>
+                    </Modal>
+                    <WrapperContainer>
+                        <BrowserMainContainer>
+                            <EditCorner type="button" onClick={handleOpen}>
+                                <StyledEditIcon />
+                            </EditCorner>
+                            <BrowserMainHeader>{header}</BrowserMainHeader>
+                            <BrowserImgContainer>
+                                <BrowserExerciseImg src={img} />
+                            </BrowserImgContainer>
+                            <BrowserDescContainer>
+                                <BrowserDescLabel>
+                                    {renderExistingStatLbs()} lbs
+                                </BrowserDescLabel>
+                                <BrowserDescLabel>
+                                    {renderExistingStatKgs()} kg
+                                </BrowserDescLabel>
+                            </BrowserDescContainer>
+                        </BrowserMainContainer>
+                        <RecentWeightContainer>
+                            <RecentWeightBox
+                                time={recentStatTimeChange}
+                                weight={recentStatWeightChange}
+                            />
+                        </RecentWeightContainer>
+                    </WrapperContainer>
+                </BrowserView>
+            );
+        }
+    };
+
+    return <>{renderUserPowerStatCard()}</>;
 };
 
 export default UserPowerStatCard;

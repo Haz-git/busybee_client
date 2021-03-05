@@ -1,5 +1,11 @@
 import React, { useEffect } from 'react';
 import { connect } from 'react-redux';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Components:
 import UserPowerStatCard from './UserPowerStatCard';
@@ -52,6 +58,13 @@ const StatCardContainer = styled.div`
     margin-top: 1em;
     display: flex;
     justify-content: center;
+    align-content: center;
+`;
+
+const BrowserStatCardContainer = styled.div`
+    margin-top: 1em;
+    display: flex;
+    justify-content: left;
     align-content: center;
 `;
 
@@ -126,103 +139,237 @@ const UserPowerStats = ({
         return results.length;
     };
 
-    return (
-        <>
-            <MainContainer>
-                <MainHeader>Your Main Lifts</MainHeader>
-                <StyledDivider />
-                <StatCardContainer>
-                    <UserPowerStatCard
-                        header="Deadlift"
-                        img={deadlift}
-                        addAction={addNewDeadlift}
-                        existingStat={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .userExistingPLStats.deadlift
-                                : null
-                        }
-                        recentStatWeightChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentDeadliftWeightChange.weightChange
-                                : null
-                        }
-                        recentStatTimeChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentDeadliftWeightChange.updateTime
-                                : null
-                        }
-                    />
-                    <UserPowerStatCard
-                        header="Squat"
-                        img={squat}
-                        addAction={addNewSquat}
-                        existingStat={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .userExistingPLStats.squat
-                                : null
-                        }
-                        recentStatWeightChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentSquatWeightChange.weightChange
-                                : null
-                        }
-                        recentStatTimeChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentSquatWeightChange.updateTime
-                                : null
-                        }
-                    />
-                    <UserPowerStatCard
-                        header="Bench"
-                        img={benchpress}
-                        addAction={addNewBench}
-                        existingStat={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .userExistingPLStats.bench
-                                : null
-                        }
-                        recentStatWeightChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentBenchWeightChange.weightChange
-                                : null
-                        }
-                        recentStatTimeChange={
-                            existingStats.powerLiftStats !== undefined &&
-                            existingStats.powerLiftStats !== null
-                                ? existingStats.powerLiftStats
-                                      .recentBenchWeightChange.updateTime
-                                : null
-                        }
-                    />
-                </StatCardContainer>
-                {checkUserPowerLiftData() !== 3 ? null : (
-                    <EmptyMainLiftContainer>
-                        <LineChartIcon />
-                        <EmptyLabel>
-                            Keep track of your main lifts with 'edit'
-                            {<EditExampleIcon />}
-                        </EmptyLabel>
-                    </EmptyMainLiftContainer>
-                )}
-            </MainContainer>
-        </>
-    );
+    const renderUserPowerStats = () => {
+        if (isMobileOnly) {
+            return (
+                <MobileOnlyView>
+                    <MainContainer>
+                        <MainHeader>Your Main Lifts</MainHeader>
+                        <StyledDivider />
+                        <StatCardContainer>
+                            <UserPowerStatCard
+                                header="Deadlift"
+                                img={deadlift}
+                                addAction={addNewDeadlift}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.deadlift
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentDeadliftWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentDeadliftWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                            <UserPowerStatCard
+                                header="Squat"
+                                img={squat}
+                                addAction={addNewSquat}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.squat
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentSquatWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentSquatWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                            <UserPowerStatCard
+                                header="Bench"
+                                img={benchpress}
+                                addAction={addNewBench}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.bench
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentBenchWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentBenchWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                        </StatCardContainer>
+                        {checkUserPowerLiftData() !== 3 ? null : (
+                            <EmptyMainLiftContainer>
+                                <LineChartIcon />
+                                <EmptyLabel>
+                                    Keep track of your main lifts with 'edit'
+                                    {<EditExampleIcon />}
+                                </EmptyLabel>
+                            </EmptyMainLiftContainer>
+                        )}
+                    </MainContainer>
+                </MobileOnlyView>
+            );
+        } else if (isBrowser) {
+            return (
+                <BrowserView>
+                    <MainContainer>
+                        <MainHeader>Your Main Lifts</MainHeader>
+                        <StyledDivider />
+                        <BrowserStatCardContainer>
+                            <UserPowerStatCard
+                                header="Deadlift"
+                                img={deadlift}
+                                addAction={addNewDeadlift}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.deadlift
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentDeadliftWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentDeadliftWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                            <UserPowerStatCard
+                                header="Squat"
+                                img={squat}
+                                addAction={addNewSquat}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.squat
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentSquatWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentSquatWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                            <UserPowerStatCard
+                                header="Bench"
+                                img={benchpress}
+                                addAction={addNewBench}
+                                existingStat={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .userExistingPLStats.bench
+                                        : null
+                                }
+                                recentStatWeightChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentBenchWeightChange
+                                              .weightChange
+                                        : null
+                                }
+                                recentStatTimeChange={
+                                    existingStats.powerLiftStats !==
+                                        undefined &&
+                                    existingStats.powerLiftStats !== null
+                                        ? existingStats.powerLiftStats
+                                              .recentBenchWeightChange
+                                              .updateTime
+                                        : null
+                                }
+                            />
+                        </BrowserStatCardContainer>
+                        {checkUserPowerLiftData() !== 3 ? null : (
+                            <EmptyMainLiftContainer>
+                                <LineChartIcon />
+                                <EmptyLabel>
+                                    Keep track of your main lifts with 'edit'
+                                    {<EditExampleIcon />}
+                                </EmptyLabel>
+                            </EmptyMainLiftContainer>
+                        )}
+                    </MainContainer>
+                </BrowserView>
+            );
+        }
+    };
+
+    return <>{renderUserPowerStats()}</>;
 };
 
 const mapStateToProps = (state) => {

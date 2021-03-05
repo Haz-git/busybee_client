@@ -42,6 +42,7 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 const AppBrowserContainer = styled.div`
     //Margin for navbar.
     margin-left: 8% !important;
+    /* margin-right: 8% !important; */
     position: relative;
 `;
 
