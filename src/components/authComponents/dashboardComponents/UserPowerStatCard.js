@@ -91,6 +91,7 @@ const EditCorner = styled.button`
     border: none;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
     z-index: 2;
+    cursor: pointer;
 
     &:focus {
         outline: none;
@@ -215,6 +216,37 @@ export const ModalContainer = styled.div`
     align-content: center;
     text-align: center;
     width: 86%;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const BrowserModalContainer = styled.div`
+    position: absolute;
+    top: 40%;
+    left: 58%;
+    -webkit-transform: translate(-58%, -50%);
+    -ms-transform: translate(-58%, -50%);
+    transform: translate(-58%, -50%);
+    background: ${({ theme }) => theme.ModalBG};
+    /* border: 1px solid #fdbc3d; */
+    border-radius: 0.4em;
+    padding: 1em 1em;
+    display: -webkit-box;
+    display: -ms-flexbox;
+    display: flex;
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-line-pack: center;
+    align-content: center;
+    text-align: center;
+    width: 25em;
 
     &:focus {
         outline: none;
@@ -416,7 +448,7 @@ const UserPowerStatCard = ({
                         }}
                     >
                         <Fade in={modalOpen}>
-                            <ModalContainer>
+                            <BrowserModalContainer>
                                 <ModalHeader>Oh, a new score?</ModalHeader>
                                 <ModalPicture src={bicep} />
                                 <ModalDesc>
@@ -439,7 +471,7 @@ const UserPowerStatCard = ({
                                         type="submit"
                                     />
                                 </form>
-                            </ModalContainer>
+                            </BrowserModalContainer>
                         </Fade>
                     </Modal>
                     <WrapperContainer>
