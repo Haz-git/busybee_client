@@ -81,6 +81,17 @@ export const MainHeader = styled.h1`
     }
 `;
 
+export const BrowserMainHeader = styled.h1`
+    font-family: 'Lato';
+    font-size: 3em;
+    text-align: left;
+    color: ${({ theme }) => theme.UserGreetingColor};
+    font-weight: 900;
+    margin-bottom: 0.2em;
+    animation: ${fadeIn} 0.2s ease;
+    text-shadow: ${({ theme }) => theme.textShadow};
+`;
+
 const UserDetailLabel = styled.h2`
     margin: 0.2em 0;
     font-family: 'Lato';
