@@ -4,6 +4,12 @@ import {
     getUserStatData,
     addNewStat,
 } from '../../../redux/userStats/userStatActions';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 import { v4 as uuid } from 'uuid';
 
 //Components:
@@ -16,7 +22,10 @@ import { LoadingContainer } from '../configureProgram/ConfigureMain';
 //Styles:
 import styled from 'styled-components';
 import { Stats } from '@styled-icons/boxicons-regular/Stats';
-import { MainHeader } from '../dashboardComponents/UserGreeting';
+import {
+    BrowserMainHeader,
+    MainHeader,
+} from '../dashboardComponents/UserGreeting';
 import {
     ModalContainer,
     ModalHeader,
@@ -101,9 +110,31 @@ const FlexWrapper = styled.div`
     padding: 0.5em 0;
 `;
 
+const BrowserFlexWrapper = styled.div`
+    top: 0;
+    position: -webkit-sticky;
+    position: sticky;
+    display: grid;
+    grid-template-columns: 87% 13%;
+    /* align-items: center;
+    justify-content: left; */
+    background: ${({ theme }) => theme.background};
+    padding: 0.5em 0;
+`;
+
+const BrowserSearchBarContainer = styled.div``;
+
 const SecondaryStatHeader = styled(MainHeader)`
     font-size: 1em;
     font-weight: 400;
+    white-space: nowrap;
+    margin: 0.7em 0;
+`;
+
+const BrowserSecondaryStatHeader = styled(MainHeader)`
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 700;
     white-space: nowrap;
     margin: 0.7em 0;
 `;
@@ -398,24 +429,50 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 </Fade>
             </Modal>
             <MainContainer>
-                <MainHeader>Stat Log</MainHeader>
-                <SecondaryStatHeader>
-                    Jot down all of your achievements.
-                </SecondaryStatHeader>
-                <FlexWrapper>
-                    <SearchBarContainer>
-                        <SearchBar
-                            placeholder="Total Stats"
-                            value={
-                                isLoaded === true
-                                    ? renderNumberOfStats()
-                                    : '...'
-                            }
-                            changeFunction={handleSearchBarChange}
-                        />
-                    </SearchBarContainer>
-                    <AddButton clickFunction={openModal} />
-                </FlexWrapper>
+                {isMobileOnly && <MainHeader>Stat Log</MainHeader>}
+                {isBrowser && <BrowserMainHeader>Stat Log</BrowserMainHeader>}
+                {isMobileOnly && (
+                    <SecondaryStatHeader>
+                        Jot down all of your achievements.
+                    </SecondaryStatHeader>
+                )}
+                {isBrowser && (
+                    <BrowserSecondaryStatHeader>
+                        Jot down all of your achievements.
+                    </BrowserSecondaryStatHeader>
+                )}
+                {isMobileOnly && (
+                    <FlexWrapper>
+                        <SearchBarContainer>
+                            <SearchBar
+                                placeholder="Total Stats"
+                                value={
+                                    isLoaded === true
+                                        ? renderNumberOfStats()
+                                        : '...'
+                                }
+                                changeFunction={handleSearchBarChange}
+                            />
+                        </SearchBarContainer>
+                        <AddButton clickFunction={openModal} />
+                    </FlexWrapper>
+                )}
+                {isBrowser && (
+                    <BrowserFlexWrapper>
+                        <BrowserSearchBarContainer>
+                            <SearchBar
+                                placeholder="Total Stats"
+                                value={
+                                    isLoaded === true
+                                        ? renderNumberOfStats()
+                                        : '...'
+                                }
+                                changeFunction={handleSearchBarChange}
+                            />
+                        </BrowserSearchBarContainer>
+                        <AddButton clickFunction={openModal} />
+                    </BrowserFlexWrapper>
+                )}
                 <StatCardContainer>
                     {isLoaded === true ? (
                         renderStatCards()
