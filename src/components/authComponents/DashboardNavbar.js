@@ -74,8 +74,8 @@ const BrowserMainContainer = styled.div`
     position: fixed;
     /* left: 0; */
     height: 100%;
-    /* width: 100%; */
-    z-index: 99999 !important;
+    padding-left: 8em;
+    z-index: 1 !important;
     box-shadow: rgba(0, 0, 0, 0.5) 4px 3px 3px;
     /* animation: ${fadeUp} 0.5s ease; */
 `;
