@@ -42,8 +42,13 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 const AppBrowserContainer = styled.div`
     //Margin for navbar.
     margin-left: 8% !important;
-    /* margin-right: 8% !important; */
+    margin-right: 8% !important;
     position: relative;
+`;
+
+const AppBrowserContentContainer = styled.div`
+    margin-left: 14em;
+    margin-right: 14em;
 `;
 
 //Render
@@ -76,12 +81,6 @@ const App = withRouter(({ location }) => {
                 <BrowserView>
                     <ThemeProvider theme={grabbedTheme}>
                         <GlobalStyle />
-                        {location.pathname !== '/login' &&
-                            location.pathname !== '/signup' &&
-                            location.pathname !== '/' &&
-                            location.pathname !== '/newUserTutorial' && (
-                                <DashboardNavbar />
-                            )}
                         <Switch>
                             <Route exact path="/" component={MainLandingPage} />
                             <Route
@@ -96,61 +95,75 @@ const App = withRouter(({ location }) => {
                             />
                             <AuthCheckComponent>
                                 <AppBrowserContainer>
-                                    <Route
-                                        exact
-                                        path="/dashboard"
-                                        component={Dashboard}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/newUserTutorial"
-                                        component={TutorialMain}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/programs"
-                                        component={MainPrograms}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/stats"
-                                        component={MainStats}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/settings"
-                                        render={(props) => (
-                                            <MainSettings
-                                                {...props}
-                                                modeStatus={changeModeStatus}
-                                            />
+                                    {location.pathname !== '/login' &&
+                                        location.pathname !== '/signup' &&
+                                        location.pathname !== '/' &&
+                                        location.pathname !==
+                                            '/newUserTutorial' && (
+                                            <DashboardNavbar />
                                         )}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/programs/configure/:name/:id"
-                                        component={ConfigureMain}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/programs/configure/select/:name/:id"
-                                        component={ExerciseSelectorPage}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/programs/configure/blueprint/:name/:id"
-                                        component={BlueprintLayoutSelectionPage}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/programs/configure/select/pyramid/:name/:id"
-                                        component={PyramidMain}
-                                    />
-                                    <Route
-                                        exact
-                                        path="/runprogram/:name/:id"
-                                        component={MainRunProgram}
-                                    />
+
+                                    <AppBrowserContentContainer>
+                                        <Route
+                                            exact
+                                            path="/dashboard"
+                                            component={Dashboard}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/newUserTutorial"
+                                            component={TutorialMain}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/programs"
+                                            component={MainPrograms}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/stats"
+                                            component={MainStats}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/settings"
+                                            render={(props) => (
+                                                <MainSettings
+                                                    {...props}
+                                                    modeStatus={
+                                                        changeModeStatus
+                                                    }
+                                                />
+                                            )}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/programs/configure/:name/:id"
+                                            component={ConfigureMain}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/programs/configure/select/:name/:id"
+                                            component={ExerciseSelectorPage}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/programs/configure/blueprint/:name/:id"
+                                            component={
+                                                BlueprintLayoutSelectionPage
+                                            }
+                                        />
+                                        <Route
+                                            exact
+                                            path="/programs/configure/select/pyramid/:name/:id"
+                                            component={PyramidMain}
+                                        />
+                                        <Route
+                                            exact
+                                            path="/runprogram/:name/:id"
+                                            component={MainRunProgram}
+                                        />
+                                    </AppBrowserContentContainer>
                                 </AppBrowserContainer>
                             </AuthCheckComponent>
                         </Switch>
