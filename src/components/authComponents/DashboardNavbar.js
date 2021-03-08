@@ -76,7 +76,7 @@ const BrowserMainContainer = styled.div`
     height: 100%;
     padding-left: 8em;
     z-index: 1 !important;
-    box-shadow: rgba(0, 0, 0, 0.5) 4px 3px 3px;
+    box-shadow: rgba(0, 0, 0, 0.5) 4px 3px 8px;
     /* animation: ${fadeUp} 0.5s ease; */
 `;
 
