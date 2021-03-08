@@ -64,7 +64,7 @@ const StatCardContainer = styled.div`
 const BrowserStatCardContainer = styled.div`
     margin-top: 1em;
     display: flex;
-    justify-content: left;
+    justify-content: center;
     align-content: center;
 `;
 
