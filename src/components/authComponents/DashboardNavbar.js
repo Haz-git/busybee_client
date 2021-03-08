@@ -29,49 +29,54 @@ const fadeUp = keyframes`
 `;
 
 const StyledHomeIcon = styled(Home)`
-    height: 2em;
-    width: 2em;
+    height: 2.2em;
+    width: 2.2em;
+    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
-    height: 2em;
-    width: 2em;
+    height: 2.2em;
+    width: 2.2em;
+    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledStatsIcon = styled(StatsChart)`
-    height: 2em;
-    width: 2em;
+    height: 2.2em;
+    width: 2.2em;
+    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
-    height: 2em;
-    width: 2em;
+    height: 2.2em;
+    width: 2.2em;
+    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
-    height: 2em;
-    width: 2em;
+    height: 2.2em;
+    width: 2.2em;
+    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
 
 const BrowserMainContainer = styled.div`
-    background: ${({ theme }) => theme.NavColor};
+    background: ${({ theme }) => theme.background};
     overflow: hidden;
     position: fixed;
-    left: 0;
+    /* left: 0; */
     height: 100%;
     /* width: 100%; */
     z-index: 99999 !important;
-    box-shadow: rgba(0, 0, 0, 1) 0px 3px 15px;
+    box-shadow: rgba(0, 0, 0, 0.5) 4px 3px 3px;
     /* animation: ${fadeUp} 0.5s ease; */
 `;
 
@@ -89,18 +94,21 @@ const MainContainer = styled.div`
 `;
 
 const BrowserNavItemContainer = styled.div`
-    display: flex;
+    /* display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: center;
+    justify-content: flex-start; */
+    text-align: left;
     margin-top: 1em;
+    padding: 0 1em;
+    /* background: salmon; */
 `;
 
 const NavItemContainer = styled.div`
     display: flex;
     align-items: center;
-    align-content: stretch;
-    justify-content: space-between;
+    /* align-content: stretch; */
+    /* justify-content: space-between; */
 `;
 
 const NavItem = styled(NavLink)`
@@ -109,6 +117,29 @@ const NavItem = styled(NavLink)`
     align-items: center;
     justify-content: center;
     padding: 0.7em 1.2em;
+`;
+
+const BrowserNavItem = styled(NavLink)`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    padding: 1em 0em;
+    /* transition: 0.1s all linear; */
+    cursor: pointer;
+    /* background: salmon; */
+    /* 
+    &:hover {
+        transform: scale(1.05);
+    } */
+`;
+
+const BrowserNavLabel = styled.label`
+    font-size: 1.5em;
+    font-weight: 900;
+    font-family: 'Lato', helvetica;
+    color: ${({ theme }) => theme.NavIconColor};
+    cursor: pointer;
 `;
 
 const NavLabel = styled.label`
@@ -175,7 +206,7 @@ const DashboardNavbar = () => {
                 <BrowserView>
                     <BrowserMainContainer>
                         <BrowserNavItemContainer>
-                            <NavItem
+                            <BrowserNavItem
                                 to="/dashboard"
                                 activeStyle={{
                                     filter:
@@ -183,9 +214,9 @@ const DashboardNavbar = () => {
                                 }}
                             >
                                 <StyledHomeIcon />
-                                <NavLabel>Dashboard</NavLabel>
-                            </NavItem>
-                            <NavItem
+                                <BrowserNavLabel>Dashboard</BrowserNavLabel>
+                            </BrowserNavItem>
+                            <BrowserNavItem
                                 to="/stats"
                                 activeStyle={{
                                     filter:
@@ -193,9 +224,9 @@ const DashboardNavbar = () => {
                                 }}
                             >
                                 <StyledStatsIcon />
-                                <NavLabel>Stats</NavLabel>
-                            </NavItem>
-                            <NavItem
+                                <BrowserNavLabel>Stats</BrowserNavLabel>
+                            </BrowserNavItem>
+                            <BrowserNavItem
                                 to="/programs"
                                 activeStyle={{
                                     filter:
@@ -203,9 +234,9 @@ const DashboardNavbar = () => {
                                 }}
                             >
                                 <StyledBarbellIcon />
-                                <NavLabel>Programs</NavLabel>
-                            </NavItem>
-                            <NavItem
+                                <BrowserNavLabel>Programs</BrowserNavLabel>
+                            </BrowserNavItem>
+                            <BrowserNavItem
                                 to="/settings"
                                 activeStyle={{
                                     filter:
@@ -213,8 +244,8 @@ const DashboardNavbar = () => {
                                 }}
                             >
                                 <StyledUserCogIcon />
-                                <NavLabel>Settings</NavLabel>
-                            </NavItem>
+                                <BrowserNavLabel>Settings</BrowserNavLabel>
+                            </BrowserNavItem>
                         </BrowserNavItemContainer>
                     </BrowserMainContainer>
                 </BrowserView>
