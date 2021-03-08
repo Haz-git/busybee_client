@@ -41,8 +41,10 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 
 const AppBrowserContainer = styled.div`
     //Margin for navbar.
-    margin-left: 8% !important;
-    margin-right: 8% !important;
+    /* margin-left: 8% !important;
+    margin-right: 8% !important; */
+    padding-left: 8%;
+    padding-right: 8%;
     position: relative;
 `;
 
@@ -94,15 +96,14 @@ const App = withRouter(({ location }) => {
                                 component={MainSignupForm}
                             />
                             <AuthCheckComponent>
+                                {location.pathname !== '/login' &&
+                                    location.pathname !== '/signup' &&
+                                    location.pathname !== '/' &&
+                                    location.pathname !==
+                                        '/newUserTutorial' && (
+                                        <DashboardNavbar />
+                                    )}
                                 <AppBrowserContainer>
-                                    {location.pathname !== '/login' &&
-                                        location.pathname !== '/signup' &&
-                                        location.pathname !== '/' &&
-                                        location.pathname !==
-                                            '/newUserTutorial' && (
-                                            <DashboardNavbar />
-                                        )}
-
                                     <AppBrowserContentContainer>
                                         <Route
                                             exact
