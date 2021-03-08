@@ -56,7 +56,7 @@ const MainContainer = styled.div`
 const BrowserMainContainer = styled.div`
     display: flex;
     text-align: left;
-    justify-content: left;
+    justify-content: space-evenly;
     align-items: center;
     margin-bottom: 1.5em;
 `;
