@@ -1,6 +1,12 @@
 import React from 'react';
 import GeneralSaveButton from './GeneralSaveButton';
 import GeneralCancelButton from './GeneralCancelButton';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -9,6 +15,7 @@ import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -140,60 +147,118 @@ const CreateProgramModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <CreateProgramModalContainer>
-                        <CreateProgramModalHeader>
-                            {headerLabel}
-                        </CreateProgramModalHeader>
-                        <InputContainer>
-                            <InputDivider>
-                                <TitleInput
-                                    placeholder={
-                                        namePlaceholder
-                                            ? namePlaceholder
-                                            : 'Program name...'
-                                    }
-                                    onChange={titleFunction}
-                                    maxLength={20}
-                                />
-                            </InputDivider>
-                            <InputDivider>
-                                <DescInput
-                                    placeholder={
-                                        descPlaceholder
-                                            ? descPlaceholder
-                                            : 'Program description (optional)'
-                                    }
-                                    onChange={descFunction}
-                                />
-                            </InputDivider>
-                            <ButtonContainer>
-                                <ButtonMargin>
-                                    <GeneralSaveButton
-                                        clickFunction={submitHandler}
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <CreateProgramModalContainer>
+                            <CreateProgramModalHeader>
+                                {headerLabel}
+                            </CreateProgramModalHeader>
+                            <InputContainer>
+                                <InputDivider>
+                                    <TitleInput
+                                        placeholder={
+                                            namePlaceholder
+                                                ? namePlaceholder
+                                                : 'Program name...'
+                                        }
+                                        onChange={titleFunction}
+                                        maxLength={20}
                                     />
-                                </ButtonMargin>
-                                <ButtonMargin>
-                                    <GeneralCancelButton
-                                        clickFunction={closeFunction}
+                                </InputDivider>
+                                <InputDivider>
+                                    <DescInput
+                                        placeholder={
+                                            descPlaceholder
+                                                ? descPlaceholder
+                                                : 'Program description (optional)'
+                                        }
+                                        onChange={descFunction}
                                     />
-                                </ButtonMargin>
-                            </ButtonContainer>
-                        </InputContainer>
-                    </CreateProgramModalContainer>
-                </Fade>
-            </Modal>
+                                </InputDivider>
+                                <ButtonContainer>
+                                    <ButtonMargin>
+                                        <GeneralSaveButton
+                                            clickFunction={submitHandler}
+                                        />
+                                    </ButtonMargin>
+                                    <ButtonMargin>
+                                        <GeneralCancelButton
+                                            clickFunction={closeFunction}
+                                        />
+                                    </ButtonMargin>
+                                </ButtonContainer>
+                            </InputContainer>
+                        </CreateProgramModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <CreateProgramModalHeader>
+                                {headerLabel}
+                            </CreateProgramModalHeader>
+                            <InputContainer>
+                                <InputDivider>
+                                    <TitleInput
+                                        placeholder={
+                                            namePlaceholder
+                                                ? namePlaceholder
+                                                : 'Program name...'
+                                        }
+                                        onChange={titleFunction}
+                                        maxLength={20}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <DescInput
+                                        placeholder={
+                                            descPlaceholder
+                                                ? descPlaceholder
+                                                : 'Program description (optional)'
+                                        }
+                                        onChange={descFunction}
+                                    />
+                                </InputDivider>
+                                <ButtonContainer>
+                                    <ButtonMargin>
+                                        <GeneralSaveButton
+                                            clickFunction={submitHandler}
+                                        />
+                                    </ButtonMargin>
+                                    <ButtonMargin>
+                                        <GeneralCancelButton
+                                            clickFunction={closeFunction}
+                                        />
+                                    </ButtonMargin>
+                                </ButtonContainer>
+                            </InputContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
