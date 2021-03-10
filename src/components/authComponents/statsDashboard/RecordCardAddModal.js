@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -13,6 +19,7 @@ import { withStyles } from '@material-ui/core/styles';
 import RecordCard from './RecordCard';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -75,81 +82,164 @@ const RecordCardAddModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLab}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <AddRecordModalContainer>
-                        <AddRecordModalHeader>
-                            {modalHeader}
-                        </AddRecordModalHeader>
-                        {needNameHandler && (
-                            <CustomTextField
-                                type="text"
-                                placeholder="Name"
-                                changeFunc={nameFunction}
-                                maxlength={maxTextLength}
-                            />
-                        )}
-                        <InputContainer>
-                            <InputDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Weight"
-                                        changeFunc={weightFunction}
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Sets"
-                                        changeFunc={setsFunction}
-                                    />
-                                </FieldDivider>
-                            </InputDivider>
-                            <InputDivider>
-                                <FieldDivider>
-                                    <CustomSelector changeFunc={unitFunction} />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Reps"
-                                        changeFunc={repsFunction}
-                                    />
-                                </FieldDivider>
-                            </InputDivider>
-                        </InputContainer>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                onClick={submitHandler}
-                            >
-                                Save
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </AddRecordModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <AddRecordModalContainer>
+                            <AddRecordModalHeader>
+                                {modalHeader}
+                            </AddRecordModalHeader>
+                            {needNameHandler && (
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="Name"
+                                    changeFunc={nameFunction}
+                                    maxlength={maxTextLength}
+                                />
+                            )}
+                            <InputContainer>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Weight"
+                                            changeFunc={weightFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Sets"
+                                            changeFunc={setsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomSelector
+                                            changeFunc={unitFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Reps"
+                                            changeFunc={repsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </AddRecordModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <AddRecordModalHeader>
+                                {modalHeader}
+                            </AddRecordModalHeader>
+                            {needNameHandler && (
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="Name"
+                                    changeFunc={nameFunction}
+                                    maxlength={maxTextLength}
+                                />
+                            )}
+                            <InputContainer>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Weight"
+                                            changeFunc={weightFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Sets"
+                                            changeFunc={setsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomSelector
+                                            changeFunc={unitFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Reps"
+                                            changeFunc={repsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
