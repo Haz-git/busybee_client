@@ -49,6 +49,7 @@ const AppBrowserContainer = styled.div`
 `;
 
 const AppBrowserContentContainer = styled.div`
+    position: relative;
     margin-left: 14em;
     margin-right: 14em;
     padding-top: 1em;
