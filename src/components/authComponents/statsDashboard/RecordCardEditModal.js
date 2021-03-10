@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -11,6 +17,7 @@ import CustomSelector from '../dashboardComponents/CustomSelector';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -66,65 +73,128 @@ const RecordCardEditModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby="modal for add record"
-                aria-describedby="modal for adding a new record"
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <EditRecordModalContainer>
-                        <EditRecordModalHeader>
-                            Edit your record!
-                        </EditRecordModalHeader>
-                        <InputContainer>
-                            <InputDivider>
-                                <CustomNumberField
-                                    type="number"
-                                    existingStat={existingStatWeight}
-                                    changeFunc={weightFunction}
-                                />
-                                <CustomNumberField
-                                    type="number"
-                                    existingStat={existingStatSets}
-                                    changeFunc={setsFunction}
-                                />
-                            </InputDivider>
-                            <InputDivider>
-                                <CustomSelector changeFunc={unitFunction} />
-                                <CustomNumberField
-                                    type="number"
-                                    existingStat={existingStatReps}
-                                    changeFunc={repsFunction}
-                                />
-                            </InputDivider>
-                        </InputContainer>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                onClick={submitHandler}
-                            >
-                                Save
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </EditRecordModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby="modal for add record"
+                    aria-describedby="modal for adding a new record"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <EditRecordModalContainer>
+                            <EditRecordModalHeader>
+                                Edit your record!
+                            </EditRecordModalHeader>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatWeight}
+                                        changeFunc={weightFunction}
+                                    />
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatSets}
+                                        changeFunc={setsFunction}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomSelector changeFunc={unitFunction} />
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatReps}
+                                        changeFunc={repsFunction}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </EditRecordModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby="modal for add record"
+                    aria-describedby="modal for adding a new record"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <EditRecordModalHeader>
+                                Edit your record!
+                            </EditRecordModalHeader>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatWeight}
+                                        changeFunc={weightFunction}
+                                    />
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatSets}
+                                        changeFunc={setsFunction}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomSelector changeFunc={unitFunction} />
+                                    <CustomNumberField
+                                        type="number"
+                                        existingStat={existingStatReps}
+                                        changeFunc={repsFunction}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };

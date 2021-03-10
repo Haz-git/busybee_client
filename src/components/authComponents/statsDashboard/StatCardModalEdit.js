@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -10,6 +16,7 @@ import CustomTextField from '../dashboardComponents/CustomTextField';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -50,48 +57,98 @@ const StatCardModalDelete = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby="stat card edit modal"
-                aria-describedby="modal for stat edit"
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <DeleteModalContainer>
-                        <DeleteModalHeader>Edit Stat Name</DeleteModalHeader>
-                        <InputContainer>
-                            <CustomTextField
-                                type="text"
-                                placeholder="New name..."
-                                changeFunc={inputFunction}
-                                maxlength={17}
-                            />
-                        </InputContainer>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                onClick={buttonSubmitFunction}
-                            >
-                                Save
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </DeleteModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby="stat card edit modal"
+                    aria-describedby="modal for stat edit"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <DeleteModalContainer>
+                            <DeleteModalHeader>
+                                Edit Stat Name
+                            </DeleteModalHeader>
+                            <InputContainer>
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="New name..."
+                                    changeFunc={inputFunction}
+                                    maxlength={17}
+                                />
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </DeleteModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby="stat card edit modal"
+                    aria-describedby="modal for stat edit"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <DeleteModalHeader>
+                                Edit Stat Name
+                            </DeleteModalHeader>
+                            <InputContainer>
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="New name..."
+                                    changeFunc={inputFunction}
+                                    maxlength={17}
+                                />
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };

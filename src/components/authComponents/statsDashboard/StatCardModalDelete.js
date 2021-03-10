@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -9,6 +15,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -51,41 +58,84 @@ const StatCardModalDelete = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <DeleteModalContainer>
-                        <DeleteModalHeader>Confirm Deletion</DeleteModalHeader>
-                        <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={buttonSubmitFunction}
-                            >
-                                Delete
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </DeleteModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <DeleteModalContainer>
+                            <DeleteModalHeader>
+                                Confirm Deletion
+                            </DeleteModalHeader>
+                            <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    Delete
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </DeleteModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <DeleteModalHeader>
+                                Confirm Deletion
+                            </DeleteModalHeader>
+                            <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    Delete
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };

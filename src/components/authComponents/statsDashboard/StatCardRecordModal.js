@@ -1,4 +1,10 @@
 import React, { useState } from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -16,6 +22,7 @@ import { v4 as uuid } from 'uuid';
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
 import { PlaylistAdd } from '@styled-icons/material/PlaylistAdd';
+import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard';
 
 //Styles:
 
@@ -148,45 +155,88 @@ const StatCardRecordModal = ({
 
     return (
         <>
-            <Modal
-                aria-labelledby="stat card edit modal"
-                aria-describedby="modal for stat edit"
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <RecordModalContainer>
-                        <ModalHeader>Records</ModalHeader>
-                        <RecordCardContainer>
-                            {renderRecordCards()}
-                        </RecordCardContainer>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                startIcon={<AddIcon />}
-                                onClick={openAddRecordModal}
-                            >
-                                Add New Record
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={closeFunction}
-                            >
-                                Exit
-                            </StyledButton>
-                        </ButtonContainer>
-                    </RecordModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby="stat card edit modal"
+                    aria-describedby="modal for stat edit"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <RecordModalContainer>
+                            <ModalHeader>Records</ModalHeader>
+                            <RecordCardContainer>
+                                {renderRecordCards()}
+                            </RecordCardContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<AddIcon />}
+                                    onClick={openAddRecordModal}
+                                >
+                                    Add New Record
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Exit
+                                </StyledButton>
+                            </ButtonContainer>
+                        </RecordModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby="stat card edit modal"
+                    aria-describedby="modal for stat edit"
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <ModalHeader>Records</ModalHeader>
+                            <RecordCardContainer>
+                                {renderRecordCards()}
+                            </RecordCardContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    startIcon={<AddIcon />}
+                                    onClick={openAddRecordModal}
+                                >
+                                    Add New Record
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Exit
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
             <RecordCardAddModal
                 ariaLab="Modal for adding a new record"
                 ariaDesc="Modal for adding a new record"
