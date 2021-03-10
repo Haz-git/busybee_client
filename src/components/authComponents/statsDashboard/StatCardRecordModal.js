@@ -54,6 +54,17 @@ const RecordCardContainer = styled.div`
     max-height: 20em;
 `;
 
+const BrowserRecordModalContainer = styled(BrowserModalContainer)`
+    top: 50%;
+`;
+
+const BrowserRecordCardContainer = styled.div`
+    margin: 1em 0;
+    overflow-y: scroll;
+    height: 35em;
+    max-height: 35em;
+`;
+
 const ButtonContainer = styled.div`
     display: flex;
     align-items: center;
@@ -209,11 +220,11 @@ const StatCardRecordModal = ({
                     }}
                 >
                     <Fade in={openBoolean}>
-                        <BrowserModalContainer>
+                        <BrowserRecordModalContainer>
                             <ModalHeader>Records</ModalHeader>
-                            <RecordCardContainer>
+                            <BrowserRecordCardContainer>
                                 {renderRecordCards()}
-                            </RecordCardContainer>
+                            </BrowserRecordCardContainer>
                             <ButtonContainer>
                                 <StyledButton
                                     size="large"
@@ -233,7 +244,7 @@ const StatCardRecordModal = ({
                                     Exit
                                 </StyledButton>
                             </ButtonContainer>
-                        </BrowserModalContainer>
+                        </BrowserRecordModalContainer>
                     </Fade>
                 </Modal>
             )}
