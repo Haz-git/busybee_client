@@ -222,7 +222,7 @@ export const ModalContainer = styled.div`
     }
 `;
 
-const BrowserModalContainer = styled.div`
+export const BrowserModalContainer = styled.div`
     position: absolute;
     top: 40%;
     left: 50%;

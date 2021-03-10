@@ -28,6 +28,7 @@ import {
 } from '../dashboardComponents/UserGreeting';
 import {
     ModalContainer,
+    BrowserModalContainer,
     ModalHeader,
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
@@ -391,43 +392,88 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
 
     return (
         <>
-            <Modal
-                aria-labelledby="stats-modal"
-                aria-describedby="user stats modal for input"
-                // className={classes.modal}
-                open={statModalOpen}
-                onClose={closeModal}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={statModalOpen}>
-                    <ModalContainer>
-                        <StatModalHeader>Track new exercise</StatModalHeader>
-                        <form onSubmit={handleUserSubmit}>
-                            <FormContainer>
-                                <TextFieldContainer>
-                                    <CustomTextField
-                                        type="text"
-                                        placeholder="Exercise Name"
-                                        changeFunc={handleUserInput}
-                                        maxlength={17}
-                                    />
-                                </TextFieldContainer>
-                                <ButtonContainer>
-                                    <CustomSubmitButton
-                                        label="Add"
-                                        type="submit"
-                                        variant="contained"
-                                    />
-                                </ButtonContainer>
-                            </FormContainer>
-                        </form>
-                    </ModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby="stats-modal"
+                    aria-describedby="user stats modal for input"
+                    // className={classes.modal}
+                    open={statModalOpen}
+                    onClose={closeModal}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={statModalOpen}>
+                        <ModalContainer>
+                            <StatModalHeader>
+                                Track new exercise
+                            </StatModalHeader>
+                            <form onSubmit={handleUserSubmit}>
+                                <FormContainer>
+                                    <TextFieldContainer>
+                                        <CustomTextField
+                                            type="text"
+                                            placeholder="Exercise Name"
+                                            changeFunc={handleUserInput}
+                                            maxlength={17}
+                                        />
+                                    </TextFieldContainer>
+                                    <ButtonContainer>
+                                        <CustomSubmitButton
+                                            label="Add"
+                                            type="submit"
+                                            variant="contained"
+                                        />
+                                    </ButtonContainer>
+                                </FormContainer>
+                            </form>
+                        </ModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby="stats-modal"
+                    aria-describedby="user stats modal for input"
+                    // className={classes.modal}
+                    open={statModalOpen}
+                    onClose={closeModal}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={statModalOpen}>
+                        <BrowserModalContainer>
+                            <StatModalHeader>
+                                Track new exercise
+                            </StatModalHeader>
+                            <form onSubmit={handleUserSubmit}>
+                                <FormContainer>
+                                    <TextFieldContainer>
+                                        <CustomTextField
+                                            type="text"
+                                            placeholder="Exercise Name"
+                                            changeFunc={handleUserInput}
+                                            maxlength={17}
+                                        />
+                                    </TextFieldContainer>
+                                    <ButtonContainer>
+                                        <CustomSubmitButton
+                                            label="Add"
+                                            type="submit"
+                                            variant="contained"
+                                        />
+                                    </ButtonContainer>
+                                </FormContainer>
+                            </form>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
             <MainContainer>
                 {isMobileOnly && (
                     <>
