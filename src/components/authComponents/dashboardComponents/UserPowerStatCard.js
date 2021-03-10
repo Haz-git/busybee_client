@@ -225,14 +225,14 @@ export const ModalContainer = styled.div`
 const BrowserModalContainer = styled.div`
     position: absolute;
     top: 40%;
-    left: 58%;
-    -webkit-transform: translate(-58%, -50%);
-    -ms-transform: translate(-58%, -50%);
-    transform: translate(-58%, -50%);
+    left: 50%;
+    -webkit-transform: translate(-50%, -50%);
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
     background: ${({ theme }) => theme.ModalBG};
     /* border: 1px solid #fdbc3d; */
     border-radius: 0.4em;
-    padding: 1em 1em;
+    padding: 2em 2em;
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
@@ -246,7 +246,7 @@ const BrowserModalContainer = styled.div`
     -ms-flex-line-pack: center;
     align-content: center;
     text-align: center;
-    width: 25em;
+    width: 35em;
 
     &:focus {
         outline: none;
