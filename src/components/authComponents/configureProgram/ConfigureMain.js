@@ -5,6 +5,12 @@ import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
 import TimeSelectModal from './TimeSelectModal';
 import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseConstants';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Redux:
 import {
@@ -180,6 +186,16 @@ const ButtonContainer = styled.div`
     position: fixed;
     bottom: 5.5em;
     right: 0.4em;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    justify-content: flex-end;
+`;
+
+const BrowserButtonContainer = styled.div`
+    position: fixed;
+    bottom: 3em;
+    right: 23.25em;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
@@ -513,6 +529,16 @@ const LabelContainer = styled.div`
     text-align: left;
 `;
 
+const BrowserLabelContainer = styled.div`
+    position: fixed;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    bottom: 4em;
+    right: 29em;
+    text-align: left;
+`;
+
 const AddMoreLabel = styled.h3`
     padding: 0;
     margin: 0 0.5em;
@@ -811,64 +837,134 @@ const ConfigureMain = ({
                     )}
                 </CardContainer>
             </MainContainer>
-            {stateCardEndLabel && (
-                <LabelContainer>
-                    <AddMoreLabel>
-                        Add more exercises, or <br />
-                        configure your blueprint's <br />
-                        layout to finish and save.
-                    </AddMoreLabel>
-                    <ArrowIcon />
-                </LabelContainer>
+            {isMobileOnly && (
+                <>
+                    {stateCardEndLabel && (
+                        <LabelContainer>
+                            <AddMoreLabel>
+                                Add more exercises, or <br />
+                                configure your blueprint's <br />
+                                layout to finish and save.
+                            </AddMoreLabel>
+                            <ArrowIcon />
+                        </LabelContainer>
+                    )}
+                </>
             )}
-            <ButtonContainer>
-                {stateAddButtons === true ? (
-                    <EditLayoutButtonOpening
-                        to={`/programs/configure/blueprint/${name}/${id}`}
-                    >
-                        <SortIcon />
-                        Blueprint
-                    </EditLayoutButtonOpening>
-                ) : (
-                    <EditLayoutButtonClosing>
-                        <SortIcon />
-                        Blueprint
-                    </EditLayoutButtonClosing>
-                )}
-                {stateAddButtons === true ? (
-                    <AddExerciseButtonOpening
-                        to={`/programs/configure/select/${name}/${id}`}
-                    >
-                        <PlusIcon />
-                        Exercise
-                    </AddExerciseButtonOpening>
-                ) : (
-                    <AddExerciseButtonClosing>
-                        <PlusIcon />
-                        Exercise
-                    </AddExerciseButtonClosing>
-                )}
-                {stateAddButtons === true ? (
-                    <AddRestButtonOpening onClick={openTimeSelectorModal}>
-                        <PlusIcon />
-                        Rest
-                    </AddRestButtonOpening>
-                ) : (
-                    <AddRestButtonClosing>
-                        <PlusIcon />
-                        Rest
-                    </AddRestButtonClosing>
-                )}
-                {stateSelfAddButton === true ? (
-                    <AddButton onClick={showAddButtons}>
-                        <HideIcon />
-                    </AddButton>
-                ) : (
-                    <AddButton onClick={showAddButtons}>
-                        <AddIcon />
-                    </AddButton>
-                )}
-            </ButtonContainer>
+            {isBrowser && (
+                <>
+                    {stateCardEndLabel && (
+                        <BrowserLabelContainer>
+                            <AddMoreLabel>
+                                Add more exercises, or <br />
+                                configure your blueprint's <br />
+                                layout to finish and save.
+                            </AddMoreLabel>
+                            <ArrowIcon />
+                        </BrowserLabelContainer>
+                    )}
+                </>
+            )}
+            {isMobileOnly && (
+                <ButtonContainer>
+                    {stateAddButtons === true ? (
+                        <EditLayoutButtonOpening
+                            to={`/programs/configure/blueprint/${name}/${id}`}
+                        >
+                            <SortIcon />
+                            Blueprint
+                        </EditLayoutButtonOpening>
+                    ) : (
+                        <EditLayoutButtonClosing>
+                            <SortIcon />
+                            Blueprint
+                        </EditLayoutButtonClosing>
+                    )}
+                    {stateAddButtons === true ? (
+                        <AddExerciseButtonOpening
+                            to={`/programs/configure/select/${name}/${id}`}
+                        >
+                            <PlusIcon />
+                            Exercise
+                        </AddExerciseButtonOpening>
+                    ) : (
+                        <AddExerciseButtonClosing>
+                            <PlusIcon />
+                            Exercise
+                        </AddExerciseButtonClosing>
+                    )}
+                    {stateAddButtons === true ? (
+                        <AddRestButtonOpening onClick={openTimeSelectorModal}>
+                            <PlusIcon />
+                            Rest
+                        </AddRestButtonOpening>
+                    ) : (
+                        <AddRestButtonClosing>
+                            <PlusIcon />
+                            Rest
+                        </AddRestButtonClosing>
+                    )}
+                    {stateSelfAddButton === true ? (
+                        <AddButton onClick={showAddButtons}>
+                            <HideIcon />
+                        </AddButton>
+                    ) : (
+                        <AddButton onClick={showAddButtons}>
+                            <AddIcon />
+                        </AddButton>
+                    )}
+                </ButtonContainer>
+            )}
+            {isBrowser && (
+                <BrowserButtonContainer>
+                    {stateAddButtons === true ? (
+                        <EditLayoutButtonOpening
+                            to={`/programs/configure/blueprint/${name}/${id}`}
+                        >
+                            <SortIcon />
+                            Blueprint
+                        </EditLayoutButtonOpening>
+                    ) : (
+                        <EditLayoutButtonClosing>
+                            <SortIcon />
+                            Blueprint
+                        </EditLayoutButtonClosing>
+                    )}
+                    {stateAddButtons === true ? (
+                        <AddExerciseButtonOpening
+                            to={`/programs/configure/select/${name}/${id}`}
+                        >
+                            <PlusIcon />
+                            Exercise
+                        </AddExerciseButtonOpening>
+                    ) : (
+                        <AddExerciseButtonClosing>
+                            <PlusIcon />
+                            Exercise
+                        </AddExerciseButtonClosing>
+                    )}
+                    {stateAddButtons === true ? (
+                        <AddRestButtonOpening onClick={openTimeSelectorModal}>
+                            <PlusIcon />
+                            Rest
+                        </AddRestButtonOpening>
+                    ) : (
+                        <AddRestButtonClosing>
+                            <PlusIcon />
+                            Rest
+                        </AddRestButtonClosing>
+                    )}
+                    {stateSelfAddButton === true ? (
+                        <AddButton onClick={showAddButtons}>
+                            <HideIcon />
+                        </AddButton>
+                    ) : (
+                        <AddButton onClick={showAddButtons}>
+                            <AddIcon />
+                        </AddButton>
+                    )}
+                </BrowserButtonContainer>
+            )}
             <Snackbar
                 open={openDeleteProgramExerciseSnackBar}
                 autoHideDuration={4000}
