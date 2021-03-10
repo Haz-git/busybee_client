@@ -429,17 +429,21 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 </Fade>
             </Modal>
             <MainContainer>
-                {isMobileOnly && <MainHeader>Stat Log</MainHeader>}
-                {isBrowser && <BrowserMainHeader>Stat Log</BrowserMainHeader>}
                 {isMobileOnly && (
-                    <SecondaryStatHeader>
-                        Jot down all of your achievements.
-                    </SecondaryStatHeader>
+                    <>
+                        <MainHeader>Stat Log</MainHeader>
+                        <SecondaryStatHeader>
+                            Jot down all of your achievements.
+                        </SecondaryStatHeader>
+                    </>
                 )}
                 {isBrowser && (
-                    <BrowserSecondaryStatHeader>
-                        Jot down all of your achievements.
-                    </BrowserSecondaryStatHeader>
+                    <>
+                        <BrowserMainHeader>Stat Log</BrowserMainHeader>
+                        <BrowserSecondaryStatHeader>
+                            Jot down all of your achievements.
+                        </BrowserSecondaryStatHeader>
+                    </>
                 )}
                 {isMobileOnly && (
                     <FlexWrapper>
