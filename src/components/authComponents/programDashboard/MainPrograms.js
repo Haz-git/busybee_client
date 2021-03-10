@@ -2,6 +2,13 @@ import React, { useState, useEffect, useMemo } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
+
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 import {
     getUserProgramData,
     addNewProgram,
@@ -25,7 +32,10 @@ import { withStyles } from '@material-ui/core/styles';
 
 //Styles:
 import styled from 'styled-components';
-import { MainHeader } from '../dashboardComponents/UserGreeting';
+import {
+    BrowserMainHeader,
+    MainHeader,
+} from '../dashboardComponents/UserGreeting';
 import { SnackbarContent } from '@material-ui/core';
 
 const CustomMuiAlert = withStyles(() => ({
@@ -85,6 +95,14 @@ const SecondaryProgramHeader = styled(MainHeader)`
     font-weight: 400;
     white-space: nowrap;
     margin: 1em 0;
+`;
+
+const BrowserSecondaryProgramHeader = styled(MainHeader)`
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 700;
+    white-space: nowrap;
+    margin: 0.7em 0;
 `;
 
 const SearchBarContainer = styled.div`
@@ -363,10 +381,22 @@ const MainPrograms = ({
                 submitHandler={submitUserInputs}
             />
             <MainContainer>
-                <MainHeader>Program Manager</MainHeader>
-                <SecondaryProgramHeader>
-                    Design and run your lifting programs.
-                </SecondaryProgramHeader>
+                {isMobileOnly && (
+                    <>
+                        <MainHeader>Program Manager</MainHeader>
+                        <SecondaryProgramHeader>
+                            Design and run your lifting programs.
+                        </SecondaryProgramHeader>
+                    </>
+                )}
+                {isBrowser && (
+                    <>
+                        <BrowserMainHeader>Program Manager</BrowserMainHeader>
+                        <BrowserSecondaryProgramHeader>
+                            Design and run your lifting programs.
+                        </BrowserSecondaryProgramHeader>
+                    </>
+                )}
                 <SearchBarContainer>
                     <SearchBar
                         placeholder="Total Programs"
