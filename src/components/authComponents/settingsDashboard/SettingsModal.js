@@ -8,8 +8,15 @@ import Fade from '@material-ui/core/Fade';
 import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 // import ExpandMoreIcon from '@material-ui/icons/ExpandMore';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -179,181 +186,388 @@ const SettingsModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <SettingsModalContainer>
-                        <SettingsModalHeader>{modalHeader}</SettingsModalHeader>
-                        <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
-                        {isSignOutModal === 'true' ? (
-                            <>
-                                <CustomCancelButton
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={buttonSubmitFunction}
-                                >
-                                    Yes, Sign Me Out
-                                </CustomCancelButton>
-                                <ButtonDivider />
-                                <CustomConfirmButton
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={closeFunction}
-                                >
-                                    No, Keep Me Logged In
-                                </CustomConfirmButton>
-                            </>
-                        ) : null}
-                        {isPasswordModal === 'true' ? (
-                            <>
-                                {hasPasswordError === true ? (
-                                    <ErrorLabel>
-                                        Your current password is incorrect.
-                                    </ErrorLabel>
-                                ) : (
-                                    <ErrorLabelInvi>
-                                        Your current password is incorrect.
-                                    </ErrorLabelInvi>
-                                )}
-                                <FieldDivider>
-                                    <FieldLabel>Current Password</FieldLabel>
-                                    <Field
-                                        type="password"
-                                        onChange={editCurrentPasswordHandler}
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <FieldLabel>New Password</FieldLabel>
-                                    <Field
-                                        type="password"
-                                        onChange={editNewPasswordHandler}
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <FieldLabel>
-                                        Confirm New Password
-                                    </FieldLabel>
-                                    <Field
-                                        type="password"
-                                        onChange={editNewPasswordConfirmHandler}
-                                    />
-                                </FieldDivider>
-                                <ButtonContainer>
-                                    <CustomConfirmButton
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={userPasswordSubmissionHandler}
-                                    >
-                                        Save Changes
-                                    </CustomConfirmButton>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <SettingsModalContainer>
+                            <SettingsModalHeader>
+                                {modalHeader}
+                            </SettingsModalHeader>
+                            <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
+                            {isSignOutModal === 'true' ? (
+                                <>
                                     <CustomCancelButton
                                         variant="contained"
                                         color="secondary"
-                                        onClick={closeFunction}
+                                        onClick={buttonSubmitFunction}
                                     >
-                                        Nevermind
+                                        Yes, Sign Me Out
                                     </CustomCancelButton>
-                                </ButtonContainer>
-                            </>
-                        ) : null}
-                        {isEmailModal === 'true' ? (
-                            <>
-                                <FieldDivider>
-                                    <FieldLabel>New Email Address</FieldLabel>
-                                    <Field
-                                        type="email"
-                                        placeholder={existingEmail}
-                                        onChange={editEmailHandler}
-                                        maxLength="20"
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <FieldLabel>
-                                        Confirm New Email Address
-                                    </FieldLabel>
-                                    <Field
-                                        type="email"
-                                        onChange={editEmailConfirmHandler}
-                                        maxLength="20"
-                                    />
-                                </FieldDivider>
-                                <ButtonContainer>
+                                    <ButtonDivider />
                                     <CustomConfirmButton
                                         variant="contained"
                                         color="primary"
-                                        onClick={userEmailSubmissionHandler}
+                                        onClick={closeFunction}
                                     >
-                                        Save Changes
+                                        No, Keep Me Logged In
                                     </CustomConfirmButton>
+                                </>
+                            ) : null}
+                            {isPasswordModal === 'true' ? (
+                                <>
+                                    {hasPasswordError === true ? (
+                                        <ErrorLabel>
+                                            Your current password is incorrect.
+                                        </ErrorLabel>
+                                    ) : (
+                                        <ErrorLabelInvi>
+                                            Your current password is incorrect.
+                                        </ErrorLabelInvi>
+                                    )}
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Current Password
+                                        </FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={
+                                                editCurrentPasswordHandler
+                                            }
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New Password</FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={editNewPasswordHandler}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Confirm New Password
+                                        </FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={
+                                                editNewPasswordConfirmHandler
+                                            }
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={
+                                                userPasswordSubmissionHandler
+                                            }
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                            {isEmailModal === 'true' ? (
+                                <>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            New Email Address
+                                        </FieldLabel>
+                                        <Field
+                                            type="email"
+                                            placeholder={existingEmail}
+                                            onChange={editEmailHandler}
+                                            maxLength="20"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Confirm New Email Address
+                                        </FieldLabel>
+                                        <Field
+                                            type="email"
+                                            onChange={editEmailConfirmHandler}
+                                            maxLength="20"
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={userEmailSubmissionHandler}
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                            {isUserDetailsModal === 'true' ? (
+                                <>
+                                    <FieldDivider>
+                                        <FieldLabel>New Username</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingUserName}
+                                            onChange={editUserNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New First Name</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingFirstName}
+                                            onChange={editFirstNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New Last Name</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingLastName}
+                                            onChange={editLastNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={
+                                                userDetailSubmissionHandler
+                                            }
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                        </SettingsModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <SettingsModalHeader>
+                                {modalHeader}
+                            </SettingsModalHeader>
+                            <SettingsModalDesc>{modalDesc}</SettingsModalDesc>
+                            {isSignOutModal === 'true' ? (
+                                <>
                                     <CustomCancelButton
                                         variant="contained"
                                         color="secondary"
-                                        onClick={closeFunction}
+                                        onClick={buttonSubmitFunction}
                                     >
-                                        Nevermind
+                                        Yes, Sign Me Out
                                     </CustomCancelButton>
-                                </ButtonContainer>
-                            </>
-                        ) : null}
-                        {isUserDetailsModal === 'true' ? (
-                            <>
-                                <FieldDivider>
-                                    <FieldLabel>New Username</FieldLabel>
-                                    <Field
-                                        type="text"
-                                        placeholder={existingUserName}
-                                        onChange={editUserNameHandler}
-                                        maxLength="15"
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <FieldLabel>New First Name</FieldLabel>
-                                    <Field
-                                        type="text"
-                                        placeholder={existingFirstName}
-                                        onChange={editFirstNameHandler}
-                                        maxLength="15"
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <FieldLabel>New Last Name</FieldLabel>
-                                    <Field
-                                        type="text"
-                                        placeholder={existingLastName}
-                                        onChange={editLastNameHandler}
-                                        maxLength="15"
-                                    />
-                                </FieldDivider>
-                                <ButtonContainer>
+                                    <ButtonDivider />
                                     <CustomConfirmButton
                                         variant="contained"
                                         color="primary"
-                                        onClick={userDetailSubmissionHandler}
-                                    >
-                                        Save Changes
-                                    </CustomConfirmButton>
-                                    <CustomCancelButton
-                                        variant="contained"
-                                        color="secondary"
                                         onClick={closeFunction}
                                     >
-                                        Nevermind
-                                    </CustomCancelButton>
-                                </ButtonContainer>
-                            </>
-                        ) : null}
-                    </SettingsModalContainer>
-                </Fade>
-            </Modal>
+                                        No, Keep Me Logged In
+                                    </CustomConfirmButton>
+                                </>
+                            ) : null}
+                            {isPasswordModal === 'true' ? (
+                                <>
+                                    {hasPasswordError === true ? (
+                                        <ErrorLabel>
+                                            Your current password is incorrect.
+                                        </ErrorLabel>
+                                    ) : (
+                                        <ErrorLabelInvi>
+                                            Your current password is incorrect.
+                                        </ErrorLabelInvi>
+                                    )}
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Current Password
+                                        </FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={
+                                                editCurrentPasswordHandler
+                                            }
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New Password</FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={editNewPasswordHandler}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Confirm New Password
+                                        </FieldLabel>
+                                        <Field
+                                            type="password"
+                                            onChange={
+                                                editNewPasswordConfirmHandler
+                                            }
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={
+                                                userPasswordSubmissionHandler
+                                            }
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                            {isEmailModal === 'true' ? (
+                                <>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            New Email Address
+                                        </FieldLabel>
+                                        <Field
+                                            type="email"
+                                            placeholder={existingEmail}
+                                            onChange={editEmailHandler}
+                                            maxLength="20"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>
+                                            Confirm New Email Address
+                                        </FieldLabel>
+                                        <Field
+                                            type="email"
+                                            onChange={editEmailConfirmHandler}
+                                            maxLength="20"
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={userEmailSubmissionHandler}
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                            {isUserDetailsModal === 'true' ? (
+                                <>
+                                    <FieldDivider>
+                                        <FieldLabel>New Username</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingUserName}
+                                            onChange={editUserNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New First Name</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingFirstName}
+                                            onChange={editFirstNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <FieldLabel>New Last Name</FieldLabel>
+                                        <Field
+                                            type="text"
+                                            placeholder={existingLastName}
+                                            onChange={editLastNameHandler}
+                                            maxLength="15"
+                                        />
+                                    </FieldDivider>
+                                    <ButtonContainer>
+                                        <CustomConfirmButton
+                                            variant="contained"
+                                            color="primary"
+                                            onClick={
+                                                userDetailSubmissionHandler
+                                            }
+                                        >
+                                            Save Changes
+                                        </CustomConfirmButton>
+                                        <CustomCancelButton
+                                            variant="contained"
+                                            color="secondary"
+                                            onClick={closeFunction}
+                                        >
+                                            Nevermind
+                                        </CustomCancelButton>
+                                    </ButtonContainer>
+                                </>
+                            ) : null}
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
