@@ -9,10 +9,19 @@ import {
 } from '../../../redux/userDetails/detailActions';
 import { userLogout } from '../../../redux/userLogout/userLogoutActions';
 import ThemeToggler from './ThemeToggler';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
-import { MainHeader } from '../dashboardComponents/UserGreeting';
+import {
+    BrowserMainHeader,
+    MainHeader,
+} from '../dashboardComponents/UserGreeting';
 import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { Email } from '@styled-icons/material-outlined/Email';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
@@ -94,6 +103,14 @@ const SecondarySettingsHeader = styled(MainHeader)`
     margin: 0.7em 0;
 `;
 
+const BrowserSecondarySettingsHeader = styled(MainHeader)`
+    text-align: left;
+    font-size: 1.2em;
+    font-weight: 700;
+    white-space: nowrap;
+    margin: 0.7em 0;
+`;
+
 const SettingOptionsContainer = styled.div`
     width: 19em;
     margin: 0 auto;
@@ -108,6 +125,15 @@ const SettingOptionsContainer = styled.div`
     grid-row: auto auto;
     grid-column-gap: 1em;
     grid-row-gap: 1.4em;
+`;
+
+const BrowserSettingOptionsContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin-left: -1em;
+    margin-top: 2em;
+    margin-bottom: 2em;
 `;
 /*
     This settings page should have the following features:
@@ -360,36 +386,89 @@ const MainSettings = ({
     return (
         <>
             <MainContainer>
-                <MainHeader>Settings Manager</MainHeader>
-                <SecondarySettingsHeader>
-                    Change your user preferences.
-                </SecondarySettingsHeader>
-                <SettingOptionsContainer>
-                    <SettingsCard
-                        icon={<LogOutIcon />}
-                        textLabel="Sign Out"
-                        clickFunc={openSignOutModal}
-                    />
-                    <SettingsCard
-                        icon={<UserDetailIcon />}
-                        textLabel="Edit User Details"
-                        clickFunc={openEditUserDetailsModal}
-                    />
-                    <SettingsCard
-                        icon={<EmailIcon />}
-                        textLabel="Edit Email"
-                        clickFunc={openEditEmailModal}
-                    />
-                    <SettingsCard
-                        icon={<PasswordIcon />}
-                        textLabel="Edit Password"
-                        clickFunc={openEditPasswordModal}
-                    />
-                </SettingOptionsContainer>
-                <MainHeader>Theme</MainHeader>
-                <div>
-                    <ThemeToggler modeStatus={modeStatus} />
-                </div>
+                {isMobileOnly && (
+                    <>
+                        <MainHeader>Settings Manager</MainHeader>
+                        <SecondarySettingsHeader>
+                            Change your user preferences.
+                        </SecondarySettingsHeader>
+                    </>
+                )}
+                {isBrowser && (
+                    <>
+                        <BrowserMainHeader>Settings Manager</BrowserMainHeader>
+                        <BrowserSecondarySettingsHeader>
+                            Change your user preferences.
+                        </BrowserSecondarySettingsHeader>
+                    </>
+                )}
+                {isMobileOnly && (
+                    <SettingOptionsContainer>
+                        <SettingsCard
+                            icon={<LogOutIcon />}
+                            textLabel="Sign Out"
+                            clickFunc={openSignOutModal}
+                        />
+                        <SettingsCard
+                            icon={<UserDetailIcon />}
+                            textLabel="Edit User Details"
+                            clickFunc={openEditUserDetailsModal}
+                        />
+                        <SettingsCard
+                            icon={<EmailIcon />}
+                            textLabel="Edit Email"
+                            clickFunc={openEditEmailModal}
+                        />
+                        <SettingsCard
+                            icon={<PasswordIcon />}
+                            textLabel="Edit Password"
+                            clickFunc={openEditPasswordModal}
+                        />
+                    </SettingOptionsContainer>
+                )}
+                {isBrowser && (
+                    <BrowserSettingOptionsContainer>
+                        <SettingsCard
+                            icon={<LogOutIcon />}
+                            textLabel="Sign Out"
+                            clickFunc={openSignOutModal}
+                        />
+                        <SettingsCard
+                            icon={<UserDetailIcon />}
+                            textLabel="Edit User Details"
+                            clickFunc={openEditUserDetailsModal}
+                        />
+                        <SettingsCard
+                            icon={<EmailIcon />}
+                            textLabel="Edit Email"
+                            clickFunc={openEditEmailModal}
+                        />
+                        <SettingsCard
+                            icon={<PasswordIcon />}
+                            textLabel="Edit Password"
+                            clickFunc={openEditPasswordModal}
+                        />
+                    </BrowserSettingOptionsContainer>
+                )}
+                {isMobileOnly && (
+                    <>
+                        <MainHeader>Theme</MainHeader>
+                        <div>
+                            <ThemeToggler modeStatus={modeStatus} />
+                        </div>
+                    </>
+                )}
+                {isBrowser && (
+                    <>
+                        <BrowserMainHeader>Theme</BrowserMainHeader>
+                        <BrowserSecondarySettingsHeader>
+                            This feature is currently in-the-works.
+                        </BrowserSecondarySettingsHeader>
+                        {/* <div>
+                            <ThemeToggler modeStatus={modeStatus} />
+                        </div> */}
+                    </>
+                )}
             </MainContainer>
             <SettingsModal
                 openBoolean={stateEditUserDetailsModal}
