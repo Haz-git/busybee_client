@@ -159,7 +159,9 @@ const UserGreeting = ({ firstName, lastName, userName, email, _id }) => {
                 <BrowserView>
                     <BrowserMainContainer>
                         <DetailsContainer>
-                            <MainHeader>Hello, {firstName}!</MainHeader>
+                            <BrowserMainHeader>
+                                Hello, {firstName}!
+                            </BrowserMainHeader>
                             <UserDetailLabel>{email}</UserDetailLabel>
                             <UserDetailLabel>@{userName}</UserDetailLabel>
                         </DetailsContainer>
