@@ -31,7 +31,6 @@ const fadeUp = keyframes`
 const StyledHomeIcon = styled(Home)`
     height: 2.2em;
     width: 2.2em;
-    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -39,7 +38,6 @@ const StyledHomeIcon = styled(Home)`
 const StyledCalendarIcon = styled(Calendar)`
     height: 2.2em;
     width: 2.2em;
-    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -47,7 +45,6 @@ const StyledCalendarIcon = styled(Calendar)`
 const StyledStatsIcon = styled(StatsChart)`
     height: 2.2em;
     width: 2.2em;
-    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -55,7 +52,6 @@ const StyledStatsIcon = styled(StatsChart)`
 const StyledUserCogIcon = styled(UserCog)`
     height: 2.2em;
     width: 2.2em;
-    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -63,7 +59,6 @@ const StyledUserCogIcon = styled(UserCog)`
 const StyledBarbellIcon = styled(Barbell)`
     height: 2.2em;
     width: 2.2em;
-    margin-right: 1em;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
 `;
@@ -107,8 +102,8 @@ const BrowserNavItemContainer = styled.div`
 const NavItemContainer = styled.div`
     display: flex;
     align-items: center;
-    /* align-content: stretch; */
-    /* justify-content: space-between; */
+    align-content: stretch;
+    justify-content: space-between;
 `;
 
 const NavItem = styled(NavLink)`
@@ -140,6 +135,7 @@ const BrowserNavLabel = styled.label`
     font-family: 'Lato', helvetica;
     color: ${({ theme }) => theme.NavIconColor};
     cursor: pointer;
+    margin-left: 1em;
 `;
 
 const NavLabel = styled.label`
