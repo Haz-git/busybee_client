@@ -165,6 +165,16 @@ const ButtonContainer = styled.div`
 
 const StatCardContainer = styled.div``;
 
+const BrowserStatCardContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-column-gap: 1em;
+    /* align-items: center; */
+    justify-content: space-between;
+    /* justify-items: center; */
+    align-items: stretch;
+`;
+
 //Slide transition function for MUI:
 
 function slideTransition(props) {
@@ -523,15 +533,28 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                         <AddButton clickFunction={openModal} />
                     </BrowserFlexWrapper>
                 )}
-                <StatCardContainer>
-                    {isLoaded === true ? (
-                        renderStatCards()
-                    ) : (
-                        <LoadingContainer>
-                            <CustomLoadingDots />
-                        </LoadingContainer>
-                    )}
-                </StatCardContainer>
+                {isMobileOnly && (
+                    <StatCardContainer>
+                        {isLoaded === true ? (
+                            renderStatCards()
+                        ) : (
+                            <LoadingContainer>
+                                <CustomLoadingDots />
+                            </LoadingContainer>
+                        )}
+                    </StatCardContainer>
+                )}
+                {isBrowser && (
+                    <BrowserStatCardContainer>
+                        {isLoaded === true ? (
+                            renderStatCards()
+                        ) : (
+                            <LoadingContainer>
+                                <CustomLoadingDots />
+                            </LoadingContainer>
+                        )}
+                    </BrowserStatCardContainer>
+                )}
             </MainContainer>
             <Snackbar
                 open={openAddRecordSnackBar}
