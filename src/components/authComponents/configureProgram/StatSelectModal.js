@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -17,6 +23,7 @@ import {
 import { green } from '@material-ui/core/colors';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -100,82 +107,166 @@ const StatSelectModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLab}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <AddRecordModalContainer>
-                        <AddRecordModalHeader>
-                            {modalHeader}
-                        </AddRecordModalHeader>
-                        <SelectorContainer>
-                            <CustomSelector
-                                optionsList={optionsList}
-                                optionsDefaultValue={optionsDefaultValue}
-                                changeFunc={statSelected}
-                            />
-                        </SelectorContainer>
-                        <InputContainer>
-                            <InputDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Weight"
-                                        changeFunc={weightFunction}
-                                    />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Sets"
-                                        changeFunc={setsFunction}
-                                    />
-                                </FieldDivider>
-                            </InputDivider>
-                            <InputDivider>
-                                <FieldDivider>
-                                    <CustomSelector changeFunc={unitFunction} />
-                                </FieldDivider>
-                                <FieldDivider>
-                                    <CustomNumberField
-                                        type="number"
-                                        placeholder="Reps"
-                                        changeFunc={repsFunction}
-                                    />
-                                </FieldDivider>
-                            </InputDivider>
-                        </InputContainer>
-                        <ButtonContainer>
-                            <ThemeProvider theme={theme}>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <AddRecordModalContainer>
+                            <AddRecordModalHeader>
+                                {modalHeader}
+                            </AddRecordModalHeader>
+                            <SelectorContainer>
+                                <CustomSelector
+                                    optionsList={optionsList}
+                                    optionsDefaultValue={optionsDefaultValue}
+                                    changeFunc={statSelected}
+                                />
+                            </SelectorContainer>
+                            <InputContainer>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Weight"
+                                            changeFunc={weightFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Sets"
+                                            changeFunc={setsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomSelector
+                                            changeFunc={unitFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Reps"
+                                            changeFunc={repsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <ThemeProvider theme={theme}>
+                                    <StyledButton
+                                        size="large"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={submitHandler}
+                                    >
+                                        Save
+                                    </StyledButton>
+                                </ThemeProvider>
                                 <StyledButton
                                     size="large"
                                     variant="contained"
-                                    color="primary"
-                                    onClick={submitHandler}
+                                    color="secondary"
+                                    onClick={closeFunction}
                                 >
-                                    Save
+                                    Cancel
                                 </StyledButton>
-                            </ThemeProvider>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </AddRecordModalContainer>
-                </Fade>
-            </Modal>
+                            </ButtonContainer>
+                        </AddRecordModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <AddRecordModalHeader>
+                                {modalHeader}
+                            </AddRecordModalHeader>
+                            <SelectorContainer>
+                                <CustomSelector
+                                    optionsList={optionsList}
+                                    optionsDefaultValue={optionsDefaultValue}
+                                    changeFunc={statSelected}
+                                />
+                            </SelectorContainer>
+                            <InputContainer>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Weight"
+                                            changeFunc={weightFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Sets"
+                                            changeFunc={setsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                                <InputDivider>
+                                    <FieldDivider>
+                                        <CustomSelector
+                                            changeFunc={unitFunction}
+                                        />
+                                    </FieldDivider>
+                                    <FieldDivider>
+                                        <CustomNumberField
+                                            type="number"
+                                            placeholder="Reps"
+                                            changeFunc={repsFunction}
+                                        />
+                                    </FieldDivider>
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <ThemeProvider theme={theme}>
+                                    <StyledButton
+                                        size="large"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={submitHandler}
+                                    >
+                                        Save
+                                    </StyledButton>
+                                </ThemeProvider>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };

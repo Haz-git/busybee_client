@@ -31,13 +31,11 @@ import {
 
 const carouselMovement = keyframes`
     from {
-        opacity: 0;
-        transform: translate(20%);
+        transform: translateY(40%);
     }
 
     to {
-        opacity: 1;
-        transform: translate(0,0);
+        transform: translateY(0%);
     }
 `;
 
@@ -49,7 +47,7 @@ const fadeIn = keyframes`
 
     to {
         opacity: 1;
-        transform: translateY(0);
+        transform: translateY(0%);
     }
 `;
 
@@ -93,7 +91,7 @@ const FormContainer = styled.div`
     padding: 1em 1em;
     width: 100%;
     max-width: 100%;
-    animation: ${carouselMovement} 0.5s linear;
+    animation: ${carouselMovement} 0.5s ease;
 `;
 
 const ButtonContainer = styled.div`
@@ -118,8 +116,9 @@ const NextButton = styled.button`
     font-size: 1.2em;
     background: #096b27;
     color: white;
-    padding: .8em 2.6em;
-    font-weight: 400
+    padding: 0.8em 2.6em;
+    font-weight: 400;
+    cursor: pointer;
 
     &:focus {
         outline: none;

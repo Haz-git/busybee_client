@@ -1,4 +1,10 @@
 import React from 'react';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -12,6 +18,7 @@ import CustomSelector from '../dashboardComponents/CustomSelector';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -76,63 +83,124 @@ const CardioSelectModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLab}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <CardioModalContainer>
-                        <CardioModalHeader>{modalHeader}</CardioModalHeader>
-                        <TextFieldDivider>
-                            <CustomTextField
-                                type="text"
-                                placeholder="Cardio exercise..."
-                                changeFunc={nameFunction}
-                                maxlength={maxTextLength}
-                            />
-                        </TextFieldDivider>
-                        <InputContainer>
-                            <InputDivider>
-                                <CustomNumberField
-                                    placeholder="Minutes"
-                                    changeFunc={minHandler}
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <CardioModalContainer>
+                            <CardioModalHeader>{modalHeader}</CardioModalHeader>
+                            <TextFieldDivider>
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="Cardio exercise..."
+                                    changeFunc={nameFunction}
+                                    maxlength={maxTextLength}
                                 />
-                            </InputDivider>
-                            <InputDivider>
-                                <CustomNumberField
-                                    placeholder="Seconds"
-                                    changeFunc={secHandler}
+                            </TextFieldDivider>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Minutes"
+                                        changeFunc={minHandler}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Seconds"
+                                        changeFunc={secHandler}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </CardioModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLab}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <CardioModalHeader>{modalHeader}</CardioModalHeader>
+                            <TextFieldDivider>
+                                <CustomTextField
+                                    type="text"
+                                    placeholder="Cardio exercise..."
+                                    changeFunc={nameFunction}
+                                    maxlength={maxTextLength}
                                 />
-                            </InputDivider>
-                        </InputContainer>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="primary"
-                                onClick={submitHandler}
-                            >
-                                Save
-                            </StyledButton>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                color="secondary"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </CardioModalContainer>
-                </Fade>
-            </Modal>
+                            </TextFieldDivider>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Minutes"
+                                        changeFunc={minHandler}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Seconds"
+                                        changeFunc={secHandler}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="primary"
+                                    onClick={submitHandler}
+                                >
+                                    Save
+                                </StyledButton>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    color="secondary"
+                                    onClick={closeFunction}
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
