@@ -6,6 +6,12 @@ import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
 import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseConstants';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -149,6 +155,31 @@ const PreviousButton = styled.button`
     }
 `;
 
+const BrowserPreviousButton = styled.button`
+    animation: ${fadeIn} 0.2s linear;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0.5em;
+    font-family: 'Lato';
+    font-size: 1.1em;
+    background: #2c3243;
+    color: white;
+    padding: 0.8em 1em;
+    font-weight: 400;
+    margin: 0 0.3em;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        outline: none;
+        background: #464f67;
+    }
+`;
+
 const SubmitButton = styled.button`
     animation: ${fadeIn} 0.2s linear;
     border: none;
@@ -173,6 +204,31 @@ const SubmitButton = styled.button`
     }
 `;
 
+const BrowserSubmitButton = styled.button`
+    animation: ${fadeIn} 0.2s linear;
+    border: none;
+    width: 100%;
+    max-width: 100%;
+    border-radius: 0.5em;
+    font-family: 'Lato';
+    font-size: 1.1em;
+    background: #096b27;
+    color: white;
+    padding: 0.8em 1em;
+    font-weight: 400;
+    margin: 0 0.3em;
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+
+    &:hover {
+        outline: none;
+        background: #1c833b;
+    }
+`;
+
 const PreviousButtonContainer = styled.div`
     display: flex;
     align-items: center;
@@ -182,6 +238,22 @@ const PreviousButtonContainer = styled.div`
     left: 50%;
     width: 100%;
     max-width: 100%;
+    transform: translate(-50%, 0);
+    white-space: nowrap;
+    padding: 1em 1em;
+    background: ${({ theme }) => theme.background};
+    z-index: 99 !important;
+`;
+
+const BrowserPreviousButtonContainer = styled.div`
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: fixed;
+    top: 6.7em;
+    left: 50%;
+    width: 61em;
+
     transform: translate(-50%, 0);
     white-space: nowrap;
     padding: 1em 1em;
@@ -302,16 +374,31 @@ const PyramidMain = ({
 
     const renderPreviousAndSubmitButton = () => {
         if (currentStep === 2) {
-            return (
-                <>
-                    <PreviousButton onClick={prevFunction}>
-                        Return To Name and Sets
-                    </PreviousButton>
-                    <SubmitButton onClick={checkUserFieldsBeforeSubmission}>
-                        Save Pyramid Set
-                    </SubmitButton>
-                </>
-            );
+            if (isMobileOnly) {
+                return (
+                    <>
+                        <PreviousButton onClick={prevFunction}>
+                            Return To Name and Sets
+                        </PreviousButton>
+                        <SubmitButton onClick={checkUserFieldsBeforeSubmission}>
+                            Save Pyramid Set
+                        </SubmitButton>
+                    </>
+                );
+            } else if (isBrowser) {
+                return (
+                    <>
+                        <BrowserPreviousButton onClick={prevFunction}>
+                            Return To Name and Sets
+                        </BrowserPreviousButton>
+                        <BrowserSubmitButton
+                            onClick={checkUserFieldsBeforeSubmission}
+                        >
+                            Save Pyramid Set
+                        </BrowserSubmitButton>
+                    </>
+                );
+            }
         } else {
             return null;
         }
@@ -369,9 +456,16 @@ const PyramidMain = ({
                         <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
                     </FlexWrapper>
                 </HeaderContainer>
-                <PreviousButtonContainer>
-                    {renderPreviousAndSubmitButton()}
-                </PreviousButtonContainer>
+                {isMobileOnly && (
+                    <PreviousButtonContainer>
+                        {renderPreviousAndSubmitButton()}
+                    </PreviousButtonContainer>
+                )}
+                {isBrowser && (
+                    <BrowserPreviousButtonContainer>
+                        {renderPreviousAndSubmitButton()}
+                    </BrowserPreviousButtonContainer>
+                )}
                 <FormContainer>
                     <>
                         <PyramidFirstStep
