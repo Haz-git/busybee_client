@@ -162,12 +162,12 @@ const BrowserPreviousButton = styled.button`
     max-width: 100%;
     border-radius: 0.5em;
     font-family: 'Lato';
-    font-size: 1.1em;
+    font-size: 1.2em;
     background: #2c3243;
     color: white;
-    padding: 0.8em 1em;
+    padding: 0.8em 0.4em;
     font-weight: 400;
-    margin: 0 0.3em;
+    margin: 0 0.15em;
     cursor: pointer;
 
     &:focus {
@@ -211,12 +211,12 @@ const BrowserSubmitButton = styled.button`
     max-width: 100%;
     border-radius: 0.5em;
     font-family: 'Lato';
-    font-size: 1.1em;
+    font-size: 1.2em;
     background: #096b27;
     color: white;
-    padding: 0.8em 1em;
+    padding: 0.8em 0.4em;
     font-weight: 400;
-    margin: 0 0.3em;
+    margin: 0 0.15em;
     cursor: pointer;
 
     &:focus {
@@ -246,17 +246,17 @@ const PreviousButtonContainer = styled.div`
 `;
 
 const BrowserPreviousButtonContainer = styled.div`
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: center;
-    position: fixed;
+    justify-content: center; */
+    /* position: fixed;
     top: 6.7em;
     left: 50%;
-    width: 61em;
+    width: 100%; */
 
-    transform: translate(-50%, 0);
+    /* transform: translate(-50%, 0); */
     white-space: nowrap;
-    padding: 1em 1em;
+    padding: 0.3em 0em;
     background: ${({ theme }) => theme.background};
     z-index: 99 !important;
 `;
@@ -454,17 +454,17 @@ const PyramidMain = ({
                     <FlexWrapper>
                         <MainHeader>{name}</MainHeader>
                         <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
+                        {isBrowser && (
+                            <BrowserPreviousButtonContainer>
+                                {renderPreviousAndSubmitButton()}
+                            </BrowserPreviousButtonContainer>
+                        )}
                     </FlexWrapper>
                 </HeaderContainer>
                 {isMobileOnly && (
                     <PreviousButtonContainer>
                         {renderPreviousAndSubmitButton()}
                     </PreviousButtonContainer>
-                )}
-                {isBrowser && (
-                    <BrowserPreviousButtonContainer>
-                        {renderPreviousAndSubmitButton()}
-                    </BrowserPreviousButtonContainer>
                 )}
                 <FormContainer>
                     <>
