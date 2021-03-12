@@ -533,14 +533,14 @@ const LabelContainer = styled.div`
     text-align: left;
 `;
 
-const BrowserLabelContainer = styled.div`
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 4em;
-    right: 29em;
-    text-align: left;
+const BrowserAddMoreLabel = styled.h3`
+    padding: 0;
+    margin: 1em 0.5em;
+    font-size: 1.4em;
+    font-family: 'Lato', Arial, Helvetica, sans-serif;
+    font-weight: 700;
+    color: ${({ theme }) => theme.AddMoreLabelC};
+    white-space: nowrap;
 `;
 
 const AddMoreLabel = styled.h3`
@@ -804,15 +804,31 @@ const ConfigureMain = ({
     //Render function for no exercises--
 
     const renderEmptyConfigureMain = () => {
-        return (
-            <EmptyExerciseContainer>
-                <EmptyExerciseIcon />
-                <EmptyExerciseLabel>
-                    Looks a bit empty here... Stack your favorite exercises and
-                    rest periods!
-                </EmptyExerciseLabel>
-            </EmptyExerciseContainer>
-        );
+        if (isMobileOnly) {
+            return (
+                <EmptyExerciseContainer>
+                    <EmptyExerciseIcon />
+                    <EmptyExerciseLabel>
+                        Looks a bit empty here... Stack your favorite exercises
+                        and rest periods!
+                    </EmptyExerciseLabel>
+                </EmptyExerciseContainer>
+            );
+        } else if (isBrowser) {
+            return (
+                <EmptyExerciseContainer>
+                    <EmptyExerciseIcon />
+                    <BrowserAddMoreLabel>
+                        Looks a bit empty here... Stack your favorite exercises
+                        and rest periods!
+                    </BrowserAddMoreLabel>
+                    <BrowserAddMoreLabel>
+                        Add more exercises, or configure your blueprint's layout
+                        to finish and save.
+                    </BrowserAddMoreLabel>
+                </EmptyExerciseContainer>
+            );
+        }
     };
 
     return (
@@ -852,20 +868,6 @@ const ConfigureMain = ({
                             </AddMoreLabel>
                             <ArrowIcon />
                         </LabelContainer>
-                    )}
-                </>
-            )}
-            {isBrowser && (
-                <>
-                    {stateCardEndLabel && (
-                        <BrowserLabelContainer>
-                            <AddMoreLabel>
-                                Add more exercises, or <br />
-                                configure your blueprint's <br />
-                                layout to finish and save.
-                            </AddMoreLabel>
-                            <ArrowIcon />
-                        </BrowserLabelContainer>
                     )}
                 </>
             )}
