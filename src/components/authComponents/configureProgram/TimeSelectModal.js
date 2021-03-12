@@ -1,5 +1,11 @@
 import React from 'react';
 import CustomNumberField from '../dashboardComponents/CustomNumberField';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,6 +21,7 @@ import {
 import { green } from '@material-ui/core/colors';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -71,58 +78,114 @@ const TimeSelectModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <TimeSelectorModalContainer>
-                        <ModalHeader>{modalHeader}</ModalHeader>
-                        <ModalDesc>{modalDesc}</ModalDesc>
-                        <InputContainer>
-                            <InputDivider>
-                                <CustomNumberField
-                                    placeholder="Minutes"
-                                    changeFunc={minHandler}
-                                />
-                            </InputDivider>
-                            <InputDivider>
-                                <CustomNumberField
-                                    placeholder="Seconds"
-                                    changeFunc={secHandler}
-                                />
-                            </InputDivider>
-                        </InputContainer>
-                        <ButtonContainer>
-                            <ThemeProvider theme={theme}>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <TimeSelectorModalContainer>
+                            <ModalHeader>{modalHeader}</ModalHeader>
+                            <ModalDesc>{modalDesc}</ModalDesc>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Minutes"
+                                        changeFunc={minHandler}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Seconds"
+                                        changeFunc={secHandler}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <ThemeProvider theme={theme}>
+                                    <StyledButton
+                                        size="large"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={buttonSubmitFunction}
+                                    >
+                                        Save
+                                    </StyledButton>
+                                </ThemeProvider>
                                 <StyledButton
                                     size="large"
                                     variant="contained"
-                                    color="primary"
-                                    onClick={buttonSubmitFunction}
+                                    onClick={closeFunction}
+                                    color="secondary"
                                 >
-                                    Save
+                                    Cancel
                                 </StyledButton>
-                            </ThemeProvider>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                                color="secondary"
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </TimeSelectorModalContainer>
-                </Fade>
-            </Modal>
+                            </ButtonContainer>
+                        </TimeSelectorModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <ModalHeader>{modalHeader}</ModalHeader>
+                            <ModalDesc>{modalDesc}</ModalDesc>
+                            <InputContainer>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Minutes"
+                                        changeFunc={minHandler}
+                                    />
+                                </InputDivider>
+                                <InputDivider>
+                                    <CustomNumberField
+                                        placeholder="Seconds"
+                                        changeFunc={secHandler}
+                                    />
+                                </InputDivider>
+                            </InputContainer>
+                            <ButtonContainer>
+                                <ThemeProvider theme={theme}>
+                                    <StyledButton
+                                        size="large"
+                                        variant="contained"
+                                        color="primary"
+                                        onClick={buttonSubmitFunction}
+                                    >
+                                        Save
+                                    </StyledButton>
+                                </ThemeProvider>
+                                <StyledButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={closeFunction}
+                                    color="secondary"
+                                >
+                                    Cancel
+                                </StyledButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
