@@ -43,7 +43,10 @@ const InputContainer = styled.div`
 `;
 
 const InputDivider = styled.div`
-    margin: 0 0.5em;
+    margin: 0.5em 0.2em;
+    display: grid;
+    grid-template-columns: 100%;
+    row-gap: 0.8em;
 `;
 
 const ButtonContainer = styled.div`
