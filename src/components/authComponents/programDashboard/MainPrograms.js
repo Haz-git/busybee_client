@@ -121,6 +121,15 @@ const ProgramCardContainer = styled.div`
     padding-bottom: 3.5em;
 `;
 
+const BrowserProgramCardContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-column-gap: 1em;
+    /* align-items: center; */
+    justify-content: center;
+    align-items: start;
+`;
+
 //Slide transition function for MUI:
 
 function slideTransition(props) {
@@ -407,15 +416,28 @@ const MainPrograms = ({
                     />
                     <CreateProgramButton clickFunction={openAddProgramModal} />
                 </SearchBarContainer>
-                <ProgramCardContainer>
-                    {isLoaded === true ? (
-                        renderProgramCards()
-                    ) : (
-                        <LoadingContainer>
-                            <CustomLoadingDots />
-                        </LoadingContainer>
-                    )}
-                </ProgramCardContainer>
+                {isMobileOnly && (
+                    <ProgramCardContainer>
+                        {isLoaded === true ? (
+                            renderProgramCards()
+                        ) : (
+                            <LoadingContainer>
+                                <CustomLoadingDots />
+                            </LoadingContainer>
+                        )}
+                    </ProgramCardContainer>
+                )}
+                {isBrowser && (
+                    <BrowserProgramCardContainer>
+                        {isLoaded === true ? (
+                            renderProgramCards()
+                        ) : (
+                            <LoadingContainer>
+                                <CustomLoadingDots />
+                            </LoadingContainer>
+                        )}
+                    </BrowserProgramCardContainer>
+                )}
             </MainContainer>
             <Snackbar
                 open={openAddProgramSnackBar}
