@@ -19,6 +19,7 @@ const WrapperContainer = styled.div`
 `;
 
 const MainContainer = styled.div`
+    max-width: 100%;
     border-radius: 0.4em;
     padding: 0.5em 0.4em;
     display: flex;
