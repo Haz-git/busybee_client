@@ -27,6 +27,7 @@ import AuthCheckComponent from './AuthCheckComponent';
 //Authentication-Required Components:
 import Dashboard from './authComponents/Dashboard';
 import TutorialMain from './authComponents/tutorialComponents/TutorialMain';
+import MainNewsBoard from './authComponents/newsBoard/MainNewsBoard';
 import DashboardNavbar from './authComponents/DashboardNavbar';
 import MainPrograms from './authComponents/programDashboard/MainPrograms';
 import MainStats from './authComponents/statsDashboard/MainStats';
@@ -39,19 +40,52 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 
 //Device-containers:
 
+// const AppBrowserContainer = styled.div`
+//     //Margin for navbar.
+//     /* margin-left: 8% !important;
+//     margin-right: 8% !important; */
+//     padding-left: 8%;
+//     padding-right: 8%;
+//     position: relative;
+// `;
+
 const AppBrowserContainer = styled.div`
-    //Margin for navbar.
-    /* margin-left: 8% !important;
-    margin-right: 8% !important; */
-    padding-left: 8%;
-    padding-right: 8%;
-    position: relative;
+    /* display: block;
+    margin: 0 auto;
+    max-width: 85em; */
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 85em;
+`;
+
+// const AppBrowserContentContainer = styled.div`
+//     position: relative;
+//     margin-left: 14em;
+//     margin-right: 14em;
+//     padding-top: 1em;
+// `;
+
+const AppBrowserNavigationContainer = styled.div`
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
+`;
+
+const AppBrowserNewsContainer = styled.div`
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0;
 `;
 
 const AppBrowserContentContainer = styled.div`
     position: relative;
-    margin-left: 14em;
-    margin-right: 14em;
+    max-width: 55em;
+    width: 55em;
+    /* margin: 0 auto; */
+    padding-left: 1em;
+    padding-right: 1em;
     padding-top: 1em;
 `;
 
@@ -98,14 +132,23 @@ const App = withRouter(({ location }) => {
                                 component={MainSignupForm}
                             />
                             <AuthCheckComponent>
-                                {location.pathname !== '/login' &&
+                                {/* {location.pathname !== '/login' &&
                                     location.pathname !== '/signup' &&
                                     location.pathname !== '/' &&
                                     location.pathname !==
                                         '/newUserTutorial' && (
                                         <DashboardNavbar />
-                                    )}
+                                    )} */}
                                 <AppBrowserContainer>
+                                    <AppBrowserNavigationContainer>
+                                        {location.pathname !== '/login' &&
+                                            location.pathname !== '/signup' &&
+                                            location.pathname !== '/' &&
+                                            location.pathname !==
+                                                '/newUserTutorial' && (
+                                                <DashboardNavbar />
+                                            )}
+                                    </AppBrowserNavigationContainer>
                                     <AppBrowserContentContainer>
                                         <Route
                                             exact
@@ -167,6 +210,15 @@ const App = withRouter(({ location }) => {
                                             component={MainRunProgram}
                                         />
                                     </AppBrowserContentContainer>
+                                    <AppBrowserNewsContainer>
+                                        {location.pathname !== '/login' &&
+                                            location.pathname !== '/signup' &&
+                                            location.pathname !== '/' &&
+                                            location.pathname !==
+                                                '/newUserTutorial' && (
+                                                <MainNewsBoard />
+                                            )}
+                                    </AppBrowserNewsContainer>
                                 </AppBrowserContainer>
                             </AuthCheckComponent>
                         </Switch>
