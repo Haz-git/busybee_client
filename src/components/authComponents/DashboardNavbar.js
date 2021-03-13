@@ -66,12 +66,11 @@ const StyledBarbellIcon = styled(Barbell)`
 const BrowserMainContainer = styled.div`
     background: ${({ theme }) => theme.background};
     overflow: hidden;
-    position: fixed;
-    /* left: 0; */
     height: 100%;
-    padding-left: 8em;
+    max-height: 100%;
+    /* padding-left: 8em; */
     z-index: 100 !important;
-    box-shadow: rgba(0, 0, 0, 0.5) 4px 3px 8px;
+    box-shadow: rgba(0, 0, 0, 0.2) 10px 0px 6px;
     /* animation: ${fadeUp} 0.5s ease; */
 `;
 
