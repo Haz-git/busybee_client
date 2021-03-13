@@ -31,46 +31,43 @@ const fadeUp = keyframes`
 const StyledHomeIcon = styled(Home)`
     height: 2.2em;
     width: 2.2em;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
     height: 2.2em;
     width: 2.2em;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
 `;
 
 const StyledStatsIcon = styled(StatsChart)`
     height: 2.2em;
     width: 2.2em;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
     height: 2.2em;
     width: 2.2em;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
     height: 2.2em;
     width: 2.2em;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
 `;
 
 const BrowserMainContainer = styled.div`
-    background: ${({ theme }) => theme.background};
+    /* background: ${({ theme }) => theme.background}; */
     overflow: hidden;
-    height: 100%;
-    max-height: 100%;
-    /* padding-left: 8em; */
     z-index: 100 !important;
-    box-shadow: rgba(0, 0, 0, 0.2) 10px 0px 6px;
+    /* box-shadow: rgba(0, 0, 0, 0.2) 10px 0px 6px; */
     /* animation: ${fadeUp} 0.5s ease; */
 `;
 
@@ -88,14 +85,9 @@ const MainContainer = styled.div`
 `;
 
 const BrowserNavItemContainer = styled.div`
-    /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start; */
     text-align: left;
     margin-top: 1em;
     padding: 0 1em;
-    /* background: salmon; */
 `;
 
 const NavItemContainer = styled.div`
@@ -111,6 +103,7 @@ const NavItem = styled(NavLink)`
     align-items: center;
     justify-content: center;
     padding: 0.7em 1.2em;
+    color: ${({ theme }) => theme.NavIconColor};
 `;
 
 const BrowserNavItem = styled(NavLink)`
@@ -118,12 +111,17 @@ const BrowserNavItem = styled(NavLink)`
     align-items: center;
     justify-content: flex-start;
     text-align: left;
-    padding: 1em 0em;
-    /* transition: 0.1s all linear; */
+    margin: 1em 0;
+    padding: 1em 1em;
+    border-radius: 2em;
+    transition: 0.1s all linear;
+    box-shadow: rgba(0, 0, 0, 1) 1px 1px 5px;
     cursor: pointer;
+    animation: ${fadeUp} 0.5s ease;
+    color: ${({ theme }) => theme.NavIconColor};
     /* background: salmon; */
     /* 
-    &:hover {
+    /* &:hover {
         transform: scale(1.05);
     } */
 `;
@@ -132,7 +130,7 @@ const BrowserNavLabel = styled.label`
     font-size: 1.5em;
     font-weight: 900;
     font-family: 'Lato', helvetica;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
     cursor: pointer;
     margin-left: 1em;
 `;
@@ -140,7 +138,7 @@ const BrowserNavLabel = styled.label`
 const NavLabel = styled.label`
     font-size: 0.75em;
     font-weight: 400;
-    color: ${({ theme }) => theme.NavIconColor};
+    color: inherit;
 `;
 
 //Render:
@@ -155,8 +153,7 @@ const DashboardNavbar = () => {
                             <NavItem
                                 to="/stats"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledStatsIcon />
@@ -165,8 +162,7 @@ const DashboardNavbar = () => {
                             <NavItem
                                 to="/programs"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledBarbellIcon />
@@ -175,8 +171,7 @@ const DashboardNavbar = () => {
                             <NavItem
                                 to="/dashboard"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledHomeIcon />
@@ -185,8 +180,7 @@ const DashboardNavbar = () => {
                             <NavItem
                                 to="/settings"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledUserCogIcon />
@@ -204,8 +198,7 @@ const DashboardNavbar = () => {
                             <BrowserNavItem
                                 to="/dashboard"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledHomeIcon />
@@ -214,8 +207,7 @@ const DashboardNavbar = () => {
                             <BrowserNavItem
                                 to="/stats"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledStatsIcon />
@@ -224,8 +216,7 @@ const DashboardNavbar = () => {
                             <BrowserNavItem
                                 to="/programs"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledBarbellIcon />
@@ -234,8 +225,7 @@ const DashboardNavbar = () => {
                             <BrowserNavItem
                                 to="/settings"
                                 activeStyle={{
-                                    filter:
-                                        'invert(20%) sepia(90%) saturate(4000%) hue-rotate(20deg) brightness(190%) contrast(95%)',
+                                    color: '#fdbc3d',
                                 }}
                             >
                                 <StyledUserCogIcon />
