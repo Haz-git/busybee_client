@@ -21,9 +21,7 @@ const TestStyle = styled.h1`
 
 const MainNewsBoard = () => {
     return (
-        <MainContainer>
-            <TestStyle>News Board</TestStyle>
-        </MainContainer>
+        <MainContainer>{/* <TestStyle>News Board</TestStyle> */}</MainContainer>
     );
 };
 
