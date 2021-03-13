@@ -40,37 +40,21 @@ import PyramidMain from './authComponents/configureProgram/pyramidSetForm/Pyrami
 
 //Device-containers:
 
-// const AppBrowserContainer = styled.div`
-//     //Margin for navbar.
-//     /* margin-left: 8% !important;
-//     margin-right: 8% !important; */
-//     padding-left: 8%;
-//     padding-right: 8%;
-//     position: relative;
-// `;
-
 const AppBrowserContainer = styled.div`
-    /* display: block;
-    margin: 0 auto;
-    max-width: 85em; */
     display: flex;
     align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
     max-width: 85em;
+    height: 100%;
+    max-height: 100%;
 `;
-
-// const AppBrowserContentContainer = styled.div`
-//     position: relative;
-//     margin-left: 14em;
-//     margin-right: 14em;
-//     padding-top: 1em;
-// `;
 
 const AppBrowserNavigationContainer = styled.div`
     position: -webkit-sticky;
     position: sticky;
     top: 0;
+    height: 100%;
 `;
 
 const AppBrowserNewsContainer = styled.div`
@@ -83,7 +67,6 @@ const AppBrowserContentContainer = styled.div`
     position: relative;
     max-width: 55em;
     width: 55em;
-    /* margin: 0 auto; */
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1em;
