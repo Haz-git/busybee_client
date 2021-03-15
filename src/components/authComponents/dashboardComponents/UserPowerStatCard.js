@@ -127,7 +127,7 @@ const MainHeader = styled.h2`
     /* color: ${({ theme }) => theme.UserPowerHeaderColor}; */
     color: white;
     text-shadow: 2px 2px 2px #14181f;
-    z-index: 4;
+    z-index: 100;
 `;
 
 const BrowserMainHeader = styled.h2`
@@ -137,7 +137,7 @@ const BrowserMainHeader = styled.h2`
     /* color: ${({ theme }) => theme.UserPowerHeaderColor}; */
     color: white;
     text-shadow: 2px 2px 2px #14181f;
-    z-index: 4;
+    z-index: 100;
 `;
 
 const ImgContainer = styled.div`
