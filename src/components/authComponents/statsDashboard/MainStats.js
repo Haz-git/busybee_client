@@ -190,7 +190,9 @@ const ButtonContainer = styled.div`
     width: 100%;
 `;
 
-const StatCardContainer = styled.div``;
+const StatCardContainer = styled.div`
+    margin-bottom: 3em;
+`;
 
 const BrowserStatCardContainer = styled.div`
     display: grid;
@@ -468,7 +470,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                                             type="text"
                                             placeholder="Exercise Name"
                                             changeFunc={handleUserInput}
-                                            maxlength={17}
+                                            // maxlength={17}
                                         />
                                     </TextFieldContainer>
                                     <ButtonContainer>
