@@ -86,7 +86,7 @@ const MainContainer = styled.div`
 
 const BrowserNavItemContainer = styled.div`
     text-align: left;
-    margin-top: 1em;
+    margin-top: 2em;
     padding: 0 1em;
 `;
 
@@ -113,9 +113,9 @@ const BrowserNavItem = styled(NavLink)`
     text-align: left;
     margin: 1em 0;
     padding: 1em 1em;
-    border-radius: 2em;
+    border-radius: 0.4em;
     transition: 0.1s all linear;
-    box-shadow: rgba(0, 0, 0, 1) 1px 1px 5px;
+    box-shadow: rgba(0, 0, 0, 0.8) 1px 4px 5px;
     cursor: pointer;
     animation: ${fadeUp} 0.5s ease;
     color: ${({ theme }) => theme.NavIconColor};
