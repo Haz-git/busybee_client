@@ -70,9 +70,28 @@ const EmptyProgramIcon = styled(Diagram3Fill)`
     /* margin: -1.8em 0; */
 `;
 
+const BrowserEmptyProgramIcon = styled(Diagram3Fill)`
+    height: 10em;
+    width: 10em;
+    color: white;
+    /* margin: -1.8em 0; */
+`;
+
 const EmptyProgramContainer = styled.div`
     text-align: center;
     margin: 3em 0;
+`;
+
+const BrowserEmptyProgramContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1em 0;
+    background: #26292f;
+    border-radius: 0.4em;
+    padding: 1em 0em;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px;
 `;
 
 const EmptyProgramLabel = styled.h3`
@@ -81,6 +100,14 @@ const EmptyProgramLabel = styled.h3`
     font-size: 1em;
     margin: 0.4em 0;
     color: #26292f;
+`;
+
+const BrowserEmptyProgramLabel = styled.h3`
+    font-family: 'Lato', 'Nunito';
+    font-weight: 600;
+    font-size: 1.4em;
+    margin: 0.4em 0;
+    color: white;
 `;
 
 const MainContainer = styled.div`
@@ -284,17 +311,31 @@ const MainPrograms = ({
             programs.programs !== undefined &&
             programs.programs !== null
         ) {
-            return (
-                <EmptyProgramContainer>
-                    <EmptyProgramIcon />
-                    <EmptyProgramLabel>
-                        <em>Breeze</em> through your workout with a program.
-                    </EmptyProgramLabel>
-                    <EmptyProgramLabel>
-                        Use 'Create' to make a new one.
-                    </EmptyProgramLabel>
-                </EmptyProgramContainer>
-            );
+            if (isMobileOnly) {
+                return (
+                    <EmptyProgramContainer>
+                        <EmptyProgramIcon />
+                        <EmptyProgramLabel>
+                            <em>Breeze</em> through your workout with a program.
+                        </EmptyProgramLabel>
+                        <EmptyProgramLabel>
+                            Use 'Create' to make a new one.
+                        </EmptyProgramLabel>
+                    </EmptyProgramContainer>
+                );
+            } else if (isBrowser) {
+                return (
+                    <BrowserEmptyProgramContainer>
+                        <BrowserEmptyProgramIcon />
+                        <BrowserEmptyProgramLabel>
+                            <em>Breeze</em> through your workout with a program.
+                        </BrowserEmptyProgramLabel>
+                        <BrowserEmptyProgramLabel>
+                            Use 'Create' to make a new one.
+                        </BrowserEmptyProgramLabel>
+                    </BrowserEmptyProgramContainer>
+                );
+            }
         }
     };
 
