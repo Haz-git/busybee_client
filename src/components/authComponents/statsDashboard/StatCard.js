@@ -15,13 +15,17 @@ import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 
 const WrapperContainer = styled.div`
-    margin: 1em 0.1em;
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 68% 32%;
+    grid-template-columns: 68% 32%;
+    margin: 1em 0.2em;
 `;
 
 const MainContainer = styled.div`
     max-width: 100%;
     border-radius: 0.4em;
-    padding: 0.5em 0.4em;
+    padding: 0.75em 0.5em;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -31,7 +35,8 @@ const MainContainer = styled.div`
 
 const NameContainer = styled.div`
     text-align: left;
-    white-space: nowrap;
+    white-space: normal;
+    word-break: break-word;
 `;
 
 const NameHeader = styled.h2`
@@ -100,9 +105,10 @@ const CaretIcon = styled(ChevronDown)`
 
 const StyledButton = styled.button`
     margin: 0 0.2em;
-    border-radius: 50%;
     border: none;
-    padding: 0.5em 0.5em;
+    height: 100%;
+    padding: 0.5em 0.1em;
+    border-radius: 0.5em;
     background: ${({ theme }) => theme.ButtonBG};
     color: ${({ theme }) => theme.StatCardHeader};
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
@@ -202,18 +208,18 @@ const StatCard = ({
                             <DateText>{reformatDate()}</DateText>
                         </DateContainer>
                     </NameContainer>
-                    <ButtonContainer>
-                        <StyledButton onClick={openDeleteModal}>
-                            <TrashIcon />
-                        </StyledButton>
-                        <StyledButton onClick={openEditModal}>
-                            <EditIcon />
-                        </StyledButton>
-                        <StyledButton>
-                            <CaretIcon onClick={openRecordModal} />
-                        </StyledButton>
-                    </ButtonContainer>
                 </MainContainer>
+                <ButtonContainer>
+                    <StyledButton onClick={openDeleteModal}>
+                        <TrashIcon />
+                    </StyledButton>
+                    <StyledButton onClick={openEditModal}>
+                        <EditIcon />
+                    </StyledButton>
+                    <StyledButton>
+                        <CaretIcon onClick={openRecordModal} />
+                    </StyledButton>
+                </ButtonContainer>
             </WrapperContainer>
             <StatCardModalDelete
                 openBoolean={stateDeleteModal}
