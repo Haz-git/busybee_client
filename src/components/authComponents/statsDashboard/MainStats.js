@@ -511,7 +511,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                                             type="text"
                                             placeholder="Exercise Name"
                                             changeFunc={handleUserInput}
-                                            maxlength={17}
+                                            // maxlength={17}
                                         />
                                     </TextFieldContainer>
                                     <ButtonContainer>
