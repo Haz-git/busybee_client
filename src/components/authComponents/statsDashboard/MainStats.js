@@ -75,9 +75,28 @@ const EmptyStatsIcon = styled(Stats)`
     margin: -1.8em 0;
 `;
 
+const BrowserEmptyStatsIcon = styled(Stats)`
+    height: 14em;
+    width: 14em;
+    color: white;
+    margin: -1.8em 0;
+`;
+
 const EmptyStatContainer = styled.div`
     text-align: center;
     margin: 3em 0;
+`;
+
+const BrowserEmptyStatContainer = styled.div`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 1em 0;
+    background: #26292f;
+    border-radius: 0.4em;
+    padding: 1em 2em;
+    box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px;
 `;
 
 const EmptyStatLabel = styled.h3`
@@ -86,6 +105,14 @@ const EmptyStatLabel = styled.h3`
     font-size: 1em;
     margin: 0.4em 0;
     color: #26292f;
+`;
+
+const BrowserEmptyStatLabel = styled.h3`
+    font-family: 'Lato', 'Nunito';
+    font-weight: 600;
+    font-size: 1.4em;
+    margin: 0.4em 0;
+    color: white;
 `;
 
 const MainContainer = styled.div`
@@ -305,17 +332,31 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             stats.stats !== undefined &&
             stats.stats !== null
         ) {
-            return (
-                <EmptyStatContainer>
-                    <EmptyStatsIcon />
-                    <EmptyStatLabel>
-                        Stats track your progressive overload.
-                    </EmptyStatLabel>
-                    <EmptyStatLabel>
-                        Use 'Add' to save a new one.
-                    </EmptyStatLabel>
-                </EmptyStatContainer>
-            );
+            if (isMobileOnly) {
+                return (
+                    <EmptyStatContainer>
+                        <EmptyStatsIcon />
+                        <EmptyStatLabel>
+                            Stats track your progressive overload.
+                        </EmptyStatLabel>
+                        <EmptyStatLabel>
+                            Use 'Add' to save a new one.
+                        </EmptyStatLabel>
+                    </EmptyStatContainer>
+                );
+            } else if (isBrowser) {
+                return (
+                    <BrowserEmptyStatContainer>
+                        <BrowserEmptyStatsIcon />
+                        <BrowserEmptyStatLabel>
+                            Stats track your progressive overload.
+                        </BrowserEmptyStatLabel>
+                        <BrowserEmptyStatLabel>
+                            Use 'Add' to save a new one.
+                        </BrowserEmptyStatLabel>
+                    </BrowserEmptyStatContainer>
+                );
+            }
         }
     };
 
