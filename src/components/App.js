@@ -45,7 +45,7 @@ const AppBrowserContainer = styled.div`
     align-items: flex-start;
     justify-content: center;
     margin: 0 auto;
-    max-width: 85em;
+    max-width: 100em;
     height: 100%;
     max-height: 100%;
 `;
@@ -65,8 +65,8 @@ const AppBrowserNewsContainer = styled.div`
 
 const AppBrowserContentContainer = styled.div`
     position: relative;
-    max-width: 55em;
-    width: 55em;
+    max-width: 60em;
+    width: 60em;
     padding-left: 1em;
     padding-right: 1em;
     padding-top: 1em;
@@ -193,7 +193,7 @@ const App = withRouter(({ location }) => {
                                             component={MainRunProgram}
                                         />
                                     </AppBrowserContentContainer>
-                                    <AppBrowserNewsContainer>
+                                    {/* <AppBrowserNewsContainer>
                                         {location.pathname !== '/login' &&
                                             location.pathname !== '/signup' &&
                                             location.pathname !== '/' &&
@@ -201,7 +201,7 @@ const App = withRouter(({ location }) => {
                                                 '/newUserTutorial' && (
                                                 <MainNewsBoard />
                                             )}
-                                    </AppBrowserNewsContainer>
+                                    </AppBrowserNewsContainer> */}
                                 </AppBrowserContainer>
                             </AuthCheckComponent>
                         </Switch>
