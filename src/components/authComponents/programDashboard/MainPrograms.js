@@ -90,7 +90,7 @@ const BrowserEmptyProgramContainer = styled.div`
     margin: 1em 0;
     background: #26292f;
     border-radius: 0.4em;
-    padding: 1em 0em;
+    padding: 1em 1em;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 15px;
 `;
 
