@@ -6,6 +6,7 @@ import { v4 as uuid } from 'uuid';
 import TimeSelectModal from './TimeSelectModal';
 import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseConstants';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
+import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
 
 //Redux:
 import {
@@ -99,6 +100,11 @@ const HideIcon = styled(ChevronsDown)`
 export const BackIcon = styled(CaretBack)`
     height: 3.8em;
     width: 4.3em;
+`;
+
+const BrowserBackIcon = styled(CaretBack)`
+    height: 7.4em;
+    width: 7em;
 `;
 
 const RestIcon = styled(Zzz)`
@@ -829,19 +835,14 @@ const ConfigureMain = ({
     return (
         <>
             <MainContainer>
-                <HeaderContainer>
-                    <Link to="/programs">
-                        <BackButton>
-                            <BackIcon />
-                        </BackButton>
-                    </Link>
-                    <FlexWrapper>
-                        <MainHeader>{name}</MainHeader>
-                        <ExerciseHeader>
-                            {returnArrayCount()} Total Exercises
-                        </ExerciseHeader>
-                    </FlexWrapper>
-                </HeaderContainer>
+                <BackButtonHeader
+                    previousLink="/programs"
+                    previousButtonIcon={
+                        isBrowser ? <BrowserBackIcon /> : <BackIcon />
+                    }
+                    headerName={name}
+                    headerDesc={`${returnArrayCount()} Total Exercises`}
+                />
                 <CardContainer>
                     {isLoaded !== false ? (
                         renderProgramExerciseCards()
