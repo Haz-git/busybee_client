@@ -1,8 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import styled from 'styled-components';
 import { keyframes } from 'styled-components';
-import Button from '@material-ui/core/Button';
 import Countdown from 'react-countdown';
+import {
+    BrowserView,
+    MobileOnlyView,
+    isBrowser,
+    isMobileOnly,
+} from 'react-device-detect';
 
 //Styles:
 import { Running } from '@styled-icons/fa-solid/Running';
@@ -176,12 +181,21 @@ const ButtonContainer = styled.div`
     bottom: 5em;
     display: grid;
     grid-template-columns: 50% 50%;
-    /* align-items: center;
-    justify-content: center; */
     padding: 0em 1em;
-    /* background: #27303f; */
     width: 100%;
 `;
+
+const BrowserButtonContainer = styled.div`
+    display: absolute;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    bottom: 0;
+    padding: 0em 0em;
+    width: 100%;
+    z-index: 10;
+    cursor: pointer;
+`;
+
 const ButtonDivider = styled.div`
     /* width: 100%; */
 `;
@@ -195,6 +209,7 @@ const MoveButtonRight = styled.button`
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     border-left: 1px solid #26292f;
+    cursor: pointer;
 
     &:hover {
         outline: none;
@@ -213,6 +228,7 @@ const MoveButtonLeft = styled.button`
     width: 100%;
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
+    cursor: pointer;
 
     &:hover {
         outline: none;
@@ -492,24 +508,46 @@ const RunCards = ({
                             />
                             {renderTimerCompleteLabel()}
                         </TimerContainer>
-                        <ButtonContainer>
-                            <ButtonDivider>
-                                <MoveButtonLeft onClick={onPrev}>
-                                    <ArrowLeft />
-                                </MoveButtonLeft>
-                                <PrevExerciseLabel>
-                                    {processPrevExercise()}
-                                </PrevExerciseLabel>
-                            </ButtonDivider>
-                            <ButtonDivider>
-                                <MoveButtonRight onClick={onNext}>
-                                    <ArrowRight />
-                                </MoveButtonRight>
-                                <NextExerciseLabel>
-                                    {processNextExercise()}
-                                </NextExerciseLabel>
-                            </ButtonDivider>
-                        </ButtonContainer>
+                        {isMobileOnly && (
+                            <ButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </ButtonContainer>
+                        )}
+                        {isBrowser && (
+                            <BrowserButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </BrowserButtonContainer>
+                        )}
                     </CardContainer>
                 </MainContainer>
             );
@@ -535,24 +573,46 @@ const RunCards = ({
                             />
                             {renderCardioCompleteLabel()}
                         </TimerContainer>
-                        <ButtonContainer>
-                            <ButtonDivider>
-                                <MoveButtonLeft onClick={onPrev}>
-                                    <ArrowLeft />
-                                </MoveButtonLeft>
-                                <PrevExerciseLabel>
-                                    {processPrevExercise()}
-                                </PrevExerciseLabel>
-                            </ButtonDivider>
-                            <ButtonDivider>
-                                <MoveButtonRight onClick={onNext}>
-                                    <ArrowRight />
-                                </MoveButtonRight>
-                                <NextExerciseLabel>
-                                    {processNextExercise()}
-                                </NextExerciseLabel>
-                            </ButtonDivider>
-                        </ButtonContainer>
+                        {isMobileOnly && (
+                            <ButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </ButtonContainer>
+                        )}
+                        {isBrowser && (
+                            <BrowserButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </BrowserButtonContainer>
+                        )}
                     </CardContainer>
                 </MainContainer>
             );
@@ -578,24 +638,46 @@ const RunCards = ({
                             />
                             {renderTimerCompleteLabel()}
                         </TimerContainer>
-                        <ButtonContainer>
-                            <ButtonDivider>
-                                <MoveButtonLeft onClick={onPrev}>
-                                    <ArrowLeft />
-                                </MoveButtonLeft>
-                                <PrevExerciseLabel>
-                                    {processPrevExercise()}
-                                </PrevExerciseLabel>
-                            </ButtonDivider>
-                            <ButtonDivider>
-                                <MoveButtonRight onClick={onNext}>
-                                    <ArrowRight />
-                                </MoveButtonRight>
-                                <NextExerciseLabel>
-                                    {processNextExercise()}
-                                </NextExerciseLabel>
-                            </ButtonDivider>
-                        </ButtonContainer>
+                        {isMobileOnly && (
+                            <ButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </ButtonContainer>
+                        )}
+                        {isBrowser && (
+                            <BrowserButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </BrowserButtonContainer>
+                        )}
                     </CardContainer>
                 </MainContainer>
             );
@@ -630,24 +712,46 @@ const RunCards = ({
                                 </WeightValue>
                             </DetailsContainer>
                         </RepsContainer>
-                        <ButtonContainer>
-                            <ButtonDivider>
-                                <MoveButtonLeft onClick={onPrev}>
-                                    <ArrowLeft />
-                                </MoveButtonLeft>
-                                <PrevExerciseLabel>
-                                    {processPrevExercise()}
-                                </PrevExerciseLabel>
-                            </ButtonDivider>
-                            <ButtonDivider>
-                                <MoveButtonRight onClick={onNext}>
-                                    <ArrowRight />
-                                </MoveButtonRight>
-                                <NextExerciseLabel>
-                                    {processNextExercise()}
-                                </NextExerciseLabel>
-                            </ButtonDivider>
-                        </ButtonContainer>
+                        {isMobileOnly && (
+                            <ButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </ButtonContainer>
+                        )}
+                        {isBrowser && (
+                            <BrowserButtonContainer>
+                                <ButtonDivider>
+                                    <MoveButtonLeft onClick={onPrev}>
+                                        <ArrowLeft />
+                                    </MoveButtonLeft>
+                                    <PrevExerciseLabel>
+                                        {processPrevExercise()}
+                                    </PrevExerciseLabel>
+                                </ButtonDivider>
+                                <ButtonDivider>
+                                    <MoveButtonRight onClick={onNext}>
+                                        <ArrowRight />
+                                    </MoveButtonRight>
+                                    <NextExerciseLabel>
+                                        {processNextExercise()}
+                                    </NextExerciseLabel>
+                                </ButtonDivider>
+                            </BrowserButtonContainer>
+                        )}
                     </CardContainer>
                 </MainContainer>
             );
