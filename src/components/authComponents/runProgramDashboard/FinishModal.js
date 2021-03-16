@@ -1,4 +1,5 @@
 import React from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -9,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -54,33 +56,64 @@ const FinishModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <FinishModalContainer>
-                        <FinishModalHeader>{modalHeader}</FinishModalHeader>
-                        <FinishModalDesc>{modalDesc}</FinishModalDesc>
-                        <ButtonContainer>
-                            <StyledFinishButton
-                                size="large"
-                                variant="contained"
-                                onClick={buttonSubmitFunction}
-                            >
-                                I'm Done
-                            </StyledFinishButton>
-                        </ButtonContainer>
-                    </FinishModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <FinishModalContainer>
+                            <FinishModalHeader>{modalHeader}</FinishModalHeader>
+                            <FinishModalDesc>{modalDesc}</FinishModalDesc>
+                            <ButtonContainer>
+                                <StyledFinishButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    I'm Done
+                                </StyledFinishButton>
+                            </ButtonContainer>
+                        </FinishModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <FinishModalHeader>{modalHeader}</FinishModalHeader>
+                            <FinishModalDesc>{modalDesc}</FinishModalDesc>
+                            <ButtonContainer>
+                                <StyledFinishButton
+                                    size="large"
+                                    variant="contained"
+                                    onClick={buttonSubmitFunction}
+                                >
+                                    I'm Done
+                                </StyledFinishButton>
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
