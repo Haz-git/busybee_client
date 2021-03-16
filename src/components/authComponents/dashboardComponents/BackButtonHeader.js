@@ -89,27 +89,6 @@ const BackButton = styled.button`
     }
 `;
 
-const BrowserBackButton = styled.button`
-    border: none;
-    background: #3a4e55;
-    border-radius: 0.4em;
-    margin-right: 0.8em;
-    height: 100%;
-    color: white;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
-    cursor: pointer;
-
-    &:hover {
-        outline: none;
-        background-color: #536870;
-    }
-
-    &:focus {
-        outline: none;
-        background-color: #536870;
-    }
-`;
-
 const BackButtonLabel = styled.p`
     font-size: 1.1em;
     color: white;
@@ -131,20 +110,34 @@ const BackButtonHeader = ({
     previousButtonLabel,
     headerName,
     headerDesc,
+    buttonColor,
 }) => {
     return (
         <>
             {isMobileOnly && (
                 <MainHeaderContainer>
                     <Link to={previousLink}>
-                        <BackButton>
-                            {previousButtonIcon}
-                            {previousButtonLabel && (
-                                <BackButtonLabel>
-                                    {previousButtonLabel}
-                                </BackButtonLabel>
-                            )}
-                        </BackButton>
+                        {buttonColor === 'default' ? (
+                            <BackButton>
+                                {previousButtonIcon}
+                                {previousButtonLabel && (
+                                    <BackButtonLabel>
+                                        {previousButtonLabel}
+                                    </BackButtonLabel>
+                                )}
+                            </BackButton>
+                        ) : (
+                            <BackButton
+                                style={{ backgroundColor: `${buttonColor}` }}
+                            >
+                                {previousButtonIcon}
+                                {previousButtonLabel && (
+                                    <BackButtonLabel>
+                                        {previousButtonLabel}
+                                    </BackButtonLabel>
+                                )}
+                            </BackButton>
+                        )}
                     </Link>
                     <FlexWrapper>
                         <MainHeader>{headerName}</MainHeader>
@@ -155,14 +148,27 @@ const BackButtonHeader = ({
             {isBrowser && (
                 <MainHeaderContainer>
                     <Link to={previousLink}>
-                        <BackButton>
-                            {previousButtonIcon}
-                            {previousButtonLabel && (
-                                <BrowserBackButtonLabel>
-                                    {previousButtonLabel}
-                                </BrowserBackButtonLabel>
-                            )}
-                        </BackButton>
+                        {buttonColor === 'default' ? (
+                            <BackButton>
+                                {previousButtonIcon}
+                                {previousButtonLabel && (
+                                    <BrowserBackButtonLabel>
+                                        {previousButtonLabel}
+                                    </BrowserBackButtonLabel>
+                                )}
+                            </BackButton>
+                        ) : (
+                            <BackButton
+                                style={{ backgroundColor: `${buttonColor}` }}
+                            >
+                                {previousButtonIcon}
+                                {previousButtonLabel && (
+                                    <BrowserBackButtonLabel>
+                                        {previousButtonLabel}
+                                    </BrowserBackButtonLabel>
+                                )}
+                            </BackButton>
+                        )}
                     </Link>
                     <FlexWrapper>
                         <BrowserMainHeader>{headerName}</BrowserMainHeader>
@@ -174,6 +180,10 @@ const BackButtonHeader = ({
             )}
         </>
     );
+};
+
+BackButtonHeader.defaultProps = {
+    buttonColor: 'default',
 };
 
 export default BackButtonHeader;
