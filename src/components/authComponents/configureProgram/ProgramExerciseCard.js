@@ -345,10 +345,24 @@ const ProgramExerciseCard = ({
 
     const handleUserSec = (e) => {
         setUserSec(e.target.value);
+        console.log(typeof e.target.value);
     };
 
     const handleUserSubmit = () => {
-        addNewRestPeriodBetweenSets(programId, exerciseId, userMin, userSec);
+        //Check if userMin or userSec is empty:
+        if (
+            (userMin === null && userSec === null) ||
+            (userMin === '' && userSec === '')
+        ) {
+            alert('Please input desired values for rest between sets!');
+        } else {
+            addNewRestPeriodBetweenSets(
+                programId,
+                exerciseId,
+                userMin,
+                userSec
+            );
+        }
     };
 
     //Render Set Object Array if the exercise is a Pyramid Set:
