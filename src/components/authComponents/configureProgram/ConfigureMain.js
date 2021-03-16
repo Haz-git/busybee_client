@@ -5,12 +5,7 @@ import ProgramExerciseCard from './ProgramExerciseCard';
 import { v4 as uuid } from 'uuid';
 import TimeSelectModal from './TimeSelectModal';
 import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseConstants';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Redux:
 import {
