@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { NavLink } from 'react-router-dom';
 import {
     BrowserView,
@@ -6,6 +6,9 @@ import {
     isBrowser,
     isMobileOnly,
 } from 'react-device-detect';
+import SettingsModal from './settingsDashboard/SettingsModal';
+import { userLogout } from '../../redux/userLogout/userLogoutActions';
+import { connect } from 'react-redux';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -15,6 +18,7 @@ import { Calendar } from '@styled-icons/boxicons-regular/Calendar';
 import { StatsChart } from '@styled-icons/ionicons-solid/StatsChart';
 import { UserCog } from '@styled-icons/fa-solid/UserCog';
 import { Barbell } from '@styled-icons/ionicons-solid/Barbell';
+import { LogOut } from '@styled-icons/boxicons-regular/LogOut';
 
 const fadeUp = keyframes`
     from {
@@ -36,6 +40,13 @@ const StyledHomeIcon = styled(Home)`
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
+    height: 2.2em;
+    width: 2.2em;
+    color: inherit;
+    cursor: pointer;
+`;
+
+const StyledLogOutIcon = styled(LogOut)`
     height: 2.2em;
     width: 2.2em;
     color: inherit;
@@ -126,6 +137,21 @@ const BrowserNavItem = styled(NavLink)`
     } */
 `;
 
+const BrowserNavSignOut = styled.a`
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    text-align: left;
+    margin: 1em 0;
+    padding: 1em 1em;
+    border-radius: 0.4em;
+    transition: 0.1s all linear;
+    box-shadow: rgba(0, 0, 0, 0.8) 1px 4px 5px;
+    cursor: pointer;
+    animation: ${fadeUp} 0.5s ease;
+    color: ${({ theme }) => theme.NavIconColor};
+`;
+
 const BrowserNavLabel = styled.label`
     font-size: 1.5em;
     font-weight: 900;
@@ -143,7 +169,19 @@ const NavLabel = styled.label`
 
 //Render:
 
-const DashboardNavbar = () => {
+const DashboardNavbar = ({ userLogout }) => {
+    const [stateSignOutModal, setStateSignOutModal] = useState(false);
+
+    //Sign Out Modal handlers:
+
+    const openSignOutModal = () => {
+        setStateSignOutModal(true);
+    };
+
+    const closeSignOutModal = () => {
+        setStateSignOutModal(false);
+    };
+
     const renderDashboardNavbarComponent = () => {
         if (isMobileOnly) {
             return (
@@ -231,8 +269,22 @@ const DashboardNavbar = () => {
                                 <StyledUserCogIcon />
                                 <BrowserNavLabel>Settings</BrowserNavLabel>
                             </BrowserNavItem>
+                            <BrowserNavSignOut onClick={openSignOutModal}>
+                                <StyledLogOutIcon />
+                                <BrowserNavLabel>Sign Out</BrowserNavLabel>
+                            </BrowserNavSignOut>
                         </BrowserNavItemContainer>
                     </BrowserMainContainer>
+                    <SettingsModal
+                        openBoolean={stateSignOutModal}
+                        closeFunction={closeSignOutModal}
+                        ariaLabel="Modal for confirming user sign out"
+                        ariaDesc="Modal for confirming user sign out"
+                        modalHeader="Confirm Sign Out"
+                        modalDesc="Are you sure you want to sign out? You will have to sign back in to view your account details."
+                        buttonSubmitFunction={userLogout}
+                        isSignOutModal="true"
+                    />
                 </BrowserView>
             );
         }
@@ -240,4 +292,4 @@ const DashboardNavbar = () => {
     return <>{renderDashboardNavbarComponent()}</>;
 };
 
-export default DashboardNavbar;
+export default connect(null, { userLogout })(DashboardNavbar);
