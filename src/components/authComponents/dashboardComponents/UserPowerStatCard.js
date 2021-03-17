@@ -15,6 +15,7 @@ import Fade from '@material-ui/core/Fade';
 import bicep from '../../../imgs/bicep.png';
 
 //Components:
+import CustomSaveButton from './CustomSaveButton';
 import CustomSubmitButton from './CustomSubmitButton';
 import CustomNumberField from './CustomNumberField';
 import CustomSelector from './CustomSelector';
@@ -278,9 +279,13 @@ export const ModalDesc = styled.p`
 `;
 
 const ModalInputContainer = styled.div`
-    display: flex;
+    /* display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 70% 30%;
+    justify-content: center;
+    column-gap: 0.5em;
     margin: 1em 0;
 `;
 
@@ -385,23 +390,18 @@ const UserPowerStatCard = ({
                                 <ModalDesc>
                                     Let us know how you're doing.
                                 </ModalDesc>
-                                <form onSubmit={handleNewStatSubmit}>
-                                    <ModalInputContainer>
-                                        <CustomNumberField
-                                            placeholder="Weight"
-                                            existingStat={existingStat}
-                                            changeFunc={handleTextFieldChange}
-                                        />
-                                        <CustomSelector
-                                            changeFunc={handleSelect}
-                                        />
-                                    </ModalInputContainer>
-                                    <CustomSubmitButton
-                                        variant="contained"
-                                        label="Save"
-                                        type="submit"
+                                <ModalInputContainer>
+                                    <CustomNumberField
+                                        placeholder="Weight"
+                                        existingStat={existingStat}
+                                        changeFunc={handleTextFieldChange}
                                     />
-                                </form>
+                                    <CustomSelector changeFunc={handleSelect} />
+                                </ModalInputContainer>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={handleNewStatSubmit}
+                                />
                             </ModalContainer>
                         </Fade>
                     </Modal>
@@ -454,23 +454,18 @@ const UserPowerStatCard = ({
                                 <ModalDesc>
                                     Let us know how you're doing.
                                 </ModalDesc>
-                                <form onSubmit={handleNewStatSubmit}>
-                                    <ModalInputContainer>
-                                        <CustomNumberField
-                                            placeholder="Weight"
-                                            existingStat={existingStat}
-                                            changeFunc={handleTextFieldChange}
-                                        />
-                                        <CustomSelector
-                                            changeFunc={handleSelect}
-                                        />
-                                    </ModalInputContainer>
-                                    <CustomSubmitButton
-                                        variant="contained"
-                                        label="Save"
-                                        type="submit"
+                                <ModalInputContainer>
+                                    <CustomNumberField
+                                        placeholder="Weight"
+                                        existingStat={existingStat}
+                                        changeFunc={handleTextFieldChange}
                                     />
-                                </form>
+                                    <CustomSelector changeFunc={handleSelect} />
+                                </ModalInputContainer>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={handleNewStatSubmit}
+                                />
                             </BrowserModalContainer>
                         </Fade>
                     </Modal>
