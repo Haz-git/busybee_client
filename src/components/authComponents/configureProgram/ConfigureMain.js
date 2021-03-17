@@ -102,9 +102,9 @@ export const BackIcon = styled(CaretBack)`
     width: 4.3em;
 `;
 
-const BrowserBackIcon = styled(CaretBack)`
-    height: 7.4em;
-    width: 7em;
+export const BrowserBackIcon = styled(CaretBack)`
+    height: 7.8em;
+    width: 6.3em;
 `;
 
 const RestIcon = styled(Zzz)`
