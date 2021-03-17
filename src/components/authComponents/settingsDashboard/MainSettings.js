@@ -9,12 +9,7 @@ import {
 } from '../../../redux/userDetails/detailActions';
 import { userLogout } from '../../../redux/userLogout/userLogoutActions';
 import ThemeToggler from './ThemeToggler';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -428,11 +423,6 @@ const MainSettings = ({
                 )}
                 {isBrowser && (
                     <BrowserSettingOptionsContainer>
-                        <SettingsCard
-                            icon={<LogOutIcon />}
-                            textLabel="Sign Out"
-                            clickFunc={openSignOutModal}
-                        />
                         <SettingsCard
                             icon={<UserDetailIcon />}
                             textLabel="Edit User Details"
