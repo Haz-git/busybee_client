@@ -4,15 +4,11 @@ import {
     getUserStatData,
     addNewStat,
 } from '../../../redux/userStats/userStatActions';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 import { v4 as uuid } from 'uuid';
 
 //Components:
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
 import SearchBar from './SearchBar';
 import AddButton from './AddButton';
 import StatCard from './StatCard';
@@ -449,7 +445,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 <Modal
                     aria-labelledby="stats-modal"
                     aria-describedby="user stats modal for input"
-                    // className={classes.modal}
                     open={statModalOpen}
                     onClose={closeModal}
                     closeAfterTransition
@@ -463,25 +458,21 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                             <StatModalHeader>
                                 Track new exercise
                             </StatModalHeader>
-                            <form onSubmit={handleUserSubmit}>
-                                <FormContainer>
-                                    <TextFieldContainer>
-                                        <CustomTextField
-                                            type="text"
-                                            placeholder="Exercise Name"
-                                            changeFunc={handleUserInput}
-                                            // maxlength={17}
-                                        />
-                                    </TextFieldContainer>
-                                    <ButtonContainer>
-                                        <CustomSubmitButton
-                                            label="Add"
-                                            type="submit"
-                                            variant="contained"
-                                        />
-                                    </ButtonContainer>
-                                </FormContainer>
-                            </form>
+                            <FormContainer>
+                                <TextFieldContainer>
+                                    <CustomTextField
+                                        type="text"
+                                        placeholder="Exercise Name"
+                                        changeFunc={handleUserInput}
+                                    />
+                                </TextFieldContainer>
+                                <ButtonContainer>
+                                    <CustomSaveButton
+                                        buttonLabel="Save"
+                                        onClickFunction={handleUserSubmit}
+                                    />
+                                </ButtonContainer>
+                            </FormContainer>
                         </ModalContainer>
                     </Fade>
                 </Modal>
@@ -490,7 +481,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 <Modal
                     aria-labelledby="stats-modal"
                     aria-describedby="user stats modal for input"
-                    // className={classes.modal}
                     open={statModalOpen}
                     onClose={closeModal}
                     closeAfterTransition
@@ -504,25 +494,21 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                             <StatModalHeader>
                                 Track new exercise
                             </StatModalHeader>
-                            <form onSubmit={handleUserSubmit}>
-                                <FormContainer>
-                                    <TextFieldContainer>
-                                        <CustomTextField
-                                            type="text"
-                                            placeholder="Exercise Name"
-                                            changeFunc={handleUserInput}
-                                            // maxlength={17}
-                                        />
-                                    </TextFieldContainer>
-                                    <ButtonContainer>
-                                        <CustomSubmitButton
-                                            label="Add"
-                                            type="submit"
-                                            variant="contained"
-                                        />
-                                    </ButtonContainer>
-                                </FormContainer>
-                            </form>
+                            <FormContainer>
+                                <TextFieldContainer>
+                                    <CustomTextField
+                                        type="text"
+                                        placeholder="Exercise Name"
+                                        changeFunc={handleUserInput}
+                                    />
+                                </TextFieldContainer>
+                                <ButtonContainer>
+                                    <CustomSaveButton
+                                        buttonLabel="Save"
+                                        onClickFunction={handleUserSubmit}
+                                    />
+                                </ButtonContainer>
+                            </FormContainer>
                         </BrowserModalContainer>
                     </Fade>
                 </Modal>
