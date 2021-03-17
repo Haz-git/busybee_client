@@ -111,6 +111,8 @@ const BackButtonHeader = ({
     headerName,
     headerDesc,
     buttonColor,
+    isPyramid,
+    isPyramidRenderContent,
 }) => {
     return (
         <>
@@ -142,6 +144,7 @@ const BackButtonHeader = ({
                     <FlexWrapper>
                         <MainHeader>{headerName}</MainHeader>
                         <ExerciseHeader>{headerDesc}</ExerciseHeader>
+                        {isPyramid && { isPyramidRenderContent }}
                     </FlexWrapper>
                 </MainHeaderContainer>
             )}
@@ -175,6 +178,7 @@ const BackButtonHeader = ({
                         <BrowserExerciseHeader>
                             {headerDesc}
                         </BrowserExerciseHeader>
+                        {isPyramid && <>{isPyramidRenderContent}</>}
                     </FlexWrapper>
                 </MainHeaderContainer>
             )}
@@ -184,6 +188,8 @@ const BackButtonHeader = ({
 
 BackButtonHeader.defaultProps = {
     buttonColor: 'default',
+    isPyramid: false,
+    isPyramidRenderContent: null,
 };
 
 export default BackButtonHeader;
