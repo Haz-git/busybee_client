@@ -7,22 +7,16 @@ import {
     getUserFormattedProgram,
     submitFormattedProgram,
 } from '../../../redux/userFormattedPrograms/formattedProgramsActions';
-import { v4 as uuid } from 'uuid';
 import Fade from 'react-reveal/Fade';
 import dayjs from 'dayjs';
 import { LoadingContainer } from './ConfigureMain';
 import CustomLoadingDots from './CustomLoadingDots';
+import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
-import {
-    HeaderContainer,
-    MainHeader,
-    ExerciseHeader,
-    FlexWrapper,
-    BackButton,
-    BackIcon,
-} from './ConfigureMain';
+import { BrowserBackIcon, BackIcon } from './ConfigureMain';
 import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -395,17 +389,14 @@ const BlueprintLayoutSelectionPage = ({
     return (
         <>
             <MainContainer>
-                <HeaderContainer>
-                    <Link to={`/programs/configure/${name}/${id}`}>
-                        <BackButton>
-                            <BackIcon />
-                        </BackButton>
-                    </Link>
-                    <FlexWrapper>
-                        <MainHeader>{name}</MainHeader>
-                        <ExerciseHeader>Format Blueprint</ExerciseHeader>
-                    </FlexWrapper>
-                </HeaderContainer>
+                <BackButtonHeader
+                    previousLink={`/programs/configure/${name}/${id}`}
+                    previousButtonIcon={
+                        isBrowser ? <BrowserBackIcon /> : <BackIcon />
+                    }
+                    headerName={name}
+                    headerDesc={`Format Blueprint`}
+                />
                 <ProgramCounterContainer>
                     <ProgramCounterLabel>
                         Exercises Formatted:
