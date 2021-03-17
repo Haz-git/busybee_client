@@ -4,6 +4,8 @@ import historyObject from '../../historyObject';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import { changeIsNewUserValue } from '../../../redux/userDetails/detailActions';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
 
 import DashboardInfo from './DashboardInfo';
 import ProgramInfo from './ProgramInfo';
@@ -11,15 +13,8 @@ import StatLogAndSettingsInfo from './StatLogAndSettingsInfo';
 
 import styled from 'styled-components';
 import {
-    HeaderContainer,
-    MainHeader,
-    ExerciseHeader,
-    FlexWrapper,
-} from '../configureProgram/ConfigureMain';
-import {
-    AbortButton,
     CloseIcon,
-    AbortLabel,
+    BrowserCloseIcon,
 } from '../runProgramDashboard/MainRunProgram';
 import gymjot_logo from '../../../imgs/gymjot_transparent.png';
 import { StyledLogo } from '../dashboardComponents/UserGreeting';
@@ -144,18 +139,16 @@ const TutorialMain = ({ changeIsNewUserValue }) => {
 
     return (
         <MainContainer>
-            <HeaderContainer>
-                <AbortButton
-                    onClick={changeIsNewUserValueAndNavigateToDashboard}
-                >
-                    <CloseIcon />
-                    <AbortLabel>Exit</AbortLabel>
-                </AbortButton>
-                <FlexWrapper>
-                    <MainHeader>Tutorial Phase</MainHeader>
-                    <ExerciseHeader>Documentation</ExerciseHeader>
-                </FlexWrapper>
-            </HeaderContainer>
+            <BackButtonHeader
+                onClickFunc={changeIsNewUserValueAndNavigateToDashboard}
+                previousButtonLabel="Exit"
+                buttonColor="#90130c"
+                previousButtonIcon={
+                    isBrowser ? <BrowserCloseIcon /> : <CloseIcon />
+                }
+                headerName={'Tutorial Phase'}
+                headerDesc={`Documentation`}
+            />
             <TutorialCardContainer>
                 <DashboardInfo />
                 <ProgramInfo />
