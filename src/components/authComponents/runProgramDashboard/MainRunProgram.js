@@ -14,13 +14,6 @@ import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
-import {
-    HeaderContainer,
-    BackButton,
-    FlexWrapper,
-    MainHeader,
-    ExerciseHeader,
-} from '../configureProgram/ConfigureMain';
 
 import { Close } from '@styled-icons/ionicons-solid/Close';
 
@@ -38,22 +31,6 @@ const MainContainer = styled.div`
     position: relative;
     display: block;
     text-align: center;
-`;
-
-export const AbortButton = styled(BackButton)`
-    display: block;
-    background: #90130c;
-    padding: 0.5em 0.35em;
-
-    &:hover {
-        background: #cb484f;
-    }
-`;
-
-export const AbortLabel = styled.p`
-    font-size: 1.1em;
-    color: white;
-    text-shadow: 2px 2px 2px #14181f;
 `;
 
 const RunCardContainer = styled.div``;
@@ -234,13 +211,9 @@ const MainRunProgram = ({
                     headerName={name}
                     headerDesc={
                         isLoaded === true ? (
-                            <ExerciseHeader>
-                                Complete {countProgramExercises()} Exercises
-                            </ExerciseHeader>
+                            <>{`Complete ${countProgramExercises()} Exercises`}</>
                         ) : (
-                            <ExerciseHeader>
-                                Complete ... Exercises
-                            </ExerciseHeader>
+                            <>{`Complete ... Exercises`}</>
                         )
                     }
                 />
