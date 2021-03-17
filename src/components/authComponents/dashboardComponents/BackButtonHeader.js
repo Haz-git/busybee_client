@@ -61,7 +61,7 @@ const ExerciseHeader = styled.h2`
 
 const BrowserExerciseHeader = styled.h2`
     font-family: 'Lato';
-    font-size: 2.1em;
+    font-size: 2em;
     color: ${({ theme }) => theme.CMExerciseC};
     font-weight: 900;
     margin-bottom: 0.2em;
@@ -96,7 +96,7 @@ const BackButtonLabel = styled.p`
 `;
 
 const BrowserBackButtonLabel = styled.p`
-    font-size: 2em;
+    font-size: 1.7em;
     color: white;
     text-shadow: 2px 2px 2px #14181f;
 `;
