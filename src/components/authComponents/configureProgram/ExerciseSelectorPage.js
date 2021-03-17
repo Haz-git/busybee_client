@@ -3,6 +3,8 @@ import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
 import AddExerciseOptionButton from './AddExerciseOptionButton';
 import history from '../../../components/historyObject';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
 
 //Importing Constants:
 import {
@@ -41,14 +43,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
 import { SnackbarContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import {
-    HeaderContainer,
-    MainHeader,
-    ExerciseHeader,
-    FlexWrapper,
-    BackButton,
-    BackIcon,
-} from './ConfigureMain';
+import { BackIcon, BrowserBackIcon } from './ConfigureMain';
 
 const CustomMuiAlert = withStyles(() => ({
     root: {
@@ -462,17 +457,14 @@ const ExerciseSelectorPage = ({
     return (
         <>
             <MainContainer>
-                <HeaderContainer>
-                    <Link to={`/programs/configure/${name}/${id}`}>
-                        <BackButton>
-                            <BackIcon />
-                        </BackButton>
-                    </Link>
-                    <FlexWrapper>
-                        <MainHeader>{name}</MainHeader>
-                        <ExerciseHeader>Select Your Exercise</ExerciseHeader>
-                    </FlexWrapper>
-                </HeaderContainer>
+                <BackButtonHeader
+                    previousLink={`/programs/configure/${name}/${id}`}
+                    previousButtonIcon={
+                        isBrowser ? <BrowserBackIcon /> : <BackIcon />
+                    }
+                    headerName={name}
+                    headerDesc={`Select Your Exercise`}
+                />
                 <OptionsContainer>
                     <AddExerciseOptionButton
                         buttonLabel="Add a New Exercise"
