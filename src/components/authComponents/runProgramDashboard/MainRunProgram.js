@@ -9,6 +9,8 @@ import RunCards from '../runProgramDashboard/RunCards';
 import FinishModal from './FinishModal';
 import historyObject from '../../../components/historyObject';
 import { v4 as uuid } from 'uuid';
+import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 
 //Styles:
 import styled from 'styled-components';
@@ -25,6 +27,11 @@ import { Close } from '@styled-icons/ionicons-solid/Close';
 export const CloseIcon = styled(Close)`
     height: 4em;
     width: 4em;
+`;
+
+export const BrowserCloseIcon = styled(Close)`
+    height: 6em;
+    width: 7em;
 `;
 
 const MainContainer = styled.div`
@@ -78,6 +85,8 @@ const RunCardContainer = styled.div``;
         2. On new stats--have an ability to add that stat to stat log, along with record
         3. On main lift--have an ability to add a new record to main lift.
     
+    
+    Abort Button Color: #90130c
 
 */
 
@@ -215,26 +224,26 @@ const MainRunProgram = ({
                 buttonSubmitFunction={finishSubmit}
             />
             <MainContainer>
-                <HeaderContainer>
-                    <Link to="/programs">
-                        <AbortButton>
-                            <CloseIcon />
-                            <AbortLabel>Exit</AbortLabel>
-                        </AbortButton>
-                    </Link>
-                    <FlexWrapper>
-                        <MainHeader>{name}</MainHeader>
-                        {isLoaded === true ? (
+                <BackButtonHeader
+                    previousLink="/programs"
+                    previousButtonIcon={
+                        isBrowser ? <BrowserCloseIcon /> : <CloseIcon />
+                    }
+                    previousButtonLabel="Exit"
+                    buttonColor="#90130c"
+                    headerName={name}
+                    headerDesc={
+                        isLoaded === true ? (
                             <ExerciseHeader>
                                 Complete {countProgramExercises()} Exercises
                             </ExerciseHeader>
                         ) : (
-                            <LoadingContainer>
-                                <CustomLoadingDots />
-                            </LoadingContainer>
-                        )}
-                    </FlexWrapper>
-                </HeaderContainer>
+                            <ExerciseHeader>
+                                Complete ... Exercises
+                            </ExerciseHeader>
+                        )
+                    }
+                />
                 {isLoaded === true ? (
                     <RunCardContainer>{renderRunCards()}</RunCardContainer>
                 ) : (
