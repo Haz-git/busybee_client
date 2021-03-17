@@ -441,22 +441,6 @@ const PyramidMain = ({
     return (
         <>
             <MainContainer>
-                {/* <HeaderContainer>
-                    <Link to={`/programs/configure/select/${name}/${id}`}>
-                        <BackButton>
-                            <BackIcon />
-                        </BackButton>
-                    </Link>
-                    <FlexWrapper>
-                        <MainHeader>{name}</MainHeader>
-                        <ExerciseHeader>Create Your Pyramid Set</ExerciseHeader>
-                        {isBrowser && (
-                            <BrowserPreviousButtonContainer>
-                                {renderPreviousAndSubmitButton()}
-                            </BrowserPreviousButtonContainer>
-                        )}
-                    </FlexWrapper>
-                </HeaderContainer> */}
                 <BackButtonHeader
                     previousLink={`/programs/configure/select/${name}/${id}`}
                     previousButtonIcon={
