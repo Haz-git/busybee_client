@@ -113,6 +113,7 @@ const BackButtonHeader = ({
     buttonColor,
     isPyramid,
     isPyramidRenderContent,
+    onClickFunc,
 }) => {
     return (
         <>
@@ -150,7 +151,7 @@ const BackButtonHeader = ({
             )}
             {isBrowser && (
                 <MainHeaderContainer>
-                    <Link to={previousLink}>
+                    <Link to={previousLink} onClick={onClickFunc}>
                         {buttonColor === 'default' ? (
                             <BackButton>
                                 {previousButtonIcon}
@@ -190,6 +191,7 @@ BackButtonHeader.defaultProps = {
     buttonColor: 'default',
     isPyramid: false,
     isPyramidRenderContent: null,
+    onClickFunc: null,
 };
 
 export default BackButtonHeader;
