@@ -6,12 +6,8 @@ import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
 import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseConstants';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import BackButtonHeader from '../../dashboardComponents/BackButtonHeader';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -27,6 +23,7 @@ import {
     FlexWrapper,
     BackButton,
     BackIcon,
+    BrowserBackIcon,
 } from '../ConfigureMain';
 
 const carouselMovement = keyframes`
@@ -444,7 +441,7 @@ const PyramidMain = ({
     return (
         <>
             <MainContainer>
-                <HeaderContainer>
+                {/* <HeaderContainer>
                     <Link to={`/programs/configure/select/${name}/${id}`}>
                         <BackButton>
                             <BackIcon />
@@ -459,7 +456,23 @@ const PyramidMain = ({
                             </BrowserPreviousButtonContainer>
                         )}
                     </FlexWrapper>
-                </HeaderContainer>
+                </HeaderContainer> */}
+                <BackButtonHeader
+                    previousLink={`/programs/configure/select/${name}/${id}`}
+                    previousButtonIcon={
+                        isBrowser ? <BrowserBackIcon /> : <BackIcon />
+                    }
+                    headerName={name}
+                    headerDesc={`Create Your Pyramid Set`}
+                    isPyramid={true}
+                    isPyramidRenderContent={
+                        isBrowser && (
+                            <BrowserPreviousButtonContainer>
+                                {renderPreviousAndSubmitButton()}
+                            </BrowserPreviousButtonContainer>
+                        )
+                    }
+                />
                 {isMobileOnly && (
                     <PreviousButtonContainer>
                         {renderPreviousAndSubmitButton()}
