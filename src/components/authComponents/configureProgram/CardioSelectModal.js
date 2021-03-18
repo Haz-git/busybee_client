@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -57,9 +54,11 @@ const FieldDivider = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
 
 const StyledButton = withStyles({
@@ -121,22 +120,14 @@ const CardioSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={submitHandler}
-                                >
-                                    Save
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </CardioModalContainer>
                     </Fade>
@@ -180,22 +171,14 @@ const CardioSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={submitHandler}
-                                >
-                                    Save
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
