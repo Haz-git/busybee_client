@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -42,9 +39,10 @@ const ConfirmationModalDesc = styled(ModalDesc)`
 
 const ButtonContainer = styled.div`
     margin-top: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
 
 const UnformattedErrorLabel = styled.p`
@@ -138,32 +136,20 @@ const ConfirmationModal = ({
                                     <ButtonContainer>
                                         {isFormatted === 'true' ? (
                                             <>
-                                                <StyledConfirmationButton
-                                                    size="large"
-                                                    variant="contained"
-                                                    onClick={
+                                                <CustomSaveButton
+                                                    buttonLabel="I'm Ready!"
+                                                    onClickFunction={
                                                         buttonSubmitFunction
                                                     }
-                                                >
-                                                    I'm Ready
-                                                </StyledConfirmationButton>
-                                                <StyledDeletionButton
-                                                    size="large"
-                                                    variant="contained"
-                                                    onClick={closeFunction}
-                                                >
-                                                    Nevermind
-                                                </StyledDeletionButton>
+                                                />
+                                                <CustomCancelButton
+                                                    buttonLabel="Nevermind.."
+                                                    onClickFunction={
+                                                        closeFunction
+                                                    }
+                                                />
                                             </>
-                                        ) : (
-                                            <StyledDeletionButton
-                                                size="large"
-                                                variant="contained"
-                                                onClick={closeFunction}
-                                            >
-                                                Return
-                                            </StyledDeletionButton>
-                                        )}
+                                        ) : null}
                                     </ButtonContainer>
                                 </>
                             ) : (
@@ -223,32 +209,20 @@ const ConfirmationModal = ({
                                     <ButtonContainer>
                                         {isFormatted === 'true' ? (
                                             <>
-                                                <StyledConfirmationButton
-                                                    size="large"
-                                                    variant="contained"
-                                                    onClick={
+                                                <CustomSaveButton
+                                                    buttonLabel="I'm Ready!"
+                                                    onClickFunction={
                                                         buttonSubmitFunction
                                                     }
-                                                >
-                                                    I'm Ready
-                                                </StyledConfirmationButton>
-                                                <StyledDeletionButton
-                                                    size="large"
-                                                    variant="contained"
-                                                    onClick={closeFunction}
-                                                >
-                                                    Nevermind
-                                                </StyledDeletionButton>
+                                                />
+                                                <CustomCancelButton
+                                                    buttonLabel="Nevermind.."
+                                                    onClickFunction={
+                                                        closeFunction
+                                                    }
+                                                />
                                             </>
-                                        ) : (
-                                            <StyledDeletionButton
-                                                size="large"
-                                                variant="contained"
-                                                onClick={closeFunction}
-                                            >
-                                                Return
-                                            </StyledDeletionButton>
-                                        )}
+                                        ) : null}
                                     </ButtonContainer>
                                 </>
                             ) : (
