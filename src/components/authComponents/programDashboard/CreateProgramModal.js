@@ -1,12 +1,9 @@
 import React from 'react';
 import GeneralSaveButton from './GeneralSaveButton';
 import GeneralCancelButton from './GeneralCancelButton';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -42,7 +39,6 @@ const InputContainer = styled.div`
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 0 1em;
     width: 100%;
 `;
 
@@ -119,10 +115,11 @@ const DescInput = styled.textarea`
 `;
 
 const ButtonContainer = styled.div`
-    margin-top: 0.5em;
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
 
 const ButtonMargin = styled.span`
@@ -186,19 +183,17 @@ const CreateProgramModal = ({
                                         onChange={descFunction}
                                     />
                                 </InputDivider>
-                                <ButtonContainer>
-                                    <ButtonMargin>
-                                        <GeneralSaveButton
-                                            clickFunction={submitHandler}
-                                        />
-                                    </ButtonMargin>
-                                    <ButtonMargin>
-                                        <GeneralCancelButton
-                                            clickFunction={closeFunction}
-                                        />
-                                    </ButtonMargin>
-                                </ButtonContainer>
                             </InputContainer>
+                            <ButtonContainer>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
+                            </ButtonContainer>
                         </CreateProgramModalContainer>
                     </Fade>
                 </Modal>
@@ -242,19 +237,17 @@ const CreateProgramModal = ({
                                         onChange={descFunction}
                                     />
                                 </InputDivider>
-                                <ButtonContainer>
-                                    <ButtonMargin>
-                                        <GeneralSaveButton
-                                            clickFunction={submitHandler}
-                                        />
-                                    </ButtonMargin>
-                                    <ButtonMargin>
-                                        <GeneralCancelButton
-                                            clickFunction={closeFunction}
-                                        />
-                                    </ButtonMargin>
-                                </ButtonContainer>
                             </InputContainer>
+                            <ButtonContainer>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
+                            </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
                 </Modal>
