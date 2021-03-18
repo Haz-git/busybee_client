@@ -49,32 +49,6 @@ const UnformattedErrorLabel = styled.p`
     text-align: left;
 `;
 
-const StyledConfirmationButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1em',
-        background: '#368f1f',
-        color: 'white',
-
-        '&:hover': {
-            background: '#6cdc4f',
-        },
-    },
-})(Button);
-
-const StyledDeletionButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1em',
-        background: '#272C34',
-        color: 'white',
-
-        '&:hover': {
-            background: '#454D59',
-        },
-    },
-})(Button);
-
 const ConfirmationModal = ({
     openBoolean,
     closeFunction,
