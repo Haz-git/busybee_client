@@ -156,10 +156,11 @@ const ExercisesContainer = styled.div`
 `;
 
 const ButtonPlayContainer = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 33% 33% 33%;
+    justify-content: center;
     align-items: center;
-    justify-content: space-evenly;
-    padding: 0.75em 0.8em;
+    /* padding: 0.75em 0.8em; */
     background: ${({ theme }) => theme.LowerContainerBG};
     border-bottom-left-radius: 0.4em;
     border-bottom-right-radius: 0.4em;
@@ -175,64 +176,65 @@ const StyledHr = styled.hr`
 
 const DeleteButton = styled.button`
     border: none;
-    border-radius: 0.4em;
     padding: 0.8em 1.3em;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #90130c;
+    background: inherit;
     font-size: 1em;
+    font-family: 'Lato', helvetica;
+    font-weight: 700;
     color: white;
+    border-right: 2px solid ${({ theme }) => theme.ProgramCardBG};
+    border-bottom-left-radius: 0.4em;
+    border-top-right-radius: 1em;
     cursor: pointer;
 
     &:focus {
         outline: none;
-        background: #cb484f;
     }
 
     &:hover {
         outline: none;
-        background: #cb484f;
     }
 `;
 
 const ConfigureButton = styled(Link)`
     border: none;
-    border-radius: 0.4em;
     padding: 0.68em 1.3em;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #7d1b56;
+    background: inherit;
     font-size: 1em;
+    font-family: 'Lato', helvetica;
+    font-weight: 700;
     color: white;
     cursor: pointer;
+    border-bottom-right-radius: 0.4em;
+    border-top-right-radius: 1em;
 
     &:focus {
         outline: none;
-        background: #b95a94;
     }
 
     &:hover {
         outline: none;
-        background: #b95a94;
     }
 `;
 
 const EditButton = styled.button`
     border: none;
-    border-radius: 0.4em;
     padding: 0.8em 1.3em;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #3041ad;
+    background: inherit;
+    border-right: 2px solid ${({ theme }) => theme.ProgramCardBG};
     font-size: 1em;
+    font-family: 'Lato', helvetica;
+    font-weight: 700;
+    border-top-right-radius: 1em;
     color: white;
     cursor: pointer;
 
     &:focus {
         outline: none;
-        background: #346d98;
     }
 
     &:hover {
         outline: none;
-        background: #346d98;
     }
 `;
 
