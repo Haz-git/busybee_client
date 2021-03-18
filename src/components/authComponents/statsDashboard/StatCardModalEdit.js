@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -37,23 +34,19 @@ const InputContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
-
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1em',
-    },
-})(Button);
 
 const StatCardModalDelete = ({
     openBoolean,
     closeFunction,
     buttonSubmitFunction,
     inputFunction,
+    existingStatName,
 }) => {
     return (
         <>
@@ -77,27 +70,20 @@ const StatCardModalDelete = ({
                             <InputContainer>
                                 <CustomTextField
                                     type="text"
-                                    placeholder="New name..."
+                                    placeholder={`${existingStatName}`}
                                     changeFunc={inputFunction}
                                     maxlength={17}
                                 />
                             </InputContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={buttonSubmitFunction}
-                                >
-                                    Save
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={buttonSubmitFunction}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </DeleteModalContainer>
                     </Fade>
@@ -123,27 +109,20 @@ const StatCardModalDelete = ({
                             <InputContainer>
                                 <CustomTextField
                                     type="text"
-                                    placeholder="New name..."
+                                    placeholder={`${existingStatName}`}
                                     changeFunc={inputFunction}
                                     maxlength={17}
                                 />
                             </InputContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    onClick={buttonSubmitFunction}
-                                >
-                                    Save
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={buttonSubmitFunction}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
