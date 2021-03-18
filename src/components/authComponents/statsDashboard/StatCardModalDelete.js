@@ -39,13 +39,6 @@ const ButtonContainer = styled.div`
     grid-column-gap: 0.5em;
 `;
 
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1em',
-    },
-})(Button);
-
 const StatCardModalDelete = ({
     openBoolean,
     closeFunction,
@@ -78,9 +71,7 @@ const StatCardModalDelete = ({
                                 <CustomDeleteButton
                                     buttonLabel="Delete"
                                     onClickFunction={buttonSubmitFunction}
-                                >
-                                    Delete
-                                </CustomDeleteButton>
+                                />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
                                     onClickFunction={closeFunction}
