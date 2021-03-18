@@ -191,6 +191,9 @@ const StatCardRecordModal = ({
                                     buttonIcon={<AddIcon />}
                                     buttonLabel="Record"
                                     onClickFunction={openAddRecordModal}
+                                    buttonTextColor="white"
+                                    buttonColor="#20861b"
+                                    buttonHoverColor="#034500"
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
