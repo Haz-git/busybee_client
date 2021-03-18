@@ -77,6 +77,7 @@ const BackButton = styled.button`
     color: white;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
     cursor: pointer;
+    transition: all 0.8s ease;
 
     &:hover {
         outline: none;
@@ -115,6 +116,7 @@ const BackButtonHeader = ({
     isPyramidRenderContent,
     onClickFunc,
 }) => {
+    console.log(typeof isPyramidRenderContent);
     return (
         <>
             {isMobileOnly && (
@@ -145,7 +147,6 @@ const BackButtonHeader = ({
                     <FlexWrapper>
                         <MainHeader>{headerName}</MainHeader>
                         <ExerciseHeader>{headerDesc}</ExerciseHeader>
-                        {isPyramid && { isPyramidRenderContent }}
                     </FlexWrapper>
                 </MainHeaderContainer>
             )}
@@ -190,7 +191,7 @@ const BackButtonHeader = ({
 BackButtonHeader.defaultProps = {
     buttonColor: 'default',
     isPyramid: false,
-    isPyramidRenderContent: null,
+    isPyramidRenderContent: undefined,
     onClickFunc: null,
 };
 
