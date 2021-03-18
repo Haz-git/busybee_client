@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
@@ -11,6 +11,10 @@ const StyledButtonBase = withStyles({
 })(ButtonBase);
 
 export const CustomButton = styled.div`
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
     border: none;
     border-radius: 0.4rem;
     /* color: white; */
@@ -21,41 +25,80 @@ export const CustomButton = styled.div`
     letter-spacing: 0.05rem;
     padding: 0.7rem 1rem;
     text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
-    box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
+    box-shadow: rgba(0, 0, 0, 0.5) 0px 5px 10px;
     cursor: pointer;
     width: 100%;
     max-width: 100%;
     transition: all 0.075s ease;
-
-    &:hover {
-        /* background: #780600; */
-    }
+    overflow: hidden;
 
     &:focus {
         outline: none;
     }
 `;
 
+const IconContainer = styled.div`
+    position: absolute;
+    height: 2rem;
+    width: 2rem;
+    max-height: 2rem;
+    max-width: 2rem;
+    /* left: 1.25rem; */
+    top: 50%;
+    left: 18%;
+    transform: translate(-18%, -50%);
+`;
+
+const LabelContainer = styled.div`
+    margin-left: 2rem;
+`;
+
 const CustomIconButton = ({
     buttonIcon,
     buttonColor,
+    buttonHoverColor,
     buttonTextColor,
     buttonLabel,
     onClickFunction,
 }) => {
+    const [isHover, setIsHover] = useState(false);
+
+    const toggleHover = () => {
+        setIsHover(!isHover);
+    };
+
     return (
         <>
-            <StyledButtonBase onClick={onClickFunction}>
-                <CustomButton
-                    style={{
-                        backgroundColor: `${buttonColor}`,
-                        color: `${buttonTextColor}`,
-                    }}
-                >
-                    {buttonIcon}
-                    {buttonLabel}
-                </CustomButton>
-            </StyledButtonBase>
+            {isHover === false ? (
+                <StyledButtonBase onClick={onClickFunction}>
+                    <CustomButton
+                        onMouseEnter={toggleHover}
+                        onMouseLeave={toggleHover}
+                        style={{
+                            backgroundColor: `${buttonColor}`,
+                            color: `${buttonTextColor}`,
+                        }}
+                    >
+                        <IconContainer>{buttonIcon}</IconContainer>
+                        <LabelContainer>{buttonLabel}</LabelContainer>
+                    </CustomButton>
+                </StyledButtonBase>
+            ) : (
+                <StyledButtonBase onClick={onClickFunction}>
+                    <CustomButton
+                        onMouseEnter={toggleHover}
+                        onMouseLeave={toggleHover}
+                        style={{
+                            backgroundColor: `${buttonHoverColor}`,
+                            color: `${buttonTextColor}`,
+                            cursor: 'pointer',
+                        }}
+                    >
+                        <IconContainer>{buttonIcon}</IconContainer>
+                        <LabelContainer>{buttonLabel}</LabelContainer>
+                    </CustomButton>
+                </StyledButtonBase>
+            )}
         </>
     );
 };
