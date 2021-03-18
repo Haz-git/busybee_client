@@ -8,8 +8,6 @@ import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
-import { withStyles } from '@material-ui/core/styles';
 import RecordCard from './RecordCard';
 import RecordCardAddModal from './RecordCardAddModal';
 import { connect } from 'react-redux';
@@ -77,13 +75,6 @@ const AddIcon = styled(PostAdd)`
     max-width: 100%;
     max-height: 100%;
 `;
-
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1.1em',
-    },
-})(Button);
 
 //Render:
 
