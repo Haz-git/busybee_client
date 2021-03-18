@@ -18,7 +18,7 @@ import { v4 as uuid } from 'uuid';
 
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
-import { PlaylistAdd } from '@styled-icons/material/PlaylistAdd';
+import { PostAdd } from '@styled-icons/material-sharp/PostAdd';
 import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard';
 
 //Styles:
@@ -70,9 +70,12 @@ const ButtonContainer = styled.div`
     grid-column-gap: 0.5em;
 `;
 
-const AddIcon = styled(PlaylistAdd)`
-    height: 1.2em;
-    width: 1.2em;
+const AddIcon = styled(PostAdd)`
+    height: 100%;
+    width: 100%;
+    box-sizing: border-box;
+    max-width: 100%;
+    max-height: 100%;
 `;
 
 const StyledButton = withStyles({
@@ -184,15 +187,11 @@ const StatCardRecordModal = ({
                                 {renderRecordCards()}
                             </RecordCardContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    startIcon={<AddIcon />}
-                                    onClick={openAddRecordModal}
-                                >
-                                    Add New Record
-                                </StyledButton>
+                                <CustomIconButton
+                                    buttonIcon={<AddIcon />}
+                                    buttonLabel="Record"
+                                    onClickFunction={openAddRecordModal}
+                                />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
                                     onClickFunction={closeFunction}
@@ -223,7 +222,11 @@ const StatCardRecordModal = ({
                             <ButtonContainer>
                                 <CustomIconButton
                                     buttonIcon={<AddIcon />}
-                                    buttonLabel="Add New Record"
+                                    buttonLabel="New Record"
+                                    onClickFunction={openAddRecordModal}
+                                    buttonTextColor="white"
+                                    buttonColor="#20861b"
+                                    buttonHoverColor="#034500"
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
