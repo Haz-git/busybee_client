@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import BackButtonHeader from '../../dashboardComponents/BackButtonHeader';
 import { Link } from 'react-router-dom';
 import PyramidFirstStep from './PyramidFirstStep';
 import PyramidSecondStep from './PyramidSecondStep';
@@ -6,8 +8,6 @@ import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
 import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseConstants';
-import { isBrowser, isMobileOnly } from 'react-device-detect';
-import BackButtonHeader from '../../dashboardComponents/BackButtonHeader';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -16,15 +16,7 @@ import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
 import { SnackbarContent } from '@material-ui/core';
 import { withStyles } from '@material-ui/core/styles';
-import {
-    HeaderContainer,
-    MainHeader,
-    ExerciseHeader,
-    FlexWrapper,
-    BackButton,
-    BackIcon,
-    BrowserBackIcon,
-} from '../ConfigureMain';
+import { BackIcon, BrowserBackIcon } from '../ConfigureMain';
 
 const carouselMovement = keyframes`
     from {
