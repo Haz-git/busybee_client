@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomDeleteButton from '../dashboardComponents/CustomDeleteButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -36,9 +33,10 @@ const DeleteModalDesc = styled(ModalDesc)`
 
 const ButtonContainer = styled.div`
     margin-top: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
 
 const StyledButton = withStyles({
@@ -77,21 +75,16 @@ const StatCardModalDelete = ({
                             </DeleteModalHeader>
                             <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={buttonSubmitFunction}
+                                <CustomDeleteButton
+                                    buttonLabel="Delete"
+                                    onClickFunction={buttonSubmitFunction}
                                 >
                                     Delete
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                </CustomDeleteButton>
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </DeleteModalContainer>
                     </Fade>
@@ -116,21 +109,15 @@ const StatCardModalDelete = ({
                             </DeleteModalHeader>
                             <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={buttonSubmitFunction}
-                                >
-                                    Delete
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomDeleteButton
+                                    buttonLabel="Delete"
+                                    onClickFunction={buttonSubmitFunction}
+                                />
+
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
