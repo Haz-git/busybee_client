@@ -119,7 +119,7 @@ const BackButtonHeader = ({
         <>
             {isMobileOnly && (
                 <MainHeaderContainer>
-                    <Link to={previousLink}>
+                    <Link to={previousLink} onClick={onClickFunc}>
                         {buttonColor === 'default' ? (
                             <BackButton>
                                 {previousButtonIcon}
