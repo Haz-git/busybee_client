@@ -1,10 +1,7 @@
 import React, { useState } from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
+import CustomIconButton from '../dashboardComponents/CustomIconButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -66,9 +63,11 @@ const BrowserRecordCardContainer = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    margin-top: 1em;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
 
 const AddIcon = styled(PlaylistAdd)`
@@ -194,14 +193,10 @@ const StatCardRecordModal = ({
                                 >
                                     Add New Record
                                 </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Exit
-                                </StyledButton>
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </RecordModalContainer>
                     </Fade>
@@ -226,23 +221,14 @@ const StatCardRecordModal = ({
                                 {renderRecordCards()}
                             </BrowserRecordCardContainer>
                             <ButtonContainer>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="primary"
-                                    startIcon={<AddIcon />}
-                                    onClick={openAddRecordModal}
-                                >
-                                    Add New Record
-                                </StyledButton>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Exit
-                                </StyledButton>
+                                <CustomIconButton
+                                    buttonIcon={<AddIcon />}
+                                    buttonLabel="Add New Record"
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserRecordModalContainer>
                     </Fade>
