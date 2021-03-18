@@ -1,10 +1,7 @@
 import React from 'react';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -15,12 +12,6 @@ import Button from '@material-ui/core/Button';
 import CustomNumberField from '../dashboardComponents/CustomNumberField';
 import CustomTextField from '../dashboardComponents/CustomTextField';
 import CustomSelector from '../dashboardComponents/CustomSelector';
-import {
-    createMuiTheme,
-    withStyles,
-    ThemeProvider,
-} from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 
 import {
     BrowserModalContainer,
@@ -57,36 +48,14 @@ const FieldDivider = styled.div`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
-
-const theme = createMuiTheme({
-    palette: {
-        primary: green,
-    },
-});
-
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1.2em',
-        padding: '.5em 1em',
-        color: 'white',
-    },
-})(Button);
 
 const SelectorContainer = styled.div`
     position: relative;
-`;
-
-const StyledSelector = styled.select`
-    display: none;
-
-    &:selected {
-        background-color: white;
-    }
 `;
 
 const StatSelectModal = ({
@@ -164,24 +133,14 @@ const StatSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <ThemeProvider theme={theme}>
-                                    <StyledButton
-                                        size="large"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={submitHandler}
-                                    >
-                                        Save
-                                    </StyledButton>
-                                </ThemeProvider>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </AddRecordModalContainer>
                     </Fade>
@@ -244,24 +203,14 @@ const StatSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <ThemeProvider theme={theme}>
-                                    <StyledButton
-                                        size="large"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={submitHandler}
-                                    >
-                                        Save
-                                    </StyledButton>
-                                </ThemeProvider>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    color="secondary"
-                                    onClick={closeFunction}
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    onClickFunction={submitHandler}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
