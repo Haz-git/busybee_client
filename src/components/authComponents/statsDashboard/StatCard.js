@@ -236,6 +236,7 @@ const StatCard = ({
                 closeFunction={closeEditModal}
                 inputFunction={onEditInput}
                 buttonSubmitFunction={onEditConfirmation}
+                existingStatName={name}
             />
             <StatCardRecordModal
                 openBoolean={stateRecordModal}
