@@ -1,6 +1,4 @@
 import React from 'react';
-import GeneralSaveButton from './GeneralSaveButton';
-import GeneralCancelButton from './GeneralCancelButton';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
@@ -10,7 +8,6 @@ import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
 import {
     BrowserModalContainer,
     ModalContainer,
@@ -79,8 +76,6 @@ const TitleInput = styled.input`
     }
 `;
 
-const DescLabel = styled.label``;
-
 const DescInput = styled.textarea`
     margin: 0 auto;
     border: none;
@@ -120,10 +115,6 @@ const ButtonContainer = styled.div`
     grid-template-columns: 50% 50%;
     justify-content: center;
     grid-column-gap: 0.5em;
-`;
-
-const ButtonMargin = styled.span`
-    margin: 0 2em;
 `;
 
 //Render:
