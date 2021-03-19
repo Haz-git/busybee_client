@@ -131,11 +131,11 @@ const TimeSelectModal = ({
                             <ButtonContainer>
                                 <CustomSaveButton
                                     buttonLabel="Save"
-                                    buttonSubmitFunction={buttonSubmitFunction}
+                                    onClickFunction={buttonSubmitFunction}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
-                                    buttonSubmitFunction={closeFunction}
+                                    onClickFunction={closeFunction}
                                 />
                             </ButtonContainer>
                         </BrowserModalContainer>
