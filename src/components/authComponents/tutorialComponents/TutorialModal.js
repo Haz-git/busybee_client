@@ -1,4 +1,6 @@
 import React from 'react';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomDeleteButton from '../dashboardComponents/CustomDeleteButton';
 import {
     BrowserView,
     MobileOnlyView,
@@ -21,11 +23,6 @@ import {
     ModalHeader,
     ModalDesc,
 } from '../dashboardComponents/UserPowerStatCard';
-
-import {
-    CustomConfirmButton,
-    CustomCancelButton,
-} from '../settingsDashboard/SettingsModal';
 
 const moveUp = keyframes`
     from {
@@ -124,13 +121,15 @@ const TutorialModal = ({
                             tutorial makes using GymJot easier!
                         </TutorialModalDesc>
                         <ButtonContainer>
-                            <CustomConfirmButton onClick={buttonSubmitFunction}>
-                                Yes, take me to the tutorial
-                            </CustomConfirmButton>
+                            <CustomSaveButton
+                                buttonLabel="Yes, take me to the tutorial"
+                                onClickFunction={buttonSubmitFunction}
+                            />
                             <ButtonDivider />
-                            <CustomCancelButton onClick={closeFunction}>
-                                No, don't show me this again
-                            </CustomCancelButton>
+                            <CustomDeleteButton
+                                buttonLabel="No, don't show me this again"
+                                onClickFunction={closeFunction}
+                            />
                         </ButtonContainer>
                     </TutorialModalContainer>
                 </MobileOnlyView>
@@ -160,13 +159,15 @@ const TutorialModal = ({
                             tutorial makes using GymJot easier!
                         </TutorialModalDesc>
                         <ButtonContainer>
-                            <CustomConfirmButton onClick={buttonSubmitFunction}>
-                                Yes, take me to the tutorial
-                            </CustomConfirmButton>
+                            <CustomSaveButton
+                                buttonLabel="Yes, take me to the tutorial"
+                                onClickFunction={buttonSubmitFunction}
+                            />
                             <ButtonDivider />
-                            <CustomCancelButton onClick={closeFunction}>
-                                No, don't show me this again
-                            </CustomCancelButton>
+                            <CustomDeleteButton
+                                buttonLabel="No, don't show me this again"
+                                onClickFunction={closeFunction}
+                            />
                         </ButtonContainer>
                     </BrowserTutorialModalContainer>
                 </BrowserView>
