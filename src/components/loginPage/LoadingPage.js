@@ -31,21 +31,18 @@ const MainContainer = styled.div`
 
 const SpinnerContainer = styled.div`
     position: fixed;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
     top: 45%;
     left: 50%;
     transform: translate(-50%, -50%);
     color: ${({ theme }) => theme.SpinnerColor};
 `;
 
-const LoadingCharacterContainer = styled.div`
-    position: fixed;
-    top: 60%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    white-space: nowrap;
-`;
-
 const LoadingCharacters = styled.h1`
+    margin-top: 1em;
     font-family: 'Nunito', sans-serif, helvetica;
     font-size: 1.5em;
     font-weight: 900;
@@ -65,12 +62,10 @@ const LoadingPage = ({ renderLoading }) => {
                             color="inherit"
                             thickness={1}
                         />
-                    </SpinnerContainer>
-                    <LoadingCharacterContainer>
                         <LoadingCharacters>
                             Re-racking Dumbbells...
                         </LoadingCharacters>
-                    </LoadingCharacterContainer>
+                    </SpinnerContainer>
                 </MainContainer>
             </>
         );
