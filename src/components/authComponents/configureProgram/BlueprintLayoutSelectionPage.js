@@ -231,7 +231,6 @@ const BlueprintLayoutSelectionPage = ({
 
     const handleSelection = (e) => {
         let userBlueprintArray = userBlueprint;
-        console.log('Initial Array: ', userBlueprintArray);
         //Break apart the target value: We know the orderId will always be in index 0.
         const userSelectionTargetValues = e.target.value.split(' ');
 

@@ -116,7 +116,6 @@ const BackButtonHeader = ({
     isPyramidRenderContent,
     onClickFunc,
 }) => {
-    console.log(typeof isPyramidRenderContent);
     return (
         <>
             {isMobileOnly && (
