@@ -56,9 +56,6 @@ export const StyledDivider = styled.hr`
 
 const StatCardContainer = styled.div`
     margin-top: 1em;
-    /* display: flex;
-    justify-content: space-between;
-    align-content: center; */
     display: grid;
     justify-content: center;
     align-content: center;
