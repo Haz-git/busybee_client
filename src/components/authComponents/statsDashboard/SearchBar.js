@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 //Styles:
-import { SearchCircle } from '@styled-icons/ionicons-solid/SearchCircle';
+import { Search } from '@styled-icons/material-rounded/Search';
 
 const WrapperContainer = styled.div`
     position: relative;
@@ -14,17 +14,17 @@ const WrapperContainer = styled.div`
     justify-content: center;
 `;
 
-const StyledSearchIcon = styled(SearchCircle)`
+const StyledSearchIcon = styled(Search)`
     position: absolute;
-    left: 0;
+    left: 0.4em;
     color: rgb(255, 169, 0);
-    height: 3.3em;
-    width: 3.3em;
+    height: 2.6em;
+    width: 2.6em;
 `;
 
 const StyledInput = styled.input`
     border: 1px solid grey;
-    border-radius: 2em;
+    border-radius: 0.4em;
     height: 3em;
     width: 100%;
     padding-top: 0;
