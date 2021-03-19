@@ -16,7 +16,11 @@ export const fadeIn = keyframes`
 `;
 
 export const MainContainer = styled.div`
-    display: flex;
+    /* display: flex;
+    align-items: center;
+    justify-content: space-between; */
+    display: grid;
+    grid-template-columns: 65% 35%;
     align-items: center;
     justify-content: space-between;
     padding: 0.7em 0.5em;
@@ -37,6 +41,7 @@ export const NameLabel = styled.h2`
     font-weight: 400;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+    word-break: break-word;
 
     @media screen and (min-width: 414px) {
         font-size: 1.1em;
@@ -49,6 +54,7 @@ export const CountLabel = styled.h2`
     font-weight: 700;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 1px 2px;
+    text-align: right;
 
     @media screen and (min-width: 414px) {
         font-size: 1.1em;
