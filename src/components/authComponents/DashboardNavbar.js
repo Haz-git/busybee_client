@@ -104,8 +104,7 @@ const BrowserNavItemContainer = styled.div`
 const NavItemContainer = styled.div`
     display: flex;
     align-items: center;
-    align-content: stretch;
-    justify-content: space-between;
+    justify-content: space-evenly;
 `;
 
 const NavItem = styled(NavLink)`
