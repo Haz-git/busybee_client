@@ -44,9 +44,10 @@ const SpinnerContainer = styled.div`
 const LoadingCharacters = styled.h1`
     margin-top: 1em;
     font-family: 'Nunito', sans-serif, helvetica;
-    font-size: 1.5em;
+    font-size: 1.1em;
     font-weight: 900;
     color: ${({ theme }) => theme.SpinnerCharacter};
+    white-space: nowrap;
 `;
 
 //Render:
@@ -58,7 +59,7 @@ const LoadingPage = ({ renderLoading }) => {
                 <MainContainer>
                     <SpinnerContainer>
                         <CircularProgress
-                            size={120}
+                            size={70}
                             color="inherit"
                             thickness={1}
                         />
