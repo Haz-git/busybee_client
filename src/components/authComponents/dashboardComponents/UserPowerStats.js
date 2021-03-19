@@ -56,16 +56,23 @@ export const StyledDivider = styled.hr`
 
 const StatCardContainer = styled.div`
     margin-top: 1em;
-    display: flex;
+    /* display: flex;
+    justify-content: space-between;
+    align-content: center; */
+    display: grid;
     justify-content: center;
     align-content: center;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 0.3em;
 `;
 
 const BrowserStatCardContainer = styled.div`
     margin-top: 1em;
-    display: flex;
+    display: grid;
     justify-content: center;
     align-content: center;
+    grid-template-columns: 33% 33% 33%;
+    column-gap: 0.3em;
 `;
 
 const EmptyMainLiftContainer = styled.div`
