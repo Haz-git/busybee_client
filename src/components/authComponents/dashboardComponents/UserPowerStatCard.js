@@ -41,10 +41,10 @@ const WrapperContainer = styled.div`
 const MainContainer = styled.div`
     position: relative;
     text-align: center;
-    padding: 0.6em 0.99em;
+    padding: 0.5em 0.5em;
     border-radius: 0.5em;
     background: #27303f;
-    margin: 0 0.15em;
+    width: 100%;
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     z-index: 1;
@@ -66,12 +66,14 @@ const BrowserMainContainer = styled.div`
     padding: 0.6em 1em;
     border-radius: 0.5em;
     background: #27303f;
-    margin: 0 0.8em;
+    width: 100%;
+    max-width: 15em;
+    margin: 0 auto;
+    /* margin: 0 0.8em; */
     border: 1px solid #fdbc3d;
     box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 3px;
     z-index: 1;
     animation: ${fadeIn} 0.3s ease;
-    width: 11em;
 `;
 
 const RecentWeightContainer = styled.div`
@@ -81,27 +83,26 @@ const RecentWeightContainer = styled.div`
 
 const EditCorner = styled.button`
     text-align: center;
-    position: absolute;
-    height: 2.8em;
-    width: 2.8em;
-    top: 0;
-    right: 0;
-    border-top-right-radius: 20em;
-    border-bottom-left-radius: 100em;
-    background: #fdbc3d;
+    /* position: absolute; */
+    width: 100%;
+    max-width: 10em;
+    color: white;
+    font-family: 'Nunito';
+    font-size: 0.85em;
+    font-weight: 900;
+    margin-top: 0.5em;
+    padding: 0.3em 0.3em;
+    border-radius: 0.4em;
+    /* border-top-right-radius: 20em;
+    border-bottom-left-radius: 100em; */
+    background: #1a222f;
     border: none;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    z-index: 2;
+    text-shadow: rgba(0, 0, 0, 0.7) 0px 2px 5px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 3px 4px;
     cursor: pointer;
 
     &:focus {
         outline: none;
-    }
-
-    @media only screen and (min-width: 375px) {
-        height: 3.5em;
-        width: 3.5em;
-        border-top-right-radius: 16em;
     }
 `;
 
@@ -124,7 +125,7 @@ const StyledEditIcon = styled(NewMessage)`
 const MainHeader = styled.h2`
     margin-top: 0.7em;
     font-size: 1em;
-    font-weight: 700;
+    font-weight: 900;
     /* color: ${({ theme }) => theme.UserPowerHeaderColor}; */
     color: white;
     text-shadow: 2px 2px 2px #14181f;
@@ -168,7 +169,7 @@ const BrowserExerciseImg = styled.img`
 `;
 
 const DescContainer = styled.div`
-    max-width: 4em;
+    max-width: 100%;
     text-align: center;
 `;
 
@@ -407,9 +408,6 @@ const UserPowerStatCard = ({
                     </Modal>
                     <WrapperContainer>
                         <MainContainer>
-                            <EditCorner type="button" onClick={handleOpen}>
-                                <StyledEditIcon />
-                            </EditCorner>
                             <MainHeader>{header}</MainHeader>
                             <ImgContainer>
                                 <ExerciseImg src={img} />
@@ -422,6 +420,9 @@ const UserPowerStatCard = ({
                                     {renderExistingStatKgs()} kg
                                 </DescLabel>
                             </DescContainer>
+                            <EditCorner type="button" onClick={handleOpen}>
+                                Edit
+                            </EditCorner>
                         </MainContainer>
                         <RecentWeightContainer>
                             <RecentWeightBox
@@ -471,9 +472,6 @@ const UserPowerStatCard = ({
                     </Modal>
                     <WrapperContainer>
                         <BrowserMainContainer>
-                            <EditCorner type="button" onClick={handleOpen}>
-                                <StyledEditIcon />
-                            </EditCorner>
                             <BrowserMainHeader>{header}</BrowserMainHeader>
                             <BrowserImgContainer>
                                 <BrowserExerciseImg src={img} />
@@ -486,6 +484,9 @@ const UserPowerStatCard = ({
                                     {renderExistingStatKgs()} kg
                                 </BrowserDescLabel>
                             </BrowserDescContainer>
+                            <EditCorner type="button" onClick={handleOpen}>
+                                Edit
+                            </EditCorner>
                         </BrowserMainContainer>
                         <RecentWeightContainer>
                             <RecentWeightBox
