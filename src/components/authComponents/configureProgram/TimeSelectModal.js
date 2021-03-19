@@ -1,24 +1,14 @@
 import React from 'react';
 import CustomNumberField from '../dashboardComponents/CustomNumberField';
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
-import {
-    createMuiTheme,
-    withStyles,
-    ThemeProvider,
-} from '@material-ui/core/styles';
-import { green } from '@material-ui/core/colors';
 
 import {
     BrowserModalContainer,
@@ -45,25 +35,11 @@ const InputDivider = styled.div`
 
 const ButtonContainer = styled.div`
     margin-top: 1em;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    grid-column-gap: 0.5em;
 `;
-
-const theme = createMuiTheme({
-    palette: {
-        primary: green,
-    },
-});
-
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1.2em',
-        padding: '.5em 1em',
-        color: 'white',
-    },
-})(Button);
 
 const TimeSelectModal = ({
     openBoolean,
@@ -109,24 +85,14 @@ const TimeSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <ThemeProvider theme={theme}>
-                                    <StyledButton
-                                        size="large"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={buttonSubmitFunction}
-                                    >
-                                        Save
-                                    </StyledButton>
-                                </ThemeProvider>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                    color="secondary"
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    buttonSubmitFunction={buttonSubmitFunction}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    buttonSubmitFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </TimeSelectorModalContainer>
                     </Fade>
@@ -163,24 +129,14 @@ const TimeSelectModal = ({
                                 </InputDivider>
                             </InputContainer>
                             <ButtonContainer>
-                                <ThemeProvider theme={theme}>
-                                    <StyledButton
-                                        size="large"
-                                        variant="contained"
-                                        color="primary"
-                                        onClick={buttonSubmitFunction}
-                                    >
-                                        Save
-                                    </StyledButton>
-                                </ThemeProvider>
-                                <StyledButton
-                                    size="large"
-                                    variant="contained"
-                                    onClick={closeFunction}
-                                    color="secondary"
-                                >
-                                    Cancel
-                                </StyledButton>
+                                <CustomSaveButton
+                                    buttonLabel="Save"
+                                    buttonSubmitFunction={buttonSubmitFunction}
+                                />
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    buttonSubmitFunction={closeFunction}
+                                />
                             </ButtonContainer>
                         </BrowserModalContainer>
                     </Fade>
