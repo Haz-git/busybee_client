@@ -37,6 +37,11 @@ const StyledHomeIcon = styled(Home)`
     width: 2.2em;
     color: inherit;
     cursor: pointer;
+
+    @media screen and (max-width: 320px) {
+        height: 1.5em;
+        width: 1.5em;
+    }
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
@@ -44,6 +49,10 @@ const StyledCalendarIcon = styled(Calendar)`
     width: 2.2em;
     color: inherit;
     cursor: pointer;
+    @media screen and (min-width: 320px) {
+        height: 1.5em;
+        width: 1.5em;
+    }
 `;
 
 const StyledLogOutIcon = styled(LogOut)`
@@ -58,6 +67,10 @@ const StyledStatsIcon = styled(StatsChart)`
     width: 2.2em;
     color: inherit;
     cursor: pointer;
+    @media screen and (max-width: 320px) {
+        height: 1.5em;
+        width: 1.5em;
+    }
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
@@ -65,6 +78,10 @@ const StyledUserCogIcon = styled(UserCog)`
     width: 2.2em;
     color: inherit;
     cursor: pointer;
+    @media screen and (max-width: 320px) {
+        height: 1.5em;
+        width: 1.5em;
+    }
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
@@ -72,6 +89,10 @@ const StyledBarbellIcon = styled(Barbell)`
     width: 2.2em;
     color: inherit;
     cursor: pointer;
+    @media screen and (max-width: 320px) {
+        height: 1.5em;
+        width: 1.5em;
+    }
 `;
 
 const BrowserMainContainer = styled.div`
