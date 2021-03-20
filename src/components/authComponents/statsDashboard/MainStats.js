@@ -131,7 +131,9 @@ const FlexWrapper = styled.div`
     align-items: center;
     justify-content: space-evenly;
     background: ${({ theme }) => theme.background};
-    padding: 0.5em 0;
+    padding: 0.5em 0em;
+    width: 100%;
+    max-width: 100%;
 `;
 
 const BrowserFlexWrapper = styled.div`
@@ -188,6 +190,8 @@ const ButtonContainer = styled.div`
 
 const StatCardContainer = styled.div`
     margin-bottom: 3em;
+    /* width: 100%;
+    max-width: 100vw; */
 `;
 
 const BrowserStatCardContainer = styled.div`

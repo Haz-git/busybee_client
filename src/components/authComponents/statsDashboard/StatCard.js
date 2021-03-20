@@ -17,9 +17,14 @@ import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 const WrapperContainer = styled.div`
     display: -ms-grid;
     display: grid;
-    -ms-grid-columns: 68% 32%;
-    grid-template-columns: 68% 32%;
-    margin: 1em 0.2em;
+    -ms-grid-columns: auto auto;
+    grid-template-columns: auto auto;
+    justify-items: center;
+    margin: 1em 0em;
+    /* @media screen and (max-width: 320px) {
+        -ms-grid-columns: 60% 40%;
+        grid-template-columns: 60% 40%;
+    } */
 `;
 
 const MainContainer = styled.div`
@@ -28,15 +33,26 @@ const MainContainer = styled.div`
     padding: 0.75em 0.5em;
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    /* justify-content: space-between; */
     background: ${({ theme }) => theme.StatCardBG};
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
 `;
 
 const NameContainer = styled.div`
+    width: 10.5rem;
     text-align: left;
     white-space: normal;
     word-break: break-word;
+    @media screen and (min-width: 320px) {
+        width: 9rem;
+    }
+
+    @media screen and (min-width: 360px) {
+        width: 11.5rem;
+    }
+    @media screen and (min-width: 411px) {
+        width: 13rem;
+    }
 `;
 
 const NameHeader = styled.h2`
@@ -67,7 +83,7 @@ const DateText = styled.h2`
 `;
 
 const ButtonContainer = styled.div`
-    white-space: nowrap;
+    /* white-space: nowrap; */
 `;
 
 const TrashIcon = styled(Trash)`
@@ -79,6 +95,10 @@ const TrashIcon = styled(Trash)`
         height: 3.5em;
         width: 3.5em;
     }
+    /* @media screen and (max-width: 320px) {
+        height: 2.5em;
+        width: 2.5em;
+    } */
 `;
 
 const EditIcon = styled(Pencil)`
@@ -90,6 +110,10 @@ const EditIcon = styled(Pencil)`
         height: 3.5em;
         width: 3.5em;
     }
+    /* @media screen and (max-width: 320px) {
+        height: 2.5em;
+        width: 2.5em;
+    } */
 `;
 
 const CaretIcon = styled(ChevronDown)`
@@ -101,6 +125,10 @@ const CaretIcon = styled(ChevronDown)`
         height: 3.5em;
         width: 3.5em;
     }
+    /* @media screen and (max-width: 320px) {
+        height: 2.5em;
+        width: 2.5em;
+    } */
 `;
 
 const StyledButton = styled.button`
