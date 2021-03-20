@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 import dayjs from 'dayjs';
 import { connect } from 'react-redux';
 import { deleteStat, editStat } from '../../../redux/userStats/userStatActions';
@@ -27,6 +28,15 @@ const WrapperContainer = styled.div`
     } */
 `;
 
+const BrowserWrapperContainer = styled.div`
+    display: -ms-grid;
+    display: grid;
+    -ms-grid-columns: 68% 32%;
+    grid-template-columns: 68% 32%;
+    /* justify-items: center; */
+    margin: 1em 0em;
+`;
+
 const MainContainer = styled.div`
     max-width: 100%;
     border-radius: 0.4em;
@@ -53,6 +63,13 @@ const NameContainer = styled.div`
     @media screen and (min-width: 411px) {
         width: 13rem;
     }
+`;
+
+const BrowserNameContainer = styled.div`
+    /* width: 10.5rem; */
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
 `;
 
 const NameHeader = styled.h2`
@@ -228,53 +245,108 @@ const StatCard = ({
 
     return (
         <>
-            <WrapperContainer>
-                <MainContainer>
-                    <NameContainer>
-                        <NameHeader>{name}</NameHeader>
-                        <DateContainer>
-                            <DateText>{reformatDate()}</DateText>
-                        </DateContainer>
-                    </NameContainer>
-                </MainContainer>
-                <ButtonContainer>
-                    <StyledButton onClick={openDeleteModal}>
-                        <TrashIcon />
-                    </StyledButton>
-                    <StyledButton onClick={openEditModal}>
-                        <EditIcon />
-                    </StyledButton>
-                    <StyledButton>
-                        <CaretIcon onClick={openRecordModal} />
-                    </StyledButton>
-                </ButtonContainer>
-            </WrapperContainer>
-            <StatCardModalDelete
-                openBoolean={stateDeleteModal}
-                closeFunction={closeDeleteModal}
-                buttonSubmitFunction={onDeleteConfirmation}
-                modalDesc="Are you sure you want to delete this stat? This
+            {isMobileOnly && (
+                <>
+                    <WrapperContainer>
+                        <MainContainer>
+                            <NameContainer>
+                                <NameHeader>{name}</NameHeader>
+                                <DateContainer>
+                                    <DateText>{reformatDate()}</DateText>
+                                </DateContainer>
+                            </NameContainer>
+                        </MainContainer>
+                        <ButtonContainer>
+                            <StyledButton onClick={openDeleteModal}>
+                                <TrashIcon />
+                            </StyledButton>
+                            <StyledButton onClick={openEditModal}>
+                                <EditIcon />
+                            </StyledButton>
+                            <StyledButton>
+                                <CaretIcon onClick={openRecordModal} />
+                            </StyledButton>
+                        </ButtonContainer>
+                    </WrapperContainer>
+                    <StatCardModalDelete
+                        openBoolean={stateDeleteModal}
+                        closeFunction={closeDeleteModal}
+                        buttonSubmitFunction={onDeleteConfirmation}
+                        modalDesc="Are you sure you want to delete this stat? This
                 process is irreversible, and all underlying records
                 will be deleted."
-                ariaLabel="stat card modal"
-                ariaDesc="modal for stat deletion"
-            />
-            <StatCardModalEdit
-                openBoolean={stateEditModal}
-                closeFunction={closeEditModal}
-                inputFunction={onEditInput}
-                buttonSubmitFunction={onEditConfirmation}
-                existingStatName={name}
-            />
-            <StatCardRecordModal
-                openBoolean={stateRecordModal}
-                closeFunction={closeRecordModal}
-                recordArray={records}
-                exerciseId={exerciseId}
-                addRecordSnackbar={addRecordSnackbar}
-                editRecordSnackbar={editRecordSnackbar}
-                deleteRecordSnackbar={deleteRecordSnackbar}
-            />
+                        ariaLabel="stat card modal"
+                        ariaDesc="modal for stat deletion"
+                    />
+                    <StatCardModalEdit
+                        openBoolean={stateEditModal}
+                        closeFunction={closeEditModal}
+                        inputFunction={onEditInput}
+                        buttonSubmitFunction={onEditConfirmation}
+                        existingStatName={name}
+                    />
+                    <StatCardRecordModal
+                        openBoolean={stateRecordModal}
+                        closeFunction={closeRecordModal}
+                        recordArray={records}
+                        exerciseId={exerciseId}
+                        addRecordSnackbar={addRecordSnackbar}
+                        editRecordSnackbar={editRecordSnackbar}
+                        deleteRecordSnackbar={deleteRecordSnackbar}
+                    />
+                </>
+            )}
+            {isBrowser && (
+                <>
+                    <BrowserWrapperContainer>
+                        <MainContainer>
+                            <BrowserNameContainer>
+                                <NameHeader>{name}</NameHeader>
+                                <DateContainer>
+                                    <DateText>{reformatDate()}</DateText>
+                                </DateContainer>
+                            </BrowserNameContainer>
+                        </MainContainer>
+                        <ButtonContainer>
+                            <StyledButton onClick={openDeleteModal}>
+                                <TrashIcon />
+                            </StyledButton>
+                            <StyledButton onClick={openEditModal}>
+                                <EditIcon />
+                            </StyledButton>
+                            <StyledButton>
+                                <CaretIcon onClick={openRecordModal} />
+                            </StyledButton>
+                        </ButtonContainer>
+                    </BrowserWrapperContainer>
+                    <StatCardModalDelete
+                        openBoolean={stateDeleteModal}
+                        closeFunction={closeDeleteModal}
+                        buttonSubmitFunction={onDeleteConfirmation}
+                        modalDesc="Are you sure you want to delete this stat? This
+                process is irreversible, and all underlying records
+                will be deleted."
+                        ariaLabel="stat card modal"
+                        ariaDesc="modal for stat deletion"
+                    />
+                    <StatCardModalEdit
+                        openBoolean={stateEditModal}
+                        closeFunction={closeEditModal}
+                        inputFunction={onEditInput}
+                        buttonSubmitFunction={onEditConfirmation}
+                        existingStatName={name}
+                    />
+                    <StatCardRecordModal
+                        openBoolean={stateRecordModal}
+                        closeFunction={closeRecordModal}
+                        recordArray={records}
+                        exerciseId={exerciseId}
+                        addRecordSnackbar={addRecordSnackbar}
+                        editRecordSnackbar={editRecordSnackbar}
+                        deleteRecordSnackbar={deleteRecordSnackbar}
+                    />
+                </>
+            )}
         </>
     );
 };
