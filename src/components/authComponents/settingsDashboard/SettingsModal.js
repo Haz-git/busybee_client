@@ -40,6 +40,11 @@ const SettingsModalDesc = styled(ModalDesc)`
     margin: 0.7em 0;
     white-space: normal;
     text-align: center;
+
+    @media only screen and (max-width: 320px) {
+        font-size: 0.95em;
+        margin: 0.5em 0;
+    }
 `;
 
 export const CustomConfirmButton = styled.button`
@@ -126,6 +131,10 @@ const Field = styled.input`
 
     &:focus {
         outline: none;
+    }
+
+    @media only screen and (max-width: 320px) {
+        font-size: 1.1em;
     }
 
     @media only screen and (min-width: 375px) {
@@ -237,7 +246,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userPasswordSubmissionHandler
                                             }
@@ -274,7 +283,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userEmailSubmissionHandler
                                             }
@@ -317,7 +326,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userDetailSubmissionHandler
                                             }
@@ -406,7 +415,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userPasswordSubmissionHandler
                                             }
@@ -443,7 +452,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userEmailSubmissionHandler
                                             }
@@ -486,7 +495,7 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save Changes"
+                                            buttonLabel="Save"
                                             onClickFunction={
                                                 userDetailSubmissionHandler
                                             }
