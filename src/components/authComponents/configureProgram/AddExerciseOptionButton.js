@@ -7,9 +7,15 @@ const ButtonLabel = styled.p`
     font-size: 1.8em;
     font-weight: 500;
     margin-left: 0.5em;
-    white-space: nowrap;
+    text-align: left;
+    /* white-space: nowrap; */
     color: #fdbc3d;
     text-shadow: 2px 2px 2px #14181f;
+
+    @media screen and (max-width: 360px) {
+        font-size: 1.5em;
+        font-weight: 700;
+    }
 `;
 
 const CustomExerciseSelector = styled.button`
@@ -32,6 +38,14 @@ const CustomExerciseSelector = styled.button`
     border-radius: 0.7em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.6) 0px 3px 12px;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 3px 12px;
+
+    @media screen and (max-width: 360px) {
+        padding: 1em 1.1em;
+    }
+
+    @media screen and (width: 375px) {
+        padding: 1.5em 1.5em;
+    }
 
     &:hover {
         background: #1c2330;

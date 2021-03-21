@@ -82,30 +82,50 @@ const RunIcon = styled(Run)`
     height: 4em;
     width: 4em;
     color: #fdbc3d;
+    @media screen and (max-width: 360px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const PyramidIcon = styled(Pyramid)`
     height: 4em;
     width: 4em;
     color: #fdbc3d;
+    @media screen and (max-width: 360px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const NewIcon = styled(NewReleases)`
     height: 4em;
     width: 4em;
     color: #fdbc3d;
+    @media screen and (max-width: 360px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const LogIcon = styled(Notepad)`
     height: 4em;
     width: 4em;
     color: #fdbc3d;
+    @media screen and (max-width: 360px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const MainLiftIcon = styled(Columns)`
     height: 4em;
     width: 4em;
     color: #fdbc3d;
+    @media screen and (max-width: 360px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const MainContainer = styled.div`
@@ -472,7 +492,7 @@ const ExerciseSelectorPage = ({
                         clickFunction={openAddNewExerciseModal}
                     />
                     <AddExerciseOptionButton
-                        buttonLabel="Select from Stat Log"
+                        buttonLabel="Select from Stats"
                         icon={<LogIcon />}
                         clickFunction={openStatModal}
                     />
