@@ -116,6 +116,12 @@ const BackButtonHeader = ({
     isPyramidRenderContent,
     onClickFunc,
 }) => {
+    const shortenHeaderName = () => {
+        if (headerName.length > 13) {
+            return `${headerName.slice(0, 13)}...`;
+        }
+    };
+
     return (
         <>
             {isMobileOnly && (
@@ -144,7 +150,7 @@ const BackButtonHeader = ({
                         )}
                     </Link>
                     <FlexWrapper>
-                        <MainHeader>{headerName}</MainHeader>
+                        <MainHeader>{shortenHeaderName()}</MainHeader>
                         <ExerciseHeader>{headerDesc}</ExerciseHeader>
                     </FlexWrapper>
                 </MainHeaderContainer>
