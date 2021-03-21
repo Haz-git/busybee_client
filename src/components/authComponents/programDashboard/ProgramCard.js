@@ -22,7 +22,7 @@ const PlayIcon = styled(PlayCircle)`
     width: 4em;
     color: ${({ theme }) => theme.PlayIcon};
 
-    @media screen and (min-width: 320px) {
+    @media screen and (max-width: 320px) {
         height: 3em;
         width: 3em;
     }
