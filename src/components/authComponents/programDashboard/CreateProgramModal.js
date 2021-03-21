@@ -161,7 +161,6 @@ const CreateProgramModal = ({
                                                 : 'Program name...'
                                         }
                                         onChange={titleFunction}
-                                        maxLength={20}
                                     />
                                 </InputDivider>
                                 <InputDivider>
@@ -215,7 +214,6 @@ const CreateProgramModal = ({
                                                 : 'Program name...'
                                         }
                                         onChange={titleFunction}
-                                        maxLength={20}
                                     />
                                 </InputDivider>
                                 <InputDivider>
