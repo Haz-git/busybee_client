@@ -323,14 +323,23 @@ const MainSettings = ({
 
     const handlePasswordSubmission = () => {
         if (newPassword === newPasswordConfirm) {
-            userEditPassword(
-                PASSWORD_CHANGE,
-                newPassword,
-                newPasswordConfirm,
-                currentPassword,
-                handlePasswordError,
-                showEditPasswordSnackBar
-            );
+            if (
+                newPassword !== '' &&
+                newPassword !== null &&
+                newPasswordConfirm !== '' &&
+                newPasswordConfirm !== null
+            ) {
+                userEditPassword(
+                    PASSWORD_CHANGE,
+                    newPassword,
+                    newPasswordConfirm,
+                    currentPassword,
+                    handlePasswordError,
+                    showEditPasswordSnackBar
+                );
+            } else {
+                alert('You cannot save an empty value as your password.');
+            }
 
             //Closing of the modal is handled by handle Password Error currently.
         } else {
