@@ -21,6 +21,11 @@ const PlayIcon = styled(PlayCircle)`
     height: 4em;
     width: 4em;
     color: ${({ theme }) => theme.PlayIcon};
+
+    @media screen and (min-width: 320px) {
+        height: 3em;
+        width: 3em;
+    }
 `;
 
 const CalendarIcon = styled(Calendar)`
@@ -89,6 +94,8 @@ const MainContainer = styled.div`
 
 const HeaderContainer = styled.div`
     text-align: left;
+    word-break: break-word;
+    max-width: 80%;
 `;
 
 const NameHeader = styled.h2`
