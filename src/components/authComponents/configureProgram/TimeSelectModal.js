@@ -22,6 +22,14 @@ const TimeSelectorModalContainer = styled(ModalContainer)`
     width: 92.5%;
 `;
 
+const TimeSelectorDesc = styled(ModalDesc)`
+    word-break: break-word;
+    text-align: center;
+    @media screen and (max-width: 320px) {
+        font-size: 1em;
+    }
+`;
+
 const InputContainer = styled.div`
     margin: 0.5em 0;
     display: flex;
@@ -69,7 +77,7 @@ const TimeSelectModal = ({
                     <Fade in={openBoolean}>
                         <TimeSelectorModalContainer>
                             <ModalHeader>{modalHeader}</ModalHeader>
-                            <ModalDesc>{modalDesc}</ModalDesc>
+                            <TimeSelectorDesc>{modalDesc}</TimeSelectorDesc>
                             <InputContainer>
                                 <InputDivider>
                                     <CustomNumberField
@@ -87,11 +95,11 @@ const TimeSelectModal = ({
                             <ButtonContainer>
                                 <CustomSaveButton
                                     buttonLabel="Save"
-                                    buttonSubmitFunction={buttonSubmitFunction}
+                                    onClickFunction={buttonSubmitFunction}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
-                                    buttonSubmitFunction={closeFunction}
+                                    onClickFunction={closeFunction}
                                 />
                             </ButtonContainer>
                         </TimeSelectorModalContainer>
@@ -113,7 +121,7 @@ const TimeSelectModal = ({
                     <Fade in={openBoolean}>
                         <BrowserModalContainer>
                             <ModalHeader>{modalHeader}</ModalHeader>
-                            <ModalDesc>{modalDesc}</ModalDesc>
+                            <TimeSelectorDesc>{modalDesc}</TimeSelectorDesc>
                             <InputContainer>
                                 <InputDivider>
                                     <CustomNumberField
