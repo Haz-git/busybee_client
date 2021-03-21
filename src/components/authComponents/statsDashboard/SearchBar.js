@@ -36,8 +36,8 @@ const StyledInput = styled.input`
     color: white;
     font-size: 1.1em;
     font-weight: 300;
-    border: 1px solid #fdbc3d;
-    box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 6px;
 
     &:focus {
         outline: none;
