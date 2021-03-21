@@ -40,24 +40,40 @@ const LogOutIcon = styled(LogOut)`
     width: 5em;
     margin-right: 0.4em;
     color: white;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const PasswordIcon = styled(LockPassword)`
     height: 5em;
     width: 5em;
     color: white;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const UserDetailIcon = styled(UserDetail)`
     height: 5em;
     width: 5em;
     color: white;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const EmailIcon = styled(Email)`
     height: 5em;
     width: 5em;
     color: white;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const CustomMuiAlert = withStyles(() => ({
@@ -107,19 +123,19 @@ const BrowserSecondarySettingsHeader = styled(MainHeader)`
 `;
 
 const SettingOptionsContainer = styled.div`
-    width: 19em;
-    margin: 0 auto;
+    width: 100%;
     margin-top: 2.5em;
     margin-bottom: 1.8em;
     display: -ms-grid;
+    padding: 1em 1em;
     display: grid;
-    justify-items: center;
+    /* justify-items: center; */
     justify-content: center;
-    -ms-grid-columns: 50% 0em 50%;
+    -ms-grid-columns: 50% 50%;
     grid-template-columns: 50% 50%;
-    grid-row: auto auto;
+    /* grid-row: auto auto; */
     grid-column-gap: 1em;
-    grid-row-gap: 1.4em;
+    grid-row-gap: 1em;
 `;
 
 const BrowserSettingOptionsContainer = styled.div`
