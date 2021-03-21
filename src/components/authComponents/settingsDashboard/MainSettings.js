@@ -281,9 +281,18 @@ const MainSettings = ({
 
     const handleEmailSubmission = () => {
         if (newEmailConfirm === newEmail) {
-            userEditEmail(EMAIL_CHANGE, newEmail, showEditEmailSnackBar);
+            if (
+                newEmail !== '' &&
+                newEmail !== null &&
+                newEmailConfirm !== '' &&
+                newEmailConfirm !== null
+            ) {
+                userEditEmail(EMAIL_CHANGE, newEmail, showEditEmailSnackBar);
 
-            setStateEditEmailModal(false);
+                setStateEditEmailModal(false);
+            } else {
+                alert('Your new email must not be empty values.');
+            }
         } else {
             alert('Your emails do not match!');
         }
