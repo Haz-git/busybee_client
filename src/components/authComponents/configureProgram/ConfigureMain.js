@@ -87,6 +87,11 @@ const ArrowIcon = styled(ArrowRightSquareFill)`
     height: 2.2em;
     width: 2.2em;
     color: ${({ theme }) => theme.AddMoreLabelC};
+
+    @media screen and (max-width: 320px) {
+        height: 1.8em;
+        width: 1.8em;
+    }
 `;
 
 const HideIcon = styled(ChevronsDown)`
@@ -552,6 +557,10 @@ const AddMoreLabel = styled.h3`
     font-weight: 700;
     color: ${({ theme }) => theme.AddMoreLabelC};
     white-space: nowrap;
+
+    @media screen and (max-width: 320px) {
+        font-size: 0.9em;
+    }
 `;
 
 export const LoadingContainer = styled.div`
