@@ -15,12 +15,11 @@ const MainContainer = styled.button`
     flex-direction: column;
     justify-content: center;
     border-radius: 0.4em;
-    /* width: 4em; */
-    width: 12em;
-    height: 12em;
-    border: 1px solid #fdbc3d;
-    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    padding: 0.8em 0.8em;
+    width: 100%;
+    height: 100%;
+    border: none;
+    box-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    padding: 1em 1em;
     background: #1a222f;
     cursor: pointer;
     transition: 0.1s linear;
@@ -31,11 +30,6 @@ const MainContainer = styled.button`
 
     &:focus {
         outline: none;
-    }
-
-    @media screen and (min-width: 414px) {
-        height: 14em;
-        width: 14em;
     }
 `;
 
@@ -82,6 +76,10 @@ const TextLabel = styled.h2`
     font-size: 1.2em;
     color: white;
     text-shadow: rgba(0, 0, 0, 0.8) 0px 2px 4px;
+
+    @media screen and (max-width: 320px) {
+        font-size: 1em;
+    }
 
     @media screen and (min-width: 414px) {
         font-size: 1.45em;
