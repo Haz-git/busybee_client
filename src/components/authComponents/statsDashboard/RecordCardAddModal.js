@@ -8,11 +8,9 @@ import styled from 'styled-components';
 import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
-import Button from '@material-ui/core/Button';
 import CustomNumberField from '../dashboardComponents/CustomNumberField';
 import CustomTextField from '../dashboardComponents/CustomTextField';
 import CustomSelector from '../dashboardComponents/CustomSelector';
-import { withStyles } from '@material-ui/core/styles';
 import RecordCard from './RecordCard';
 
 import {
