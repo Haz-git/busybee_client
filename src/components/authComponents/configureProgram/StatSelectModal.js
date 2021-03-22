@@ -28,6 +28,10 @@ const AddRecordModalHeader = styled(ModalHeader)`
     font-size: 1.8em;
     font-weight: 900;
     margin: 0.5em 0;
+
+    @media only screen and (max-width: 320px) {
+        font-size: 1.4em;
+    }
 `;
 
 const InputContainer = styled.div`
