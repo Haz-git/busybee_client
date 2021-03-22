@@ -55,8 +55,8 @@ const NameContainer = styled.div`
     text-align: left;
     white-space: normal;
     word-break: break-word;
-    @media screen and (max-width: 320px) {
-        width: 9rem;
+    @media screen and (min-width: 320px) {
+        width: 8.9rem;
     }
 
     @media screen and (min-width: 360px) {
