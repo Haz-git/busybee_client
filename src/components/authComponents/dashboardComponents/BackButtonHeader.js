@@ -117,8 +117,18 @@ const BackButtonHeader = ({
     onClickFunc,
 }) => {
     const shortenHeaderName = () => {
-        if (headerName.length > 13) {
-            return `${headerName.slice(0, 13)}...`;
+        if (isMobileOnly) {
+            if (headerName.length > 13) {
+                return `${headerName.slice(0, 13)}...`;
+            } else {
+                return headerName;
+            }
+        } else {
+            if (headerName.length > 28) {
+                return `${headerName.slice(0, 28)}...`;
+            } else {
+                return headerName;
+            }
         }
     };
 
@@ -181,7 +191,9 @@ const BackButtonHeader = ({
                         )}
                     </Link>
                     <FlexWrapper>
-                        <BrowserMainHeader>{headerName}</BrowserMainHeader>
+                        <BrowserMainHeader>
+                            {shortenHeaderName()}
+                        </BrowserMainHeader>
                         <BrowserExerciseHeader>
                             {headerDesc}
                         </BrowserExerciseHeader>
