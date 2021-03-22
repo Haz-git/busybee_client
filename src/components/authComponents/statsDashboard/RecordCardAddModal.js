@@ -30,6 +30,9 @@ const AddRecordModalHeader = styled(ModalHeader)`
     font-size: 1.8em;
     font-weight: 900;
     margin: 0.5em 0;
+    @media only screen and (max-width: 320px) {
+        font-size: 1.4em;
+    }
 `;
 
 const InputContainer = styled.div`
@@ -55,13 +58,6 @@ const ButtonContainer = styled.div`
     justify-content: center;
     grid-column-gap: 0.5em;
 `;
-
-const StyledButton = withStyles({
-    root: {
-        textTransform: 'capitalize',
-        fontSize: '1.3em',
-    },
-})(Button);
 
 const RecordCardAddModal = ({
     ariaLab,
