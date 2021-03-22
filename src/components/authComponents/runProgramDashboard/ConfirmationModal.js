@@ -60,6 +60,21 @@ const ConfirmationModal = ({
     isFormatted,
     hasProgramExercises,
 }) => {
+    const shortenModalHeaderName = () => {
+        if (isMobileOnly) {
+            if (modalHeader.length > 13) {
+                return `${modalHeader.slice(0, 13)}...`;
+            } else {
+                return modalHeader;
+            }
+        } else {
+            if (modalHeader.length > 28) {
+                return `${modalHeader.slice(0, 28)}...`;
+            } else {
+                return modalHeader;
+            }
+        }
+    };
     return (
         <>
             {isMobileOnly && (
@@ -80,7 +95,7 @@ const ConfirmationModal = ({
                                 <>
                                     <ConfirmationModalHeader>
                                         {isFormatted === 'true'
-                                            ? modalHeader
+                                            ? `Initiate: ${shortenModalHeaderName()}`
                                             : 'Error: Unformatted Program'}
                                     </ConfirmationModalHeader>
                                     <ConfirmationModalDesc>
@@ -117,7 +132,7 @@ const ConfirmationModal = ({
                                                     }
                                                 />
                                                 <CustomCancelButton
-                                                    buttonLabel="Nevermind.."
+                                                    buttonLabel="Return"
                                                     onClickFunction={
                                                         closeFunction
                                                     }
@@ -153,7 +168,7 @@ const ConfirmationModal = ({
                                 <>
                                     <ConfirmationModalHeader>
                                         {isFormatted === 'true'
-                                            ? modalHeader
+                                            ? `Initiate: ${shortenModalHeaderName()}`
                                             : 'Error: Unformatted Program'}
                                     </ConfirmationModalHeader>
                                     <ConfirmationModalDesc>
@@ -190,7 +205,7 @@ const ConfirmationModal = ({
                                                     }
                                                 />
                                                 <CustomCancelButton
-                                                    buttonLabel="Nevermind.."
+                                                    buttonLabel="Return"
                                                     onClickFunction={
                                                         closeFunction
                                                     }
