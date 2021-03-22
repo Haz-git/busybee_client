@@ -362,7 +362,7 @@ const PyramidMain = ({
             <AddPyramidSetModal
                 openBoolean={statePyramidModal}
                 closeFunction={closePyramidModal}
-                modalDesc="It appears that some of the fields for a set was left empty. Please fill out all of the fields before saving!"
+                modalDesc="Some fields were left empty. Please fill out all of the fields before saving!"
                 modalHeader="Oops, Sorry!"
                 ariaLabel="Modal informing user that a number field is empty and cannot add pyramid set."
                 ariaDesc="Modal informing user that a number field is empty and cannot add pyramid set."
