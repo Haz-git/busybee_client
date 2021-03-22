@@ -8,7 +8,7 @@ import styled from 'styled-components';
 
 const MainHeaderContainer = styled.div`
     display: flex;
-    align-items: stretch;
+    align-items: center;
     justify-content: flex-start;
     text-align: left;
     position: sticky;
@@ -78,6 +78,7 @@ const BackButton = styled.button`
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
     cursor: pointer;
     transition: all 0.8s ease;
+    padding: 0.7em 0em;
 
     &:hover {
         outline: none;
