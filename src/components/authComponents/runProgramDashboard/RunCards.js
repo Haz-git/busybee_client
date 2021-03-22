@@ -43,18 +43,30 @@ const CoffeeIcon = styled(Coffee)`
     width: 3em;
     color: white;
     margin-right: 1em;
+    @media screen and (max-width: 320px) {
+        height: 2.3em;
+        width: 2.3em;
+    }
 `;
 
 const ArrowLeft = styled(ArrowLongLeft)`
     height: 6em;
     width: 6em;
     color: #fdbc3d;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const ArrowRight = styled(ArrowLongRight)`
     height: 6em;
     width: 6em;
     color: #fdbc3d;
+    @media screen and (max-width: 320px) {
+        height: 4em;
+        width: 4em;
+    }
 `;
 
 const ExerciseIcon = styled(Running)`
@@ -62,6 +74,10 @@ const ExerciseIcon = styled(Running)`
     width: 3em;
     color: white;
     margin-right: 1em;
+    @media screen and (max-width: 320px) {
+        height: 2.3em;
+        width: 2.3em;
+    }
 `;
 
 const MainContainer = styled.div`
@@ -74,11 +90,13 @@ const MainContainer = styled.div`
 `;
 
 const CardContainer = styled.div`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: flex-start;
-    padding: 0em 1em;
+    /* padding: 1em 1em; */
+    margin: 0 1em;
 `;
 
 const ExerciseContainer = styled.div`
@@ -100,6 +118,9 @@ const ItemLabel = styled.h3`
     font-weight: 900;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    @media screen and (max-width: 320px) {
+        font-size: 1.2em;
+    }
 `;
 
 const ExerciseValue = styled.h3`
@@ -109,12 +130,16 @@ const ExerciseValue = styled.h3`
     font-weight: 900;
     color: white;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+
+    @media screen and (max-width: 320px) {
+        font-size: 1.3em;
+    }
 `;
 
 const RepsContainer = styled.div`
     padding-left: 1em;
-    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px;
     background: #080f1a;
+    box-shadow: rgba(0, 0, 0, 0.7) 0px 3px 5px;
     width: 100%;
     height: 48vh;
     animation: ${carouselMovement} 0.7s ease-in-out;
@@ -158,6 +183,9 @@ const RepsValue = styled.h3`
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
     padding: 0;
+    @media screen and (max-width: 320px) {
+        font-size: 2.6em;
+    }
 `;
 
 const WeightValue = styled.h3`
@@ -166,6 +194,9 @@ const WeightValue = styled.h3`
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    @media screen and (max-width: 320px) {
+        font-size: 2.6em;
+    }
 `;
 
 const SetsValue = styled.h3`
@@ -174,6 +205,9 @@ const SetsValue = styled.h3`
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+    @media screen and (max-width: 320px) {
+        font-size: 2.6em;
+    }
 `;
 
 const ButtonContainer = styled.div`
@@ -246,6 +280,10 @@ const StyledCountdown = styled(Countdown)`
     font-weight: 900;
     color: #046184;
     text-shadow: rgba(0, 0, 0, 1) 0px 3px 5px;
+
+    @media screen and (max-width: 320px) {
+        font-size: 2.2em;
+    }
 `;
 
 const PrevExerciseLabel = styled.h4`
