@@ -190,8 +190,6 @@ const ButtonContainer = styled.div`
 
 const StatCardContainer = styled.div`
     margin-bottom: 3em;
-    /* width: 100%;
-    max-width: 100vw; */
 `;
 
 const BrowserStatCardContainer = styled.div`

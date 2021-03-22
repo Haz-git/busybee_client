@@ -20,7 +20,9 @@ const WrapperContainer = styled.div`
     display: grid;
     -ms-grid-columns: auto auto;
     grid-template-columns: auto auto;
-    justify-items: center;
+    justify-items: stretch;
+    justify-content: center;
+    column-gap: 0.1em;
     margin: 1em 0em;
     /* @media screen and (max-width: 320px) {
         -ms-grid-columns: 60% 40%;
@@ -41,9 +43,9 @@ const MainContainer = styled.div`
     max-width: 100%;
     border-radius: 0.4em;
     padding: 0.75em 0.5em;
-    display: flex;
-    align-items: center;
-    /* justify-content: space-between; */
+    /* display: flex;
+    align-items: center; */
+
     background: ${({ theme }) => theme.StatCardBG};
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
 `;
@@ -53,7 +55,7 @@ const NameContainer = styled.div`
     text-align: left;
     white-space: normal;
     word-break: break-word;
-    @media screen and (min-width: 320px) {
+    @media screen and (max-width: 320px) {
         width: 9rem;
     }
 
@@ -100,7 +102,9 @@ const DateText = styled.h2`
 `;
 
 const ButtonContainer = styled.div`
-    /* white-space: nowrap; */
+    display: flex;
+    align-items: center;
+    justify-items: center;
 `;
 
 const TrashIcon = styled(Trash)`
