@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 import SetConfig from './SetConfig';
 import { v4 as uuid } from 'uuid';
 
@@ -24,6 +25,14 @@ const MainContainer = styled.div`
 
 const ConfigObjectContainer = styled.div`
     /* padding-bottom: 4.5em; */
+`;
+
+const BrowserConfigObjectContainer = styled.div`
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    grid-column-gap: 1em;
+    justify-content: center;
+    align-items: start;
 `;
 
 const PyramidSecondStep = ({ currentStep, valueSet, setObjectHandler }) => {
@@ -176,9 +185,16 @@ const PyramidSecondStep = ({ currentStep, valueSet, setObjectHandler }) => {
         <>
             {currentStep !== 2 ? null : (
                 <MainContainer>
-                    <ConfigObjectContainer>
-                        {renderSetConfigObjects()}
-                    </ConfigObjectContainer>
+                    {isMobileOnly && (
+                        <ConfigObjectContainer>
+                            {renderSetConfigObjects()}
+                        </ConfigObjectContainer>
+                    )}
+                    {isBrowser && (
+                        <BrowserConfigObjectContainer>
+                            {renderSetConfigObjects()}
+                        </BrowserConfigObjectContainer>
+                    )}
                 </MainContainer>
             )}
         </>
