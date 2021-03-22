@@ -8,6 +8,8 @@ import { connect } from 'react-redux';
 import { addNewPyramidSet } from '../../../../redux/userProgramExercises/programExerciseActions';
 import AddPyramidSetModal from './AddPyramidSetModal';
 import { PYRAMID_PROGRAM_EXERCISE } from '../programExerciseConstants';
+import CustomSaveButton from '../../dashboardComponents/CustomSaveButton';
+import CustomCancelButton from '../../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled, { keyframes } from 'styled-components';
@@ -95,52 +97,17 @@ const ButtonContainer = styled.div`
     transform: translate(-50%, 0);
 `;
 
-const NextButton = styled.button`
+const AnimatedButtonContainer = styled.div`
     animation: ${fadeIn} 0.2s linear;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 2em;
-    font-family: 'Lato';
-    font-size: 1.2em;
-    background: #096b27;
-    color: white;
-    padding: 0.8em 2.6em;
-    font-weight: 400;
-    cursor: pointer;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        outline: none;
-        background: #62c267;
-    }
 `;
 
-const PreviousButton = styled.button`
+const AnimatedColumnButtonContainer = styled.div`
     animation: ${fadeIn} 0.2s linear;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0.5em;
-    font-family: 'Lato';
-    font-size: 0.85em;
-    background: #2c3243;
-    color: white;
-    padding: 0.8em 1em;
-    font-weight: 400;
-    margin: 0 0.3em;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        outline: none;
-        background: #2c3243;
-    }
+    display: grid;
+    grid-template-columns: 50% 50%;
+    column-gap: 0.2em;
+    align-items: center;
+    justify-content: center;
 `;
 
 const BrowserPreviousButton = styled.button`
@@ -165,30 +132,6 @@ const BrowserPreviousButton = styled.button`
     &:hover {
         outline: none;
         background: #464f67;
-    }
-`;
-
-const SubmitButton = styled.button`
-    animation: ${fadeIn} 0.2s linear;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0.5em;
-    font-family: 'Lato';
-    font-size: 0.85em;
-    background: #096b27;
-    color: white;
-    padding: 0.8em 1em;
-    font-weight: 400;
-    margin: 0 0.3em;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        outline: none;
-        background: #096b27;
     }
 `;
 
@@ -218,19 +161,20 @@ const BrowserSubmitButton = styled.button`
 `;
 
 const PreviousButtonContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
     position: fixed;
     top: 5.98em;
     left: 50%;
     width: 100%;
     max-width: 100%;
     transform: translate(-50%, 0);
-    white-space: nowrap;
+    /* white-space: nowrap; */
     padding: 1em 1em;
     background: ${({ theme }) => theme.background};
     z-index: 99 !important;
+
+    @media only screen and (max-width: 320px) {
+        padding: 0.35em 1em;
+    }
 `;
 
 const BrowserPreviousButtonContainer = styled.div`
@@ -351,9 +295,12 @@ const PyramidMain = ({
     const renderNextButton = () => {
         if (currentStep === 1 && exercise.trim() !== '' && sets.trim() !== '') {
             return (
-                <NextButton onClick={nextFunction}>
-                    Configure Reps and Weight
-                </NextButton>
+                <AnimatedButtonContainer>
+                    <CustomSaveButton
+                        onClickFunction={nextFunction}
+                        buttonLabel="Configure Reps and Weight"
+                    />
+                </AnimatedButtonContainer>
             );
         } else {
             return null;
@@ -364,18 +311,20 @@ const PyramidMain = ({
         if (currentStep === 2) {
             if (isMobileOnly) {
                 return (
-                    <>
-                        <PreviousButton onClick={prevFunction}>
-                            Return To Name and Sets
-                        </PreviousButton>
-                        <SubmitButton onClick={checkUserFieldsBeforeSubmission}>
-                            Save Pyramid Set
-                        </SubmitButton>
-                    </>
+                    <AnimatedColumnButtonContainer>
+                        <CustomCancelButton
+                            onClickFunction={prevFunction}
+                            buttonLabel="Re-Config"
+                        />
+                        <CustomSaveButton
+                            onClickFunction={checkUserFieldsBeforeSubmission}
+                            buttonLabel="Save"
+                        />
+                    </AnimatedColumnButtonContainer>
                 );
             } else if (isBrowser) {
                 return (
-                    <>
+                    <AnimatedButtonContainer>
                         <BrowserPreviousButton onClick={prevFunction}>
                             Return To Name and Sets
                         </BrowserPreviousButton>
@@ -384,7 +333,7 @@ const PyramidMain = ({
                         >
                             Save Pyramid Set
                         </BrowserSubmitButton>
-                    </>
+                    </AnimatedButtonContainer>
                 );
             }
         } else {
@@ -439,7 +388,7 @@ const PyramidMain = ({
                         isBrowser ? <BrowserBackIcon /> : <BackIcon />
                     }
                     headerName={name}
-                    headerDesc={`Create Your Pyramid Set`}
+                    headerDesc={`Create Pyramid Set`}
                     isPyramid={true}
                     isPyramidRenderContent={
                         isBrowser && (
