@@ -18,8 +18,8 @@ const StyledSearchIcon = styled(Search)`
     position: absolute;
     left: 0.4em;
     color: rgb(255, 169, 0);
-    height: 2.6em;
-    width: 2.6em;
+    height: 2em;
+    width: 2em;
 `;
 
 const StyledInput = styled.input`
