@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import BackButtonHeader from '../../dashboardComponents/BackButtonHeader';
-import { Link } from 'react-router-dom';
 import PyramidFirstStep from './PyramidFirstStep';
 import PyramidSecondStep from './PyramidSecondStep';
 import { connect } from 'react-redux';
@@ -108,56 +107,6 @@ const AnimatedColumnButtonContainer = styled.div`
     column-gap: 0.2em;
     align-items: center;
     justify-content: center;
-`;
-
-const BrowserPreviousButton = styled.button`
-    animation: ${fadeIn} 0.2s linear;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0.5em;
-    font-family: 'Lato';
-    font-size: 1.2em;
-    background: #2c3243;
-    color: white;
-    padding: 0.8em 0.4em;
-    font-weight: 400;
-    margin: 0 0.15em;
-    cursor: pointer;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        outline: none;
-        background: #464f67;
-    }
-`;
-
-const BrowserSubmitButton = styled.button`
-    animation: ${fadeIn} 0.2s linear;
-    border: none;
-    width: 100%;
-    max-width: 100%;
-    border-radius: 0.5em;
-    font-family: 'Lato';
-    font-size: 1.2em;
-    background: #096b27;
-    color: white;
-    padding: 0.8em 0.4em;
-    font-weight: 400;
-    margin: 0 0.15em;
-    cursor: pointer;
-
-    &:focus {
-        outline: none;
-    }
-
-    &:hover {
-        outline: none;
-        background: #1c833b;
-    }
 `;
 
 const PreviousButtonContainer = styled.div`
@@ -324,16 +273,16 @@ const PyramidMain = ({
                 );
             } else if (isBrowser) {
                 return (
-                    <AnimatedButtonContainer>
-                        <BrowserPreviousButton onClick={prevFunction}>
-                            Return To Name and Sets
-                        </BrowserPreviousButton>
-                        <BrowserSubmitButton
-                            onClick={checkUserFieldsBeforeSubmission}
-                        >
-                            Save Pyramid Set
-                        </BrowserSubmitButton>
-                    </AnimatedButtonContainer>
+                    <AnimatedColumnButtonContainer>
+                        <CustomCancelButton
+                            onClickFunction={prevFunction}
+                            buttonLabel="Reconfigure"
+                        />
+                        <CustomSaveButton
+                            onClickFunction={checkUserFieldsBeforeSubmission}
+                            buttonLabel="Save Pyramid Set"
+                        />
+                    </AnimatedColumnButtonContainer>
                 );
             }
         } else {
