@@ -197,7 +197,7 @@ const MainRunProgram = ({
                 ariaLabel="Modal for program completion"
                 ariaDesc="Modal for program completion"
                 modalHeader="Well Done!"
-                modalDesc={`Congratulations! You've finished the program: ${name}`}
+                modalDesc={`Congratulations! You've finished the program!`}
                 buttonSubmitFunction={finishSubmit}
             />
             <MainContainer>
