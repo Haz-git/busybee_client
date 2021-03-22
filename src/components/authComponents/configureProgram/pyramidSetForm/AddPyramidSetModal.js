@@ -1,4 +1,6 @@
 import React from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
+import CustomCancelButton from '../../dashboardComponents/CustomCancelButton';
 
 //Styles:
 import styled from 'styled-components';
@@ -9,6 +11,7 @@ import Button from '@material-ui/core/Button';
 import { withStyles } from '@material-ui/core/styles';
 
 import {
+    BrowserModalContainer,
     ModalContainer,
     ModalHeader,
     ModalDesc,
@@ -49,33 +52,62 @@ const AddPyramidSetModal = ({
 }) => {
     return (
         <>
-            <Modal
-                aria-labelledby={ariaLabel}
-                aria-describedby={ariaDesc}
-                open={openBoolean}
-                onClose={closeFunction}
-                closeAfterTransition
-                BackdropComponent={Backdrop}
-                BackdropProps={{
-                    timeout: 500,
-                }}
-            >
-                <Fade in={openBoolean}>
-                    <PyramidModalContainer>
-                        <PyramidModalHeader>{modalHeader}</PyramidModalHeader>
-                        <PyramidModalDesc>{modalDesc}</PyramidModalDesc>
-                        <ButtonContainer>
-                            <StyledButton
-                                size="large"
-                                variant="contained"
-                                onClick={closeFunction}
-                            >
-                                Cancel
-                            </StyledButton>
-                        </ButtonContainer>
-                    </PyramidModalContainer>
-                </Fade>
-            </Modal>
+            {isMobileOnly && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <PyramidModalContainer>
+                            <PyramidModalHeader>
+                                {modalHeader}
+                            </PyramidModalHeader>
+                            <PyramidModalDesc>{modalDesc}</PyramidModalDesc>
+                            <ButtonContainer>
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
+                            </ButtonContainer>
+                        </PyramidModalContainer>
+                    </Fade>
+                </Modal>
+            )}
+            {isBrowser && (
+                <Modal
+                    aria-labelledby={ariaLabel}
+                    aria-describedby={ariaDesc}
+                    open={openBoolean}
+                    onClose={closeFunction}
+                    closeAfterTransition
+                    BackdropComponent={Backdrop}
+                    BackdropProps={{
+                        timeout: 500,
+                    }}
+                >
+                    <Fade in={openBoolean}>
+                        <BrowserModalContainer>
+                            <PyramidModalHeader>
+                                {modalHeader}
+                            </PyramidModalHeader>
+                            <PyramidModalDesc>{modalDesc}</PyramidModalDesc>
+                            <ButtonContainer>
+                                <CustomCancelButton
+                                    buttonLabel="Cancel"
+                                    onClickFunction={closeFunction}
+                                />
+                            </ButtonContainer>
+                        </BrowserModalContainer>
+                    </Fade>
+                </Modal>
+            )}
         </>
     );
 };
