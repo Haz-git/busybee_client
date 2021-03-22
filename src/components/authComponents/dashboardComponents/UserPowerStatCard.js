@@ -256,11 +256,13 @@ export const BrowserModalContainer = styled.div`
 `;
 
 export const ModalHeader = styled.h2`
-    white-space: nowrap;
     font-size: 1.5em;
     font-weight: 900;
     color: ${({ theme }) => theme.ModalHeader};
     font-family: 'Lato', 'Nunito', sans-serif, helvetica;
+    @media only screen and (max-width: 320px) {
+        font-size: 1.2em;
+    }
 `;
 
 const ModalPicture = styled.img`
