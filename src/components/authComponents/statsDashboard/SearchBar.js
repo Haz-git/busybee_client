@@ -29,7 +29,7 @@ const StyledInput = styled.input`
     width: 100%;
     padding-top: 0;
     padding-bottom: 0;
-    padding-left: 3.1em;
+    padding-left: 2.4em;
     padding-right: 1em;
     outline: 0;
     background: #27303f;
