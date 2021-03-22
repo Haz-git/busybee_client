@@ -90,7 +90,6 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
     white-space: nowrap;
-    /* padding: 1em 1em; */
     bottom: 5.5em;
     left: 50%;
     transform: translate(-50%, 0);
@@ -116,26 +115,16 @@ const PreviousButtonContainer = styled.div`
     width: 100%;
     max-width: 100%;
     transform: translate(-50%, 0);
-    /* white-space: nowrap; */
     padding: 1em 1em;
     background: ${({ theme }) => theme.background};
     z-index: 99 !important;
 
     @media only screen and (max-width: 320px) {
-        padding: 0.35em 1em;
+        padding: 0.45em 1em;
     }
 `;
 
 const BrowserPreviousButtonContainer = styled.div`
-    /* display: flex;
-    align-items: center;
-    justify-content: center; */
-    /* position: fixed;
-    top: 6.7em;
-    left: 50%;
-    width: 100%; */
-
-    /* transform: translate(-50%, 0); */
     white-space: nowrap;
     padding: 0.3em 0em;
     background: ${({ theme }) => theme.background};
