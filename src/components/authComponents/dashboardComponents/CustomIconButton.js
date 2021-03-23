@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 const StyledButtonBase = withStyles({
     root: {
+        height: '100%',
         width: '100%',
         maxWidth: '100%',
     },
