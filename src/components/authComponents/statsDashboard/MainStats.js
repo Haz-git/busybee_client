@@ -121,7 +121,6 @@ const MainContainer = styled.div`
     display: block;
     text-align: center;
     padding: 0.5em 0.5em;
-    /* overflow-y: scroll; */
 `;
 
 const SearchBarContainer = styled.div`
@@ -140,6 +139,7 @@ const FlexWrapper = styled.div`
     padding: 0.5em 0em;
     width: 100%;
     max-width: 100%;
+    z-index: 100;
 `;
 
 const BrowserFlexWrapper = styled.div`
@@ -148,8 +148,6 @@ const BrowserFlexWrapper = styled.div`
     position: sticky;
     display: grid;
     grid-template-columns: 87% 13%;
-    /* align-items: center;
-    justify-content: left; */
     background: ${({ theme }) => theme.background};
     padding: 0.5em 0;
 `;
@@ -202,9 +200,7 @@ const BrowserStatCardContainer = styled.div`
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-column-gap: 1em;
-    /* align-items: center; */
     justify-content: space-between;
-    /* justify-items: center; */
     align-items: stretch;
 `;
 
