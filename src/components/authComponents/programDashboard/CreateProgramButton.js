@@ -9,6 +9,7 @@ import { Create } from '@styled-icons/ionicons-solid/Create';
 const CreateIcon = styled(Create)`
     height: 1.25em;
     width: 1.25em;
+    margin-bottom: 0.3em;
 `;
 
 const CustomButton = withStyles({
@@ -20,8 +21,8 @@ const CustomButton = withStyles({
         textTransform: 'capitalize',
         color: '#fdbc3d',
         fontFamily: 'Nunito, Lato, sans-serif',
-        fontWeight: '400',
-        fontSize: '1.2em',
+        fontWeight: '800',
+        fontSize: '1.175em',
         padding: '.5em 1em',
         borderRadius: '.3em',
         marginLeft: '.5em',
