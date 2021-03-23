@@ -193,7 +193,7 @@ const ButtonContainer = styled.div`
 `;
 
 const StatCardContainer = styled.div`
-    margin-bottom: 3em;
+    margin-bottom: 4em;
 `;
 
 const BrowserStatCardContainer = styled.div`
