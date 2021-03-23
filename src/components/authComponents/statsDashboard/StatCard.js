@@ -14,44 +14,52 @@ import styled from 'styled-components';
 import { Trash } from '@styled-icons/typicons/Trash';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
+import { Database } from '@styled-icons/remix-line/Database';
 
 const WrapperContainer = styled.div`
-    display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: auto auto;
-    grid-template-columns: auto auto;
-    justify-items: stretch;
-    justify-content: center;
-    column-gap: 0.1em;
-    margin: 1em 0em;
-    /* @media screen and (max-width: 320px) {
-        -ms-grid-columns: 60% 40%;
-        grid-template-columns: 60% 40%;
-    } */
+    display: block;
+    margin: 1em 0;
+    z-index: 10;
+    padding: 0 0.4em;
+    transition: all 0.2s ease;
 `;
 
 const BrowserWrapperContainer = styled.div`
-    display: -ms-grid;
+    /* display: -ms-grid;
     display: grid;
     -ms-grid-columns: 68% 32%;
     grid-template-columns: 68% 32%;
-    /* justify-items: center; */
-    margin: 1em 0em;
+    margin: 1em 0em; */
+    display: block;
+    margin: 1em 0;
+    z-index: 10;
+    padding: 0 0.4em;
+    transition: all 0.2s ease;
 `;
 
 const MainContainer = styled.div`
+    position: relative;
     max-width: 100%;
     border-radius: 0.4em;
-    padding: 0.75em 0.5em;
-    /* display: flex;
-    align-items: center; */
+    padding-top: 0.75em;
+    padding-bottom: 0.75em;
+    padding-left: 0.5em;
+    padding-right: 2.6em;
+    z-index: 5;
 
     background: ${({ theme }) => theme.StatCardBG};
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
 `;
 
+const DropdownContainer = styled.div`
+    position: absolute;
+    right: -0.2rem;
+    top: 0;
+    height: 100%;
+`;
+
 const NameContainer = styled.div`
-    width: 10.5rem;
+    /* width: 10.5rem;
     text-align: left;
     white-space: normal;
     word-break: break-word;
@@ -64,7 +72,13 @@ const NameContainer = styled.div`
     }
     @media screen and (min-width: 411px) {
         width: 13rem;
-    }
+    } */
+
+    width: 100%;
+    max-width: 100%;
+    text-align: left;
+    white-space: normal;
+    word-break: break-word;
 `;
 
 const BrowserNameContainer = styled.div`
@@ -102,9 +116,15 @@ const DateText = styled.h2`
 `;
 
 const ButtonContainer = styled.div`
-    display: flex;
+    display: grid;
+    grid-template-columns: 33.3% 33.3% 33.3%;
+    column-gap: 0.2em;
     align-items: center;
     justify-items: center;
+    padding: 0 0.2em;
+    transition: all 0.25s ease-in-out;
+    transform: translateY(-2.5em);
+    max-height: 0em; //3em;
 `;
 
 const TrashIcon = styled(Trash)`
@@ -137,14 +157,14 @@ const EditIcon = styled(Pencil)`
     } */
 `;
 
-const CaretIcon = styled(ChevronDown)`
-    height: 3em;
-    width: 3em;
+const DatabaseIcon = styled(Database)`
+    height: 2.7em;
+    width: 2.7em;
     color: ${({ theme }) => theme.CaretIcon};
 
     @media screen and (min-width: 414px) {
-        height: 3.5em;
-        width: 3.5em;
+        height: 3.2em;
+        width: 3.2em;
     }
     /* @media screen and (max-width: 320px) {
         height: 2.5em;
@@ -152,15 +172,47 @@ const CaretIcon = styled(ChevronDown)`
     } */
 `;
 
+const CaretIcon = styled(ChevronDown)`
+    height: 3em;
+    width: 3em;
+    color: ${({ theme }) => theme.CaretIcon};
+    transition: all 0.25s ease-in-out;
+
+    @media screen and (min-width: 414px) {
+        height: 3.5em;
+        width: 3.5em;
+    }
+`;
+
 const StyledButton = styled.button`
     margin: 0 0.2em;
     border: none;
     height: 100%;
+    width: 100%;
     padding: 0.5em 0.1em;
     border-radius: 0.5em;
+    background: ${({ theme }) => theme.LowerContainerBG};
+    color: ${({ theme }) => theme.StatCardHeader};
+
+    cursor: pointer;
+
+    &:focus {
+        outline: none;
+    }
+`;
+
+const StyledDropdownButton = styled.button`
+    margin: 0 0.2em;
+    border: none;
+    height: 100%;
+    width: 100%;
+    padding: 0.5em 0.1em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
     background: ${({ theme }) => theme.ButtonBG};
     color: ${({ theme }) => theme.StatCardHeader};
     box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    cursor: pointer;
 
     &:focus {
         outline: none;
@@ -180,6 +232,9 @@ const StatCard = ({
     editRecordSnackbar,
     deleteRecordSnackbar,
 }) => {
+    //State for dropdown:
+
+    const [stateDropdown, setStateDropdown] = useState(false);
     //States for modals:
 
     //Deletion Modal:
@@ -201,6 +256,12 @@ const StatCard = ({
         } else {
             return null;
         }
+    };
+
+    //Controller function for stateDropdown:
+
+    const enableDropdownMenu = () => {
+        setStateDropdown(!stateDropdown);
     };
 
     //Controller Functions for Deletion Modal:
@@ -259,8 +320,44 @@ const StatCard = ({
                                     <DateText>{reformatDate()}</DateText>
                                 </DateContainer>
                             </NameContainer>
+                            <DropdownContainer>
+                                <StyledDropdownButton
+                                    onClick={enableDropdownMenu}
+                                >
+                                    <CaretIcon
+                                        style={
+                                            stateDropdown === false
+                                                ? {
+                                                      transformOrigin: 'center',
+                                                      transform: 'rotate(0deg)',
+                                                  }
+                                                : {
+                                                      transformOrigin: 'center',
+                                                      transform:
+                                                          'rotate(180deg)',
+                                                  }
+                                        }
+                                    />
+                                </StyledDropdownButton>
+                            </DropdownContainer>
                         </MainContainer>
-                        <ButtonContainer>
+                        <ButtonContainer
+                            style={
+                                stateDropdown === false
+                                    ? {
+                                          transform: 'translateY(-3.5em)',
+                                          maxHeight: '0em',
+                                          visibility: 'visible',
+                                          zIndex: '0',
+                                      }
+                                    : {
+                                          transform: 'translateY(0)',
+                                          maxHeight: '3em',
+                                          visibility: 'visible',
+                                          zIndex: '0',
+                                      }
+                            }
+                        >
                             <StyledButton onClick={openDeleteModal}>
                                 <TrashIcon />
                             </StyledButton>
@@ -268,7 +365,7 @@ const StatCard = ({
                                 <EditIcon />
                             </StyledButton>
                             <StyledButton>
-                                <CaretIcon onClick={openRecordModal} />
+                                <DatabaseIcon onClick={openRecordModal} />
                             </StyledButton>
                         </ButtonContainer>
                     </WrapperContainer>
@@ -310,8 +407,44 @@ const StatCard = ({
                                     <DateText>{reformatDate()}</DateText>
                                 </DateContainer>
                             </BrowserNameContainer>
+                            <DropdownContainer>
+                                <StyledDropdownButton
+                                    onClick={enableDropdownMenu}
+                                >
+                                    <CaretIcon
+                                        style={
+                                            stateDropdown === false
+                                                ? {
+                                                      transformOrigin: 'center',
+                                                      transform: 'rotate(0deg)',
+                                                  }
+                                                : {
+                                                      transformOrigin: 'center',
+                                                      transform:
+                                                          'rotate(180deg)',
+                                                  }
+                                        }
+                                    />
+                                </StyledDropdownButton>
+                            </DropdownContainer>
                         </MainContainer>
-                        <ButtonContainer>
+                        <ButtonContainer
+                            style={
+                                stateDropdown === false
+                                    ? {
+                                          transform: 'translateY(-3.5em)',
+                                          maxHeight: '0em',
+                                          visibility: 'visible',
+                                          zIndex: '0',
+                                      }
+                                    : {
+                                          transform: 'translateY(0)',
+                                          maxHeight: '3em',
+                                          visibility: 'visible',
+                                          zIndex: '0',
+                                      }
+                            }
+                        >
                             <StyledButton onClick={openDeleteModal}>
                                 <TrashIcon />
                             </StyledButton>
@@ -319,7 +452,7 @@ const StatCard = ({
                                 <EditIcon />
                             </StyledButton>
                             <StyledButton>
-                                <CaretIcon onClick={openRecordModal} />
+                                <DatabaseIcon onClick={openRecordModal} />
                             </StyledButton>
                         </ButtonContainer>
                     </BrowserWrapperContainer>
