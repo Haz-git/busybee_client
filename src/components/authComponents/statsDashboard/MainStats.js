@@ -44,23 +44,29 @@ const CustomMuiAlert = withStyles(() => ({
         padding: '.6em .8em',
         '& .MuiAlert-icon': {
             fontSize: '2.2em',
+            ['@media (max-width: 320px)']: {
+                fontSize: '1.7em',
+            },
         },
         '& .MuiAlert-message': {
             fontSize: '1.4em',
             whiteSpace: 'nowrap',
+            ['@media (max-width: 320px)']: {
+                fontSize: '1.1em',
+            },
         },
         '& .MuiAlert-action': {
             fontSize: '.85em',
         },
     },
     filledSuccess: {
-        background: '#156711',
+        background: '#1A222F',
     },
     filledError: {
-        background: '#76251F',
+        background: '#1A222F',
     },
     filledInfo: {
-        background: '#083768',
+        background: '#1A222F',
     },
 }))(MuiAlert);
 
