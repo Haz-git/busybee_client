@@ -62,8 +62,12 @@ const BrowserRecordCardContainer = styled.div`
 
 const ButtonContainer = styled.div`
     margin-top: 1em;
+    display: -ms-grid;
     display: grid;
+    -ms-grid-columns: 50% 0.5em 50%;
     grid-template-columns: 50% 50%;
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
     justify-content: center;
     grid-column-gap: 0.5em;
 `;

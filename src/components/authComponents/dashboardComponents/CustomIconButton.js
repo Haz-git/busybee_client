@@ -5,7 +5,6 @@ import styled from 'styled-components';
 
 const StyledButtonBase = withStyles({
     root: {
-        height: '100%',
         width: '100%',
         maxWidth: '100%',
     },
@@ -44,9 +43,10 @@ const IconContainer = styled.div`
     width: 2rem;
     max-height: 2rem;
     max-width: 2rem;
-    /* left: 1.25rem; */
     top: 50%;
     left: 18%;
+    -webkit-transform: translate(-18%, -50%);
+    -ms-transform: translate(-18%, -50%);
     transform: translate(-18%, -50%);
 `;
 
