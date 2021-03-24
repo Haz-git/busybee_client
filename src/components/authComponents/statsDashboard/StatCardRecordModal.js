@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 import CustomIconButton from '../dashboardComponents/CustomIconButton';
@@ -11,7 +11,10 @@ import Fade from '@material-ui/core/Fade';
 import RecordCard from './RecordCard';
 import RecordCardAddModal from './RecordCardAddModal';
 import { connect } from 'react-redux';
-import { addRecord } from '../../../redux/userStats/userStatActions';
+import {
+    retrieveRecord,
+    addRecord,
+} from '../../../redux/userStatRecords/recordActions';
 import { v4 as uuid } from 'uuid';
 
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
@@ -93,7 +96,13 @@ const StatCardRecordModal = ({
     addRecordSnackbar,
     editRecordSnackbar,
     deleteRecordSnackbar,
+    retrieveRecord,
 }) => {
+    useEffect(() => {
+        retrieveRecord(exerciseId);
+
+        //Need to figure out a way for only the opened stat to retrieve records. Currently, when user navigates to stat log, react retrieves all records for all stats because technically the modals are all mounted...
+    }, []);
     //Controls state of modal to add new record:
 
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
@@ -252,6 +261,8 @@ const StatCardRecordModal = ({
     );
 };
 
-export default connect(null, { addRecord })(StatCardRecordModal);
+export default connect(null, { retrieveRecord, addRecord })(
+    StatCardRecordModal
+);
 
 // export default StatCardRecordModal;
