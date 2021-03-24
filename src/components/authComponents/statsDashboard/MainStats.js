@@ -194,6 +194,7 @@ const ButtonContainer = styled.div`
 
 const StatCardContainer = styled.div`
     margin-bottom: 4em;
+    padding: 0 0.5em;
 `;
 
 const BrowserStatCardContainer = styled.div`
@@ -223,8 +224,13 @@ function slideTransition(props) {
 
 const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Loading State:
-
     const [isLoaded, setIsLoaded] = useState(false);
+
+    //State of userSearchInput:
+    const [userSearchValue, setUserSearchValue] = useState(null);
+
+    //State for search filter:
+    const [userSearchArray, setUserSearchArray] = useState(null);
 
     useEffect(() => {
         if (stats.stats === undefined || stats.stats === null) {
@@ -251,9 +257,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
 
     //State for user submission:
     const [userNewExercise, setUserNewExercise] = useState(null);
-
-    //State for search filter:
-    const [userSearchArray, setUserSearchArray] = useState(null);
 
     //Modal Functions:
     const openModal = () => {
@@ -376,6 +379,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
 
     const handleSearchBarChange = (e) => {
         let filteredArray;
+
+        setUserSearchValue(e.target.value.trim().toLowerCase());
         //Filter stats.stats array:
         if (stats.stats !== undefined && stats.stats !== null) {
             filteredArray = stats.stats.filter((stat) => {
