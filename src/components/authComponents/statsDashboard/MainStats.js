@@ -33,42 +33,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import CustomSubmitButton from '../dashboardComponents/CustomSubmitButton';
 import Fade from '@material-ui/core/Fade';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import Slide from '@material-ui/core/Slide';
-import { withStyles } from '@material-ui/core/styles';
-import { SnackbarContent } from '@material-ui/core';
-
-const CustomMuiAlert = withStyles(() => ({
-    root: {
-        padding: '.6em .8em',
-        '& .MuiAlert-icon': {
-            fontSize: '2.2em',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.7em',
-            },
-        },
-        '& .MuiAlert-message': {
-            fontSize: '1.4em',
-            whiteSpace: 'nowrap',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.1em',
-            },
-        },
-        '& .MuiAlert-action': {
-            fontSize: '.85em',
-        },
-    },
-    filledSuccess: {
-        background: '#1A222F',
-    },
-    filledError: {
-        background: '#1A222F',
-    },
-    filledInfo: {
-        background: '#1A222F',
-    },
-}))(MuiAlert);
 
 const EmptyStatsIcon = styled(Stats)`
     height: 10em;
@@ -205,26 +169,14 @@ const BrowserStatCardContainer = styled.div`
     align-items: stretch;
 `;
 
-//Slide transition function for MUI:
-
-function slideTransition(props) {
-    return (
-        <Slide
-            {...props}
-            direction="down"
-            timeout={{
-                enter: 400,
-                exit: 400,
-            }}
-        />
-    );
-}
-
 //Render:
 
 const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
+
+    //Modification flag:
+    const [isStatModified, setIsStatModified] = useState(false);
 
     //State of userSearchInput:
     const [userSearchValue, setUserSearchValue] = useState(null);
@@ -245,12 +197,9 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         }
     }, []);
 
-    //States for SnackBars:
-    const [openAddRecordSnackBar, setOpenAddRecordSnackBar] = useState(false);
-    const [openEditRecordSnackBar, setOpenEditRecordSnackBar] = useState(false);
-    const [openDeleteRecordSnackBar, setOpenDeleteRecordSnackBar] = useState(
-        false
-    );
+    // useEffect(() => {
+    //     getUserStatData();
+    // }, [JSON.stringify(stats.stats)]);
 
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
@@ -309,9 +258,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
-                    addRecordSnackbar={showNewRecordSnackBar}
-                    editRecordSnackbar={showEditRecordSnackBar}
-                    deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
         } else if (
@@ -327,9 +273,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
-                    addRecordSnackbar={showNewRecordSnackBar}
-                    editRecordSnackbar={showEditRecordSnackBar}
-                    deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
         } else if (
@@ -398,54 +341,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         } else {
             setUserSearchArray(filteredArray);
         }
-    };
-
-    //Controller functions for SnackBars:
-
-    const Alert = (props) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
-    };
-
-    //Controls opening the 'new record' snackbar:
-    const showNewRecordSnackBar = (bool) => {
-        setOpenAddRecordSnackBar(bool);
-    };
-
-    //Controls closing the 'New Record' snackbar:
-    const closeNewRecordSnackBar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenAddRecordSnackBar(false);
-    };
-
-    //Controls opening and closing 'Editing' records snackbar:
-
-    const showEditRecordSnackBar = (bool) => {
-        setOpenEditRecordSnackBar(bool);
-    };
-
-    const closeEditRecordSnackBar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenEditRecordSnackBar(false);
-    };
-
-    //Controls opening and closing 'Deleting' records snackbar:
-
-    const showDeleteRecordSnackBar = (bool) => {
-        setOpenDeleteRecordSnackBar(bool);
-    };
-
-    const closeDeleteRecordSnackBar = (event, reason) => {
-        if (reason === 'clickaway') {
-            return;
-        }
-
-        setOpenDeleteRecordSnackBar(false);
     };
 
     return (
@@ -594,69 +489,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     </BrowserStatCardContainer>
                 )}
             </MainContainer>
-            <Snackbar
-                open={openAddRecordSnackBar}
-                autoHideDuration={1000}
-                onClose={closeNewRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your record has been added.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openEditRecordSnackBar}
-                autoHideDuration={1000}
-                onClose={closeEditRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="info">
-                            Your edits have been saved.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openDeleteRecordSnackBar}
-                autoHideDuration={1000}
-                onClose={closeDeleteRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="error">
-                            Your record has been removed.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
         </>
     );
 };
