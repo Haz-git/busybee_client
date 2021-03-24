@@ -27,7 +27,6 @@ export const persistConfig = {
         'user',
         'powerStats',
         'stats',
-        'statRecords',
         'programs',
         'programExercises',
         'formattedProgram',

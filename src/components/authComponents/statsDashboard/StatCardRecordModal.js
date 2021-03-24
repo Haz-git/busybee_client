@@ -11,16 +11,14 @@ import Fade from '@material-ui/core/Fade';
 import RecordCard from './RecordCard';
 import RecordCardAddModal from './RecordCardAddModal';
 import { connect } from 'react-redux';
-import {
-    retrieveRecord,
-    addRecord,
-} from '../../../redux/userStatRecords/recordActions';
+import { addRecord } from '../../../redux/userStatRecords/recordActions';
 import { v4 as uuid } from 'uuid';
 
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
 import { PostAdd } from '@styled-icons/material-sharp/PostAdd';
 import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard';
+import { TreasureMap } from '@styled-icons/remix-fill';
 
 //Styles:
 
@@ -98,12 +96,8 @@ const StatCardRecordModal = ({
     deleteRecordSnackbar,
     retrieveRecord,
 }) => {
-    useEffect(() => {
-        retrieveRecord(exerciseId);
-
-        //Need to figure out a way for only the opened stat to retrieve records. Currently, when user navigates to stat log, react retrieves all records for all stats because technically the modals are all mounted...
-    }, []);
-    //Controls state of modal to add new record:
+    //Loading State:
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
     const [weightInput, setWeightInput] = useState(null);
@@ -126,8 +120,6 @@ const StatCardRecordModal = ({
                     deleteRecordSnackbar={deleteRecordSnackbar}
                 />
             ));
-        } else {
-            return <>You don't seem to have any records!</>;
         }
     };
 
@@ -216,6 +208,7 @@ const StatCardRecordModal = ({
                     onClose={closeFunction}
                     closeAfterTransition
                     BackdropComponent={Backdrop}
+                    onRendered={() => retrieveRecord(exerciseId)}
                     BackdropProps={{
                         timeout: 500,
                     }}
@@ -261,8 +254,6 @@ const StatCardRecordModal = ({
     );
 };
 
-export default connect(null, { retrieveRecord, addRecord })(
-    StatCardRecordModal
-);
+export default connect(null, { addRecord })(StatCardRecordModal);
 
 // export default StatCardRecordModal;

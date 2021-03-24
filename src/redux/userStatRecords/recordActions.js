@@ -14,14 +14,12 @@ export function retrieveRecord(exerciseId) {
             exerciseId,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_RETRIEVE_RECORD,
+            payload: response.data.statRecords,
+        });
 
-        // dispatch({
-        //     type: USER_RETRIEVE_RECORD,
-        //     payload: response.data.statRecords,
-        // });
-
-        // return true;
+        return true;
     };
 }
 
