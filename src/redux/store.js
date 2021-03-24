@@ -9,6 +9,7 @@ import { USER_LOGOUT } from '../redux/userLogout/userLogoutTypes';
 import authReducer from './authReducer/authReducer';
 import powerStatReducer from './userPowerLifts/powerLiftReducer';
 import statReducer from './userStats/userStatReducer';
+import recordReducer from './userStatRecords/recordReducer';
 import programReducer from './userPrograms/userProgramReducer';
 import programExerciseReducer from './userProgramExercises/programExerciseReducer';
 import formattedProgramReducer from './userFormattedPrograms/formattedProgramsReducer';
@@ -26,6 +27,7 @@ export const persistConfig = {
         'user',
         'powerStats',
         'stats',
+        'statRecords',
         'programs',
         'programExercises',
         'formattedProgram',
@@ -42,6 +44,7 @@ const appReducer = combineReducers({
     auth: authReducer,
     powerStats: powerStatReducer,
     stats: statReducer,
+    statRecords: recordReducer,
     programs: programReducer,
     programExercises: programExerciseReducer,
     formattedProgram: formattedProgramReducer,
