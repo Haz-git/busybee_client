@@ -197,10 +197,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     getUserStatData();
-    // }, [JSON.stringify(stats.stats)]);
-
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
 

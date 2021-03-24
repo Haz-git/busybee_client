@@ -2,6 +2,8 @@ import React, { useEffect, useState } from 'react';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 import CustomIconButton from '../dashboardComponents/CustomIconButton';
+import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Styles:
 import styled from 'styled-components';
@@ -150,6 +152,7 @@ const StatCardRecordModal = ({
     retrieveRecord,
 }) => {
     //Loading State:
+    const [isLoaded, setIsLoaded] = useState(false);
 
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
     const [weightInput, setWeightInput] = useState(null);
@@ -163,8 +166,6 @@ const StatCardRecordModal = ({
     const [openDeleteRecordSnackBar, setOpenDeleteRecordSnackBar] = useState(
         false
     );
-
-    console.log(records);
 
     const renderRecordCards = () => {
         if (records.stats !== undefined && records.stats !== null) {
@@ -181,6 +182,12 @@ const StatCardRecordModal = ({
                     deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
+        } else {
+            return (
+                <LoadingContainer>
+                    <CustomLoadingDots />
+                </LoadingContainer>
+            );
         }
     };
 
