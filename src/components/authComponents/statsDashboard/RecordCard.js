@@ -6,7 +6,7 @@ import { connect } from 'react-redux';
 import {
     deleteRecord,
     editRecord,
-} from '../../../redux/userStats/userStatActions';
+} from '../../../redux/userStatRecords/recordActions';
 
 //Components:
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
@@ -241,6 +241,8 @@ const RecordCard = ({
                     recordUnit,
                     editRecordSnackbar
                 );
+
+                setStateEditRecordModal(false);
             } else {
                 alert('Please input values, or press cancel to exit.');
             }
