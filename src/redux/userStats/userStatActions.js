@@ -5,9 +5,6 @@ import {
     USER_ADD_NEW_STAT,
     USER_EDIT_STAT,
     USER_DELETE_STAT,
-    USER_ADD_NEW_RECORD,
-    USER_EDIT_RECORD,
-    USER_DELETE_RECORD,
 } from './userStatTypes';
 
 export function getUserStatData() {
@@ -62,84 +59,5 @@ export function editStat(exerciseId, newExerciseName) {
             type: USER_EDIT_STAT,
             payload: response.data.userSavedStats,
         });
-    };
-}
-
-//Action Creators for records:
-
-export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
-    return async (dispatch) => {
-        const response = await api.post('/user/stat/addnewrecord', {
-            exerciseId,
-            sets,
-            reps,
-            weight,
-            unit,
-        });
-
-        dispatch({
-            type: USER_ADD_NEW_RECORD,
-            payload: response.data.userSavedStats,
-        });
-
-        //Creating a snackbar to notify new record add:
-
-        if (response) {
-            callback(true);
-        }
-    };
-}
-
-export function deleteRecord(exerciseId, recordId, callback) {
-    return async (dispatch) => {
-        const response = await api.delete('/user/stat/deleterecord', {
-            data: {
-                exerciseId,
-                recordId,
-            },
-        });
-
-        dispatch({
-            type: USER_DELETE_RECORD,
-            payload: response.data.userSavedStats,
-        });
-
-        //Creating a snackbar to notify user that a record is deleted:
-
-        if (response) {
-            callback(true);
-        }
-    };
-}
-
-export function editRecord(
-    exerciseId,
-    recordId,
-    sets,
-    reps,
-    weight,
-    unit,
-    callback
-) {
-    return async (dispatch) => {
-        const response = await api.patch('/user/stat/editrecord', {
-            exerciseId,
-            recordId,
-            sets,
-            reps,
-            weight,
-            unit,
-        });
-
-        dispatch({
-            type: USER_EDIT_RECORD,
-            payload: response.data.userSavedStats,
-        });
-
-        //Creating a snackbar to notify user that record is edited:
-
-        if (response) {
-            callback(true);
-        }
     };
 }
