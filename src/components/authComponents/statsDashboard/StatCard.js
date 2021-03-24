@@ -25,11 +25,6 @@ const WrapperContainer = styled.div`
 `;
 
 const BrowserWrapperContainer = styled.div`
-    /* display: -ms-grid;
-    display: grid;
-    -ms-grid-columns: 68% 32%;
-    grid-template-columns: 68% 32%;
-    margin: 1em 0em; */
     display: block;
     text-align: center;
     margin: 1em 0;
@@ -60,21 +55,6 @@ const DropdownContainer = styled.div`
 `;
 
 const NameContainer = styled.div`
-    /* width: 10.5rem;
-    text-align: left;
-    white-space: normal;
-    word-break: break-word;
-    @media screen and (min-width: 320px) {
-        width: 8.9rem;
-    }
-
-    @media screen and (min-width: 360px) {
-        width: 11.5rem;
-    }
-    @media screen and (min-width: 411px) {
-        width: 13rem;
-    } */
-
     width: 100%;
     max-width: 100%;
     text-align: left;
@@ -229,9 +209,6 @@ const StatCard = ({
     deleteStat,
     editStat,
     records,
-    addRecordSnackbar,
-    editRecordSnackbar,
-    deleteRecordSnackbar,
 }) => {
     //State for dropdown:
 
@@ -392,9 +369,6 @@ const StatCard = ({
                         closeFunction={closeRecordModal}
                         recordArray={records}
                         exerciseId={exerciseId}
-                        addRecordSnackbar={addRecordSnackbar}
-                        editRecordSnackbar={editRecordSnackbar}
-                        deleteRecordSnackbar={deleteRecordSnackbar}
                     />
                 </>
             )}
@@ -479,9 +453,6 @@ const StatCard = ({
                         closeFunction={closeRecordModal}
                         recordArray={records}
                         exerciseId={exerciseId}
-                        addRecordSnackbar={addRecordSnackbar}
-                        editRecordSnackbar={editRecordSnackbar}
-                        deleteRecordSnackbar={deleteRecordSnackbar}
                     />
                 </>
             )}
