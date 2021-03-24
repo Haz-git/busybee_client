@@ -11,8 +11,17 @@ import Fade from '@material-ui/core/Fade';
 import RecordCard from './RecordCard';
 import RecordCardAddModal from './RecordCardAddModal';
 import { connect } from 'react-redux';
-import { addRecord } from '../../../redux/userStatRecords/recordActions';
+import {
+    retrieveRecord,
+    addRecord,
+} from '../../../redux/userStatRecords/recordActions';
 import { v4 as uuid } from 'uuid';
+
+import Snackbar from '@material-ui/core/Snackbar';
+import MuiAlert from '@material-ui/lab/Alert';
+import Slide from '@material-ui/core/Slide';
+import { withStyles } from '@material-ui/core/styles';
+import { SnackbarContent } from '@material-ui/core';
 
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
@@ -21,6 +30,37 @@ import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard'
 import { TreasureMap } from '@styled-icons/remix-fill';
 
 //Styles:
+
+const CustomMuiAlert = withStyles(() => ({
+    root: {
+        padding: '.6em .8em',
+        '& .MuiAlert-icon': {
+            fontSize: '2.2em',
+            ['@media (max-width: 320px)']: {
+                fontSize: '1.7em',
+            },
+        },
+        '& .MuiAlert-message': {
+            fontSize: '1.4em',
+            whiteSpace: 'nowrap',
+            ['@media (max-width: 320px)']: {
+                fontSize: '1.1em',
+            },
+        },
+        '& .MuiAlert-action': {
+            fontSize: '.85em',
+        },
+    },
+    filledSuccess: {
+        background: '#1A222F',
+    },
+    filledError: {
+        background: '#1A222F',
+    },
+    filledInfo: {
+        background: '#1A222F',
+    },
+}))(MuiAlert);
 
 const RecordModalContainer = styled.div`
     width: 92%;
@@ -81,6 +121,21 @@ const AddIcon = styled(PostAdd)`
     max-height: 100%;
 `;
 
+//Slide transition function for MUI:
+
+function slideTransition(props) {
+    return (
+        <Slide
+            {...props}
+            direction="down"
+            timeout={{
+                enter: 400,
+                exit: 400,
+            }}
+        />
+    );
+}
+
 //Render:
 
 const StatCardRecordModal = ({
@@ -91,13 +146,10 @@ const StatCardRecordModal = ({
     recordArray,
     addRecord,
     exerciseId,
-    addRecordSnackbar,
-    editRecordSnackbar,
-    deleteRecordSnackbar,
+    records,
     retrieveRecord,
 }) => {
     //Loading State:
-    const [isLoaded, setIsLoaded] = useState(false);
 
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
     const [weightInput, setWeightInput] = useState(null);
@@ -105,9 +157,18 @@ const StatCardRecordModal = ({
     const [repsInput, setRepsInput] = useState(null);
     const [unitSelect, setUnitSelect] = useState(null);
 
+    //States for SnackBars:
+    const [openAddRecordSnackBar, setOpenAddRecordSnackBar] = useState(false);
+    const [openEditRecordSnackBar, setOpenEditRecordSnackBar] = useState(false);
+    const [openDeleteRecordSnackBar, setOpenDeleteRecordSnackBar] = useState(
+        false
+    );
+
+    console.log(records);
+
     const renderRecordCards = () => {
-        if (recordArray !== undefined && recordArray !== null) {
-            return recordArray.map((record) => (
+        if (records.stats !== undefined && records.stats !== null) {
+            return records.stats.map((record) => (
                 <RecordCard
                     key={uuid()}
                     sets={record.sets}
@@ -116,8 +177,8 @@ const StatCardRecordModal = ({
                     recordId={record.recordId}
                     exerciseId={exerciseId}
                     dateModified={record.dateModified}
-                    editRecordSnackbar={editRecordSnackbar}
-                    deleteRecordSnackbar={deleteRecordSnackbar}
+                    editRecordSnackbar={showEditRecordSnackBar}
+                    deleteRecordSnackbar={showDeleteRecordSnackBar}
                 />
             ));
         }
@@ -157,9 +218,57 @@ const StatCardRecordModal = ({
             repsInput,
             weightInput,
             unitSelect,
-            addRecordSnackbar
+            showNewRecordSnackBar
         );
         setStateAddRecordModal(false);
+    };
+
+    //Controller functions for SnackBars:
+
+    const Alert = (props) => {
+        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
+    };
+
+    //Controls opening the 'new record' snackbar:
+    const showNewRecordSnackBar = (bool) => {
+        setOpenAddRecordSnackBar(bool);
+    };
+
+    //Controls closing the 'New Record' snackbar:
+    const closeNewRecordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenAddRecordSnackBar(false);
+    };
+
+    //Controls opening and closing 'Editing' records snackbar:
+
+    const showEditRecordSnackBar = (bool) => {
+        setOpenEditRecordSnackBar(bool);
+    };
+
+    const closeEditRecordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenEditRecordSnackBar(false);
+    };
+
+    //Controls opening and closing 'Deleting' records snackbar:
+
+    const showDeleteRecordSnackBar = (bool) => {
+        setOpenDeleteRecordSnackBar(bool);
+    };
+
+    const closeDeleteRecordSnackBar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteRecordSnackBar(false);
     };
 
     return (
@@ -171,6 +280,9 @@ const StatCardRecordModal = ({
                     open={openBoolean}
                     onClose={closeFunction}
                     closeAfterTransition
+                    onRendered={async () => {
+                        const bool = await retrieveRecord(exerciseId);
+                    }}
                     BackdropComponent={Backdrop}
                     BackdropProps={{
                         timeout: 500,
@@ -208,7 +320,6 @@ const StatCardRecordModal = ({
                     onClose={closeFunction}
                     closeAfterTransition
                     BackdropComponent={Backdrop}
-                    onRendered={() => retrieveRecord(exerciseId)}
                     BackdropProps={{
                         timeout: 500,
                     }}
@@ -250,10 +361,81 @@ const StatCardRecordModal = ({
                 submitHandler={handleSubmission}
                 needNameHandler={false}
             />
+            <Snackbar
+                open={openAddRecordSnackBar}
+                autoHideDuration={3000}
+                onClose={closeNewRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="success">
+                            Your record has been added.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openEditRecordSnackBar}
+                autoHideDuration={3000}
+                onClose={closeEditRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="info">
+                            Your edits have been saved.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
+            <Snackbar
+                open={openDeleteRecordSnackBar}
+                autoHideDuration={3000}
+                onClose={closeDeleteRecordSnackBar}
+                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
+                TransitionComponent={slideTransition}
+            >
+                <SnackbarContent
+                    style={{
+                        boxShadow: 'none',
+                        background: 'none',
+                        display: 'flex',
+                        justifyContent: 'center',
+                    }}
+                    message={
+                        <Alert severity="error">
+                            Your record has been removed.
+                        </Alert>
+                    }
+                />
+            </Snackbar>
         </>
     );
 };
 
-export default connect(null, { addRecord })(StatCardRecordModal);
+const mapStateToProps = (state) => {
+    return {
+        records: state.statRecords,
+    };
+};
+
+export default connect(mapStateToProps, { addRecord, retrieveRecord })(
+    StatCardRecordModal
+);
 
 // export default StatCardRecordModal;
