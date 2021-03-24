@@ -18,9 +18,9 @@ import { Database } from '@styled-icons/remix-line/Database';
 
 const WrapperContainer = styled.div`
     display: block;
+    text-align: center;
     margin: 1em 0;
     z-index: 10;
-    padding: 0 0.4em;
     transition: all 0.2s ease;
 `;
 
@@ -31,9 +31,10 @@ const BrowserWrapperContainer = styled.div`
     grid-template-columns: 68% 32%;
     margin: 1em 0em; */
     display: block;
+    text-align: center;
     margin: 1em 0;
     z-index: 10;
-    padding: 0 0.4em;
+    padding: 0 0;
     transition: all 0.2s ease;
 `;
 
@@ -202,7 +203,7 @@ const StyledButton = styled.button`
 `;
 
 const StyledDropdownButton = styled.button`
-    margin: 0 0.2em;
+    margin: 0 0em;
     border: none;
     height: 100%;
     width: 100%;
