@@ -14,6 +14,8 @@ export function retrieveRecord(exerciseId) {
             exerciseId,
         });
 
+        console.log(response);
+
         dispatch({
             type: USER_RETRIEVE_RECORD,
             payload: response.data.statRecords,
@@ -35,7 +37,7 @@ export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
 
         dispatch({
             type: USER_ADD_NEW_RECORD,
-            payload: response.data.userSavedStats,
+            payload: response.data.userUpdatedRecords,
         });
 
         //Creating a snackbar to notify new record add:
@@ -57,7 +59,7 @@ export function deleteRecord(exerciseId, recordId, callback) {
 
         dispatch({
             type: USER_DELETE_RECORD,
-            payload: response.data.userSavedStats,
+            payload: response.data.userUpdatedRecords,
         });
 
         //Creating a snackbar to notify user that a record is deleted:
@@ -89,7 +91,7 @@ export function editRecord(
 
         dispatch({
             type: USER_EDIT_RECORD,
-            payload: response.data.userSavedStats,
+            payload: response.data.userUpdatedRecords,
         });
 
         //Creating a snackbar to notify user that record is edited:
