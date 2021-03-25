@@ -176,8 +176,10 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
-    //State for adding new stat snackbar:
+    //State for stat snackbars:
     const [openNewStatSnackbar, setOpenNewStatSnackbar] = useState(false);
+    const [openEditStatSnackbar, setOpenEditStatSnackbar] = useState(false);
+    const [openDeleteStatSnackbar, setOpenDeleteStatSnackbar] = useState(false);
 
     //Modification flag:
     const [isStatModified, setIsStatModified] = useState(false);
@@ -212,6 +214,30 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         }
 
         setOpenNewStatSnackbar(false);
+    };
+
+    const showEditStatSnackbar = (bool) => {
+        setOpenEditStatSnackbar(bool);
+    };
+
+    const closeEditStatSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenEditStatSnackbar(false);
+    };
+
+    const showDeleteStatSnackbar = (bool) => {
+        setOpenDeleteStatSnackbar(bool);
+    };
+
+    const closeDeleteStatSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenDeleteStatSnackbar(false);
     };
 
     //This state controls modal open/close:
@@ -271,6 +297,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
+                    editSnackbar={showEditStatSnackbar}
+                    deleteSnackbar={showDeleteStatSnackbar}
                 />
             ));
         } else if (
@@ -286,6 +314,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     date={stat.dateUpdated}
                     exerciseId={stat.exerciseId}
                     records={stat.records}
+                    editSnackbar={showEditStatSnackbar}
+                    deleteSnackbar={showDeleteStatSnackbar}
                 />
             ));
         } else if (
@@ -510,6 +540,24 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                 anchorOriginHorizontal="center"
                 alertSeverity="success"
                 alertMessage="Your new stat has been saved."
+            />
+            <GlobalSnackbar
+                openFunction={openEditStatSnackbar}
+                closeFunction={closeEditStatSnackbar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="info"
+                alertMessage="Your stat has been edited."
+            />
+            <GlobalSnackbar
+                openFunction={openDeleteStatSnackbar}
+                closeFunction={closeDeleteStatSnackbar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="error"
+                alertMessage="Your stat has been removed."
             />
         </>
     );
