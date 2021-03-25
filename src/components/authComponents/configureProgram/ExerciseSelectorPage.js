@@ -582,7 +582,7 @@ const ExerciseSelectorPage = ({
             />
             <CustomSnackBar
                 open={openAddProgramExerciseSnackBar}
-                autoHideDuration={4000}
+                autoHideDuration={3000}
                 onClose={closeNewProgramExerciseSnackBar}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 TransitionComponent={slideTransition}
@@ -596,7 +596,7 @@ const ExerciseSelectorPage = ({
                     }}
                     message={
                         <Alert severity="success">
-                            Your Exercise Has Been Added.
+                            Your exercise has been added.
                         </Alert>
                     }
                 />
