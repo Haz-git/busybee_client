@@ -1,14 +1,9 @@
-import React, { useState, useEffect, useMemo } from 'react';
+import React, { useState, useEffect } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
 
-import {
-    BrowserView,
-    MobileOnlyView,
-    isBrowser,
-    isMobileOnly,
-} from 'react-device-detect';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 import {
     getUserProgramData,
     addNewProgram,
@@ -16,6 +11,7 @@ import {
     deleteExistingProgram,
 } from '../../../redux/userPrograms/userProgramActions';
 import { v4 as uuid } from 'uuid';
+import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
@@ -25,10 +21,6 @@ import SearchBar from '../statsDashboard/SearchBar';
 import CreateProgramButton from './CreateProgramButton';
 import CreateProgramModal from './CreateProgramModal';
 import ProgramCard from './ProgramCard';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import Slide from '@material-ui/core/Slide';
-import { withStyles } from '@material-ui/core/styles';
 
 //Styles:
 import styled from 'styled-components';
@@ -36,38 +28,6 @@ import {
     BrowserMainHeader,
     MainHeader,
 } from '../dashboardComponents/UserGreeting';
-import { SnackbarContent } from '@material-ui/core';
-
-const CustomMuiAlert = withStyles(() => ({
-    root: {
-        padding: '.6em .8em',
-        '& .MuiAlert-icon': {
-            fontSize: '2.2em',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.7em',
-            },
-        },
-        '& .MuiAlert-message': {
-            fontSize: '1.4em',
-            whiteSpace: 'nowrap',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.1em',
-            },
-        },
-        '& .MuiAlert-action': {
-            fontSize: '.85em',
-        },
-    },
-    filledSuccess: {
-        background: '#1A222F',
-    },
-    filledError: {
-        background: '#1A222F',
-    },
-    filledInfo: {
-        background: '#1A222F',
-    },
-}))(MuiAlert);
 
 const EmptyProgramIcon = styled(Diagram3Fill)`
     height: 7em;
@@ -162,21 +122,6 @@ const BrowserProgramCardContainer = styled.div`
     justify-content: center;
     align-items: start;
 `;
-
-//Slide transition function for MUI:
-
-function slideTransition(props) {
-    return (
-        <Slide
-            {...props}
-            direction="down"
-            timeout={{
-                enter: 400,
-                exit: 400,
-            }}
-        />
-    );
-}
 
 //Render:
 const MainPrograms = ({
@@ -377,11 +322,6 @@ const MainPrograms = ({
         }
     };
 
-    //Alert function for snackbars:
-    const Alert = (props, type) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
-    };
-
     //Controls opening the 'new program' snackbar:
     const showNewProgramSnackBar = (bool) => {
         setOpenAddProgramSnackBar(bool);
@@ -486,69 +426,33 @@ const MainPrograms = ({
                     </BrowserProgramCardContainer>
                 )}
             </MainContainer>
-            <Snackbar
-                open={openAddProgramSnackBar}
-                autoHideDuration={4000}
-                onClose={closeNewProgramSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your Program has been added.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openEditProgramSnackBar}
-                autoHideDuration={4000}
-                onClose={closeEditProgramSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="info">
-                            Your edits have been saved.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openDeleteProgramSnackBar}
-                autoHideDuration={4000}
-                onClose={closeDeleteProgramSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="error">
-                            Your Program has been removed.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
+            <GlobalSnackbar
+                openFunction={openAddProgramSnackBar}
+                closeFunction={closeNewProgramSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your program has been added."
+            />
+            <GlobalSnackbar
+                openFunction={openEditProgramSnackBar}
+                closeFunction={closeEditProgramSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="info"
+                alertMessage="Your edits have been saved."
+            />
+            <GlobalSnackbar
+                openFunction={openDeleteProgramSnackBar}
+                closeFunction={closeDeleteProgramSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="error"
+                alertMessage="Your program has been removed."
+            />
         </>
     );
 };
