@@ -10,6 +10,7 @@ import {
 import { userLogout } from '../../../redux/userLogout/userLogoutActions';
 import ThemeToggler from './ThemeToggler';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
+import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 
 //Styles:
 import styled from 'styled-components';
@@ -21,11 +22,6 @@ import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
 import { Email } from '@styled-icons/material-outlined/Email';
 import { LockPassword } from '@styled-icons/remix-fill/LockPassword';
 import { LogOut } from '@styled-icons/boxicons-regular/LogOut';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import Slide from '@material-ui/core/Slide';
-import { SnackbarContent } from '@material-ui/core';
-import { withStyles } from '@material-ui/core/styles';
 
 //Initiating constants for edit types:
 
@@ -75,37 +71,6 @@ const EmailIcon = styled(Email)`
         width: 4em;
     }
 `;
-
-const CustomMuiAlert = withStyles(() => ({
-    root: {
-        padding: '.6em .8em',
-        '& .MuiAlert-icon': {
-            fontSize: '2.2em',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.7em',
-            },
-        },
-        '& .MuiAlert-message': {
-            fontSize: '1.4em',
-            whiteSpace: 'nowrap',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.1em',
-            },
-        },
-        '& .MuiAlert-action': {
-            fontSize: '.85em',
-        },
-    },
-    filledSuccess: {
-        background: '#1A222F',
-    },
-    filledError: {
-        background: '#1A222F',
-    },
-    filledInfo: {
-        background: '#1A222F',
-    },
-}))(MuiAlert);
 
 const MainContainer = styled.div`
     display: block;
@@ -171,21 +136,6 @@ const BrowserSettingOptionsContainer = styled.div`
     [] []
       []
 */
-
-//Slide transition function for MUI:
-
-function slideTransition(props) {
-    return (
-        <Slide
-            {...props}
-            direction="down"
-            timeout={{
-                enter: 400,
-                exit: 400,
-            }}
-        />
-    );
-}
 
 const MainSettings = ({
     user,
@@ -372,11 +322,6 @@ const MainSettings = ({
         setStateSignOutModal(false);
     };
 
-    //Alert function for snackbars:
-    const Alert = (props) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
-    };
-
     //SnackBar Handlers:
 
     const showEditDetailSnackBar = (bool) => {
@@ -553,69 +498,33 @@ const MainSettings = ({
                 buttonSubmitFunction={userLogout}
                 isSignOutModal="true"
             />
-            <Snackbar
-                open={stateEditDetailSnackBar}
-                autoHideDuration={4000}
-                onClose={closeEditDetailSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your User Edits Are Saved.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={stateEditEmailSnackBar}
-                autoHideDuration={4000}
-                onClose={closeEditEmailSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your New Email Has Been Saved.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={stateEditPasswordSnackBar}
-                autoHideDuration={4000}
-                onClose={closeEditPasswordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your Password Has Been Updated.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
+            <GlobalSnackbar
+                openFunction={stateEditDetailSnackBar}
+                closeFunction={closeEditDetailSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your user details have been updated."
+            />
+            <GlobalSnackbar
+                openFunction={stateEditEmailSnackBar}
+                closeFunction={closeEditEmailSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your email has been updated."
+            />
+            <GlobalSnackbar
+                openFunction={stateEditPasswordSnackBar}
+                closeFunction={closeEditPasswordSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your password has been updated."
+            />
         </>
     );
 };
