@@ -375,7 +375,7 @@ const PyramidMain = ({
             />
             <CustomSnackBar
                 open={statePyramidSnackbar}
-                autoHideDuration={4000}
+                autoHideDuration={3000}
                 onClose={closePyramidSnackbar}
                 anchorOrigin={{ vertical: 'bottom', horizontal: 'center' }}
                 TransitionComponent={slideTransition}
@@ -389,7 +389,7 @@ const PyramidMain = ({
                     }}
                     message={
                         <Alert severity="success">
-                            Your Pyramid Set Was Saved.
+                            Your pyramid set was saved.
                         </Alert>
                     }
                 />
