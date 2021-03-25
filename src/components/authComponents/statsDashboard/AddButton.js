@@ -21,11 +21,16 @@ const CustomButton = withStyles({
         textTransform: 'capitalize',
         color: '#fdbc3d',
         fontFamily: 'Nunito, Lato, sans-serif',
-        fontWeight: '700',
+        fontWeight: '500',
         fontSize: '1.175em',
         padding: '.5em .8em',
         borderRadius: '.3em',
         marginLeft: '.5em',
+        '& .MuiButton-startIcon': {
+            margin: '0',
+            padding: '0',
+            marginRight: '.2em',
+        },
     },
 })(Button);
 
