@@ -20,50 +20,12 @@ import {
 } from '../../../redux/userStatRecords/recordActions';
 import { v4 as uuid } from 'uuid';
 
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import Slide from '@material-ui/core/Slide';
-import { withStyles } from '@material-ui/core/styles';
-import { SnackbarContent } from '@material-ui/core';
-
 import { ModalHeader } from '../dashboardComponents/UserPowerStatCard';
 
 import { PostAdd } from '@styled-icons/material-sharp/PostAdd';
 import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard';
-import { TreasureMap } from '@styled-icons/remix-fill';
 
 //Styles:
-
-const CustomMuiAlert = withStyles(() => ({
-    root: {
-        padding: '.6em .8em',
-        '& .MuiAlert-icon': {
-            fontSize: '2.2em',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.7em',
-            },
-        },
-        '& .MuiAlert-message': {
-            fontSize: '1.4em',
-            whiteSpace: 'nowrap',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.1em',
-            },
-        },
-        '& .MuiAlert-action': {
-            fontSize: '.85em',
-        },
-    },
-    filledSuccess: {
-        background: '#1A222F',
-    },
-    filledError: {
-        background: '#1A222F',
-    },
-    filledInfo: {
-        background: '#1A222F',
-    },
-}))(MuiAlert);
 
 const RecordModalContainer = styled.div`
     width: 92%;
@@ -123,21 +85,6 @@ const AddIcon = styled(PostAdd)`
     max-width: 100%;
     max-height: 100%;
 `;
-
-//Slide transition function for MUI:
-
-function slideTransition(props) {
-    return (
-        <Slide
-            {...props}
-            direction="down"
-            timeout={{
-                enter: 400,
-                exit: 400,
-            }}
-        />
-    );
-}
 
 //Render:
 
@@ -234,10 +181,6 @@ const StatCardRecordModal = ({
     };
 
     //Controller functions for SnackBars:
-
-    const Alert = (props) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
-    };
 
     //Controls opening the 'new record' snackbar:
     const showNewRecordSnackBar = (bool) => {
@@ -398,48 +341,24 @@ const StatCardRecordModal = ({
                 alertSeverity="success"
                 alertMessage="Your record has been added."
             />
-            <Snackbar
-                open={openEditRecordSnackBar}
+            <GlobalSnackbar
+                openFunction={openEditRecordSnackBar}
+                closeFunction={closeEditRecordSnackBar}
                 autoHideDuration={3000}
-                onClose={closeEditRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="info">
-                            Your edits have been saved.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openDeleteRecordSnackBar}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="info"
+                alertMessage="Your edits have been saved."
+            />
+            <GlobalSnackbar
+                openFunction={openDeleteRecordSnackBar}
+                closeFunction={closeDeleteRecordSnackBar}
                 autoHideDuration={3000}
-                onClose={closeDeleteRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="error">
-                            Your record has been removed.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="error"
+                alertMessage="Your record has been removed."
+            />
         </>
     );
 };
