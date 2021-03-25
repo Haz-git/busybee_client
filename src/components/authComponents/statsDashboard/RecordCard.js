@@ -14,39 +14,56 @@ import RecordCardEditModal from '../statsDashboard/RecordCardEditModal';
 
 //Styles:
 import styled from 'styled-components';
-import Button from '@material-ui/core/Button';
-import IconButton from '@material-ui/core/IconButton';
 import { Cancel } from '@styled-icons/material-rounded/Cancel';
 import { Pencil } from '@styled-icons/remix-fill/Pencil';
+import { ExpandMore } from '@styled-icons/material-rounded/ExpandMore';
+
+const WrapperContainer = styled.div`
+    position: relative;
+    margin-bottom: 2em;
+`;
 
 const MainContainer = styled.div`
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
     position: relative;
-    margin-bottom: 1em;
     background: #10122a;
     border-radius: 0.2em;
     -webkit-box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
     box-shadow: rgba(0, 0, 0, 0.4) 0px 3px 8px;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
+    z-index: 2;
+`;
+
+const DropdownIcon = styled(ExpandMore)`
+    width: 2.7rem;
+    height: 2.7rem;
+    color: ${({ theme }) => theme.CaretIcon};
+    transition: all 0.2s ease-in-out;
+
+    @media screen and (max-width: 320px) {
+        width: 2rem;
+        height: 2rem;
+    }
 `;
 
 const EditIcon = styled(Pencil)`
-    width: 3em;
-    height: 3em;
+    width: 2rem;
+    height: 2rem;
     color: ${({ theme }) => theme.EditIcon};
+
+    @media screen and (max-width: 320px) {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
 `;
 
 const DeleteIcon = styled(Cancel)`
-    width: 3em;
-    height: 3em;
+    width: 2rem;
+    height: 2rem;
     color: ${({ theme }) => theme.TrashIcon};
+
+    @media screen and (max-width: 320px) {
+        width: 1.7rem;
+        height: 1.7rem;
+    }
 `;
 
 const FlexContainer = styled.div`
@@ -69,7 +86,7 @@ const DetailsContainer = styled.div`
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     justify-content: flex-start;
-    padding: 0.5em 0em;
+    padding: 0.5rem 0em;
     text-align: left;
 `;
 
@@ -91,6 +108,11 @@ const WeightContainer = styled.div`
     font-size: 1.2em;
     font-weight: 500;
     color: ${({ theme }) => theme.generalText};
+
+    @media screen and (max-width: 320px) {
+        font-size: 1em;
+        font-weight: 600;
+    }
 `;
 
 const WeightDivider = styled.div``;
@@ -101,16 +123,41 @@ const TechContainer = styled.div`
     font-size: 1.2em;
     font-weight: 500;
     color: ${({ theme }) => theme.generalText};
+
+    @media screen and (max-width: 320px) {
+        font-size: 1em;
+        font-weight: 600;
+    }
 `;
 
 const TechDivider = styled.div``;
+
+const DropdownContainer = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+`;
+
+const DropdownButton = styled.button`
+    background: inherit;
+    cursor: pointer;
+    border: none;
+
+    &:hover {
+        outline: none;
+    }
+
+    &:focus {
+        outline: none;
+    }
+`;
 
 const EditButton = styled.button`
     background: #1c1e37;
     cursor: pointer;
     border: none;
     padding: 0.5em 0.5em;
-    border-top-right-radius: 0.2em;
+    border-bottom-left-radius: 0.8em;
 
     &:hover {
         outline: none;
@@ -126,7 +173,7 @@ const DeleteButton = styled.button`
     cursor: pointer;
     border: none;
     padding: 0.5em 0.5em;
-    border-bottom-right-radius: 0.2em;
+    border-bottom-right-radius: 0.8em;
 
     &:hover {
         outline: none;
@@ -138,16 +185,9 @@ const DeleteButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
-    height: 100%;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    border-bottom-right-radius: 0.2em;
-    border-top-right-radius: 0.2em;
+    position: absolute;
+    right: 0;
+    transition: all 0.2s ease-in-out;
 `;
 
 //Render:
@@ -164,6 +204,9 @@ const RecordCard = ({
     deleteRecord,
     editRecord,
 }) => {
+    //State for dropdown buttons:
+    const [stateDropdown, setStateDropdown] = useState(false);
+
     //States for showing delete and edit modals for records.
 
     const [stateDeleteRecordModal, setStateDeleteRecordModal] = useState(false);
@@ -254,34 +297,75 @@ const RecordCard = ({
     //Helper Functions:
 
     const convertWeightToKg = () => {
-        return (parseInt(weight) / 2.205).toFixed(0);
+        return (parseInt(weight) / 2.205).toFixed();
     };
 
     const convertISOToDate = () => {
         return dayjs(dateModified).format('MM/DD/YYYY');
     };
 
+    //Control dropdown:
+
+    const enableDropdownMenu = () => {
+        setStateDropdown(!stateDropdown);
+    };
+
     return (
         <>
-            <DateContainer>
-                <DateText>Edited on: {convertISOToDate()}</DateText>
-            </DateContainer>
-            <MainContainer>
-                <FlexContainer>
-                    <DetailsContainer>
-                        <TechContainer>
-                            <TechDivider>Sets: {sets}</TechDivider>
-                            <TechDivider>Reps: {reps}</TechDivider>
-                        </TechContainer>
-                        <WeightContainer>
-                            <WeightDivider>{weight} Lbs</WeightDivider>
-                            <WeightDivider>
-                                {convertWeightToKg()} Kgs
-                            </WeightDivider>
-                        </WeightContainer>
-                    </DetailsContainer>
-                </FlexContainer>
-                <ButtonContainer>
+            <WrapperContainer>
+                <DateContainer>
+                    <DateText>Edited on: {convertISOToDate()}</DateText>
+                </DateContainer>
+                <MainContainer>
+                    <FlexContainer>
+                        <DetailsContainer>
+                            <TechContainer>
+                                <TechDivider>Sets: {sets}</TechDivider>
+                                <TechDivider>Reps: {reps}</TechDivider>
+                            </TechContainer>
+                            <WeightContainer>
+                                <WeightDivider>{weight} Lbs</WeightDivider>
+                                <WeightDivider>
+                                    {convertWeightToKg()} Kgs
+                                </WeightDivider>
+                            </WeightContainer>
+                        </DetailsContainer>
+                    </FlexContainer>
+                    <DropdownContainer>
+                        <DropdownButton onClick={enableDropdownMenu}>
+                            <DropdownIcon
+                                style={
+                                    stateDropdown === false
+                                        ? {
+                                              transformOrigin: 'center',
+                                              transform: 'rotate(0deg)',
+                                          }
+                                        : {
+                                              transformOrigin: 'center',
+                                              transform: 'rotate(180deg)',
+                                          }
+                                }
+                            />
+                        </DropdownButton>
+                    </DropdownContainer>
+                </MainContainer>
+                <ButtonContainer
+                    style={
+                        stateDropdown === false
+                            ? {
+                                  transform: 'translateY(-3.5em)',
+                                  maxHeight: '0em',
+                                  visibility: 'visible',
+                                  zIndex: '0',
+                              }
+                            : {
+                                  transform: 'translateY(0)',
+                                  maxHeight: '3em',
+                                  visibility: 'visible',
+                                  zIndex: '0',
+                              }
+                    }
+                >
                     <EditButton onClick={openEditRecordModal}>
                         <EditIcon />
                     </EditButton>
@@ -289,7 +373,7 @@ const RecordCard = ({
                         <DeleteIcon />
                     </DeleteButton>
                 </ButtonContainer>
-            </MainContainer>
+            </WrapperContainer>
             <StatCardModalDelete
                 openBoolean={stateDeleteRecordModal}
                 closeFunction={closeDeleteRecordModal}
