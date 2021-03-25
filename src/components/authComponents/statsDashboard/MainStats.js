@@ -8,6 +8,7 @@ import { isBrowser, isMobileOnly } from 'react-device-detect';
 import { v4 as uuid } from 'uuid';
 
 //Components:
+import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
 import SearchBar from './SearchBar';
 import AddButton from './AddButton';
@@ -175,6 +176,9 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
+    //State for adding new stat snackbar:
+    const [openNewStatSnackbar, setOpenNewStatSnackbar] = useState(false);
+
     //Modification flag:
     const [isStatModified, setIsStatModified] = useState(false);
 
@@ -196,6 +200,19 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             setIsLoaded(true);
         }
     }, []);
+
+    //Controls snackbar open/close:
+    const showNewStatSnackbar = (bool) => {
+        setOpenNewStatSnackbar(bool);
+    };
+
+    const closeNewStatSnackbar = (event, reason) => {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenNewStatSnackbar(false);
+    };
 
     //This state controls modal open/close:
     const [statModalOpen, setStatModalOpen] = useState(false);
@@ -231,7 +248,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         ) {
             alert('Please enter an exercise before submission.');
         } else {
-            addNewStat(userNewExercise);
+            addNewStat(userNewExercise, showNewStatSnackbar);
             setStatModalOpen(false);
         }
 
@@ -485,6 +502,15 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     </BrowserStatCardContainer>
                 )}
             </MainContainer>
+            <GlobalSnackbar
+                openFunction={openNewStatSnackbar}
+                closeFunction={closeNewStatSnackbar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your new stat has been saved."
+            />
         </>
     );
 };
