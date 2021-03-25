@@ -7,6 +7,7 @@ import TimeSelectModal from './TimeSelectModal';
 import { REST_PERIOD_PROGRAM_EXERCISE } from './programExerciseConstants';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import BackButtonHeader from '../dashboardComponents/BackButtonHeader';
+import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 
 //Redux:
 import {
@@ -26,44 +27,10 @@ import { CaretBack } from '@styled-icons/ionicons-sharp/CaretBack';
 import { ArrowRightSquareFill } from '@styled-icons/bootstrap/ArrowRightSquareFill';
 import { ChevronsDown } from '@styled-icons/boxicons-solid/ChevronsDown';
 import { SortAlt2 } from '@styled-icons/boxicons-regular/SortAlt2';
-import Snackbar from '@material-ui/core/Snackbar';
-import MuiAlert from '@material-ui/lab/Alert';
-import Slide from '@material-ui/core/Slide';
 import CustomLoadingDots from './CustomLoadingDots';
 import { withStyles } from '@material-ui/core/styles';
-import { SnackbarContent } from '@material-ui/core';
 import { Stack } from '@styled-icons/remix-fill/Stack';
 
-const CustomMuiAlert = withStyles(() => ({
-    root: {
-        padding: '.6em .8em',
-        '& .MuiAlert-icon': {
-            fontSize: '2.2em',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.7em',
-            },
-        },
-        '& .MuiAlert-message': {
-            fontSize: '1.4em',
-            whiteSpace: 'nowrap',
-            ['@media (max-width: 320px)']: {
-                fontSize: '1.1em',
-            },
-        },
-        '& .MuiAlert-action': {
-            fontSize: '.85em',
-        },
-    },
-    filledSuccess: {
-        background: '#1A222F',
-    },
-    filledError: {
-        background: '#1A222F',
-    },
-    filledInfo: {
-        background: '#1A222F',
-    },
-}))(MuiAlert);
 //Icons:
 const EmptyExerciseIcon = styled(Stack)`
     height: 6em;
@@ -576,21 +543,6 @@ export const LoadingContainer = styled.div`
     transform: translate(-50%, -50%);
 `;
 
-//Slide transition function for MUI:
-
-function slideTransition(props) {
-    return (
-        <Slide
-            {...props}
-            direction="down"
-            timeout={{
-                enter: 400,
-                exit: 400,
-            }}
-        />
-    );
-}
-
 //Render:
 
 const ConfigureMain = ({
@@ -713,9 +665,7 @@ const ConfigureMain = ({
     };
 
     //Handler Functions for snackbars:
-    const Alert = (props) => {
-        return <CustomMuiAlert elevation={6} variant="filled" {...props} />;
-    };
+
     //Controls opening and closing 'Deleting' ProgramExercises snackbar:
 
     const showDeleteProgramExerciseSnackBar = (bool) => {
@@ -986,69 +936,33 @@ const ConfigureMain = ({
                     </BrowserButtonContainer>
                 </BrowserButtonWrapper>
             )}
-            <Snackbar
-                open={openDeleteProgramExerciseSnackBar}
-                autoHideDuration={4000}
-                onClose={closeDeleteProgramExerciseSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="error">
-                            Exercise Has Been Removed.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openAddProgramRestSnackBar}
-                autoHideDuration={4000}
-                onClose={closeAddProgramRestSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="info">
-                            Rest Period Has Been Added.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
-            <Snackbar
-                open={openDeleteProgramRestSnackBar}
-                autoHideDuration={4000}
-                onClose={closeDeleteProgramRestSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="error">
-                            Rest Period Has Been Deleted.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
+            <GlobalSnackbar
+                openFunction={openDeleteProgramExerciseSnackBar}
+                closeFunction={closeDeleteProgramExerciseSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="error"
+                alertMessage="Exercise has been removed."
+            />
+            <GlobalSnackbar
+                openFunction={openAddProgramRestSnackBar}
+                closeFunction={closeAddProgramRestSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="info"
+                alertMessage="Rest Period has been added."
+            />
+            <GlobalSnackbar
+                openFunction={openDeleteProgramRestSnackBar}
+                closeFunction={closeDeleteProgramRestSnackBar}
+                autoHideDuration={3000}
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="error"
+                alertMessage="Rest Period has been removed."
+            />
             <TimeSelectModal
                 openBoolean={stateTimeSelectModal}
                 closeFunction={closeTimeSelectorModal}
