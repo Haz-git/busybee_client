@@ -168,20 +168,22 @@ const StatCardRecordModal = ({
     );
 
     const renderRecordCards = () => {
-        if (records.stats !== undefined && records.stats !== null) {
-            return records.stats.map((record) => (
-                <RecordCard
-                    key={uuid()}
-                    sets={record.sets}
-                    reps={record.reps}
-                    weight={record.weight}
-                    recordId={record.recordId}
-                    exerciseId={exerciseId}
-                    dateModified={record.dateModified}
-                    editRecordSnackbar={showEditRecordSnackBar}
-                    deleteRecordSnackbar={showDeleteRecordSnackBar}
-                />
-            ));
+        if (isLoaded !== false) {
+            if (records.stats !== undefined && records.stats !== null) {
+                return records.stats.map((record) => (
+                    <RecordCard
+                        key={uuid()}
+                        sets={record.sets}
+                        reps={record.reps}
+                        weight={record.weight}
+                        recordId={record.recordId}
+                        exerciseId={exerciseId}
+                        dateModified={record.dateModified}
+                        editRecordSnackbar={showEditRecordSnackBar}
+                        deleteRecordSnackbar={showDeleteRecordSnackBar}
+                    />
+                ));
+            }
         } else {
             return (
                 <LoadingContainer>
@@ -285,10 +287,14 @@ const StatCardRecordModal = ({
                     aria-labelledby="stat card edit modal"
                     aria-describedby="modal for stat edit"
                     open={openBoolean}
-                    onClose={closeFunction}
+                    onClose={() => {
+                        setIsLoaded(false);
+                        closeFunction();
+                    }}
                     closeAfterTransition
                     onRendered={async () => {
                         const bool = await retrieveRecord(exerciseId);
+                        setIsLoaded(bool);
                     }}
                     BackdropComponent={Backdrop}
                     BackdropProps={{
@@ -312,7 +318,10 @@ const StatCardRecordModal = ({
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
-                                    onClickFunction={closeFunction}
+                                    onClickFunction={() => {
+                                        setIsLoaded(false);
+                                        closeFunction();
+                                    }}
                                 />
                             </ButtonContainer>
                         </RecordModalContainer>
@@ -324,7 +333,15 @@ const StatCardRecordModal = ({
                     aria-labelledby="stat card edit modal"
                     aria-describedby="modal for stat edit"
                     open={openBoolean}
-                    onClose={closeFunction}
+                    onClose={() => {
+                        setIsLoaded(false);
+                        closeFunction();
+                    }}
+                    closeAfterTransition
+                    onRendered={async () => {
+                        const bool = await retrieveRecord(exerciseId);
+                        setIsLoaded(bool);
+                    }}
                     closeAfterTransition
                     BackdropComponent={Backdrop}
                     BackdropProps={{
@@ -348,7 +365,10 @@ const StatCardRecordModal = ({
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
-                                    onClickFunction={closeFunction}
+                                    onClickFunction={() => {
+                                        setIsLoaded(false);
+                                        closeFunction();
+                                    }}
                                 />
                             </ButtonContainer>
                         </BrowserRecordModalContainer>
