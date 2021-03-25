@@ -210,6 +210,8 @@ const StatCard = ({
     deleteStat,
     editStat,
     records,
+    editSnackbar,
+    deleteSnackbar,
 }) => {
     //State for dropdown:
 
@@ -254,7 +256,7 @@ const StatCard = ({
     };
 
     const onDeleteConfirmation = () => {
-        deleteStat(exerciseId);
+        deleteStat(exerciseId, deleteSnackbar);
         setStateDeleteModal(false);
     };
 
@@ -273,7 +275,7 @@ const StatCard = ({
     };
 
     const onEditConfirmation = () => {
-        editStat(exerciseId, userEditInput);
+        editStat(exerciseId, userEditInput, editSnackbar);
         setStateEditModal(false);
     };
 
