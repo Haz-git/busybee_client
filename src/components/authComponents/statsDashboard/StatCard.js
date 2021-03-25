@@ -19,6 +19,7 @@ import { Database } from '@styled-icons/remix-line/Database';
 const WrapperContainer = styled.div`
     display: block;
     text-align: center;
+    width: 100%;
     margin: 1em 0;
     z-index: 10;
     transition: all 0.2s ease;

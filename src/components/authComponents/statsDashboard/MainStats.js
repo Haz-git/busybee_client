@@ -158,7 +158,7 @@ const ButtonContainer = styled.div`
 
 const StatCardContainer = styled.div`
     margin-bottom: 4em;
-    padding: 0 0.5em;
+    padding: 0 0.2em;
 `;
 
 const BrowserStatCardContainer = styled.div`
