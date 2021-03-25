@@ -3,6 +3,7 @@ import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 import CustomIconButton from '../dashboardComponents/CustomIconButton';
 import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
 //Styles:
@@ -388,27 +389,15 @@ const StatCardRecordModal = ({
                 submitHandler={handleSubmission}
                 needNameHandler={false}
             />
-            <Snackbar
-                open={openAddRecordSnackBar}
+            <GlobalSnackbar
+                openFunction={openAddRecordSnackBar}
+                closeFunction={closeNewRecordSnackBar}
                 autoHideDuration={3000}
-                onClose={closeNewRecordSnackBar}
-                anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-                TransitionComponent={slideTransition}
-            >
-                <SnackbarContent
-                    style={{
-                        boxShadow: 'none',
-                        background: 'none',
-                        display: 'flex',
-                        justifyContent: 'center',
-                    }}
-                    message={
-                        <Alert severity="success">
-                            Your record has been added.
-                        </Alert>
-                    }
-                />
-            </Snackbar>
+                anchorOriginVertical="top"
+                anchorOriginHorizontal="center"
+                alertSeverity="success"
+                alertMessage="Your record has been added."
+            />
             <Snackbar
                 open={openEditRecordSnackBar}
                 autoHideDuration={3000}
