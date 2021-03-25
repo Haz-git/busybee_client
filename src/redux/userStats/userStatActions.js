@@ -22,7 +22,7 @@ export function getUserStatData() {
     };
 }
 
-export function addNewStat(exerciseName) {
+export function addNewStat(exerciseName, callback) {
     return async (dispatch) => {
         const response = await api.post('/user/addnewstat', { exerciseName });
 
@@ -30,6 +30,10 @@ export function addNewStat(exerciseName) {
             type: USER_ADD_NEW_STAT,
             payload: response.data.userSavedStats,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
