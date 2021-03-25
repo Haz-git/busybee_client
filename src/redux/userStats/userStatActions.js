@@ -37,7 +37,7 @@ export function addNewStat(exerciseName, callback) {
     };
 }
 
-export function deleteStat(exerciseId) {
+export function deleteStat(exerciseId, callback) {
     return async (dispatch) => {
         //For delete axios requests, data is possible in request bodies, but the following format is required.
 
@@ -49,10 +49,14 @@ export function deleteStat(exerciseId) {
             type: USER_DELETE_STAT,
             payload: response.data.userSavedStats,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
 
-export function editStat(exerciseId, newExerciseName) {
+export function editStat(exerciseId, newExerciseName, callback) {
     return async (dispatch) => {
         const response = await api.patch('/user/editstat', {
             exerciseId,
@@ -63,5 +67,9 @@ export function editStat(exerciseId, newExerciseName) {
             type: USER_EDIT_STAT,
             payload: response.data.userSavedStats,
         });
+
+        if (response) {
+            callback(true);
+        }
     };
 }
