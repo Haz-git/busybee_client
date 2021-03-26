@@ -169,6 +169,7 @@ const ButtonContainer = styled.div`
     flex-direction: column;
     align-items: flex-end;
     justify-content: flex-end;
+    z-index: 99;
 `;
 
 const BrowserButtonWrapper = styled.div`
