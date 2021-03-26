@@ -24,6 +24,7 @@ import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
+import { ChevronCompactRight } from '@styled-icons/bootstrap/ChevronCompactRight';
 
 import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
 import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
@@ -98,22 +99,76 @@ const DelIcon = styled(Remove)`
     width: 1.5em;
 `;
 
-const MainContainer = styled.div`
+const RightIcon = styled(ChevronCompactRight)`
+    height: 1.5em;
+    width: 1.5em;
+
+    transition: all 0.3s ease-in-out;
+`;
+
+const WrapperContainer = styled.div`
     position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: 88% 12%;
+    margin: 1.2em 0;
+    transition: all 0.3s ease-in-out;
+`;
+
+const MainContainer = styled.div`
     display: flex;
     flex-direction: column;
     /* align-items: center; */
     background: #27303f;
-    border-radius: 0.5em;
-    margin: 1.2em 0;
+    /* border-radius: 0.5em; */
+    border-top-left-radius: 0.5em;
+    border-bottom-left-radius: 0.5em;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
+    transition: all 0.3s ease-in-out;
+    z-index: 20;
+    max-width: 100%;
+`;
+
+const PushoverContainer = styled.div`
+    /* background: salmon; */
+    max-height: 100%;
+    z-index: 0;
+    transition: all 0.3s ease-in-out;
+`;
+
+const PushoverButton = styled.button`
+    height: 100%;
+    border: none;
+    /* border-radius: 50%; */
+    padding: 0.2em 0.2em;
+    box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
+    background: #3041ad;
+    font-size: 1em;
+    /* margin: 0.3em 0.3em; */
+    color: white;
+    cursor: pointer;
+    z-index: 1;
+    width: 100%;
+
+    &:focus {
+        outline: none;
+        background: #346d98;
+    }
+
+    &:hover {
+        outline: none;
+        background: #346d98;
+    }
 `;
 
 const HeaderBlock = styled.div`
     background: #081120;
     border-top-left-radius: 0.5em;
-    border-top-right-radius: 0.5em;
+    /* border-top-right-radius: 0.5em; */
     padding: 0.6em 1em;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
 `;
 
 const HeaderText = styled.h2`
@@ -121,6 +176,9 @@ const HeaderText = styled.h2`
     font-weight: 500;
     color: #fcac49;
     font-size: 1.2em;
+    margin-left: 0.4rem;
+    /* max-width: 80%; */
+    word-break: break-word;
     @media screen and (min-width: 414px) {
         font-size: 1.35em;
     }
@@ -171,6 +229,7 @@ const DeleteButton = styled.button`
     margin: 0.3em 0.3em;
     color: white;
     cursor: pointer;
+    z-index: 1;
 
     &:focus {
         outline: none;
@@ -193,6 +252,7 @@ const EditButton = styled.button`
     margin: 0.3em 0.3em;
     color: white;
     cursor: pointer;
+    z-index: 1;
 
     &:focus {
         outline: none;
@@ -210,6 +270,9 @@ const ButtonContainer = styled.div`
     top: 0;
     position: absolute;
     display: flex;
+    flex-direction: column;
+    background: salmon;
+    z-index: 1;
 `;
 
 const ObjectArrayContainer = styled.div`
@@ -232,10 +295,10 @@ const ObjectArrayText = styled.h3`
 `;
 
 const IconDiv = styled.div`
-    right: 0.5em;
+    /* right: 0.5em;
     top: 0.6em;
     position: absolute;
-    display: flex;
+    display: flex; */
 `;
 
 //Render:
@@ -264,6 +327,10 @@ const ProgramExerciseCard = ({
     cardioMinutes,
     cardioSeconds,
 }) => {
+    //State for controlling button expanse:
+
+    const [stateButtonExpand, setStateButtonExpand] = useState(false);
+
     const [stateRestTimeSelectModal, setStateRestTimeSelectModal] = useState(
         false
     );
@@ -410,51 +477,102 @@ const ProgramExerciseCard = ({
         }
     };
 
+    //Controls button expanding and retracting:
+
+    const toggleOptionsContainer = () => {
+        setStateButtonExpand(!stateButtonExpand);
+    };
+
     return (
         <>
-            <MainContainer>
-                <HeaderBlock>
-                    <HeaderText>{name}</HeaderText>
-                </HeaderBlock>
-                <InfoBlock>
-                    <DetailContainer>
-                        {sets && <InfoText>Sets: {sets}</InfoText>}
-                        {reps && <InfoText>Reps: {reps}</InfoText>}
-                        {weight && <InfoText>Weight: {weight}</InfoText>}
-                    </DetailContainer>
-                    <ObjectArrayContainer>
-                        {renderSetObjectArrayDetails()}
-                    </ObjectArrayContainer>
-                    {restMinutesPerSet && restNum && restSecondsPerSet && (
-                        <RestPerSetContainer>
-                            <InfoText>Total Rest Periods: {restNum}</InfoText>
-                            <InfoText>
-                                Rest Length: {restMinutesPerSet}m{' '}
-                                {restSecondsPerSet}s
-                            </InfoText>
-                        </RestPerSetContainer>
-                    )}
-                    <TimeContainer>
-                        {minutes && <InfoText>Minutes: {minutes}</InfoText>}
-                        {seconds && <InfoText>Seconds: {seconds}</InfoText>}
-                        {cardioMinutes && (
-                            <InfoText>Minutes: {cardioMinutes}</InfoText>
+            <WrapperContainer
+                style={
+                    stateButtonExpand === false
+                        ? {
+                              maxWidth: '100%',
+                          }
+                        : {
+                              maxWidth: '89%',
+                          }
+                }
+            >
+                <MainContainer>
+                    <HeaderBlock>
+                        <IconDiv>{renderMiniCardIcon()}</IconDiv>
+                        <HeaderText>{name}</HeaderText>
+                    </HeaderBlock>
+                    <InfoBlock>
+                        <DetailContainer>
+                            {sets && <InfoText>Sets: {sets}</InfoText>}
+                            {reps && <InfoText>Reps: {reps}</InfoText>}
+                            {weight && <InfoText>Weight: {weight}</InfoText>}
+                        </DetailContainer>
+                        <ObjectArrayContainer>
+                            {renderSetObjectArrayDetails()}
+                        </ObjectArrayContainer>
+                        {restMinutesPerSet && restNum && restSecondsPerSet && (
+                            <RestPerSetContainer>
+                                <InfoText>
+                                    Total Rest Periods: {restNum}
+                                </InfoText>
+                                <InfoText>
+                                    Rest Length: {restMinutesPerSet}m{' '}
+                                    {restSecondsPerSet}s
+                                </InfoText>
+                            </RestPerSetContainer>
                         )}
-                        {cardioSeconds && (
-                            <InfoText>Seconds: {cardioSeconds}</InfoText>
-                        )}
-                    </TimeContainer>
-                </InfoBlock>
-                <ButtonContainer>
+                        <TimeContainer>
+                            {minutes && <InfoText>Minutes: {minutes}</InfoText>}
+                            {seconds && <InfoText>Seconds: {seconds}</InfoText>}
+                            {cardioMinutes && (
+                                <InfoText>Minutes: {cardioMinutes}</InfoText>
+                            )}
+                            {cardioSeconds && (
+                                <InfoText>Seconds: {cardioSeconds}</InfoText>
+                            )}
+                        </TimeContainer>
+                    </InfoBlock>
+                </MainContainer>
+                <PushoverContainer
+                    style={
+                        stateButtonExpand === false
+                            ? {
+                                  visibility: 'visible',
+                              }
+                            : {
+                                  transform: 'translateX(-.5em)',
+                                  maxHeight: '100%',
+                                  visibility: 'visible',
+                                  zIndex: '0',
+                              }
+                    }
+                >
+                    <PushoverButton onClick={toggleOptionsContainer}>
+                        <RightIcon
+                            style={
+                                stateButtonExpand === false
+                                    ? {
+                                          transformOrigin: 'center',
+                                          transform: 'rotateZ(0deg)',
+                                      }
+                                    : {
+                                          transformOrigin: 'center',
+                                          transform: 'rotateZ(180deg)',
+                                          marginLeft: '.25em',
+                                      }
+                            }
+                        />
+                    </PushoverButton>
+                </PushoverContainer>
+                {/* <ButtonContainer>
                     <EditButton onClick={openRestModal}>
                         <RestIcon />
                     </EditButton>
                     <DeleteButton onClick={openDeleteProgramExerciseModal}>
                         <DelIcon />
                     </DeleteButton>
-                </ButtonContainer>
-                <IconDiv>{renderMiniCardIcon()}</IconDiv>
-            </MainContainer>
+                </ButtonContainer> */}
+            </WrapperContainer>
             {exerciseId && (
                 <StatCardModalDelete
                     openBoolean={stateDeleteProgramExerciseModal}
