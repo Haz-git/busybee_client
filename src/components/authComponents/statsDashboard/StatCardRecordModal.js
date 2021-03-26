@@ -28,13 +28,13 @@ import { BrowserModalContainer } from '../dashboardComponents/UserPowerStatCard'
 //Styles:
 
 const RecordModalContainer = styled.div`
-    width: 92%;
+    width: 95%;
     left: 50%;
     top: 45%;
     transform: translate(-50%, -50%);
     position: relative;
     background: ${({ theme }) => theme.ModalBG};
-    border: 1px solid #fdbc3d;
+    border: none;
     border-radius: 0.4em;
     padding: 1em 1em;
     display: flex;
@@ -49,10 +49,10 @@ const RecordModalContainer = styled.div`
 `;
 
 const RecordCardContainer = styled.div`
-    margin: 1em 0;
+    margin: 1rem 0;
     overflow-y: scroll;
-    height: 20em;
-    max-height: 20em;
+    height: 20rem;
+    max-height: 20rem;
 `;
 
 const BrowserRecordModalContainer = styled(BrowserModalContainer)`

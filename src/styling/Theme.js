@@ -62,6 +62,7 @@ export const lightTheme = {
 export const darkTheme = {
     //Generals:
     background: '#14181F',
+    // background: '#121212',
     generalText: '#f6f9fc',
     navBottomBorder: '#293241',
     inputFieldLabel: '#E8E8E8',
@@ -92,8 +93,9 @@ export const darkTheme = {
     //UserPowerStats:
     UserPowerHeaderColor: '#fdbc3d',
     //UserPowerStatsModal:
-    ModalBG:
-        'linear-gradient(180deg, rgba(30,44,70,1) 0%, rgba(25,32,43,1) 100%)',
+    ModalBG: '#182130',
+    // ModalBG:
+    //     'linear-gradient(180deg, rgba(30,44,70,1) 0%, rgba(25,32,43,1) 100%)',
     ModalHeader: '#fdbc3d',
     //Bottom Navbar:
     NavColor: '#1d262d',
