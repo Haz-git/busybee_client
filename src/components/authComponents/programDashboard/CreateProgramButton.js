@@ -16,7 +16,7 @@ const CustomButton = withStyles({
     root: {
         display: 'flex',
         alignItems: 'center',
-        boxShadow: 'rgba(0, 0, 0, 0.5) 0px 3px 8px',
+        boxShadow: 'rgba(0, 0, 0, 0.7) 0px 3px 6px',
         backgroundColor: '#27303f',
         textTransform: 'capitalize',
         color: '#fdbc3d',
@@ -25,7 +25,6 @@ const CustomButton = withStyles({
         fontSize: '1.175em',
         padding: '.5em 1em',
         borderRadius: '.3em',
-        marginLeft: '.5em',
         '& .MuiButton-startIcon': {
             margin: '0',
             padding: '0',
