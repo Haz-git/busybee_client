@@ -97,11 +97,13 @@ const FlexWrapper = styled.div`
     top: 0;
     position: -webkit-sticky;
     position: sticky;
-    display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 73% 29%;
+    column-gap: 0.5rem;
     background: ${({ theme }) => theme.background};
-    padding: 0.5em 0em;
+    padding: 0.5em 0.5em;
     width: 100%;
     max-width: 100%;
     z-index: 100;
