@@ -99,15 +99,19 @@ const BrowserSecondaryProgramHeader = styled(MainHeader)`
 `;
 
 const SearchBarContainer = styled.div`
-    display: flex;
-    align-items: center;
-    justify-content: center;
     top: 0;
     position: -webkit-sticky;
     position: sticky;
-    z-index: 100 !important;
+    align-items: center;
+    justify-content: center;
+    display: grid;
+    grid-template-columns: 67% 33%;
+    column-gap: 0.5rem;
     background: ${({ theme }) => theme.background};
-    padding: 0.5em 0;
+    padding: 0.5em 0.5em;
+    width: 100%;
+    max-width: 100%;
+    z-index: 100;
 `;
 
 const ProgramCardContainer = styled.div`
