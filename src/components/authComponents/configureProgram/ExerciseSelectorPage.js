@@ -536,7 +536,7 @@ const ExerciseSelectorPage = ({
                 submitHandler={handleSubmission}
                 needNameHandler={true}
                 nameFunction={handleNameChange}
-                maxTextLength="18"
+                // maxTextLength="18"
             />
             <StatSelectModal
                 ariaLab="Modal for selecting a recorded stat"
