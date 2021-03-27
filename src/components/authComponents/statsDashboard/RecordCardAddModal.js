@@ -96,7 +96,7 @@ const RecordCardAddModal = ({
                                     type="text"
                                     placeholder="Name"
                                     changeFunc={nameFunction}
-                                    maxlength={maxTextLength}
+                                    // maxlength={maxTextLength}
                                 />
                             )}
                             <InputContainer>
