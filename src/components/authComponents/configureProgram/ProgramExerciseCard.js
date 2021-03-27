@@ -19,18 +19,30 @@ import {
 } from '../../../redux/userProgramExercises/programExerciseActions';
 
 //styles:
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { EditOutline } from '@styled-icons/evaicons-outline/EditOutline';
 import { Remove } from '@styled-icons/material/Remove';
 import StatCardModalDelete from '../statsDashboard/StatCardModalDelete';
 import { Zzz } from '@styled-icons/remix-line/Zzz';
-import { ChevronCompactRight } from '@styled-icons/bootstrap/ChevronCompactRight';
+import { ChevronRight } from '@styled-icons/entypo/ChevronRight';
 
 import { NewReleases } from '@styled-icons/material-sharp/NewReleases';
 import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
 import { Columns } from '@styled-icons/boxicons-regular/Columns';
 import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
 import { Run } from '@styled-icons/boxicons-regular/Run';
+
+//Keyframes:
+
+const appearLeft = keyframes`
+    from {
+        translateX(-1rem);
+    }
+
+    to {
+        translateX(0);
+    }
+`;
 
 //Icons:
 
@@ -91,17 +103,20 @@ const EditIcon = styled(EditOutline)`
 
 const RestIcon = styled(Zzz)`
     height: 1.4em;
-    width: 1.6em;
+    width: 1.4em;
+    transition: all 0.3s ease-in-out;
 `;
 
 const DelIcon = styled(Remove)`
     height: 1.5em;
     width: 1.5em;
+    transition: all 0.3s ease-in-out;
 `;
 
-const RightIcon = styled(ChevronCompactRight)`
+const RightIcon = styled(ChevronRight)`
     height: 1.5em;
     width: 1.5em;
+    color: #fdbc3d;
 
     transition: all 0.3s ease-in-out;
 `;
@@ -110,7 +125,7 @@ const WrapperContainer = styled.div`
     position: relative;
     z-index: 10;
     display: grid;
-    grid-template-columns: 88% 12%;
+    grid-template-columns: 90% 10%;
     margin: 1.2em 0;
     transition: all 0.3s ease-in-out;
 `;
@@ -120,9 +135,10 @@ const MainContainer = styled.div`
     flex-direction: column;
     /* align-items: center; */
     background: #27303f;
-    /* border-radius: 0.5em; */
     border-top-left-radius: 0.5em;
     border-bottom-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 8px;
     transition: all 0.3s ease-in-out;
     z-index: 20;
@@ -130,10 +146,14 @@ const MainContainer = styled.div`
 `;
 
 const PushoverContainer = styled.div`
-    /* background: salmon; */
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
     max-height: 100%;
-    z-index: 0;
+    z-index: 2;
     transition: all 0.3s ease-in-out;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 `;
 
 const PushoverButton = styled.button`
@@ -142,8 +162,10 @@ const PushoverButton = styled.button`
     /* border-radius: 50%; */
     padding: 0.2em 0.2em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #3041ad;
+    background: #1a222f;
     font-size: 1em;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
     /* margin: 0.3em 0.3em; */
     color: white;
     cursor: pointer;
@@ -164,11 +186,12 @@ const PushoverButton = styled.button`
 const HeaderBlock = styled.div`
     background: #081120;
     border-top-left-radius: 0.5em;
-    /* border-top-right-radius: 0.5em; */
+    border-top-right-radius: 0.5em;
     padding: 0.6em 1em;
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    transition: all 0.3s ease-in-out;
 `;
 
 const HeaderText = styled.h2`
@@ -221,15 +244,17 @@ const RestPerSetContainer = styled.div`
 
 const DeleteButton = styled.button`
     border: none;
-    border-radius: 50%;
     padding: 0.2em 0.2em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
     background: #90130c;
     font-size: 1em;
-    margin: 0.3em 0.3em;
     color: white;
     cursor: pointer;
-    z-index: 1;
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    transition: all 0.3s ease-in-out;
 
     &:focus {
         outline: none;
@@ -244,15 +269,17 @@ const DeleteButton = styled.button`
 
 const EditButton = styled.button`
     border: none;
-    border-radius: 50%;
     padding: 0.2em 0.2em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
     background: #3041ad;
     font-size: 1em;
-    margin: 0.3em 0.3em;
     color: white;
     cursor: pointer;
-    z-index: 1;
+    height: 100%;
+    width: 100%;
+    border-top-right-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    transition: all 0.3s ease-in-out;
 
     &:focus {
         outline: none;
@@ -266,13 +293,15 @@ const EditButton = styled.button`
 `;
 
 const ButtonContainer = styled.div`
-    left: 0;
-    top: 0;
-    position: absolute;
+    height: 100%;
     display: flex;
     flex-direction: column;
-    background: salmon;
+    align-items: center;
+    justify-content: center;
+    /* max-width: 0; */
+    background: inherit;
     z-index: 1;
+    transition: all 0.3s ease-in-out;
 `;
 
 const ObjectArrayContainer = styled.div`
@@ -492,12 +521,36 @@ const ProgramExerciseCard = ({
                               maxWidth: '100%',
                           }
                         : {
-                              maxWidth: '89%',
+                              maxWidth: '90%',
                           }
                 }
             >
-                <MainContainer>
-                    <HeaderBlock>
+                <MainContainer
+                    style={
+                        stateButtonExpand === false
+                            ? {
+                                  borderBottomRightRadius: '.5em',
+                                  borderTopRightRadius: '.5em',
+                              }
+                            : {
+                                  borderBottomRightRadius: '0',
+                                  borderTopRightRadius: '0',
+                              }
+                    }
+                >
+                    <HeaderBlock
+                        style={
+                            stateButtonExpand === false
+                                ? {
+                                      borderTopLeftRadius: '.5em',
+                                      borderTopRightRadius: '.5em',
+                                  }
+                                : {
+                                      borderTopLeftRadius: '0',
+                                      borderTopRightRadius: '0',
+                                  }
+                        }
+                    >
                         <IconDiv>{renderMiniCardIcon()}</IconDiv>
                         <HeaderText>{name}</HeaderText>
                     </HeaderBlock>
@@ -537,16 +590,50 @@ const ProgramExerciseCard = ({
                     style={
                         stateButtonExpand === false
                             ? {
+                                  transform: 'translateX(-1.25rem)',
                                   visibility: 'visible',
                               }
                             : {
-                                  transform: 'translateX(-.5em)',
+                                  transform: 'translateX(1rem)',
                                   maxHeight: '100%',
                                   visibility: 'visible',
-                                  zIndex: '0',
                               }
                     }
                 >
+                    <ButtonContainer>
+                        <EditButton
+                            onClick={openRestModal}
+                            style={
+                                stateButtonExpand === false
+                                    ? {
+                                          borderTopRightRadius: '.5em',
+                                          borderBottomRightRadius: '.5em',
+                                      }
+                                    : {
+                                          borderTopRightRadius: '0',
+                                          borderBottomRightRadius: '0',
+                                      }
+                            }
+                        >
+                            <RestIcon />
+                        </EditButton>
+                        <DeleteButton
+                            onClick={openDeleteProgramExerciseModal}
+                            style={
+                                stateButtonExpand === false
+                                    ? {
+                                          borderTopRightRadius: '.5em',
+                                          borderBottomRightRadius: '.5em',
+                                      }
+                                    : {
+                                          borderTopRightRadius: '0',
+                                          borderBottomRightRadius: '0',
+                                      }
+                            }
+                        >
+                            <DelIcon />
+                        </DeleteButton>
+                    </ButtonContainer>
                     <PushoverButton onClick={toggleOptionsContainer}>
                         <RightIcon
                             style={
@@ -558,20 +645,11 @@ const ProgramExerciseCard = ({
                                     : {
                                           transformOrigin: 'center',
                                           transform: 'rotateZ(180deg)',
-                                          marginLeft: '.25em',
                                       }
                             }
                         />
                     </PushoverButton>
                 </PushoverContainer>
-                {/* <ButtonContainer>
-                    <EditButton onClick={openRestModal}>
-                        <RestIcon />
-                    </EditButton>
-                    <DeleteButton onClick={openDeleteProgramExerciseModal}>
-                        <DelIcon />
-                    </DeleteButton>
-                </ButtonContainer> */}
             </WrapperContainer>
             {exerciseId && (
                 <StatCardModalDelete
