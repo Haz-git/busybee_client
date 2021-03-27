@@ -174,12 +174,12 @@ const PushoverButton = styled.button`
 
     &:focus {
         outline: none;
-        background: #346d98;
+        background: #1a222f;
     }
 
     &:hover {
         outline: none;
-        background: #346d98;
+        background: #1a222f;
     }
 `;
 
@@ -300,7 +300,7 @@ const ButtonContainer = styled.div`
     align-items: center;
     justify-content: center;
     /* max-width: 0; */
-    background: inherit;
+    background: #1a222f;
     z-index: 1;
     transition: all 0.3s ease-in-out;
 `;
@@ -590,7 +590,7 @@ const ProgramExerciseCard = ({
                     style={
                         stateButtonExpand === false
                             ? {
-                                  transform: 'translateX(-1.25rem)',
+                                  transform: 'translateX(-70%)',
                                   visibility: 'visible',
                               }
                             : {
