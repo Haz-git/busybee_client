@@ -184,10 +184,11 @@ const PushoverButton = styled.button`
 `;
 
 const HeaderBlock = styled.div`
+    position: relative;
     background: #081120;
     border-top-left-radius: 0.5em;
     border-top-right-radius: 0.5em;
-    padding: 0.6em 1em;
+    padding: 0.6em 1.8em;
     display: flex;
     align-items: center;
     justify-content: flex-start;
@@ -324,10 +325,9 @@ const ObjectArrayText = styled.h3`
 `;
 
 const IconDiv = styled.div`
-    /* right: 0.5em;
-    top: 0.6em;
     position: absolute;
-    display: flex; */
+    top: 0.6rem;
+    left: 0.2rem;
 `;
 
 //Render:
