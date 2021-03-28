@@ -65,13 +65,13 @@ const HideIcon = styled(ChevronsDown)`
 `;
 
 export const BackIcon = styled(CaretBack)`
-    height: 3.8em;
-    width: 4.3em;
+    height: 3.5rem;
+    width: 3rem;
 `;
 
 export const BrowserBackIcon = styled(CaretBack)`
-    height: 7.8em;
-    width: 6.3em;
+    height: 6rem;
+    width: 5rem;
 `;
 
 const RestIcon = styled(Zzz)`
