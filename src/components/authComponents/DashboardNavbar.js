@@ -33,8 +33,8 @@ const fadeUp = keyframes`
 `;
 
 const StyledHomeIcon = styled(Home)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
 
@@ -45,8 +45,8 @@ const StyledHomeIcon = styled(Home)`
 `;
 
 const StyledCalendarIcon = styled(Calendar)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
     @media screen and (min-width: 320px) {
@@ -56,15 +56,15 @@ const StyledCalendarIcon = styled(Calendar)`
 `;
 
 const StyledLogOutIcon = styled(LogOut)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
 `;
 
 const StyledStatsIcon = styled(StatsChart)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
     @media screen and (max-width: 320px) {
@@ -74,8 +74,8 @@ const StyledStatsIcon = styled(StatsChart)`
 `;
 
 const StyledUserCogIcon = styled(UserCog)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
     @media screen and (max-width: 320px) {
@@ -85,8 +85,8 @@ const StyledUserCogIcon = styled(UserCog)`
 `;
 
 const StyledBarbellIcon = styled(Barbell)`
-    height: 2.2em;
-    width: 2.2em;
+    height: 1.8rem;
+    width: 1.8rem;
     color: inherit;
     cursor: pointer;
     @media screen and (max-width: 320px) {
@@ -182,7 +182,7 @@ const BrowserNavLabel = styled.label`
 `;
 
 const NavLabel = styled.label`
-    font-size: 0.75em;
+    font-size: 0.75rem;
     font-weight: 400;
     color: inherit;
 `;
