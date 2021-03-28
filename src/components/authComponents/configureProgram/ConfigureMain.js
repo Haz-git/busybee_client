@@ -198,7 +198,7 @@ const EditLayoutButtonOpening = styled(Link)`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #ca7500;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -214,12 +214,12 @@ const EditLayoutButtonOpening = styled(Link)`
 
     &:hover {
         outline: none;
-        background: #fa9100;
+        background: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background: #fa9100;
+        background: #0d182b;
     }
 `;
 
@@ -243,7 +243,7 @@ const AddRestButtonOpening = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #323875;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -259,12 +259,12 @@ const AddRestButtonOpening = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #535993;
+        background-color: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background-color: #535993;
+        background-color: #0d182b;
     }
 `;
 
@@ -288,7 +288,7 @@ const AddExerciseButtonOpening = styled(Link)`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #72045d;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -304,12 +304,12 @@ const AddExerciseButtonOpening = styled(Link)`
 
     &:hover {
         outline: none;
-        background-color: #9e2e89;
+        background-color: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background-color: #9e2e89;
+        background-color: #0d182b;
     }
 `;
 
@@ -357,7 +357,7 @@ const AddExerciseButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #72045d;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -369,12 +369,12 @@ const AddExerciseButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #9e2e89;
+        background-color: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background-color: #9e2e89;
+        background-color: #0d182b;
     }
 `;
 
@@ -399,7 +399,7 @@ const AddRestButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #323875;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -411,12 +411,12 @@ const AddRestButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background-color: #535993;
+        background-color: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background-color: #535993;
+        background-color: #0d182b;
     }
 `;
 
@@ -440,7 +440,7 @@ const EditLayoutButtonClosing = styled.button`
     justify-content: center;
     color: #ffffff;
     border: none;
-    background: #ca7500;
+    background: #273447;
     font-family: 'Nunito', 'Lato';
     font-weight: 900;
     font-size: 1.2em;
@@ -456,12 +456,12 @@ const EditLayoutButtonClosing = styled.button`
 
     &:hover {
         outline: none;
-        background: #fa9100;
+        background: #0d182b;
     }
 
     &:focus {
         outline: none;
-        background: #fa9100;
+        background: #0d182b;
     }
 `;
 

@@ -193,6 +193,7 @@ const HeaderBlock = styled.div`
     align-items: center;
     justify-content: flex-start;
     transition: all 0.3s ease-in-out;
+    border-bottom: 1px solid #1a222f;
 `;
 
 const HeaderText = styled.h2`
@@ -210,6 +211,7 @@ const HeaderText = styled.h2`
 
 const InfoBlock = styled.div`
     padding: 0.3em 0.8em;
+    background: #081120;
 `;
 
 const InfoText = styled.h3`
