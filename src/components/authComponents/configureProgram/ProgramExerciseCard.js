@@ -102,14 +102,14 @@ const EditIcon = styled(EditOutline)`
 `;
 
 const RestIcon = styled(Zzz)`
-    height: 1.4em;
-    width: 1.4em;
+    height: 1.4rem;
+    width: 1.4rem;
     transition: all 0.3s ease-in-out;
 `;
 
 const DelIcon = styled(Remove)`
-    height: 1.5em;
-    width: 1.5em;
+    height: 1.4rem;
+    width: 1.4rem;
     transition: all 0.3s ease-in-out;
 `;
 
@@ -146,6 +146,8 @@ const MainContainer = styled.div`
 `;
 
 const PushoverContainer = styled.div`
+    max-width: 4rem;
+    width: 4rem;
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     max-height: 100%;
@@ -592,11 +594,11 @@ const ProgramExerciseCard = ({
                     style={
                         stateButtonExpand === false
                             ? {
-                                  transform: 'translateX(-70%)',
+                                  transform: 'translateX(-60%)',
                                   visibility: 'visible',
                               }
                             : {
-                                  transform: 'translateX(1rem)',
+                                  transform: 'translateX(0)',
                                   maxHeight: '100%',
                                   visibility: 'visible',
                               }
