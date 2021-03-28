@@ -56,17 +56,6 @@ const SortIcon = styled(SortAlt2)`
     width: 1.5em;
 `;
 
-const ArrowIcon = styled(ArrowRightSquareFill)`
-    height: 2.2em;
-    width: 2.2em;
-    color: ${({ theme }) => theme.AddMoreLabelC};
-
-    @media screen and (max-width: 320px) {
-        height: 1.8em;
-        width: 1.8em;
-    }
-`;
-
 const HideIcon = styled(ChevronsDown)`
     position: absolute;
     top: 1em;
@@ -163,8 +152,8 @@ export const ExerciseHeader = styled.h2`
 
 const ButtonContainer = styled.div`
     position: fixed;
-    bottom: 5.5em;
-    right: 0.4em;
+    bottom: 5rem;
+    right: 0.4rem;
     display: flex;
     flex-direction: column;
     align-items: flex-end;
