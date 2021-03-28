@@ -103,7 +103,7 @@ export const darkTheme = {
     //Stats:
 
     //StatCard:
-    StatCardBG: '#27303f',
+    StatCardBG: '#081120',
     StatCardHeader: '#fdbc3d',
     StatCardTime: 'white',
     TrashIcon: '#CB3F46',
