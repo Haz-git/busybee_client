@@ -504,16 +504,6 @@ const CardContainer = styled.div`
     margin-bottom: 8.7em;
 `;
 
-const LabelContainer = styled.div`
-    position: fixed;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    bottom: 6.5em;
-    right: 6em;
-    text-align: left;
-`;
-
 const BrowserAddMoreLabel = styled.h3`
     padding: 0;
     margin: 1em 0.5em;
@@ -522,20 +512,6 @@ const BrowserAddMoreLabel = styled.h3`
     font-weight: 700;
     color: ${({ theme }) => theme.AddMoreLabelC};
     white-space: nowrap;
-`;
-
-const AddMoreLabel = styled.h3`
-    padding: 0;
-    margin: 0 0.5em;
-    font-size: 1.1em;
-    font-family: 'Lato', Arial, Helvetica, sans-serif;
-    font-weight: 700;
-    color: ${({ theme }) => theme.AddMoreLabelC};
-    white-space: nowrap;
-
-    @media screen and (max-width: 320px) {
-        font-size: 0.9em;
-    }
 `;
 
 export const LoadingContainer = styled.div`
@@ -568,17 +544,9 @@ const ConfigureMain = ({
         };
 
         getUserInfo();
-
-        window.addEventListener('scroll', handleScroll);
-
-        return () => {
-            window.removeEventListener('scroll', handleScroll);
-        };
     }, []);
 
     const [stateSelfAddButton, setStateSelfAddButton] = useState(true);
-
-    const [stateCardEndLabel, setStateCardEndLabel] = useState(false);
 
     const [stateTimeSelectModal, setStateTimeSelectModal] = useState(false);
     const [minInput, setMinInput] = useState(null);
@@ -742,33 +710,6 @@ const ConfigureMain = ({
         setSecInput(null);
     };
 
-    //Handles the visibility of the 'add more' label, this label should only be visible at the bottom of the card container.
-
-    const handleScroll = (e) => {
-        //This handleScroll doesn't seem to register correctly in Chrome:
-        const windowHeight =
-            'innerHeight' in window
-                ? window.innerHeight
-                : document.documentElement.offsetHeight;
-        const body = document.body;
-        const html = document.documentElement;
-        const docHeight = Math.max(
-            body.scrollHeight,
-            body.offsetHeight,
-            html.clientHeight,
-            html.scrollHeight,
-            html.offsetHeight
-        );
-        const windowBottom = windowHeight + window.pageYOffset;
-
-        if (windowBottom >= docHeight) {
-            //Shouldn't change the state, cause that will cause component re-render and therefore GET request again.
-            setStateCardEndLabel(true);
-        } else {
-            setStateCardEndLabel(false);
-        }
-    };
-
     //Render function for no exercises--
 
     const renderEmptyConfigureMain = () => {
@@ -820,20 +761,6 @@ const ConfigureMain = ({
                     )}
                 </CardContainer>
             </MainContainer>
-            {isMobileOnly && (
-                <>
-                    {stateCardEndLabel && (
-                        <LabelContainer>
-                            <AddMoreLabel>
-                                Add more exercises, or <br />
-                                configure your blueprint's <br />
-                                layout to finish and save.
-                            </AddMoreLabel>
-                            <ArrowIcon />
-                        </LabelContainer>
-                    )}
-                </>
-            )}
             {isMobileOnly && (
                 <ButtonContainer>
                     {stateAddButtons === true ? (
