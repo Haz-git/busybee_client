@@ -388,6 +388,43 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         }
     };
 
+    const sortCardFunction = (format, array) => {
+        if (array === undefined || array === null) return;
+
+        let sortedArray;
+
+        switch (format) {
+            case 'NEWEST':
+                sortedArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            new Date(b.dateUpdated) - new Date(a.dateUpdated)
+                    );
+
+                return sortedArray;
+                break;
+            case 'MOSTRECORDS':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => b.records.length - a.records.length);
+
+                return sortedArray;
+                break;
+            case 'ALPHABETICAL':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) =>
+                        a.exerciseName.localeCompare(b.exerciseName)
+                    );
+
+                return sortedArray;
+                break;
+            default:
+                break;
+        }
+    };
+
     return (
         <>
             {isMobileOnly && (
