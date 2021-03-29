@@ -184,9 +184,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     const [openEditStatSnackbar, setOpenEditStatSnackbar] = useState(false);
     const [openDeleteStatSnackbar, setOpenDeleteStatSnackbar] = useState(false);
 
-    //Modification flag:
-    const [isStatModified, setIsStatModified] = useState(false);
-
     //State of userSearchInput:
     const [userSearchValue, setUserSearchValue] = useState(null);
 
@@ -198,6 +195,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             //If these are undefined, that means programs were not persisted and will need retrieval.
             const getUserExistingStats = async () => {
                 const bool = await getUserStatData();
+                // setUserSearchArray(stats.stats);
                 setIsLoaded(bool);
             };
             getUserExistingStats();
@@ -205,6 +203,21 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             setIsLoaded(true);
         }
     }, []);
+
+    useEffect(() => {
+        if (userSearchValue !== null) {
+            setUserSearchArray(
+                stats.stats.filter((stat) => {
+                    return stat.exerciseName
+                        .trim()
+                        .toLowerCase()
+                        .includes(userSearchValue);
+                })
+            );
+        }
+    }, [stats.stats]);
+
+    //Need a conditional for stat length change?
 
     //Controls snackbar open/close:
     const showNewStatSnackbar = (bool) => {
@@ -428,19 +441,37 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     //Sorting Functions:
 
     const sortFunctionNewest = () => {
-        let sortedArray = sortCardFunction('NEWEST', stats.stats);
+        let sortedArray;
+
+        if (userSearchArray !== null) {
+            sortedArray = sortCardFunction('NEWEST', userSearchArray);
+        } else {
+            sortedArray = sortCardFunction('NEWEST', stats.stats);
+        }
 
         setUserSearchArray(sortedArray);
     };
 
     const sortFunctionMostRecords = () => {
-        let sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
+        let sortedArray;
+
+        if (userSearchArray !== null) {
+            sortedArray = sortCardFunction('MOSTRECORDS', userSearchArray);
+        } else {
+            sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
+        }
 
         setUserSearchArray(sortedArray);
     };
 
     const sortFunctionAlphabet = () => {
-        let sortedArray = sortCardFunction('ALPHABETICAL', stats.stats);
+        let sortedArray;
+
+        if (userSearchArray !== null) {
+            sortedArray = sortCardFunction('ALPHABETICAL', userSearchArray);
+        } else {
+            sortedArray = sortCardFunction('ALPHABETICAL', stats.stats);
+        }
 
         setUserSearchArray(sortedArray);
     };
