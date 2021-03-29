@@ -36,6 +36,10 @@ const OptionButton = styled.button`
     font-size: 0.8rem;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 3px;
+
+    &:focus {
+        outline: none;
+    }
 `;
 
 const SortByOptions = ({
