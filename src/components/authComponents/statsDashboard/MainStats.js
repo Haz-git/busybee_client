@@ -175,7 +175,7 @@ const BrowserStatCardContainer = styled.div`
 
 //Render:
 
-const MainStats = ({ addNewStat, getUserStatData, stats }) => {
+const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
@@ -195,7 +195,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             //If these are undefined, that means programs were not persisted and will need retrieval.
             const getUserExistingStats = async () => {
                 const bool = await getUserStatData();
-                // setUserSearchArray(stats.stats);
                 setIsLoaded(bool);
             };
             getUserExistingStats();
@@ -205,6 +204,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
     }, []);
 
     useEffect(() => {
+        console.log('test');
         if (userSearchValue !== null) {
             setUserSearchArray(
                 stats.stats.filter((stat) => {
@@ -452,8 +452,10 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
         setUserSearchArray(sortedArray);
     };
 
-    const sortFunctionMostRecords = () => {
+    const sortFunctionMostRecords = async () => {
         let sortedArray;
+
+        //Since we have chosen to not update stats.stats if not undefined, we update it here:
 
         if (userSearchArray !== null) {
             sortedArray = sortCardFunction('MOSTRECORDS', userSearchArray);
