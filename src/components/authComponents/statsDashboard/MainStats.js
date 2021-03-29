@@ -8,6 +8,7 @@ import { isBrowser, isMobileOnly } from 'react-device-detect';
 import { v4 as uuid } from 'uuid';
 
 //Components:
+import SortByOptions from '../dashboardComponents/SortByOptions';
 import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 import CustomSaveButton from '../dashboardComponents/CustomSaveButton';
 import SearchBar from './SearchBar';
@@ -401,7 +402,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                         (a, b) =>
                             new Date(b.dateUpdated) - new Date(a.dateUpdated)
                     );
-
                 return sortedArray;
                 break;
             case 'MOSTRECORDS':
@@ -423,6 +423,26 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
             default:
                 break;
         }
+    };
+
+    //Sorting Functions:
+
+    const sortFunctionNewest = () => {
+        let sortedArray = sortCardFunction('NEWEST', stats.stats);
+
+        setUserSearchArray(sortedArray);
+    };
+
+    const sortFunctionMostRecords = () => {
+        let sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
+
+        setUserSearchArray(sortedArray);
+    };
+
+    const sortFunctionAlphabet = () => {
+        let sortedArray = sortCardFunction('ALPHABETICAL', stats.stats);
+
+        setUserSearchArray(sortedArray);
     };
 
     return (
@@ -549,15 +569,22 @@ const MainStats = ({ addNewStat, getUserStatData, stats }) => {
                     </BrowserFlexWrapper>
                 )}
                 {isMobileOnly && (
-                    <StatCardContainer>
-                        {isLoaded === true ? (
-                            renderStatCards()
-                        ) : (
-                            <LoadingContainer>
-                                <CustomLoadingDots />
-                            </LoadingContainer>
-                        )}
-                    </StatCardContainer>
+                    <>
+                        <SortByOptions
+                            newestSortFunction={sortFunctionNewest}
+                            recordsSortFunction={sortFunctionMostRecords}
+                            alphabetSortFunction={sortFunctionAlphabet}
+                        />
+                        <StatCardContainer>
+                            {isLoaded === true ? (
+                                renderStatCards()
+                            ) : (
+                                <LoadingContainer>
+                                    <CustomLoadingDots />
+                                </LoadingContainer>
+                            )}
+                        </StatCardContainer>
+                    </>
                 )}
                 {isBrowser && (
                     <BrowserStatCardContainer>
