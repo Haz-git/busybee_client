@@ -114,13 +114,22 @@ const BrowserFlexWrapper = styled.div`
     top: 0;
     position: -webkit-sticky;
     position: sticky;
+    align-items: center;
+    justify-content: center;
     display: grid;
-    grid-template-columns: 87% 13%;
+    grid-template-columns: 88% 12%;
+    column-gap: 0.5rem;
     background: ${({ theme }) => theme.background};
-    padding: 0.5em 0;
+    padding: 0.5em 0.5em;
+    width: 100%;
+    max-width: 100%;
+    z-index: 100;
 `;
 
-const BrowserSearchBarContainer = styled.div``;
+const BrowserSearchBarContainer = styled.div`
+    display: inline-block;
+    text-align: center;
+`;
 
 const SecondaryStatHeader = styled(MainHeader)`
     font-size: 1em;
@@ -653,15 +662,22 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                     </>
                 )}
                 {isBrowser && (
-                    <BrowserStatCardContainer>
-                        {isLoaded === true ? (
-                            renderStatCards()
-                        ) : (
-                            <LoadingContainer>
-                                <CustomLoadingDots />
-                            </LoadingContainer>
-                        )}
-                    </BrowserStatCardContainer>
+                    <>
+                        <SortByOptions
+                            newestSortFunction={sortFunctionNewest}
+                            recordsSortFunction={sortFunctionMostRecords}
+                            alphabetSortFunction={sortFunctionAlphabet}
+                        />
+                        <BrowserStatCardContainer>
+                            {isLoaded === true ? (
+                                renderStatCards()
+                            ) : (
+                                <LoadingContainer>
+                                    <CustomLoadingDots />
+                                </LoadingContainer>
+                            )}
+                        </BrowserStatCardContainer>
+                    </>
                 )}
             </MainContainer>
             <GlobalSnackbar
