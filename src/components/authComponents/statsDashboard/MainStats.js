@@ -204,7 +204,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     }, []);
 
     useEffect(() => {
-        if (userSearchValue !== null) {
+        //Enables persistence of user searched stat after a stat operation.
+        if (userSearchValue !== null && userSearchValue !== '') {
             setUserSearchArray(
                 stats.stats.filter((stat) => {
                     return stat.exerciseName
@@ -489,7 +490,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
             const getUserNewRecordValues = async () => {
                 const bool = await getUserStatData();
                 if (bool === true) {
-                    console.log('true');
                     sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
                     setUserSearchArray(sortedArray);
                     setIsLoaded(true);
