@@ -204,7 +204,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     }, []);
 
     useEffect(() => {
-        console.log('test');
         if (userSearchValue !== null) {
             setUserSearchArray(
                 stats.stats.filter((stat) => {
@@ -396,6 +395,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
         //Prevents React not re-rendering cards after a search:
 
         if (e.target.value === '') {
+            console.log('Target value is empty, userSearchset to null');
             setUserSearchArray(null);
         } else {
             setUserSearchArray(filteredArray);
@@ -443,7 +443,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     const sortFunctionNewest = () => {
         let sortedArray;
 
-        if (userSearchArray !== null) {
+        if (userSearchArray !== null && userSearchArray !== '') {
             sortedArray = sortCardFunction('NEWEST', userSearchArray);
         } else {
             sortedArray = sortCardFunction('NEWEST', stats.stats);
@@ -452,24 +452,57 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
         setUserSearchArray(sortedArray);
     };
 
-    const sortFunctionMostRecords = async () => {
+    const sortFunctionMostRecords = () => {
         let sortedArray;
+        setIsLoaded(false);
 
         //Since we have chosen to not update stats.stats if not undefined, we update it here:
 
-        if (userSearchArray !== null) {
-            sortedArray = sortCardFunction('MOSTRECORDS', userSearchArray);
+        if (
+            userSearchArray !== null &&
+            userSearchValue !== null &&
+            userSearchValue !== ''
+        ) {
+            console.log('not null');
+            const getUserNewRecordValues = async () => {
+                //Refresh the stat data:
+                const bool = await getUserStatData();
+                if (bool === true) {
+                    setUserSearchArray(
+                        stats.stats.filter((stat) => {
+                            return stat.exerciseName
+                                .trim()
+                                .toLowerCase()
+                                .includes(userSearchValue);
+                        })
+                    );
+                    sortedArray = sortCardFunction(
+                        'MOSTRECORDS',
+                        userSearchArray
+                    );
+                    setUserSearchArray(sortedArray);
+                    setIsLoaded(true);
+                }
+            };
+            getUserNewRecordValues();
         } else {
-            sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
+            const getUserNewRecordValues = async () => {
+                const bool = await getUserStatData();
+                if (bool === true) {
+                    console.log('true');
+                    sortedArray = sortCardFunction('MOSTRECORDS', stats.stats);
+                    setUserSearchArray(sortedArray);
+                    setIsLoaded(true);
+                }
+            };
+            getUserNewRecordValues();
         }
-
-        setUserSearchArray(sortedArray);
     };
 
     const sortFunctionAlphabet = () => {
         let sortedArray;
 
-        if (userSearchArray !== null) {
+        if (userSearchArray !== null && userSearchArray !== '') {
             sortedArray = sortCardFunction('ALPHABETICAL', userSearchArray);
         } else {
             sortedArray = sortCardFunction('ALPHABETICAL', stats.stats);
