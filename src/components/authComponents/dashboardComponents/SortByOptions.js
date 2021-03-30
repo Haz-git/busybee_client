@@ -57,7 +57,7 @@ const SortByOptions = ({
                         Newest
                     </OptionButton>
                     <OptionButton onClick={recordsSortFunction}>
-                        Records
+                        # Records
                     </OptionButton>
                     <OptionButton onClick={alphabetSortFunction}>
                         Alphabetical
