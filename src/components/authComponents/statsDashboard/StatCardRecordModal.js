@@ -3,6 +3,7 @@ import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 import CustomIconButton from '../dashboardComponents/CustomIconButton';
 import CustomLoadingDots from '../configureProgram/CustomLoadingDots';
+import SortByOptions from '../dashboardComponents/SortByOptions';
 import GlobalSnackbar from '../dashboardComponents/GlobalSnackbar';
 import { LoadingContainer } from '../configureProgram/ConfigureMain';
 
@@ -53,6 +54,11 @@ const RecordCardContainer = styled.div`
     overflow-y: scroll;
     height: 20rem;
     max-height: 20rem;
+    @media only screen and (max-width: 320px) {
+        height: 14rem;
+        max-height: 14rem;
+        margin: 0.7rem 0;
+    }
 `;
 
 const BrowserRecordModalContainer = styled(BrowserModalContainer)`
@@ -251,6 +257,7 @@ const StatCardRecordModal = ({
                             <RecordCardContainer>
                                 {renderRecordCards()}
                             </RecordCardContainer>
+                            <SortByOptions sortingType="RECORDS" />
                             <ButtonContainer>
                                 <CustomIconButton
                                     buttonIcon={<AddIcon />}
