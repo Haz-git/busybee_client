@@ -92,6 +92,7 @@ const SortByOptions = ({
     newestSortFunction,
     recordsSortFunction,
     alphabetSortFunction,
+    recordSortHandler,
 }) => {
     const generateSortByFromSortingType = () => {
         if (sortingType === 'STATS') {
@@ -120,7 +121,10 @@ const SortByOptions = ({
                         <SortByLabel style={{ textAlign: 'center' }}>
                             Sort Records By:
                         </SortByLabel>
-                        <RecordSelectorInput name="recordsort">
+                        <RecordSelectorInput
+                            name="recordsort"
+                            onChange={recordSortHandler}
+                        >
                             <option value="DEFAULT">Default</option>
                             <option value="HIGHWEIGHT">Highest Weight</option>
                             <option value="LOWWEIGHT">Lowest Weight</option>
