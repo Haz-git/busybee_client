@@ -111,6 +111,7 @@ const StatCardRecordModal = ({
     //Use-Effect for matching sorted list with record list:
 
     useEffect(() => {
+        //This useEffect handles a bug where the records do not update after an operation after using a sort feature.
         if (records.stats !== undefined && records.stats !== null) {
             setSortedRecordArray(records.stats);
         }
@@ -247,8 +248,6 @@ const StatCardRecordModal = ({
     //Handles sorting of records:
 
     const handleRecordSortSelector = (e) => {
-        console.log(e.target.value);
-
         //pass e.target.value into switch function ordering array
         //set the new state of records
         const parsedRecordArray = sortRecordSwitchFunction(
@@ -257,8 +256,6 @@ const StatCardRecordModal = ({
         );
         setSortedRecordArray(parsedRecordArray);
     };
-
-    // console.log(sortedRecordArray);
 
     //Switch controller for record re-ordering:
     const sortRecordSwitchFunction = (format, array) => {
