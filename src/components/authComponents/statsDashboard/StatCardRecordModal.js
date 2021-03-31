@@ -111,6 +111,8 @@ const StatCardRecordModal = ({
     //State for modified records (under a sort):
     const [sortedRecordArray, setSortedRecordArray] = useState(null);
 
+    //Modal State:
+
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
     const [weightInput, setWeightInput] = useState(null);
     const [setsInput, setSetsInput] = useState(null);
@@ -126,8 +128,9 @@ const StatCardRecordModal = ({
 
     const renderRecordCards = () => {
         if (isLoaded !== false) {
-            if (records.stats !== undefined && records.stats !== null) {
-                return records.stats.map((record) => (
+            //Check if sortedRecordArray is not null, then render. Otherwise render the state of the cards....
+            if (sortedRecordArray !== undefined && sortedRecordArray !== null) {
+                return sortedRecordArray.map((record) => (
                     <RecordCard
                         key={uuid()}
                         sets={record.sets}
@@ -233,6 +236,75 @@ const StatCardRecordModal = ({
         setOpenDeleteRecordSnackBar(false);
     };
 
+    //Handles sorting of records:
+
+    const handleRecordSortSelector = (e) => {
+        console.log(e.target.value);
+
+        //pass e.target.value into switch function ordering array
+        //set the new state of records
+        const parsedRecordArray = sortRecordSwitchFunction(
+            e.target.value,
+            sortedRecordArray
+        );
+        setSortedRecordArray(parsedRecordArray);
+    };
+
+    // console.log(sortedRecordArray);
+
+    //Switch controller for record re-ordering:
+    const sortRecordSwitchFunction = (format, array) => {
+        if (array === undefined || array === null) return;
+
+        let sortedArray;
+
+        switch (format) {
+            case 'DEFAULT':
+                if (records.stats !== undefined && records.stats !== null)
+                    return records.stats;
+            case 'HIGHWEIGHT':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(b.weight) - parseInt(a.weight));
+                return sortedArray;
+            case 'LOWWEIGHT':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(a.weight) - parseInt(b.weight));
+                return sortedArray;
+            case 'HIGHSET':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(b.sets) - parseInt(a.sets));
+                return sortedArray;
+            case 'LOWSET':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(a.sets) - parseInt(b.sets));
+                return sortedArray;
+            case 'HIGHREP':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(b.reps) - parseInt(a.reps));
+                return sortedArray;
+            case 'LOWREP':
+                sortedArray = array
+                    .slice()
+                    .sort((a, b) => parseInt(a.reps) - parseInt(b.reps));
+                return sortedArray;
+            case 'LASTMODIFIED':
+                sortedArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            new Date(b.dateModified) - new Date(a.dateModified)
+                    );
+                return sortedArray;
+            default:
+                break;
+        }
+    };
+
     return (
         <>
             {isMobileOnly && (
@@ -242,11 +314,13 @@ const StatCardRecordModal = ({
                     open={openBoolean}
                     onClose={() => {
                         setIsLoaded(false);
+                        setSortedRecordArray(null);
                         closeFunction();
                     }}
                     closeAfterTransition
                     onRendered={async () => {
                         const bool = await retrieveRecord(exerciseId);
+                        if (bool === true) setSortedRecordArray(records.stats);
                         setIsLoaded(bool);
                     }}
                     BackdropComponent={Backdrop}
@@ -260,7 +334,10 @@ const StatCardRecordModal = ({
                             <RecordCardContainer>
                                 {renderRecordCards()}
                             </RecordCardContainer>
-                            <SortByOptions sortingType="RECORDS" />
+                            <SortByOptions
+                                sortingType="RECORDS"
+                                recordSortHandler={handleRecordSortSelector}
+                            />
                             <ButtonContainer>
                                 <CustomIconButton
                                     buttonIcon={<AddIcon />}
@@ -274,6 +351,7 @@ const StatCardRecordModal = ({
                                     buttonLabel="Cancel"
                                     onClickFunction={() => {
                                         setIsLoaded(false);
+                                        setSortedRecordArray(null);
                                         closeFunction();
                                     }}
                                 />
@@ -289,6 +367,7 @@ const StatCardRecordModal = ({
                     open={openBoolean}
                     onClose={() => {
                         setIsLoaded(false);
+                        setSortedRecordArray(null);
                         closeFunction();
                     }}
                     closeAfterTransition
@@ -308,6 +387,10 @@ const StatCardRecordModal = ({
                             <BrowserRecordCardContainer>
                                 {renderRecordCards()}
                             </BrowserRecordCardContainer>
+                            <SortByOptions
+                                sortingType="RECORDS"
+                                recordSortHandler={handleRecordSortSelector}
+                            />
                             <ButtonContainer>
                                 <CustomIconButton
                                     buttonIcon={<AddIcon />}
@@ -321,6 +404,7 @@ const StatCardRecordModal = ({
                                     buttonLabel="Cancel"
                                     onClickFunction={() => {
                                         setIsLoaded(false);
+                                        setSortedRecordArray(null);
                                         closeFunction();
                                     }}
                                 />
