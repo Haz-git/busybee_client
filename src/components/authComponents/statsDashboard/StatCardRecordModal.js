@@ -108,6 +108,9 @@ const StatCardRecordModal = ({
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
+    //State for modified records (under a sort):
+    const [sortedRecordArray, setSortedRecordArray] = useState(null);
+
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
     const [weightInput, setWeightInput] = useState(null);
     const [setsInput, setSetsInput] = useState(null);
