@@ -108,6 +108,14 @@ const StatCardRecordModal = ({
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
+    //Use-Effect for matching sorted list with record list:
+
+    useEffect(() => {
+        if (records.stats !== undefined && records.stats !== null) {
+            setSortedRecordArray(records.stats);
+        }
+    }, [records]);
+
     //State for modified records (under a sort):
     const [sortedRecordArray, setSortedRecordArray] = useState(null);
 
