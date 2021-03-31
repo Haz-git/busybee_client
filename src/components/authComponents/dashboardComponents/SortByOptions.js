@@ -18,8 +18,9 @@ const MainContainer = styled.div`
 
 const RecordMainContainer = styled.div`
     background: transparent;
-    display: block;
-    text-align: center;
+    display: grid;
+    grid-template-columns: 45% 55%;
+    align-items: center;
     /* margin: 0 auto; */
 `;
 
@@ -39,16 +40,6 @@ const OptionsContainer = styled.div`
     justify-content: flex-start;
 `;
 
-const RecordOptionsContainer = styled.div`
-    margin: 0 auto;
-    display: grid;
-    width: 100%;
-    grid-template-columns: 50% 50%;
-    grid-template-rows: 50% 50%;
-    /* column-gap: 0.5em;
-    row-gap: 0.5em; */
-`;
-
 const StatOptionButton = styled.button`
     margin: 0 0.1rem;
     background: #1a222f;
@@ -66,23 +57,33 @@ const StatOptionButton = styled.button`
     }
 `;
 
-const RecordOptionButton = styled.button`
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: #1a222f;
-    color: white;
+const RecordSelectorInput = styled.select`
+    margin: 0em 0em;
     border: none;
-    margin: 0.5em 0.5em;
+    width: 100%;
     border-radius: 0.4em;
-    padding: 0.5em 0.5em;
-    font-family: 'Lato';
-    font-size: 0.8rem;
-    cursor: pointer;
-    box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 3px;
+    background-color: #10122a;
+    color: white;
+    padding: 0.5em 1em;
+    font-family: 'Lato', sans-serif, helvetica;
+    font-weight: 700;
+    font-size: 0.9rem;
+    -webkit-box-shadow: rgba(0, 0, 0, 0.8) 0px 1px 1px;
+    box-shadow: rgba(0, 0, 0, 0.8) 0px 1px 1px;
+    --webkit-appearance: none;
+    --moz-appearance: none;
+    appearance: none;
+
+    &:hover {
+        outline: none;
+    }
 
     &:focus {
         outline: none;
+    }
+
+    @media only screen and (max-width: 320px) {
+        font-size: 0.9rem;
     }
 `;
 
@@ -117,26 +118,18 @@ const SortByOptions = ({
                 <>
                     <RecordMainContainer>
                         <SortByLabel style={{ textAlign: 'center' }}>
-                            Sort Records
+                            Sort Records By:
                         </SortByLabel>
-                        <RecordOptionsContainer>
-                            <RecordOptionButton onClick={newestSortFunction}>
-                                <SortIcon />
-                                Weight
-                            </RecordOptionButton>
-                            <RecordOptionButton onClick={recordsSortFunction}>
-                                <SortIcon />
-                                Reps
-                            </RecordOptionButton>
-                            <RecordOptionButton onClick={alphabetSortFunction}>
-                                <SortIcon />
-                                Sets
-                            </RecordOptionButton>
-                            <RecordOptionButton onClick={alphabetSortFunction}>
-                                <SortIcon />
-                                Recently Edited
-                            </RecordOptionButton>
-                        </RecordOptionsContainer>
+                        <RecordSelectorInput name="recordsort">
+                            <option value="DEFAULT">Default</option>
+                            <option value="HIGHWEIGHT">Highest Weight</option>
+                            <option value="LOWWEIGHT">Lowest Weight</option>
+                            <option value="HIGHSET">Highest Sets</option>
+                            <option value="LOWSET">Lowest Sets</option>
+                            <option value="HIGHREP">Highest Reps</option>
+                            <option value="LOWREP">Lowest Reps</option>
+                            <option value="LASTMODIFIED">Last Modified</option>
+                        </RecordSelectorInput>
                     </RecordMainContainer>
                 </>
             );
