@@ -77,7 +77,10 @@ const PlayButton = styled.button`
 `;
 
 const WrapperContainer = styled.div`
-    margin: 2em 0.2em;
+    margin-bottom: 1.5em;
+    margin-left: 0.2em;
+    margin-right: 0.2em;
+    /* margin: 2em 0.2em; */
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
     max-width: 28em;
 `;
