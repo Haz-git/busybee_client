@@ -1,4 +1,6 @@
 import React, { useEffect, useState } from 'react';
+
+import { RemoveScroll } from 'react-remove-scroll';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import CustomCancelButton from '../dashboardComponents/CustomCancelButton';
 import CustomIconButton from '../dashboardComponents/CustomIconButton';
@@ -336,9 +338,11 @@ const StatCardRecordModal = ({
                     <Fade in={openBoolean}>
                         <RecordModalContainer>
                             <ModalHeader>Records</ModalHeader>
-                            <RecordCardContainer>
-                                {renderRecordCards()}
-                            </RecordCardContainer>
+                            <RemoveScroll>
+                                <RecordCardContainer>
+                                    {renderRecordCards()}
+                                </RecordCardContainer>
+                            </RemoveScroll>
                             <SortByOptions
                                 sortingType="RECORDS"
                                 recordSortHandler={handleRecordSortSelector}
