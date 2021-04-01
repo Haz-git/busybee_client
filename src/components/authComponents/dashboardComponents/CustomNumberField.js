@@ -42,9 +42,22 @@ const CustomNumberField = ({ placeholder, existingStat, changeFunc }) => {
                     placeholder={existingStat}
                     onChange={changeFunc}
                     onInput={(e) => {
-                        e.target.value = Math.max(0, parseInt(e.target.value))
-                            .toString()
-                            .slice(0, 4);
+                        if (e.target.value % 1 !== 0) {
+                            //Contains decimal, we will increase the number limit by 2.
+                            e.target.value = Math.max(
+                                0,
+                                parseFloat(e.target.value)
+                            )
+                                .toString()
+                                .slice(0, 6);
+                        } else {
+                            e.target.value = Math.max(
+                                0,
+                                parseFloat(e.target.value)
+                            )
+                                .toString()
+                                .slice(0, 4);
+                        }
                     }}
                 />
             );
@@ -55,9 +68,22 @@ const CustomNumberField = ({ placeholder, existingStat, changeFunc }) => {
                     placeholder={placeholder}
                     onChange={changeFunc}
                     onInput={(e) => {
-                        e.target.value = Math.max(0, parseInt(e.target.value))
-                            .toString()
-                            .slice(0, 4);
+                        if (e.target.value % 1 !== 0) {
+                            //Contains decimal, we will increase the number limit by 2.
+                            e.target.value = Math.max(
+                                0,
+                                parseFloat(e.target.value)
+                            )
+                                .toString()
+                                .slice(0, 6);
+                        } else {
+                            e.target.value = Math.max(
+                                0,
+                                parseFloat(e.target.value)
+                            )
+                                .toString()
+                                .slice(0, 4);
+                        }
                     }}
                 />
             );
