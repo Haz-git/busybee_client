@@ -214,10 +214,10 @@ const RecordCard = ({
 
     //States for handling user input for edit modal:
 
-    const [recordWeight, setRecordWeight] = useState(null);
-    const [recordSets, setRecordSets] = useState(null);
-    const [recordReps, setRecordReps] = useState(null);
-    const [recordUnit, setRecordUnit] = useState(null);
+    const [recordWeight, setRecordWeight] = useState('');
+    const [recordSets, setRecordSets] = useState('');
+    const [recordReps, setRecordReps] = useState('');
+    const [recordUnit, setRecordUnit] = useState('');
 
     //Controller functions for deletion modal:
 
@@ -265,14 +265,10 @@ const RecordCard = ({
 
     const handleUserEditSubmission = () => {
         //Basic Empty check:
-        if (
-            recordSets !== null &&
-            recordReps !== null &&
-            recordWeight !== null
-        ) {
+        if (recordSets !== '' || recordReps !== '' || recordWeight !== '') {
             if (
-                recordSets.trim() !== '' &&
-                recordReps.trim() !== '' &&
+                recordSets.trim() !== '' ||
+                recordReps.trim() !== '' ||
                 recordWeight.trim() !== ''
             ) {
                 editRecord(
@@ -287,10 +283,14 @@ const RecordCard = ({
 
                 setStateEditRecordModal(false);
             } else {
-                alert('Please input values, or press cancel to exit.');
+                alert(
+                    '1Please input atleast one new value, or press cancel to exit.'
+                );
             }
         } else {
-            alert('Please input values, or press cancel to exit.');
+            alert(
+                '2Please input atleast one new value, or press cancel to exit.'
+            );
         }
     };
 
