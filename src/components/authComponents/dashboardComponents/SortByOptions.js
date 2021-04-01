@@ -161,6 +161,34 @@ const SortByOptions = ({
                     </RecordMainContainer>
                 </>
             );
+        } else if (sortingType === 'PROGRAMS') {
+            return (
+                <>
+                    <MainContainer>
+                        <SortByLabel>Sort By:</SortByLabel>
+                        <OptionsContainer>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Newest
+                            </StatOptionButton>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Oldest
+                            </StatOptionButton>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Highest Exercise #
+                            </StatOptionButton>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Lowest Exercise #
+                            </StatOptionButton>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Highest Estimated Time
+                            </StatOptionButton>
+                            <StatOptionButton onClick={() => alert('WIP!')}>
+                                Lowest Estimated Time
+                            </StatOptionButton>
+                        </OptionsContainer>
+                    </MainContainer>
+                </>
+            );
         }
     };
 
