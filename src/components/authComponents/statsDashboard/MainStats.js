@@ -223,6 +223,11 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                         .includes(userSearchValue);
                 })
             );
+        } else {
+            if (stats.stats !== undefined && stats.stats !== null) {
+                //Any stat card operation will cause userSearchArray to reset.
+                setUserSearchArray(stats.stats);
+            }
         }
     }, [stats.stats]);
 
@@ -315,6 +320,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
             stats.stats !== null &&
             userSearchArray === null
         ) {
+            //If and only if userSearchArray is null then we will render stats.stats. Normally userSearchArray has full control if any sort operations are used.
             return stats.stats.map((stat) => (
                 <StatCard
                     key={uuid()}
