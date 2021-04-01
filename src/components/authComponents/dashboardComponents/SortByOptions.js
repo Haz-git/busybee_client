@@ -3,9 +3,11 @@ import styled from 'styled-components';
 import { SortAlt } from '@styled-icons/boxicons-solid/SortAlt';
 
 const SortIcon = styled(SortAlt)`
-    height: 1rem;
-    width: 1rem;
+    position: absolute;
+    height: 1.1rem;
+    width: 1.1rem;
     color: white;
+    right: 0.4rem;
 `;
 
 const MainContainer = styled.div`
@@ -38,6 +40,13 @@ const OptionsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
+    overflow-y: scroll;
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    &::-webkit-scrollbar {
+        display: none;
+    }
 `;
 
 const StatOptionButton = styled.button`
@@ -51,10 +60,17 @@ const StatOptionButton = styled.button`
     font-size: 0.8rem;
     cursor: pointer;
     box-shadow: rgba(0, 0, 0, 0.6) 0px 1px 3px;
+    white-space: nowrap;
 
     &:focus {
         outline: none;
     }
+`;
+
+const RecordSelectorContainer = styled.div`
+    display: flex;
+    align-items: center;
+    position: relative;
 `;
 
 const RecordSelectorInput = styled.select`
@@ -73,6 +89,7 @@ const RecordSelectorInput = styled.select`
     --webkit-appearance: none;
     --moz-appearance: none;
     appearance: none;
+    caret-color: white;
 
     &:hover {
         outline: none;
@@ -121,19 +138,26 @@ const SortByOptions = ({
                         <SortByLabel style={{ textAlign: 'center' }}>
                             Sort Records By:
                         </SortByLabel>
-                        <RecordSelectorInput
-                            name="recordsort"
-                            onChange={recordSortHandler}
-                        >
-                            <option value="DEFAULT">Default</option>
-                            <option value="HIGHWEIGHT">Highest Weight</option>
-                            <option value="LOWWEIGHT">Lowest Weight</option>
-                            <option value="HIGHSET">Highest Sets</option>
-                            <option value="LOWSET">Lowest Sets</option>
-                            <option value="HIGHREP">Highest Reps</option>
-                            <option value="LOWREP">Lowest Reps</option>
-                            <option value="LASTMODIFIED">Last Modified</option>
-                        </RecordSelectorInput>
+                        <RecordSelectorContainer>
+                            <RecordSelectorInput
+                                name="recordsort"
+                                onChange={recordSortHandler}
+                            >
+                                <option value="DEFAULT">Default</option>
+                                <option value="HIGHWEIGHT">
+                                    Highest Weight
+                                </option>
+                                <option value="LOWWEIGHT">Lowest Weight</option>
+                                <option value="HIGHSET">Highest Sets</option>
+                                <option value="LOWSET">Lowest Sets</option>
+                                <option value="HIGHREP">Highest Reps</option>
+                                <option value="LOWREP">Lowest Reps</option>
+                                <option value="LASTMODIFIED">
+                                    Last Modified
+                                </option>
+                            </RecordSelectorInput>
+                            <SortIcon />
+                        </RecordSelectorContainer>
                     </RecordMainContainer>
                 </>
             );
