@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 
 //Redux:
 import { connect } from 'react-redux';
-
+import SortByOptions from '../dashboardComponents/SortByOptions';
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import {
     getUserProgramData,
@@ -115,6 +115,7 @@ const SearchBarContainer = styled.div`
 `;
 
 const ProgramCardContainer = styled.div`
+    padding-top: 1em;
     padding-bottom: 3.5em;
 `;
 
@@ -408,15 +409,18 @@ const MainPrograms = ({
                     <CreateProgramButton clickFunction={openAddProgramModal} />
                 </SearchBarContainer>
                 {isMobileOnly && (
-                    <ProgramCardContainer>
-                        {isLoaded === true ? (
-                            renderProgramCards()
-                        ) : (
-                            <LoadingContainer>
-                                <CustomLoadingDots />
-                            </LoadingContainer>
-                        )}
-                    </ProgramCardContainer>
+                    <>
+                        <SortByOptions sortingType="PROGRAMS" />
+                        <ProgramCardContainer>
+                            {isLoaded === true ? (
+                                renderProgramCards()
+                            ) : (
+                                <LoadingContainer>
+                                    <CustomLoadingDots />
+                                </LoadingContainer>
+                            )}
+                        </ProgramCardContainer>
+                    </>
                 )}
                 {isBrowser && (
                     <BrowserProgramCardContainer>
