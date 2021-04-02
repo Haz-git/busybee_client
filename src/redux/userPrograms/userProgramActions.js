@@ -93,3 +93,12 @@ export function deleteExistingProgram(programId, callback) {
         }
     };
 }
+
+export function addProgramTimeLength(programId, totalTime) {
+    return async (dispatch) => {
+        const response = await api.post('/user/addnewprogramtimelength', {
+            programId,
+            totalTime,
+        });
+    };
+}
