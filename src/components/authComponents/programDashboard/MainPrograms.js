@@ -160,9 +160,10 @@ const MainPrograms = ({
         //Normally, the data is retrieved on component mount. However, when the user configured his/her program and has formatted it, this component does not update to the correct value because programs.program !== undefined is true.
 
         //This useEffect serves to handle that, and upon formattedExercise change will update to the correct values enabling program to run.
-
-        getUserProgramData();
-    }, [programs.programs.length]);
+        if (programs.programs !== undefined && programs.programs !== null) {
+            getUserProgramData();
+        }
+    }, [programs.programs]);
 
     //This state controls snackbars:
     const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
@@ -368,6 +369,67 @@ const MainPrograms = ({
         }
 
         setOpenDeleteProgramSnackBar(false);
+    };
+
+    //Switch statement for program card sorting
+
+    const sortProgramCard = (format, array) => {
+        if (array === undefined || array === null) return;
+
+        let sortedProgramArray;
+
+        switch (format) {
+            case 'NEWEST':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            new Date(b.dateUpdated) - new Date(a.dateUpdated)
+                    );
+                return sortedProgramArray;
+                break;
+            case 'OLDEST':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            new Date(a.dateUpdated) - new Date(b.dateUpdated)
+                    );
+                return sortedProgramArray;
+                break;
+            case 'HIGHESTEXERCISE':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            b.programExercises.length -
+                            a.programExercises.length
+                    );
+                return sortedProgramArray;
+                break;
+            case 'LOWESTEXERCISE':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            a.programExercises.length -
+                            b.programExercises.length
+                    );
+                return sortedProgramArray;
+                break;
+            case 'HIGHESTTIME':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            a.programExercises.length -
+                            b.programExercises.length
+                    );
+                return sortedProgramArray;
+                break;
+            default:
+                break;
+        }
     };
 
     return (
