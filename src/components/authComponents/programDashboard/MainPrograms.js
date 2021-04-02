@@ -120,6 +120,7 @@ const ProgramCardContainer = styled.div`
 `;
 
 const BrowserProgramCardContainer = styled.div`
+    padding-top: 1em;
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
     grid-column-gap: 1em;
@@ -398,7 +399,15 @@ const MainPrograms = ({
                         </BrowserSecondaryProgramHeader>
                     </>
                 )}
-                <SearchBarContainer>
+                <SearchBarContainer
+                    style={
+                        isBrowser === true
+                            ? {
+                                  gridTemplateColumns: '88% 12%',
+                              }
+                            : { gridTemplateColumns: '67% 33%' }
+                    }
+                >
                     <SearchBar
                         placeholder="Total Programs"
                         value={
@@ -423,15 +432,18 @@ const MainPrograms = ({
                     </>
                 )}
                 {isBrowser && (
-                    <BrowserProgramCardContainer>
-                        {isLoaded === true ? (
-                            renderProgramCards()
-                        ) : (
-                            <LoadingContainer>
-                                <CustomLoadingDots />
-                            </LoadingContainer>
-                        )}
-                    </BrowserProgramCardContainer>
+                    <>
+                        <SortByOptions sortingType="PROGRAMS" />
+                        <BrowserProgramCardContainer>
+                            {isLoaded === true ? (
+                                renderProgramCards()
+                            ) : (
+                                <LoadingContainer>
+                                    <CustomLoadingDots />
+                                </LoadingContainer>
+                            )}
+                        </BrowserProgramCardContainer>
+                    </>
                 )}
             </MainContainer>
             <GlobalSnackbar
