@@ -100,5 +100,7 @@ export function addProgramTimeLength(programId, totalTime) {
             programId,
             totalTime,
         });
+
+        console.log(response);
     };
 }

@@ -3,10 +3,7 @@ import dayjs from 'dayjs';
 import { Link } from 'react-router-dom';
 import historyObject from '../../historyObject';
 import { connect } from 'react-redux';
-import {
-    addToUserProgramCount,
-    addProgramTimeLength,
-} from '../../../redux/userPrograms/userProgramActions';
+import { addToUserProgramCount } from '../../../redux/userPrograms/userProgramActions';
 
 //Components:
 import CreateProgramModal from './CreateProgramModal';
@@ -263,7 +260,6 @@ const ProgramCard = ({
     deleteProgramSnackbar,
     isFormatted,
     addToUserProgramCount,
-    addProgramTimeLength,
 }) => {
     //States:
     const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
@@ -513,9 +509,9 @@ const ProgramCard = ({
             }
         });
 
-        addProgramTimeLength(
-            programId,
-            totalTime.reduce((a, b) => a + b, 0)
+        let currentCalculatedTimeInSeconds = totalTime.reduce(
+            (a, b) => a + b,
+            0
         );
 
         const totalMinutes = Math.floor(
@@ -611,9 +607,7 @@ const ProgramCard = ({
     );
 };
 
-export default connect(null, { addToUserProgramCount, addProgramTimeLength })(
-    ProgramCard
-);
+export default connect(null, { addToUserProgramCount })(ProgramCard);
 
 /*
     Current BUgs:

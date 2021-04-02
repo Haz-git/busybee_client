@@ -160,10 +160,9 @@ const MainPrograms = ({
         //Normally, the data is retrieved on component mount. However, when the user configured his/her program and has formatted it, this component does not update to the correct value because programs.program !== undefined is true.
 
         //This useEffect serves to handle that, and upon formattedExercise change will update to the correct values enabling program to run.
-        if (programs.programs !== undefined && programs.programs !== null) {
-            getUserProgramData();
-        }
-    }, [programs.programs]);
+
+        getUserProgramData();
+    }, [programs.programs.length]);
 
     //This state controls snackbars:
     const [openAddProgramSnackBar, setOpenAddProgramSnackBar] = useState(false);
