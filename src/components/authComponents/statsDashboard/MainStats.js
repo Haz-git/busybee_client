@@ -418,6 +418,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
         }
     };
 
+    //Switch statement for statcard sorting.
+
     const sortCardFunction = (format, array) => {
         if (array === undefined || array === null) return;
 
