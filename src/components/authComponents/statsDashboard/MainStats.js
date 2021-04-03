@@ -195,6 +195,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
 
     //State of userSearchInput:
     const [userSearchValue, setUserSearchValue] = useState(null);
+    const [userHasInput, setUserHasInput] = useState(false);
 
     //State for search filter:
     const [userSearchArray, setUserSearchArray] = useState(null);
@@ -413,9 +414,19 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
         if (e.target.value === '') {
             console.log('Target value is empty, userSearchset to null');
             setUserSearchArray(null);
+            setUserHasInput(false);
         } else {
             setUserSearchArray(filteredArray);
+            setUserHasInput(true);
         }
+    };
+
+    //Search bar reset function:
+
+    const resetUserSearchBarInput = () => {
+        setUserSearchValue('');
+        setUserSearchArray(null);
+        setUserHasInput(false);
     };
 
     //Switch statement for statcard sorting.
@@ -623,13 +634,16 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                     <FlexWrapper>
                         <SearchBarContainer>
                             <SearchBar
-                                placeholder="Total Stats"
+                                placeholder="Stats"
                                 value={
                                     isLoaded === true
                                         ? renderNumberOfStats()
                                         : '...'
                                 }
+                                inputValue={userSearchValue}
                                 changeFunction={handleSearchBarChange}
+                                renderClearButton={userHasInput}
+                                clearButtonFunction={resetUserSearchBarInput}
                             />
                         </SearchBarContainer>
                         <AddButton clickFunction={openModal} />
@@ -639,13 +653,16 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                     <BrowserFlexWrapper>
                         <BrowserSearchBarContainer>
                             <SearchBar
-                                placeholder="Total Stats"
+                                placeholder="Stats"
                                 value={
                                     isLoaded === true
                                         ? renderNumberOfStats()
                                         : '...'
                                 }
+                                inputValue={userSearchValue}
                                 changeFunction={handleSearchBarChange}
+                                renderClearButton={userHasInput}
+                                clearButtonFunction={resetUserSearchBarInput}
                             />
                         </BrowserSearchBarContainer>
                         <AddButton clickFunction={openModal} />
