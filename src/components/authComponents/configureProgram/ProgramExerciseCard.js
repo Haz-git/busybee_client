@@ -274,11 +274,6 @@ const DeleteButton = styled.button`
     border-bottom-right-radius: 0.5em;
     transition: all 0.3s ease-in-out;
 
-    &:focus {
-        outline: none;
-        background: #90130c;
-    }
-
     &:hover {
         outline: none;
         background: #90130c;
@@ -298,11 +293,6 @@ const EditButton = styled.button`
     border-top-right-radius: 0.5em;
     border-bottom-right-radius: 0.5em;
     transition: all 0.3s ease-in-out;
-
-    &:focus {
-        outline: none;
-        background: #3041ad;
-    }
 
     &:hover {
         outline: none;
