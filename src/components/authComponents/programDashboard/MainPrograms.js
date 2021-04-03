@@ -370,6 +370,186 @@ const MainPrograms = ({
         setOpenDeleteProgramSnackBar(false);
     };
 
+    //Function for calculating a program's estimated time:
+    const calculateProgramEstimatedTime = (program) => {
+        //This is inefficient, and a copy of the calculate time present in programCard, will abstract into different function when I have more time.
+        if (
+            program.programExercises === undefined ||
+            program.programExercises === null ||
+            program.programExercises.length === 0
+        ) {
+            return 0;
+        } else {
+            let totalTime = [];
+
+            program.programExercises.forEach((exercise) => {
+                if (
+                    exercise.programExerciseType !==
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.setObjectsArray === undefined &&
+                    exercise.numRest !== undefined &&
+                    exercise.numRest !== null &&
+                    exercise.programExerciseId !== undefined &&
+                    exercise.programExerciseId !== null
+                ) {
+                    //Handles Multi-Set exercises with rest between sets:
+
+                    //Find total rest time without exercises:
+                    const totalSecsFromMin =
+                        parseInt(exercise.restLengthMinutePerSet) *
+                        60 *
+                        parseInt(exercise.numRest);
+
+                    const totalSecs =
+                        parseInt(exercise.restLengthSecondPerSet) *
+                        parseInt(exercise.numRest);
+
+                    //estimate time from sets and reps:
+
+                    const secsFromRepsAndSets =
+                        parseInt(exercise.reps) * 4 * parseInt(exercise.sets);
+
+                    const totalRestTimeCombinedSeconds =
+                        totalSecsFromMin + totalSecs + secsFromRepsAndSets;
+
+                    totalTime.push(totalRestTimeCombinedSeconds);
+                } else if (
+                    exercise.programExerciseType ===
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.cardioMinutes !== undefined &&
+                    exercise.cardioSeconds !== undefined
+                ) {
+                    let timeFromMin;
+
+                    if (exercise.cardioMinutes !== null) {
+                        timeFromMin = parseInt(exercise.cardioMinutes) * 60;
+                    } else {
+                        timeFromMin = 0;
+                    }
+
+                    let seconds;
+
+                    if (exercise.cardioSeconds !== null) {
+                        seconds = parseInt(exercise.cardioSeconds);
+                    } else {
+                        seconds = 0;
+                    }
+
+                    const timeCombined = timeFromMin + seconds;
+
+                    totalTime.push(timeCombined);
+                } else if (
+                    exercise.programExerciseType !==
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.setObjectsArray !== undefined &&
+                    exercise.numRest === undefined &&
+                    exercise.programExerciseId !== undefined
+                ) {
+                    //This should handle pyramid sets without rest between sets:
+
+                    let secondsFromReps = [];
+
+                    for (let i = 0; i < exercise.setObjectsArray.length; i++) {
+                        secondsFromReps.push(
+                            parseInt(exercise.setObjectsArray[i].reps) * 4
+                        );
+                    }
+
+                    const totalSecondsFromReps = secondsFromReps.reduce(
+                        (a, b) => a + b,
+                        0
+                    );
+
+                    totalTime.push(totalSecondsFromReps);
+                } else if (
+                    exercise.programExerciseType !==
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.setObjectsArray !== undefined &&
+                    exercise.numRest !== undefined &&
+                    exercise.programExerciseId !== undefined
+                ) {
+                    //Handles pyramid sets:
+
+                    const totalSecsFromMin =
+                        parseInt(exercise.restLengthMinutePerSet) *
+                        60 *
+                        parseInt(exercise.numRest);
+
+                    const totalSecs =
+                        parseInt(exercise.restLengthSecondPerSet) *
+                        parseInt(exercise.numRest);
+
+                    //Find seconds per rep in each set of pyramid:
+
+                    let secondsFromReps = [];
+
+                    for (let i = 0; i < exercise.setObjectsArray.length; i++) {
+                        secondsFromReps.push(
+                            parseInt(exercise.setObjectsArray[i].reps) * 4
+                        );
+                    }
+
+                    const totalSecondsFromReps = secondsFromReps.reduce(
+                        (a, b) => a + b,
+                        0
+                    );
+
+                    const totalPyramidSetSeconds =
+                        totalSecsFromMin + totalSecs + totalSecondsFromReps;
+
+                    totalTime.push(totalPyramidSetSeconds);
+
+                    //Combine seconds within secondsFromReps:
+                } else if (
+                    exercise.programExerciseType !==
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.restId !== undefined &&
+                    exercise.restId !== null
+                ) {
+                    //Handles Rest periods
+
+                    let timeFromMin;
+
+                    if (exercise.restLengthMinute !== null) {
+                        timeFromMin = parseInt(exercise.restLengthMinute) * 60;
+                    } else {
+                        timeFromMin = 0;
+                    }
+
+                    let seconds;
+
+                    if (exercise.restLengthSecond !== null) {
+                        seconds = parseInt(exercise.restLengthSecond);
+                    } else {
+                        seconds = 0;
+                    }
+
+                    const timeCombined = timeFromMin + seconds;
+
+                    totalTime.push(timeCombined);
+                } else if (
+                    exercise.programExerciseType !==
+                        'CARDIO_PROGRAM_EXERCISE' &&
+                    exercise.programExerciseId !== undefined &&
+                    exercise.programExerciseId !== null
+                ) {
+                    //Handles single set exercises, or multi set exercises without rest between sets:
+                    const secsFromRepsAndSets =
+                        parseInt(exercise.reps) * 4 * parseInt(exercise.sets);
+
+                    totalTime.push(secsFromRepsAndSets);
+                }
+            });
+
+            let currentCalculatedTimeInSeconds = totalTime.reduce(
+                (a, b) => a + b,
+                0
+            );
+
+            return currentCalculatedTimeInSeconds;
+        }
+    };
+
     //Switch statement for program card sorting
 
     const sortProgramCard = (format, array) => {
@@ -421,8 +601,18 @@ const MainPrograms = ({
                     .slice()
                     .sort(
                         (a, b) =>
-                            a.programExercises.length -
-                            b.programExercises.length
+                            calculateProgramEstimatedTime(b) -
+                            calculateProgramEstimatedTime(a)
+                    );
+                return sortedProgramArray;
+                break;
+            case 'LOWESTTIME':
+                sortedProgramArray = array
+                    .slice()
+                    .sort(
+                        (a, b) =>
+                            calculateProgramEstimatedTime(a) -
+                            calculateProgramEstimatedTime(b)
                     );
                 return sortedProgramArray;
                 break;
