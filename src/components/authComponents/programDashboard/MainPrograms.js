@@ -563,7 +563,7 @@ const MainPrograms = ({
                     .slice()
                     .sort(
                         (a, b) =>
-                            new Date(b.dateUpdated) - new Date(a.dateUpdated)
+                            new Date(b.dateCreated) - new Date(a.dateCreated)
                     );
                 return sortedProgramArray;
                 break;
@@ -572,7 +572,7 @@ const MainPrograms = ({
                     .slice()
                     .sort(
                         (a, b) =>
-                            new Date(a.dateUpdated) - new Date(b.dateUpdated)
+                            new Date(a.dateCreated) - new Date(b.dateCreated)
                     );
                 return sortedProgramArray;
                 break;
@@ -619,6 +619,26 @@ const MainPrograms = ({
             default:
                 break;
         }
+    };
+
+    //Sorting handler function:
+
+    const handleSortRequest = (request) => {
+        if (request === undefined || request === null || request === '') return;
+
+        let sortedArray;
+
+        console.log(request);
+
+        if (userSearchArray !== null && userSearchArray !== '') {
+            sortedArray = sortProgramCard(request, userSearchArray);
+        } else {
+            sortedArray = sortProgramCard(request, programs.programs);
+        }
+
+        console.log(sortedArray);
+
+        setUserSearchArray(sortedArray);
     };
 
     return (
@@ -670,7 +690,10 @@ const MainPrograms = ({
                 </SearchBarContainer>
                 {isMobileOnly && (
                     <>
-                        <SortByOptions sortingType="PROGRAMS" />
+                        <SortByOptions
+                            sortingType="PROGRAMS"
+                            programSortHandler={handleSortRequest}
+                        />
                         <ProgramCardContainer>
                             {isLoaded === true ? (
                                 renderProgramCards()
@@ -684,7 +707,10 @@ const MainPrograms = ({
                 )}
                 {isBrowser && (
                     <>
-                        <SortByOptions sortingType="PROGRAMS" />
+                        <SortByOptions
+                            sortingType="PROGRAMS"
+                            programSortHandler={handleSortRequest}
+                        />
                         <BrowserProgramCardContainer>
                             {isLoaded === true ? (
                                 renderProgramCards()
