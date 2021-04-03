@@ -8,6 +8,7 @@ import {
     EXISTING_STAT_PROGRAM_EXERCISE,
     PYRAMID_PROGRAM_EXERCISE,
     CARDIO_PROGRAM_EXERCISE,
+    REST_PERIOD_PROGRAM_EXERCISE,
 } from './programExerciseConstants';
 
 //Redux:
@@ -31,6 +32,8 @@ import { Notepad } from '@styled-icons/boxicons-solid/Notepad';
 import { Columns } from '@styled-icons/boxicons-regular/Columns';
 import { Pyramid } from '@styled-icons/boxicons-solid/Pyramid';
 import { Run } from '@styled-icons/boxicons-regular/Run';
+import { RestTime } from '@styled-icons/remix-fill/RestTime';
+import { Trash2 } from '@styled-icons/evaicons-solid/Trash2';
 
 //Keyframes:
 
@@ -47,6 +50,16 @@ const appearLeft = keyframes`
 //Icons:
 
 const MiniPyramidIcon = styled(Pyramid)`
+    height: 1.5em;
+    width: 1.6em;
+    color: white;
+    @media screen and (min-width: 414px) {
+        height: 1.8em;
+        width: 1.9em;
+    }
+`;
+
+const MiniRestIcon = styled(RestTime)`
     height: 1.5em;
     width: 1.6em;
     color: white;
@@ -101,13 +114,13 @@ const EditIcon = styled(EditOutline)`
     width: 1.6em;
 `;
 
-const RestIcon = styled(Zzz)`
+const RestIcon = styled(RestTime)`
     height: 1.4rem;
     width: 1.4rem;
     transition: all 0.3s ease-in-out;
 `;
 
-const DelIcon = styled(Remove)`
+const DelIcon = styled(Trash2)`
     height: 1.4rem;
     width: 1.4rem;
     transition: all 0.3s ease-in-out;
@@ -251,7 +264,7 @@ const DeleteButton = styled.button`
     border: none;
     padding: 0.2em 0.2em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #90130c;
+    background: #1a222f;
     font-size: 1em;
     color: white;
     cursor: pointer;
@@ -263,12 +276,12 @@ const DeleteButton = styled.button`
 
     &:focus {
         outline: none;
-        background: #cb484f;
+        background: #90130c;
     }
 
     &:hover {
         outline: none;
-        background: #cb484f;
+        background: #90130c;
     }
 `;
 
@@ -276,7 +289,7 @@ const EditButton = styled.button`
     border: none;
     padding: 0.2em 0.2em;
     box-shadow: rgba(0, 0, 0, 0.45) 0px 3px 8px;
-    background: #3041ad;
+    background: #1a222f;
     font-size: 1em;
     color: white;
     cursor: pointer;
@@ -288,12 +301,12 @@ const EditButton = styled.button`
 
     &:focus {
         outline: none;
-        background: #346d98;
+        background: #3041ad;
     }
 
     &:hover {
         outline: none;
-        background: #346d98;
+        background: #3041ad;
     }
 `;
 
@@ -489,6 +502,10 @@ const ProgramExerciseCard = ({
         switch (programExerciseType) {
             case NEW_PROGRAM_EXERCISE:
                 return <MiniNewIcon />;
+                break;
+
+            case REST_PERIOD_PROGRAM_EXERCISE:
+                return <MiniRestIcon />;
                 break;
 
             case EXISTING_STAT_PROGRAM_EXERCISE:
