@@ -110,6 +110,7 @@ const SortByOptions = ({
     recordsSortFunction,
     alphabetSortFunction,
     recordSortHandler,
+    programSortHandler,
 }) => {
     const generateSortByFromSortingType = () => {
         if (sortingType === 'STATS') {
@@ -167,22 +168,40 @@ const SortByOptions = ({
                     <MainContainer>
                         <SortByLabel>Sort By:</SortByLabel>
                         <OptionsContainer>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() => programSortHandler('NEWEST')}
+                            >
                                 Newest
                             </StatOptionButton>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() => programSortHandler('OLDEST')}
+                            >
                                 Oldest
                             </StatOptionButton>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() =>
+                                    programSortHandler('HIGHESTEXERCISE')
+                                }
+                            >
                                 Highest Exercise #
                             </StatOptionButton>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() =>
+                                    programSortHandler('LOWESTEXERCISE')
+                                }
+                            >
                                 Lowest Exercise #
                             </StatOptionButton>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() =>
+                                    programSortHandler('HIGHESTTIME')
+                                }
+                            >
                                 Highest Estimated Time
                             </StatOptionButton>
-                            <StatOptionButton onClick={() => alert('WIP!')}>
+                            <StatOptionButton
+                                onClick={() => programSortHandler('LOWESTTIME')}
+                            >
                                 Lowest Estimated Time
                             </StatOptionButton>
                         </OptionsContainer>
