@@ -175,6 +175,10 @@ const MainPrograms = ({
     //This state controls the filtered array for programs:
     const [userSearchArray, setUserSearchArray] = useState(null);
 
+    //Controls user search bar value:
+    const [userSearchValue, setUserSearchValue] = useState(null);
+    const [userHasInput, setUserHasInput] = useState(false);
+
     //This state controls program open/close:
     const [stateProgramAddModal, setStateProgramAddModal] = useState(false);
 
@@ -310,6 +314,8 @@ const MainPrograms = ({
     const handleSearchBarChange = (e) => {
         let filteredArray;
         //Filter stats.stats array:
+        setUserSearchValue(e.target.value.trim().toLowerCase());
+
         if (programs.programs !== undefined && programs.programs !== null) {
             filteredArray = programs.programs.filter((program) => {
                 return program.programName
@@ -323,9 +329,19 @@ const MainPrograms = ({
 
         if (e.target.value === '') {
             setUserSearchArray(null);
+            setUserHasInput(false);
         } else {
             setUserSearchArray(filteredArray);
+            setUserHasInput(true);
         }
+    };
+
+    //Search bar reset function:
+
+    const resetUserSearchBarInput = () => {
+        setUserSearchValue('');
+        setUserSearchArray(null);
+        setUserHasInput(false);
     };
 
     //Controls opening the 'new program' snackbar:
@@ -680,11 +696,14 @@ const MainPrograms = ({
                     }
                 >
                     <SearchBar
-                        placeholder="Total Programs"
+                        placeholder="Programs"
                         value={
                             isLoaded === true ? renderNumberOfPrograms() : '...'
                         }
                         changeFunction={handleSearchBarChange}
+                        renderClearButton={userHasInput}
+                        clearButtonFunction={resetUserSearchBarInput}
+                        inputValue={userSearchValue}
                     />
                     <CreateProgramButton clickFunction={openAddProgramModal} />
                 </SearchBarContainer>
