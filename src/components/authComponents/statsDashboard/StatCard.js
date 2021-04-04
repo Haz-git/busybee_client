@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import { isBrowser, isMobileOnly } from 'react-device-detect';
 import dayjs from 'dayjs';
@@ -16,6 +16,7 @@ import { Trash } from '@styled-icons/typicons/Trash';
 import { Pencil } from '@styled-icons/evil/Pencil';
 import { ChevronDown } from '@styled-icons/boxicons-regular/ChevronDown';
 import { Database } from '@styled-icons/remix-line/Database';
+import { FilePaper2 } from '@styled-icons/remix-fill/FilePaper2';
 
 const WrapperContainer = styled.div`
     display: block;
@@ -84,7 +85,9 @@ const NameHeader = styled.h2`
 `;
 
 const DateContainer = styled.div`
-    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
 `;
 
 const DateText = styled.h2`
@@ -108,6 +111,13 @@ const ButtonContainer = styled.div`
     transition: all 0.25s ease-in-out;
     transform: translateY(-2.5em);
     max-height: 0em; //3em;
+`;
+
+const RecordIcon = styled(FilePaper2)`
+    height: 1rem;
+    width: 1rem;
+    color: white;
+    margin-right: 0.4rem;
 `;
 
 const TrashIcon = styled(Trash)`
@@ -202,6 +212,12 @@ const StyledDropdownButton = styled.button`
     }
 `;
 
+const RecordNumberContainer = styled.div`
+    display: flex;
+    align-items: center;
+    padding-right: 0.5rem;
+`;
+
 //Render:
 
 const StatCard = ({
@@ -230,6 +246,10 @@ const StatCard = ({
     //Record Modal:
 
     const [stateRecordModal, setStateRecordModal] = useState(false);
+
+    useEffect(() => {
+        console.log('test');
+    }, [stateRecordModal]);
 
     //Reformats ISO timestamp:
     const reformatDate = () => {
@@ -290,6 +310,14 @@ const StatCard = ({
         setStateRecordModal(false);
     };
 
+    //Helper function for record amount:
+
+    // const calculateRecordNumber = (length) => {
+    //     if (length !== undefined && length !== null) {
+    //         return length;
+    //     }
+    // };
+
     return (
         <>
             {isMobileOnly && (
@@ -300,6 +328,12 @@ const StatCard = ({
                                 <NameHeader>{name}</NameHeader>
                                 <DateContainer>
                                     <DateText>{reformatDate()}</DateText>
+                                    {/* <RecordNumberContainer>
+                                        <RecordIcon />
+                                        <DateText>
+                                            {calculateRecordNumber()}
+                                        </DateText>
+                                    </RecordNumberContainer> */}
                                 </DateContainer>
                             </NameContainer>
                             <DropdownContainer>
@@ -464,4 +498,13 @@ const StatCard = ({
     );
 };
 
-export default connect(null, { deleteStat, editStat })(StatCard);
+// const mapStateToProps = (state) => {
+//     return {
+//         stats: state.stats,
+//     };
+// };
+
+export default connect(null, {
+    deleteStat,
+    editStat,
+})(StatCard);

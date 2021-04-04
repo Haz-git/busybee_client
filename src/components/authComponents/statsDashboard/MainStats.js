@@ -188,6 +188,12 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
 
+    //This state controls modal open/close:
+    const [statModalOpen, setStatModalOpen] = useState(false);
+
+    //State for user submission:
+    const [userNewExercise, setUserNewExercise] = useState(null);
+
     //State for stat snackbars:
     const [openNewStatSnackbar, setOpenNewStatSnackbar] = useState(false);
     const [openEditStatSnackbar, setOpenEditStatSnackbar] = useState(false);
@@ -210,6 +216,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
             getUserExistingStats();
         } else if (stats.stats !== undefined) {
             setIsLoaded(true);
+            getUserStatData();
         }
     }, []);
 
@@ -270,12 +277,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
 
         setOpenDeleteStatSnackbar(false);
     };
-
-    //This state controls modal open/close:
-    const [statModalOpen, setStatModalOpen] = useState(false);
-
-    //State for user submission:
-    const [userNewExercise, setUserNewExercise] = useState(null);
 
     //Modal Functions:
     const openModal = () => {

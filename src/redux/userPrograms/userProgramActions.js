@@ -101,6 +101,9 @@ export function addProgramTimeLength(programId, totalTime) {
             totalTime,
         });
 
-        console.log(response);
+        dispatch({
+            type: USER_EDIT_PROGRAM,
+            payload: response.data.userPrograms,
+        });
     };
 }
