@@ -240,10 +240,12 @@ const InfoText = styled.h3`
 `;
 
 const DetailContainer = styled.div`
-    display: flex;
-    /* flex-direction: column; */
-    /* justify-content: center; */
-    justify-content: space-between;
+    display: block;
+`;
+
+const DetailInfoTemplate = styled.div`
+    display: grid;
+    grid-template-columns: 25% 25% 50%;
 `;
 
 const TimeContainer = styled.div`
@@ -318,8 +320,8 @@ const ObjectArrayContainer = styled.div`
 
 const ObjectArrayItem = styled.div`
     display: grid;
-    grid-template-columns: 33% 33% 33%;
-    margin: 0.1em 0;
+    grid-template-columns: 25% 25% 50%;
+    /* margin: 0.1em 0; */
 `;
 
 const ObjectArrayText = styled.h3`
@@ -473,16 +475,13 @@ const ProgramExerciseCard = ({
     const renderSetObjectArrayDetails = () => {
         if (setObjectsArray !== undefined && setObjectsArray.length !== 0) {
             return setObjectsArray.map((set) => (
-                <ObjectArrayItem>
-                    <ObjectArrayText>Set: {set.setId}</ObjectArrayText>
-                    <ObjectArrayText>Reps: {set.reps}</ObjectArrayText>
-                    <ObjectArrayText>
-                        {set.weight}{' '}
-                        {set.unit !== undefined && set.unit !== null
-                            ? set.unit
-                            : 'Lbs'}
-                    </ObjectArrayText>
-                </ObjectArrayItem>
+                <>
+                    <ObjectArrayItem>
+                        <ObjectArrayText>{set.setId}</ObjectArrayText>
+                        <ObjectArrayText>{set.reps}</ObjectArrayText>
+                        <ObjectArrayText>{set.weight} Lbs</ObjectArrayText>
+                    </ObjectArrayItem>
+                </>
             ));
         }
     };
@@ -567,11 +566,31 @@ const ProgramExerciseCard = ({
                     </HeaderBlock>
                     <InfoBlock>
                         <DetailContainer>
-                            {sets && <InfoText>Sets: {sets}</InfoText>}
-                            {reps && <InfoText>Reps: {reps}</InfoText>}
-                            {weight && <InfoText>Weight: {weight}</InfoText>}
+                            {sets && reps && weight && (
+                                <>
+                                    <DetailInfoTemplate>
+                                        <InfoText>Sets</InfoText>
+                                        <InfoText>Reps</InfoText>
+                                        <InfoText>Weight</InfoText>
+                                    </DetailInfoTemplate>
+                                    <DetailInfoTemplate>
+                                        {sets && <InfoText>{sets}</InfoText>}
+                                        {reps && <InfoText>{reps}</InfoText>}
+                                        {weight && (
+                                            <InfoText>{weight} Lbs</InfoText>
+                                        )}
+                                    </DetailInfoTemplate>
+                                </>
+                            )}
                         </DetailContainer>
                         <ObjectArrayContainer>
+                            {setObjectsArray && (
+                                <ObjectArrayItem>
+                                    <InfoText>Sets</InfoText>
+                                    <InfoText>Reps</InfoText>
+                                    <InfoText>Weight</InfoText>
+                                </ObjectArrayItem>
+                            )}
                             {renderSetObjectArrayDetails()}
                         </ObjectArrayContainer>
                         {restMinutesPerSet && restNum && restSecondsPerSet && (
