@@ -200,7 +200,7 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     const [openDeleteStatSnackbar, setOpenDeleteStatSnackbar] = useState(false);
 
     //State of userSearchInput:
-    const [userSearchValue, setUserSearchValue] = useState(null);
+    const [userSearchValue, setUserSearchValue] = useState('');
     const [userHasInput, setUserHasInput] = useState(false);
 
     //State for search filter:
