@@ -247,10 +247,6 @@ const StatCard = ({
 
     const [stateRecordModal, setStateRecordModal] = useState(false);
 
-    useEffect(() => {
-        console.log('test');
-    }, [stateRecordModal]);
-
     //Reformats ISO timestamp:
     const reformatDate = () => {
         if (date !== undefined && date !== null) {
