@@ -176,7 +176,7 @@ const MainPrograms = ({
     const [userSearchArray, setUserSearchArray] = useState(null);
 
     //Controls user search bar value:
-    const [userSearchValue, setUserSearchValue] = useState(null);
+    const [userSearchValue, setUserSearchValue] = useState('');
     const [userHasInput, setUserHasInput] = useState(false);
 
     //This state controls program open/close:
