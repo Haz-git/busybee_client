@@ -644,15 +644,11 @@ const MainPrograms = ({
 
         let sortedArray;
 
-        console.log(request);
-
         if (userSearchArray !== null && userSearchArray !== '') {
             sortedArray = sortProgramCard(request, userSearchArray);
         } else {
             sortedArray = sortProgramCard(request, programs.programs);
         }
-
-        console.log(sortedArray);
 
         setUserSearchArray(sortedArray);
     };

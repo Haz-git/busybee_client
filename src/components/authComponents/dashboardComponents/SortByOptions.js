@@ -40,9 +40,10 @@ const OptionsContainer = styled.div`
     display: flex;
     align-items: center;
     justify-content: flex-start;
-    overflow-y: scroll;
+    overflow-x: scroll;
     -ms-overflow-style: none;
     scrollbar-width: none;
+    max-width: 22rem;
 
     &::-webkit-scrollbar {
         display: none;
