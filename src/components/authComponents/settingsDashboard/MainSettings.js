@@ -368,7 +368,9 @@ const MainSettings = ({
             <MainContainer>
                 {isMobileOnly && (
                     <>
-                        <MainHeader>Settings Manager</MainHeader>
+                        <MainHeader className="MainSettings-MainHeader">
+                            Settings Manager
+                        </MainHeader>
                         <SecondarySettingsHeader>
                             Change your user preferences.
                         </SecondarySettingsHeader>
