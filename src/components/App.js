@@ -16,6 +16,7 @@ import { getMode } from '../styling/useDarkMode';
 import { GlobalStyle } from '../styling/GlobalStyles';
 
 //Components:
+import GuidedTour from './GuidedTour';
 import MainLandingPage from './landingPage/MainLandingPage';
 import MainloginForm from './loginPage/MainloginForm';
 import MainSignupForm from './signupPage/MainSignupForm';
@@ -230,6 +231,7 @@ const App = withRouter(({ location }) => {
                                 path="/signup"
                                 component={MainSignupForm}
                             />
+
                             <AuthCheckComponent>
                                 <Route
                                     exact
