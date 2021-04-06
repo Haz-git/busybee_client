@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import historyObject from '../historyObject';
+import GuidedTour from '../GuidedTour';
 
 //Redux Actions:
 import { connect } from 'react-redux';
@@ -40,6 +41,7 @@ const Dashboard = ({
     getUserExistingDetails,
     changeIsNewUserValue,
     getIsNewUserValue,
+    startAppTour,
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stateTutorialModal, setStateTutorialModal] = useState(false);
@@ -87,7 +89,9 @@ const Dashboard = ({
     };
 
     const sendUserToTutorialPage = () => {
-        historyObject.push('/newUserTutorial');
+        //This should send the callback to initial the tour...
+        setStateTutorialModal(false);
+        startAppTour(true);
     };
 
     const renderLoadingIfNoUserDetails = () => {
