@@ -150,7 +150,7 @@ const UserPowerStats = ({
                     <MainContainer>
                         <MainHeader>Your Main Lifts</MainHeader>
                         <StyledDivider />
-                        <StatCardContainer>
+                        <StatCardContainer className="UserPowerStats-StatCardContainer">
                             <UserPowerStatCard
                                 header="Deadlift"
                                 img={deadlift}
