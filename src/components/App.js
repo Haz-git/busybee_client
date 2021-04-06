@@ -77,6 +77,7 @@ const AppBrowserContentContainer = styled.div`
 const App = withRouter(({ location }) => {
     //'dark' state value is temporary, should be set to '' on proper light/dark mode switching.
     const [appTheme, setAppTheme] = useState('dark');
+    const [startTour, setStartTour] = useState(false);
 
     useEffect(() => {
         async function initialState() {
@@ -95,6 +96,15 @@ const App = withRouter(({ location }) => {
     const grabbedTheme = appTheme === 'light' ? darkTheme : darkTheme;
 
     //For only now, we'll make the availiable theme Dark. We'll work on the light theme later.
+
+    //Tour handling functions:
+    const closeTour = () => {
+        setStartTour(false);
+    };
+
+    const startAppTour = (bool) => {
+        setStartTour(bool);
+    };
 
     const renderApp = () => {
         if (isBrowser) {
@@ -219,6 +229,7 @@ const App = withRouter(({ location }) => {
                             location.pathname !== '/newUserTutorial' && (
                                 <DashboardNavbar />
                             )}
+                        <GuidedTour openOn={startTour} closeFunc={closeTour} />
                         <Switch>
                             <Route exact path="/" component={MainLandingPage} />
                             <Route
@@ -231,12 +242,16 @@ const App = withRouter(({ location }) => {
                                 path="/signup"
                                 component={MainSignupForm}
                             />
-
                             <AuthCheckComponent>
                                 <Route
                                     exact
                                     path="/dashboard"
-                                    component={Dashboard}
+                                    render={(props) => (
+                                        <Dashboard
+                                            {...props}
+                                            startAppTour={startAppTour}
+                                        />
+                                    )}
                                 />
                                 <Route
                                     exact
