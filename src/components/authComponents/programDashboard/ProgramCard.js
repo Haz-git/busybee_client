@@ -561,7 +561,7 @@ const ProgramCard = ({
                 descPlaceholder={desc}
             />
             <WrapperContainer>
-                <MainContainer>
+                <MainContainer className="ProgramCard-MainContainer">
                     <PlayButton onClick={openRunProgramModal}>
                         <PlayIcon />
                     </PlayButton>
@@ -597,6 +597,7 @@ const ProgramCard = ({
                     </DeleteButton>
                     <EditButton onClick={editModalOpen}>Edit</EditButton>
                     <ConfigureButton
+                        className="ProgramCard-ConfigureButton"
                         to={`/programs/configure/${name}/${programId}`}
                     >
                         Configure
