@@ -6,6 +6,8 @@ import historyObject from './historyObject';
 
 const GuidedTour = withRouter(
     ({ openOn, closeFunc, location: { pathname } }) => {
+        const disableBody = (target) => disableBodyScroll(target);
+        const enableBody = (target) => enableBodyScroll(target);
         const accentColor = 'white';
         //States for moving around the app. Unfortunately, using the history object with reactour generates an infinite loop. We'll first check if we have navigated to an area before using the historyObject.
         const stepsStyle = {
@@ -15,14 +17,12 @@ const GuidedTour = withRouter(
             fontSize: '.9em',
             margin: '0 0',
             maxWidth: '15em',
+            data_tour_elem__controls: {
+                //Trying to center and change color of arrows...
+                justifyContent: 'center',
+                color: 'white',
+            },
         };
-
-        const [hasNavigatedToSettings, setHasNavigatedToSettings] = useState(
-            false
-        );
-
-        const disableBody = (target) => disableBodyScroll(target);
-        const enableBody = (target) => enableBodyScroll(target);
 
         const steps = [
             {
@@ -51,7 +51,10 @@ const GuidedTour = withRouter(
                 <Tour
                     steps={steps}
                     isOpen={openOn}
-                    onRequestClose={() => closeFunc(false)}
+                    onRequestClose={() => {
+                        //Body is not enabled after tutorial is closed?
+                        closeFunc(false);
+                    }}
                     rounded={10}
                     onAfterOpen={disableBody}
                     onBeforeClose={enableBody}
