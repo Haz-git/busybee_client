@@ -1,6 +1,4 @@
 import React, { useEffect, useState } from 'react';
-import historyObject from '../historyObject';
-import GuidedTour from '../GuidedTour';
 
 //Redux Actions:
 import { connect } from 'react-redux';
