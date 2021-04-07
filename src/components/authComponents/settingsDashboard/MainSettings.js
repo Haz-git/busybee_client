@@ -385,7 +385,7 @@ const MainSettings = ({
                     </>
                 )}
                 {isMobileOnly && (
-                    <SettingOptionsContainer>
+                    <SettingOptionsContainer className="MainSettings-SettingsOptionsContainer">
                         <SettingsCard
                             icon={<LogOutIcon />}
                             textLabel="Sign Out"
