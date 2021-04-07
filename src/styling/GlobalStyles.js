@@ -30,5 +30,13 @@ export const GlobalStyle = createGlobalStyle`
         margin: 0;
     }
 
+    [data-tour-elem="controls"] {
+        justify-content: center;
+        background: #293241;
+        padding: .5em .5em;
+        border-radius: .4em;
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
 
 `;
