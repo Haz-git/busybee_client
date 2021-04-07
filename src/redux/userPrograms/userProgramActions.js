@@ -35,7 +35,7 @@ export function addToUserProgramCount(programId) {
     };
 }
 
-export function addNewProgram(programName, programDesc, callback) {
+export function addNewProgram(programName, programDesc, callback, isTutorial) {
     return async (dispatch) => {
         const response = await api.post(`/user/addnewprogram`, {
             programName,
@@ -47,9 +47,11 @@ export function addNewProgram(programName, programDesc, callback) {
             payload: response.data.userPrograms,
         });
 
-        if (response) {
+        if (response && callback && isTutorial !== true) {
             callback(true);
         }
+
+        if (isTutorial === true && response) return response.data.userPrograms;
     };
 }
 
