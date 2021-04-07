@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import styled from 'styled-components';
 import { withRouter, useLocation } from 'react-router-dom';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
 import Tour from 'reactour';
@@ -13,15 +14,14 @@ const GuidedTour = withRouter(
         const stepsStyle = {
             backgroundColor: '#1a222f',
             color: 'white',
-            padding: '1.2em 1em',
+            padding: '1em 1em',
+            paddingTop: 'em',
+            paddingBottom: '1em',
             fontSize: '.9em',
             margin: '0 0',
             maxWidth: '15em',
-            data_tour_elem__controls: {
-                //Trying to center and change color of arrows...
-                justifyContent: 'center',
-                color: 'white',
-            },
+            textShadow: 'rgba(0, 0, 0, 1) 0px 1px 1px',
+            //The controls (arrows) for reactour is centered in globalstyles.js
         };
 
         const steps = [
