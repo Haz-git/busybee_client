@@ -52,7 +52,7 @@ const UserRecentStats = ({ userStats }) => {
     };
 
     return (
-        <MainContainer>
+        <MainContainer className="UserRecentStats-MainContainer">
             <MainHeader>Your Recently Modified Stats</MainHeader>
             <StyledDivider />
             <LabelContainer>

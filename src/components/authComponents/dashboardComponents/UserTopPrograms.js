@@ -83,7 +83,7 @@ const UserTopPrograms = ({ userPrograms }) => {
     };
 
     return (
-        <MainContainer>
+        <MainContainer className="UserTopPrograms-MainContainer">
             <MainHeader>Your Top Programs</MainHeader>
             <StyledDivider />
             <LabelContainer>
