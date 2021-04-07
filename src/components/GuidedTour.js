@@ -14,9 +14,7 @@ const GuidedTour = withRouter(
         const stepsStyle = {
             backgroundColor: '#1a222f',
             color: 'white',
-            padding: '1em 1em',
-            paddingTop: 'em',
-            paddingBottom: '1em',
+            padding: '2em 1em .5em 1em',
             fontSize: '.9em',
             margin: '0 0',
             maxWidth: '15em',
@@ -36,6 +34,16 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
             {
+                selector: '.UserTopPrograms-MainContainer',
+                content: `Your most frequently run programs will be shown here.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.UserRecentStats-MainContainer',
+                content: `Your most recently saved stats will be shown here.`,
+                style: stepsStyle,
+            },
+            {
                 content: 'Settings Menu',
                 action: () => {
                     if (pathname !== '/settings') {
@@ -45,6 +53,10 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
         ];
+
+        const navigationHelper = (currentStep) => {
+            //This should be a switch function to help the user move through the app during tutorial.
+        };
 
         return (
             <>
