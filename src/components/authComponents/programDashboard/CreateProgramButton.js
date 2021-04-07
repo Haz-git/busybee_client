@@ -36,7 +36,11 @@ const CustomButton = withStyles({
 const CreateProgramButton = ({ clickFunction }) => {
     return (
         <>
-            <CustomButton startIcon={<CreateIcon />} onClick={clickFunction}>
+            <CustomButton
+                className="MainPrograms-CreateProgramButton"
+                startIcon={<CreateIcon />}
+                onClick={clickFunction}
+            >
                 Create
             </CustomButton>
         </>
