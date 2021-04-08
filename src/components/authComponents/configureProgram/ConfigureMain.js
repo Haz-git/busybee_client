@@ -754,6 +754,7 @@ const ConfigureMain = ({
                 <ButtonContainer>
                     {stateAddButtons === true ? (
                         <EditLayoutButtonOpening
+                            className="ConfigureMain-EditLayoutButtonOpening"
                             to={`/programs/configure/blueprint/${name}/${id}`}
                         >
                             <SortIcon />
@@ -767,6 +768,7 @@ const ConfigureMain = ({
                     )}
                     {stateAddButtons === true ? (
                         <AddExerciseButtonOpening
+                            className="ConfigureMain-AddExerciseButtonOpening"
                             to={`/programs/configure/select/${name}/${id}`}
                         >
                             <PlusIcon />
@@ -779,7 +781,10 @@ const ConfigureMain = ({
                         </AddExerciseButtonClosing>
                     )}
                     {stateAddButtons === true ? (
-                        <AddRestButtonOpening onClick={openTimeSelectorModal}>
+                        <AddRestButtonOpening
+                            className="ConfigureMain-AddRestButtonOpening"
+                            onClick={openTimeSelectorModal}
+                        >
                             <PlusIcon />
                             Rest
                         </AddRestButtonOpening>
