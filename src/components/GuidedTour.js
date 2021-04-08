@@ -17,9 +17,10 @@ const GuidedTour = withRouter(
         //States for moving around the app. Unfortunately, using the history object with reactour generates an infinite loop. We'll first check if we have navigated to an area before using the historyObject.
         console.log('Test for infinite re-render');
 
-        //store program information:
-        let programInfo;
-        console.log(programInfo);
+        //store custom tutorial program information:
+        let programName = 'Test Program',
+            programDesc = 'Your first program! Wow!',
+            tutorialId = 'TUTORIAL_SAMPLE_PROGRAM';
 
         const stepsStyle = {
             backgroundColor: '#1a222f',
@@ -34,16 +35,8 @@ const GuidedTour = withRouter(
 
         function addTutorialProgram() {
             addTutorialProgram = function () {};
-            let programName = 'Test Program';
-            let programDesc = 'Your first program! Wow!';
-            const programInformation = addNewProgram(
-                programName,
-                programDesc,
-                undefined,
-                true
-            ); //We pass undefined for callback, since this is tutorial..
-            console.log(programInformation);
-            return programInformation;
+
+            addNewProgram(programName, programDesc, undefined, tutorialId); //We pass undefined for callback, since this is tutorial..
         }
 
         const steps = [
@@ -97,10 +90,7 @@ const GuidedTour = withRouter(
             {
                 content: `Let me create a test program for you. You can delete this later.`,
                 style: stepsStyle,
-                action: () => {
-                    let program = addTutorialProgram();
-                    console.log(program);
-                },
+                action: () => addTutorialProgram(),
                 // Wrapping the function solves the issue of re-creating a test program every-time a user moves back to this step.
                 //Also there is an issue of this function running continuously when user stays in the step...Edit: the step actually runs only once. Mapping the state to props is causing infinite re-render.
             },
@@ -117,8 +107,13 @@ const GuidedTour = withRouter(
             {
                 content: 'Customizing your Program',
                 action: () => {
-                    if (pathname !== '/programs') {
-                        historyObject.push('/programs');
+                    if (
+                        pathname !==
+                        `/programs/configure/${programName}/${tutorialId}`
+                    ) {
+                        historyObject.push(
+                            `/programs/configure/${programName}/${tutorialId}`
+                        );
                     }
                 },
                 style: stepsStyle,
