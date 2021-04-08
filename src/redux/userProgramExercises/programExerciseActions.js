@@ -54,7 +54,7 @@ export function addNewProgramExercise(
             payload: response.data.userProgramExercises,
         });
 
-        if (response) {
+        if (response && callback) {
             callback(true);
         }
     };
