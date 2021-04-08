@@ -8,19 +8,36 @@ import historyObject from './historyObject';
 //Dispatch Actions:
 import { connect } from 'react-redux';
 import { addNewProgram } from '../redux/userPrograms/userProgramActions';
+import { addNewProgramExercise } from '../redux/userProgramExercises/programExerciseActions';
 
 const GuidedTour = withRouter(
-    ({ addNewProgram, openOn, closeFunc, location: { pathname } }) => {
+    ({
+        addNewProgramExercise,
+        addNewProgram,
+        openOn,
+        closeFunc,
+        location: { pathname },
+    }) => {
         const disableBody = (target) => disableBodyScroll(target);
         const enableBody = (target) => enableBodyScroll(target);
         const accentColor = 'white';
         //States for moving around the app. Unfortunately, using the history object with reactour generates an infinite loop. We'll first check if we have navigated to an area before using the historyObject.
         console.log('Test for infinite re-render');
 
-        //store custom tutorial program information:
-        let programName = 'Test Program',
+        //Custom tutorial program information:
+        const programName = 'Test Program',
             programDesc = 'Your first program! Wow!',
             tutorialId = 'TUTORIAL_SAMPLE_PROGRAM';
+
+        //Custom program exercise information:
+        const programExerciseName = 'Bicep Curls',
+            programExerciseType = 'NEW_PROGRAM_EXERCISE',
+            sets = '4',
+            reps = '10',
+            weight = '45',
+            unit = 'Lbs';
+
+        let isProgramExerciseAdded = false;
 
         const stepsStyle = {
             backgroundColor: '#1a222f',
@@ -37,6 +54,21 @@ const GuidedTour = withRouter(
             addTutorialProgram = function () {};
 
             addNewProgram(programName, programDesc, undefined, tutorialId); //We pass undefined for callback, since this is tutorial..
+        }
+
+        function addTutorialProgramExercise() {
+            addTutorialProgramExercise = function () {};
+
+            addNewProgramExercise(
+                tutorialId,
+                programExerciseType,
+                sets,
+                reps,
+                programExerciseName,
+                weight,
+                unit,
+                undefined
+            );
         }
 
         const steps = [
@@ -118,6 +150,52 @@ const GuidedTour = withRouter(
                 },
                 style: stepsStyle,
             },
+            {
+                selector: '.ConfigureMain-AddExerciseButtonOpening',
+                content: `Use this button to browse options to add your favorite exercises.`,
+                style: stepsStyle,
+            },
+            {
+                content: 'There are many ways to add your favorite exercises',
+                action: () => {
+                    //Open issue: it appears that when historyObject is used, it causes GuidedTour to re-render, and therefore it makes sense that programExercise cards are being added everything the back button is pressed.
+                    if (
+                        pathname !==
+                        `/programs/configure/select/${programName}/${tutorialId}`
+                    ) {
+                        historyObject.push(
+                            `/programs/configure/select/${programName}/${tutorialId}`
+                        );
+
+                        addTutorialProgramExercise();
+                    }
+                },
+                style: stepsStyle,
+            },
+            {
+                content: `Let me create a sample exercise for you.`,
+                style: stepsStyle,
+                action: () => {
+                    if (
+                        pathname !==
+                        `/programs/configure/${programName}/${tutorialId}`
+                    ) {
+                        historyObject.push(
+                            `/programs/configure/${programName}/${tutorialId}`
+                        );
+                    }
+                },
+            },
+            {
+                selector: '.ConfigureMain-AddRestButtonOpening',
+                content: `Thinking you're going to be a little tired? Add a rest period!`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.ConfigureMain-EditLayoutButtonOpening',
+                content: `Make sure to format the program--We don't know in what order you want to run this program!`,
+                style: stepsStyle,
+            },
         ];
 
         const navigationHelper = (currentStep) => {
@@ -144,7 +222,7 @@ const GuidedTour = withRouter(
                     showNavigation={false}
                     update={pathname}
                     accentColor={accentColor}
-                    startAt={0}
+                    startAt={6}
                     showButtons={true}
                     showCloseButton={true}
                     getCurrentStep={(current) => {
@@ -162,4 +240,7 @@ const GuidedTour = withRouter(
     }
 );
 
-export default connect(null, { addNewProgram })(GuidedTour);
+export default connect(null, {
+    addNewProgram,
+    addNewProgramExercise,
+})(GuidedTour);
