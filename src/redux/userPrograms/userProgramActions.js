@@ -35,23 +35,36 @@ export function addToUserProgramCount(programId) {
     };
 }
 
-export function addNewProgram(programName, programDesc, callback, isTutorial) {
+export function addNewProgram(programName, programDesc, callback, tutorialId) {
     return async (dispatch) => {
-        const response = await api.post(`/user/addnewprogram`, {
-            programName,
-            programDesc,
-        });
+        let response;
+
+        if (tutorialId !== undefined && tutorialId !== null) {
+            response = await api.post(`/user/addnewprogram`, {
+                programName,
+                programDesc,
+                tutorialId,
+            });
+        } else {
+            response = await api.post(`/user/addnewprogram`, {
+                programName,
+                programDesc,
+            });
+        }
 
         dispatch({
             type: USER_ADD_NEW_PROGRAM,
             payload: response.data.userPrograms,
         });
 
-        if (response && callback && isTutorial !== true) {
+        if (
+            response &&
+            callback &&
+            tutorialId === undefined &&
+            tutorialId === null
+        ) {
             callback(true);
         }
-
-        if (isTutorial === true && response) return response.data.userPrograms;
     };
 }
 
