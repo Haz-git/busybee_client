@@ -7,11 +7,17 @@ import historyObject from './historyObject';
 
 //Dispatch Actions:
 import { connect } from 'react-redux';
-import { addNewProgram } from '../redux/userPrograms/userProgramActions';
+import {
+    addNewProgram,
+    addToUserProgramCount,
+} from '../redux/userPrograms/userProgramActions';
 import { addNewProgramExercise } from '../redux/userProgramExercises/programExerciseActions';
+import { submitFormattedProgram } from '../redux/userFormattedPrograms/formattedProgramsActions';
 
 const GuidedTour = withRouter(
     ({
+        addToUserProgramCount,
+        submitFormattedProgram,
         addNewProgramExercise,
         addNewProgram,
         openOn,
@@ -37,7 +43,22 @@ const GuidedTour = withRouter(
             weight = '45',
             unit = 'Lbs';
 
-        let isProgramExerciseAdded = false;
+        const PreFormattedTutorialProgramObject = [
+            {
+                orderId: '1',
+                programExerciseId: 'tutorial',
+                restDetails: undefined,
+                exerciseDetails: {
+                    dateAdded: `${new Date()}`,
+                    programExerciseId: 'tutorial',
+                    programExerciseName: 'Bicep Curls',
+                    programExerciseType: 'NEW_PROGRAM_EXERCISE',
+                    reps: '10',
+                    sets: '4',
+                    weight: '45',
+                },
+            },
+        ];
 
         const stepsStyle = {
             backgroundColor: '#1a222f',
@@ -68,6 +89,15 @@ const GuidedTour = withRouter(
                 weight,
                 unit,
                 undefined
+            );
+        }
+
+        function submitTutorialFormattedProgram() {
+            submitTutorialFormattedProgram = function () {};
+
+            submitFormattedProgram(
+                PreFormattedTutorialProgramObject,
+                tutorialId
             );
         }
 
@@ -159,6 +189,8 @@ const GuidedTour = withRouter(
                 content: 'There are many ways to add your favorite exercises',
                 action: () => {
                     //Open issue: it appears that when historyObject is used, it causes GuidedTour to re-render, and therefore it makes sense that programExercise cards are being added everything the back button is pressed.
+
+                    //I'm thinking the only way over this is to disable the ability to return to previous steps. Check out the custom helper in reactour demo, press enter to view it in the live demo.
                     if (
                         pathname !==
                         `/programs/configure/select/${programName}/${tutorialId}`
@@ -187,14 +219,110 @@ const GuidedTour = withRouter(
                 },
             },
             {
+                selector: '.ProgramExerciseCard-WrapperContainer',
+                content: `Here's your exercise details.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.ProgramExerciseCard-PushoverContainer',
+                content: `Check this out to remove your stat card or add rest between each set.`,
+                style: stepsStyle,
+            },
+            {
                 selector: '.ConfigureMain-AddRestButtonOpening',
                 content: `Thinking you're going to be a little tired? Add a rest period!`,
                 style: stepsStyle,
             },
             {
                 selector: '.ConfigureMain-EditLayoutButtonOpening',
-                content: `Make sure to format the program--We don't know in what order you want to run this program!`,
+                content: `Make sure to format the program before you finish--We don't know in what order you want to run this program!`,
                 style: stepsStyle,
+            },
+            {
+                content: `Formatting your program`,
+                style: stepsStyle,
+                action: () => {
+                    if (
+                        pathname !==
+                        `/programs/configure/blueprint/${programName}/${tutorialId}`
+                    ) {
+                        historyObject.push(
+                            `/programs/configure/blueprint/${programName}/${tutorialId}`
+                        );
+                    }
+                },
+            },
+            {
+                selector: '.BlueprintSelector-NumberLabel',
+                content: `This number shows the order an exercise will show up.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.StyledSelector-BlueprintSelector',
+                content: `Select from your exercises entered in the last page.`,
+                style: stepsStyle,
+            },
+            {
+                content: `When finished selecting, a button will appear the save it. Make sure to save it!`,
+                style: stepsStyle,
+                action: () => submitTutorialFormattedProgram(),
+            },
+            {
+                selector: '.BackButtonHeader-BackButton',
+                content: `I have formatted this program automatically for you! You can return to previous pages via this back button!`,
+                style: stepsStyle,
+            },
+            {
+                content: `We've returned back to your programs!`,
+                style: stepsStyle,
+                action: () => {
+                    if (pathname !== '/programs') {
+                        historyObject.push('/programs');
+                    }
+                },
+            },
+            {
+                selector: '.ProgramCard-PlayButton',
+                content: `After formatting your program, you can run it! Let's try that.`,
+                style: stepsStyle,
+            },
+            {
+                content: `Running A Program`,
+                style: stepsStyle,
+                action: () => {
+                    if (
+                        pathname !== `/runprogram/${programName}/${tutorialId}`
+                    ) {
+                        addToUserProgramCount(tutorialId);
+                        historyObject.push(
+                            `/runprogram/${programName}/${tutorialId}`
+                        );
+                    }
+                },
+            },
+            {
+                selector: '.RunCards-CardContainer',
+                content: `Here's your exercise details to perform.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.RunCards-ButtonContainer',
+                content: `Move between your previous, current, and next exercises in your program.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.BackButtonHeader-BackButton',
+                content: `Let's exit here.`,
+                style: stepsStyle,
+            },
+            {
+                content: `This place looks familiar now, does it?`,
+                style: stepsStyle,
+                action: () => {
+                    if (pathname !== '/programs') {
+                        historyObject.push('/programs');
+                    }
+                },
             },
         ];
 
@@ -241,6 +369,8 @@ const GuidedTour = withRouter(
 );
 
 export default connect(null, {
+    submitFormattedProgram,
     addNewProgram,
     addNewProgramExercise,
+    addToUserProgramCount,
 })(GuidedTour);
