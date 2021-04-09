@@ -618,6 +618,7 @@ const ProgramExerciseCard = ({
                     </InfoBlock>
                 </MainContainer>
                 <PushoverContainer
+                    className="ProgramExerciseCard-PushoverContainer"
                     style={
                         stateButtonExpand === false
                             ? {
@@ -667,7 +668,7 @@ const ProgramExerciseCard = ({
                     </ButtonContainer>
                     <PushoverButton
                         onClick={toggleOptionsContainer}
-                        className="ProgramExerciseCard-PushoverContainer"
+                        id="ProgramExerciseCard-PushoverContainer"
                     >
                         <RightIcon
                             style={
