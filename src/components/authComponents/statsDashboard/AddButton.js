@@ -38,7 +38,12 @@ const CustomButton = withStyles({
 const AddButton = ({ clickFunction }) => {
     return (
         <>
-            <CustomButton startIcon={<AddIcon />} onClick={clickFunction}>
+            <CustomButton
+                className="MainStats-AddButton"
+                id="MainStats-AddButton"
+                startIcon={<AddIcon />}
+                onClick={clickFunction}
+            >
                 New
             </CustomButton>
         </>
