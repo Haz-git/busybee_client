@@ -14,6 +14,7 @@ const Header = styled.h1`
     font-family: 'Lato', 'Nunito';
     font-size: 1.3em;
     color: #fdbc3d;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 3px;
 `;
 
 const DescContainer = styled.div``;
@@ -22,6 +23,7 @@ const Desc = styled.p`
     font-family: 'Lato';
     font-size: 0.95em;
     color: white;
+    text-shadow: rgba(0, 0, 0, 1) 0px 1px 3px;
 `;
 const GuidedTourContainer = ({ header, desc }) => {
     return (
