@@ -31,13 +31,9 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     [data-tour-elem="controls"] {
-        justify-content: center;
-        background: #293241;
+        justify-content: flex-end;
+        background: inherit;
         text-decoration: none;
-        color: white !important;
-        padding: .5em .5em;
-        border-radius: .4em;
-        box-shadow: rgba(0, 0, 0, .7) 0px 2px 3px;
     }
 
 
