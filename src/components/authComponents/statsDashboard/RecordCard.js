@@ -313,12 +313,12 @@ const RecordCard = ({
     return (
         <>
             <WrapperContainer>
-                <DateContainer>
+                <DateContainer className="RecordCard-DateContainer">
                     <DateText>Edited on: {convertISOToDate()}</DateText>
                 </DateContainer>
                 <MainContainer>
                     <FlexContainer>
-                        <DetailsContainer>
+                        <DetailsContainer className="RecordCard-DetailsContainer">
                             <TechContainer>
                                 <TechDivider>Sets: {sets}</TechDivider>
                                 <TechDivider>Reps: {reps}</TechDivider>
@@ -332,7 +332,11 @@ const RecordCard = ({
                         </DetailsContainer>
                     </FlexContainer>
                     <DropdownContainer>
-                        <DropdownButton onClick={enableDropdownMenu}>
+                        <DropdownButton
+                            id="RecordCard-DropdownButton"
+                            className="RecordCard-DropdownButton"
+                            onClick={enableDropdownMenu}
+                        >
                             <DropdownIcon
                                 style={
                                     stateDropdown === false

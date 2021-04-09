@@ -24,7 +24,10 @@ export function getUserStatData() {
 
 export function addNewStat(exerciseName, callback, tutorialStatId) {
     return async (dispatch) => {
-        const response = await api.post('/user/addnewstat', { exerciseName });
+        const response = await api.post('/user/addnewstat', {
+            exerciseName,
+            tutorialStatId,
+        });
 
         dispatch({
             type: USER_ADD_NEW_STAT,

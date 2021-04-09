@@ -40,7 +40,7 @@ export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
 
         //Creating a snackbar to notify new record add:
 
-        if (response) {
+        if (response && callback) {
             callback(true);
         }
     };
