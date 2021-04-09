@@ -40,7 +40,6 @@ const AddButton = ({ clickFunction }) => {
         <>
             <CustomButton
                 className="MainStats-AddButton"
-                id="MainStats-AddButton"
                 startIcon={<AddIcon />}
                 onClick={clickFunction}
             >
