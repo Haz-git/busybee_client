@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { render } from 'react-dom';
 import styled from 'styled-components';
 import { withRouter, useLocation } from 'react-router-dom';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
@@ -316,12 +317,33 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
             {
-                content: `This place looks familiar now, does it?`,
+                content: `Your Stat Log`,
                 style: stepsStyle,
                 action: () => {
-                    if (pathname !== '/programs') {
-                        historyObject.push('/programs');
+                    if (pathname !== '/stats') {
+                        historyObject.push('/stats');
                     }
+                },
+            },
+            {
+                selector: '.MainStats-AddButton',
+                content: `Use this button to log a new stat.`,
+                style: stepsStyle,
+            },
+            {
+                content: `test`,
+                style: stepsStyle,
+                action: () => {
+                    const openEvent = new MouseEvent('click', {
+                        view: window,
+                        bubbles: true,
+                        cancelable: false,
+                    });
+
+                    const addButtonNode = document.getElementById(
+                        'MainStats-AddButton'
+                    );
+                    addButtonNode.dispatchEvent(openEvent);
                 },
             },
         ];
@@ -350,7 +372,7 @@ const GuidedTour = withRouter(
                     showNavigation={false}
                     update={pathname}
                     accentColor={accentColor}
-                    startAt={6}
+                    startAt={30}
                     showButtons={true}
                     showCloseButton={true}
                     getCurrentStep={(current) => {
