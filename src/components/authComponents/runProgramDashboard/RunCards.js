@@ -723,7 +723,7 @@ const RunCards = ({
             return (
                 //Render for exercises:
                 <MainContainer>
-                    <CardContainer>
+                    <CardContainer className="RunCards-CardContainer">
                         <ExerciseContainer>
                             <ExerciseIcon />
                             <ExerciseValue>{exerciseName}</ExerciseValue>
@@ -751,7 +751,7 @@ const RunCards = ({
                             </DetailsContainer>
                         </RepsContainer>
                         {isMobileOnly && (
-                            <ButtonContainer>
+                            <ButtonContainer className="RunCards-ButtonContainer">
                                 <ButtonDivider>
                                     <MoveButtonLeft onClick={onPrev}>
                                         <ArrowLeft />

@@ -525,6 +525,7 @@ const ProgramExerciseCard = ({
     return (
         <>
             <WrapperContainer
+                className="ProgramExerciseCard-WrapperContainer"
                 style={
                     stateButtonExpand === false
                         ? {
@@ -617,6 +618,7 @@ const ProgramExerciseCard = ({
                     </InfoBlock>
                 </MainContainer>
                 <PushoverContainer
+                    className="ProgramExerciseCard-PushoverContainer"
                     style={
                         stateButtonExpand === false
                             ? {

@@ -90,9 +90,14 @@ const BlueprintSelector = ({
         <>
             <MainContainer>
                 <NumberLabelContainer>
-                    <NumberLabel>{numLabel}</NumberLabel>
+                    <NumberLabel className="BlueprintSelector-NumberLabel">
+                        {numLabel}
+                    </NumberLabel>
                 </NumberLabelContainer>
-                <StyledSelector onChange={changeFunc}>
+                <StyledSelector
+                    className="StyledSelector-BlueprintSelector"
+                    onChange={changeFunc}
+                >
                     <StyledOption value="" disabled selected>
                         Choose a {optionsDefaultValue}...
                     </StyledOption>

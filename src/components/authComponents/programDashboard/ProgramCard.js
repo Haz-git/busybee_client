@@ -562,7 +562,10 @@ const ProgramCard = ({
             />
             <WrapperContainer>
                 <MainContainer className="ProgramCard-MainContainer">
-                    <PlayButton onClick={openRunProgramModal}>
+                    <PlayButton
+                        className="ProgramCard-PlayButton"
+                        onClick={openRunProgramModal}
+                    >
                         <PlayIcon />
                     </PlayButton>
                     <HeaderContainer>
