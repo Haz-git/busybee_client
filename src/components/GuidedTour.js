@@ -267,6 +267,10 @@ const GuidedTour = withRouter(
                 selector: '.ProgramExerciseCard-PushoverContainer',
                 content: `Check this out to remove your stat card or add rest between each set.`,
                 style: stepsStyle,
+                action: () =>
+                    dispatchMouseClickEvent(
+                        'ProgramExerciseCard-PushoverContainer'
+                    ),
             },
             {
                 selector: '.ConfigureMain-AddRestButtonOpening',
@@ -463,7 +467,7 @@ const GuidedTour = withRouter(
                     showNavigation={false}
                     update={pathname}
                     accentColor={accentColor}
-                    startAt={30}
+                    startAt={0}
                     showButtons={true}
                     showCloseButton={true}
                     prevButton={<></>}
