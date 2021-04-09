@@ -32,12 +32,14 @@ export function submitFormattedProgram(
             formattedProgramObject,
         });
 
+        console.log(formattedProgramObject);
+
         dispatch({
             type: USER_EDIT_FORMATTED_PROGRAM,
             payload: response.data.userFormattedProgram.userFormattedPrograms,
         });
 
-        if (response) {
+        if (response && callback) {
             callback(true);
         }
     };
