@@ -34,6 +34,8 @@ export const GlobalStyle = createGlobalStyle`
         justify-content: flex-end;
         background: inherit;
         text-decoration: none;
+        margin: 0 0;
+
     }
 
 
