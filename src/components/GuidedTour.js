@@ -15,9 +15,11 @@ import {
 import { addNewProgramExercise } from '../redux/userProgramExercises/programExerciseActions';
 import { submitFormattedProgram } from '../redux/userFormattedPrograms/formattedProgramsActions';
 import { addNewStat } from '../redux/userStats/userStatActions';
+import { addRecord } from '../redux/userStatRecords/recordActions';
 
 const GuidedTour = withRouter(
     ({
+        addRecord,
         addNewStat,
         addToUserProgramCount,
         submitFormattedProgram,
@@ -131,6 +133,12 @@ const GuidedTour = withRouter(
             submitTutorialStat = function () {};
 
             addNewStat(tutorialStatName, undefined, tutorialStatId);
+        }
+
+        function submitTutorialRecords() {
+            submitTutorialRecords = function () {};
+
+            addRecord(tutorialStatId, '5', '3', '70', 'Lbs', undefined);
         }
 
         const steps = [
@@ -362,10 +370,72 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
             {
+                selector: '.MainStats-AddButton',
                 content: `Let's create your first stat.`,
                 style: stepsStyle,
                 action: () => submitTutorialStat(),
+                position: 'left',
+            },
+            {
+                selector: '.StatCard-NameContainer',
+                content: `Here's your stat name and the date which it was added.`,
+                style: stepsStyle,
+            },
+            {
+                selector: '.StatCard-StyledDropdownButton',
+                content: `This caret reveals additional options!`,
+                style: stepsStyle,
+                action: () =>
+                    dispatchMouseClickEvent('StatCard-StyledDropdownButton'),
                 position: 'top',
+            },
+            {
+                selector: '.StatCard-ButtonContainer',
+                content: `Delete your stat, change your stat name, or view your records.`,
+                style: stepsStyle,
+                position: 'bottom',
+            },
+            {
+                selector: '.StatCard-DatabaseIcon',
+                content: `Let's explore stat records.`,
+                style: stepsStyle,
+                position: 'bottom',
+                action: () => submitTutorialRecords(),
+            },
+            {
+                content: `I've added a record for you. Let's take a look.`,
+                style: stepsStyle,
+                action: () =>
+                    dispatchMouseClickEvent('StatCard-Database-Button'),
+            },
+            {
+                selector: '.RecordCard-DateContainer',
+                content: `Your record modification dates are saved.`,
+                style: stepsStyle,
+                position: 'bottom',
+            },
+            {
+                selector: '.RecordCard-DetailsContainer',
+                content: `You can store your sets, reps, weight, and unit. Hooray for progressive overload!`,
+                style: stepsStyle,
+                position: 'bottom',
+            },
+            {
+                selector: '.RecordCard-DropdownButton',
+                content: `You can delete or edit a record here.`,
+                style: stepsStyle,
+                position: 'top',
+                action: () =>
+                    dispatchMouseClickEvent('RecordCard-DropdownButton'),
+            },
+            {
+                content: `That's about it! There's other features but I'm confident you'll find them on your own. Thank you for trying out GymJot!`,
+                action: () => {
+                    if (pathname !== '/dashboard') {
+                        historyObject.push('/dashboard');
+                    }
+                },
+                style: stepsStyle,
             },
         ];
 
@@ -413,6 +483,7 @@ const GuidedTour = withRouter(
 );
 
 export default connect(null, {
+    addRecord,
     addNewStat,
     submitFormattedProgram,
     addNewProgram,
