@@ -73,11 +73,11 @@ const GuidedTour = withRouter(
         const stepsStyle = {
             backgroundColor: '#1a222f',
             color: 'white',
-            padding: '.6em 1em .5em 1em',
-            fontSize: '.9em',
+            padding: '.6em .5em .5em .5em',
             margin: '0 0',
             maxWidth: '15em',
-            textShadow: 'rgba(0, 0, 0, 1) 0px 1px 1px',
+            width: '15em',
+            boxShadow: 'rgba(255, 255, 255, .15) 0px 1px 8px',
             //The controls (arrows) for reactour is centered in globalstyles.js
         };
 
@@ -146,7 +146,7 @@ const GuidedTour = withRouter(
             {
                 content: (
                     <GuidedTourContainer
-                        header="Welcome"
+                        header="Welcome!"
                         desc={`Hey! Thanks for letting me take you around. Let's start in your dashboard.`}
                     />
                 ),
@@ -154,21 +154,41 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.UserPowerStats-StatCardContainer',
-                content: `Check the status of your primary lifts at a glance.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Main Lifts"
+                        desc={`Check the status of your primary lifts at a glance.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.UserTopPrograms-MainContainer',
-                content: `Your most frequently run programs will be shown here.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Top Programs"
+                        desc={`Your most frequently run programs will be shown here.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.UserRecentStats-MainContainer',
-                content: `Your most recently saved stats will be shown here.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Recent Stats"
+                        desc={`Your most recently saved stats will be shown here.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: 'Settings Menu',
+                content: (
+                    <GuidedTourContainer
+                        header="Settings"
+                        desc={`Everything related to your personal details.`}
+                    />
+                ),
                 action: () => {
                     if (pathname !== '/settings') {
                         historyObject.push('/settings');
@@ -179,10 +199,21 @@ const GuidedTour = withRouter(
             {
                 selector: '.MainSettings-SettingsOptionsContainer',
                 content: `Edit your saved user details through these options.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Option Blocks"
+                        desc={`Edit your saved user details through these options. Or, sign out.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: 'Your Programs',
+                content: (
+                    <GuidedTourContainer
+                        header="Your Programs"
+                        desc={`Personalized programs created by you...yes you!`}
+                    />
+                ),
                 action: () => {
                     if (pathname !== '/programs') {
                         historyObject.push('/programs');
@@ -192,11 +223,21 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.MainPrograms-CreateProgramButton',
-                content: `Create tailored lifting programs here!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Create Program"
+                        desc={`Start your own custom program with a single button.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `Let me create a test program for you. You can delete this later.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Create Program"
+                        desc={`Let me create a test program for you. You can delete this later, or keep it.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => addTutorialProgram(),
                 // Wrapping the function solves the issue of re-creating a test program every-time a user moves back to this step.
@@ -204,16 +245,32 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.ProgramCard-MainContainer',
-                content: `In your program card, you can customize the title and description. Moreover, once you've added exercises we provide a time estimate.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Details"
+                        desc={`Customize the title and description of the program.`}
+                    />
+                ),
                 style: stepsStyle,
+                position: 'top',
             },
             {
                 selector: '.ProgramCard-ConfigureButton',
-                content: `Let's add some exercises to your new program through the configure button.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Configuration"
+                        desc={`Let's add some exercises to your new program.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: 'Customizing your Program',
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`All the tools required for a well-made program.`}
+                    />
+                ),
                 action: () => {
                     if (
                         pathname !==
@@ -228,11 +285,21 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.ConfigureMain-AddExerciseButtonOpening',
-                content: `Use this button to browse options to add your favorite exercises.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`Add your favorite exercises.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: 'There are many ways to add your favorite exercises',
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`Choose from multiple options to add an exercise.`}
+                    />
+                ),
                 action: () => {
                     //Open issue: it appears that when historyObject is used, it causes GuidedTour to re-render, and therefore it makes sense that programExercise cards are being added everything the back button is pressed.
 
@@ -251,7 +318,12 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
             {
-                content: `Let me create a sample exercise for you.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`I'll create a sample exercise for you. Do you like curls?`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => {
                     if (
@@ -266,12 +338,22 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.ProgramExerciseCard-WrapperContainer',
-                content: `Here's your exercise details.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`Here's your (my) exercise details.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.ProgramExerciseCard-PushoverContainer',
-                content: `Check this out to remove your stat card or add rest between each set.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`Additional options to delete your exercise, or add a rest period between each set.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () =>
                     dispatchMouseClickEvent(
@@ -280,16 +362,31 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.ConfigureMain-AddRestButtonOpening',
-                content: `Thinking you're going to be a little tired? Add a rest period!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`You can add a rest period between each exercise. I think you'll be fine, though.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.ConfigureMain-EditLayoutButtonOpening',
-                content: `Make sure to format the program before you finish--We don't know in what order you want to run this program!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Customization"
+                        desc={`Make sure to format the program before you finish. Unfortunately, we don't know the order you want to run your exercises!`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `Formatting your program`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Format"
+                        desc={`Basically a reading list for GymJot.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => {
                     if (
@@ -304,26 +401,51 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.BlueprintSelector-NumberLabel',
-                content: `This number shows the order an exercise will show up.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Format"
+                        desc={`This number shows the order an exercise will show up.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.StyledSelector-BlueprintSelector',
-                content: `Select from your exercises entered in the last page.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Format"
+                        desc={`Select from your exercises entered in the last page.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `When finished selecting, a button will appear the save it. Make sure to save it!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Format"
+                        desc={`When finished selecting, a button will appear to save your format. Make sure to save it!`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => submitTutorialFormattedProgram(),
             },
             {
                 selector: '.BackButtonHeader-BackButton',
-                content: `I have formatted this program automatically for you! You can return to previous pages via this back button!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Program Format"
+                        desc={`Don't worry, I have formatted this program automatically for you just now. You can return to previous pages via this back button.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `We've returned back to your programs!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Deja Vu"
+                        desc={`We've returned back to your programs!`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => {
                     if (pathname !== '/programs') {
@@ -333,11 +455,21 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.ProgramCard-PlayButton',
-                content: `After formatting your program, you can run it! Let's try that.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Running Programs"
+                        desc={`After formatting a program, you can run it. Let's try that now.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `Running A Program`,
+                content: (
+                    <GuidedTourContainer
+                        header="Running Programs"
+                        desc={`Never forget your next exercise again. That is, unless we forget...uh oh.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => {
                     if (
@@ -352,21 +484,41 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.RunCards-CardContainer',
-                content: `Here's your exercise details to perform.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Running Programs"
+                        desc={`Here's the details on the exercise you must perform.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.RunCards-ButtonContainer',
-                content: `Move between your previous, current, and next exercises in your program.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Running Programs"
+                        desc={`Move between your previous, current, and next exercises in your program.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.BackButtonHeader-BackButton',
-                content: `Let's exit here.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Moving On"
+                        desc={`Let's exit here.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
-                content: `Your Stat Log`,
+                content: (
+                    <GuidedTourContainer
+                        header="Stat Log"
+                        desc={`Your own personal bank of everything you've done at the Gym.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => {
                     if (pathname !== '/stats') {
@@ -376,24 +528,44 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.MainStats-AddButton',
-                content: `Use this button to log a new stat.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`Use this button to log a new stat.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.MainStats-AddButton',
-                content: `Let's create your first stat.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`Let's create your first stat. After working your biceps...let's train some legs?`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () => submitTutorialStat(),
                 position: 'left',
             },
             {
                 selector: '.StatCard-NameContainer',
-                content: `Here's your stat name and the date which it was added.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`Here's your stat name and the date which it was added.`}
+                    />
+                ),
                 style: stepsStyle,
             },
             {
                 selector: '.StatCard-StyledDropdownButton',
-                content: `This caret reveals additional options!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`This caret reveals additional options!`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () =>
                     dispatchMouseClickEvent('StatCard-StyledDropdownButton'),
@@ -401,45 +573,80 @@ const GuidedTour = withRouter(
             },
             {
                 selector: '.StatCard-ButtonContainer',
-                content: `Delete your stat, change your stat name, or view your records.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`Delete your stat, change your stat name, or view your records.`}
+                    />
+                ),
                 style: stepsStyle,
                 position: 'bottom',
             },
             {
                 selector: '.StatCard-DatabaseIcon',
-                content: `Let's explore stat records.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Adding Stats"
+                        desc={`Let's explore stat records.`}
+                    />
+                ),
                 style: stepsStyle,
                 position: 'bottom',
                 action: () => submitTutorialRecords(),
             },
             {
-                content: `I've added a record for you. Let's take a look.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Stat Records"
+                        desc={`I've added a record for you. Let's take a look.`}
+                    />
+                ),
                 style: stepsStyle,
                 action: () =>
                     dispatchMouseClickEvent('StatCard-Database-Button'),
             },
             {
                 selector: '.RecordCard-DateContainer',
-                content: `Your record modification dates are saved.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Stat Records"
+                        desc={`Your record modification dates are saved.`}
+                    />
+                ),
                 style: stepsStyle,
                 position: 'bottom',
             },
             {
                 selector: '.RecordCard-DetailsContainer',
-                content: `You can store your sets, reps, weight, and unit. Hooray for progressive overload!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Stat Records"
+                        desc={`You can store your sets, reps, weight, and unit. Track your progressive overload!`}
+                    />
+                ),
                 style: stepsStyle,
                 position: 'bottom',
             },
             {
                 selector: '.RecordCard-DropdownButton',
-                content: `You can delete or edit a record here.`,
+                content: (
+                    <GuidedTourContainer
+                        header="Stat Records"
+                        desc={`You can delete or edit a record here.`}
+                    />
+                ),
                 style: stepsStyle,
                 position: 'top',
                 action: () =>
                     dispatchMouseClickEvent('RecordCard-DropdownButton'),
             },
             {
-                content: `That's about it! There's other features but I'm confident you'll find them on your own. Thank you for trying out GymJot!`,
+                content: (
+                    <GuidedTourContainer
+                        header="Farewell"
+                        desc={`That's about it! There's other features but I'm confident you'll find them on your own. Thank you for trying out GymJot!`}
+                    />
+                ),
                 action: () => {
                     if (pathname !== '/dashboard') {
                         historyObject.push('/dashboard');
