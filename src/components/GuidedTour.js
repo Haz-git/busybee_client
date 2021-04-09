@@ -14,9 +14,11 @@ import {
 } from '../redux/userPrograms/userProgramActions';
 import { addNewProgramExercise } from '../redux/userProgramExercises/programExerciseActions';
 import { submitFormattedProgram } from '../redux/userFormattedPrograms/formattedProgramsActions';
+import { addNewStat } from '../redux/userStats/userStatActions';
 
 const GuidedTour = withRouter(
     ({
+        addNewStat,
         addToUserProgramCount,
         submitFormattedProgram,
         addNewProgramExercise,
@@ -61,6 +63,10 @@ const GuidedTour = withRouter(
             },
         ];
 
+        //Custom tutorial program stat:
+        const tutorialStatName = 'Leg Press',
+            tutorialStatId = 'TUTORIAL_SAMPLE_STAT';
+
         const stepsStyle = {
             backgroundColor: '#1a222f',
             color: 'white',
@@ -100,6 +106,31 @@ const GuidedTour = withRouter(
                 PreFormattedTutorialProgramObject,
                 tutorialId
             );
+        }
+
+        function dispatchMouseClickEvent(elementId) {
+            //I'm sure this isn't best practice for React since we are manipulating the DOM elements directly. However, this seems to be the fastest way I currently know to dispatch a mouse click event.
+            //Additionally, since I'm using this to open modals, it appears that there's focus-fighting between reactour and the material UI modals. I will have to sort that out later.
+
+            const mouseEvent = new MouseEvent('click', {
+                view: window,
+                bubbles: true,
+                cancelable: false,
+            });
+
+            const targetNode = document.getElementById(elementId);
+
+            if (targetNode) {
+                targetNode.dispatchEvent(mouseEvent);
+            } else {
+                console.warn('Node Id not found for dispatchMouseClickEvent()');
+            }
+        }
+
+        function submitTutorialStat() {
+            submitTutorialStat = function () {};
+
+            addNewStat(tutorialStatName, undefined, tutorialStatId);
         }
 
         const steps = [
@@ -331,20 +362,10 @@ const GuidedTour = withRouter(
                 style: stepsStyle,
             },
             {
-                content: `test`,
+                content: `Let's create your first stat.`,
                 style: stepsStyle,
-                action: () => {
-                    const openEvent = new MouseEvent('click', {
-                        view: window,
-                        bubbles: true,
-                        cancelable: false,
-                    });
-
-                    const addButtonNode = document.getElementById(
-                        'MainStats-AddButton'
-                    );
-                    addButtonNode.dispatchEvent(openEvent);
-                },
+                action: () => submitTutorialStat(),
+                position: 'top',
             },
         ];
 
@@ -375,6 +396,7 @@ const GuidedTour = withRouter(
                     startAt={30}
                     showButtons={true}
                     showCloseButton={true}
+                    prevButton={<></>}
                     getCurrentStep={(current) => {
                         //We will create a current step checker here...switch function?
                         if (
@@ -391,6 +413,7 @@ const GuidedTour = withRouter(
 );
 
 export default connect(null, {
+    addNewStat,
     submitFormattedProgram,
     addNewProgram,
     addNewProgramExercise,
