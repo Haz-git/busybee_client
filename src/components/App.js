@@ -1,12 +1,15 @@
 //Dependencies
 import React, { useState, useEffect } from 'react';
 import { Switch, Route, withRouter } from 'react-router-dom';
+import { connect } from 'react-redux';
 import {
     BrowserView,
     MobileOnlyView,
     isBrowser,
     isMobileOnly,
 } from 'react-device-detect';
+
+import { changeIsNewUserValue } from '../redux/userDetails/detailActions';
 
 //Styling:
 import styled from 'styled-components';
@@ -74,7 +77,7 @@ const AppBrowserContentContainer = styled.div`
 
 //Render
 
-const App = withRouter(({ location }) => {
+const App = withRouter(({ location, changeIsNewUserValue }) => {
     //'dark' state value is temporary, should be set to '' on proper light/dark mode switching.
     const [appTheme, setAppTheme] = useState('dark');
     const [startTour, setStartTour] = useState(false);
@@ -100,10 +103,14 @@ const App = withRouter(({ location }) => {
     //Tour handling functions:
     const closeTour = () => {
         setStartTour(false);
+        //Add false flag to isUserNew.
+        changeIsNewUserValue(false);
     };
 
     const startAppTour = (bool) => {
         setStartTour(bool);
+        //Add false flag to isUserNew.
+        changeIsNewUserValue(false);
     };
 
     const renderApp = () => {
@@ -315,4 +322,4 @@ const App = withRouter(({ location }) => {
     return <>{renderApp()}</>;
 });
 
-export default App;
+export default connect(null, { changeIsNewUserValue })(App);
