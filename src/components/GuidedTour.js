@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import GuidedTourContainer from './GuidedTourContainer';
 import GuidedTourArrow from './GuidedTourArrow';
+import GuidedTourFinish from './GuidedTourFinish';
 import styled from 'styled-components';
 import { withRouter, useLocation } from 'react-router-dom';
 import { disableBodyScroll, enableBodyScroll } from 'body-scroll-lock';
@@ -643,7 +644,7 @@ const GuidedTour = withRouter(
             {
                 content: (
                     <GuidedTourContainer
-                        header="Farewell"
+                        header="Farewell~"
                         desc={`That's about it! There's other features but I'm confident you'll find them on your own. Thank you for trying out GymJot!`}
                     />
                 ),
@@ -680,11 +681,12 @@ const GuidedTour = withRouter(
                     showNavigation={false}
                     update={pathname}
                     accentColor={accentColor}
-                    startAt={0}
+                    startAt={steps.length - 2}
                     showButtons={true}
                     showCloseButton={true}
                     prevButton={<></>}
                     nextButton={<GuidedTourArrow />}
+                    lastStepNextButton={<GuidedTourFinish />}
                     getCurrentStep={(current) => {
                         //We will create a current step checker here...switch function?
                         if (
