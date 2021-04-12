@@ -189,6 +189,7 @@ const TutorialModal = ({
                 BackdropProps={{
                     timeout: 500,
                 }}
+                disableScrollLock={true}
             >
                 <Fade in={openBoolean}>{renderTutorialModalContainer()}</Fade>
             </Modal>
