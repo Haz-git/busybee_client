@@ -40,6 +40,7 @@ const Dashboard = ({
     changeIsNewUserValue,
     getIsNewUserValue,
     startAppTour,
+    closeAppTour,
 }) => {
     const [isLoaded, setIsLoaded] = useState(false);
     const [stateTutorialModal, setStateTutorialModal] = useState(false);
