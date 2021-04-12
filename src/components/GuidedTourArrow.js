@@ -7,6 +7,7 @@ const IconContainer = styled.div`
     box-shadow: rgba(0, 0, 0, 0.7) 0px 2px 3px;
     background: #293241;
     border-radius: 50%;
+    margin: 0.2em 0;
 
     &:focus {
         outline: none;

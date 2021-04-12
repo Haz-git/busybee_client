@@ -7,6 +7,7 @@ const IconContainer = styled.div`
     background: #293241;
     border-radius: 50%;
     padding: 0.7em 0.7em;
+    margin: 0.2em 0;
 
     &:focus {
         outline: none;
