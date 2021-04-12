@@ -250,6 +250,7 @@ const App = withRouter(({ location }) => {
                                         <Dashboard
                                             {...props}
                                             startAppTour={startAppTour}
+                                            closeAppTour={closeTour}
                                         />
                                     )}
                                 />
