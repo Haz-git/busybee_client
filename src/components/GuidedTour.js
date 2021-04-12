@@ -18,9 +18,11 @@ import { addNewProgramExercise } from '../redux/userProgramExercises/programExer
 import { submitFormattedProgram } from '../redux/userFormattedPrograms/formattedProgramsActions';
 import { addNewStat } from '../redux/userStats/userStatActions';
 import { addRecord } from '../redux/userStatRecords/recordActions';
+import { changeIsNewUserValue } from '../redux/userDetails/detailActions';
 
 const GuidedTour = withRouter(
     ({
+        changeIsNewUserValue,
         addRecord,
         addNewStat,
         addToUserProgramCount,
@@ -141,6 +143,10 @@ const GuidedTour = withRouter(
             submitTutorialRecords = function () {};
 
             addRecord(tutorialStatId, '5', '3', '70', 'Lbs', undefined);
+        }
+
+        function setNewUserFlagOff() {
+            changeIsNewUserValue(false);
         }
 
         const steps = [
@@ -627,6 +633,7 @@ const GuidedTour = withRouter(
                 ),
                 style: stepsStyle,
                 position: 'bottom',
+                action: () => setNewUserFlagOff(),
             },
             {
                 selector: '.RecordCard-DropdownButton',
@@ -637,7 +644,7 @@ const GuidedTour = withRouter(
                     />
                 ),
                 style: stepsStyle,
-                position: 'top',
+                position: 'left',
                 action: () =>
                     dispatchMouseClickEvent('RecordCard-DropdownButton'),
             },
@@ -681,9 +688,9 @@ const GuidedTour = withRouter(
                     showNavigation={false}
                     update={pathname}
                     accentColor={accentColor}
-                    startAt={steps.length - 2}
+                    startAt={0}
                     showButtons={true}
-                    showCloseButton={true}
+                    showCloseButton={false}
                     prevButton={<></>}
                     nextButton={<GuidedTourArrow />}
                     lastStepNextButton={<GuidedTourFinish />}
@@ -709,4 +716,5 @@ export default connect(null, {
     addNewProgram,
     addNewProgramExercise,
     addToUserProgramCount,
+    changeIsNewUserValue,
 })(GuidedTour);
