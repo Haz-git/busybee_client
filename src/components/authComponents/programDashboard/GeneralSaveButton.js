@@ -30,8 +30,12 @@ const CustomButton = withStyles({
     },
 })(Button);
 
-const GeneralSaveButton = ({ clickFunction }) => {
-    return <CustomButton onClick={clickFunction}>Save</CustomButton>;
+const GeneralSaveButton = ({ clickFunction, buttonDesc }) => {
+    return <CustomButton onClick={clickFunction}>{buttonDesc}</CustomButton>;
+};
+
+GeneralSaveButton.defaultProps = {
+    buttonDesc: 'Save',
 };
 
 export default GeneralSaveButton;
