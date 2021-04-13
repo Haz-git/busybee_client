@@ -34,6 +34,10 @@ export const CustomButton = styled.div`
     &:focus {
         outline: none;
     }
+
+    @media screen and (max-width: 320px) {
+        font-size: 1rem;
+    }
 `;
 
 const CustomDeleteButton = ({ buttonLabel, onClickFunction }) => {
