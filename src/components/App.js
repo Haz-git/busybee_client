@@ -103,14 +103,10 @@ const App = withRouter(({ location, changeIsNewUserValue }) => {
     //Tour handling functions:
     const closeTour = () => {
         setStartTour(false);
-        //Add false flag to isUserNew.
-        changeIsNewUserValue(false);
     };
 
     const startAppTour = (bool) => {
         setStartTour(bool);
-        //Add false flag to isUserNew.
-        changeIsNewUserValue(false);
     };
 
     const renderApp = () => {
