@@ -18,6 +18,7 @@ import VerifyError from './VerifyError';
 
 //Styles:
 import styled from 'styled-components';
+import CircularProgress from '@material-ui/core/CircularProgress';
 import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
@@ -268,6 +269,9 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
     //Client Verification Handlers:
     //We will use the browser to handle verification.
     //Snackbar controls the label that indicates proper user regristration.
+
+    const [accountCreationLoading, setAccountCreationLoading] = useState(false);
+
     const [openSnackBar, setOpenSnackBar] = useState(false);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
@@ -368,9 +372,21 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
             invalidPassword === false &&
             invalidPasswordMatchVar === false
         ) {
-            userRegistration(formValues, showSnackBar);
+            //If tests pass, set button state to loading...
+            setAccountCreationLoading(true);
+
+            userRegistration(
+                formValues,
+                showSnackBar,
+                reenableButtonAfterAccountCreation
+            );
             dispatch(reset('registrationForm'));
         }
+    };
+
+    //Controls button state:
+    const reenableButtonAfterAccountCreation = (bool) => {
+        setAccountCreationLoading(bool);
     };
 
     //Controls opening the snackbar:
@@ -466,8 +482,24 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                                     </InputField>
                                     <ButtonContainer>
                                         <SubmitButton
-                                            label="Create new account"
+                                            label={
+                                                accountCreationLoading === false
+                                                    ? 'Create new account'
+                                                    : 'Creating your account'
+                                            }
                                             formID="regForm"
+                                            disabledState={
+                                                accountCreationLoading
+                                            }
+                                            loader={
+                                                accountCreationLoading && (
+                                                    <CircularProgress
+                                                        size={20}
+                                                        thickness={6}
+                                                        color="inherit"
+                                                    />
+                                                )
+                                            }
                                         />
                                     </ButtonContainer>
                                 </FormContainer>
