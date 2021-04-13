@@ -23,6 +23,7 @@ import { withStyles } from '@material-ui/core/styles';
 import Snackbar from '@material-ui/core/Snackbar';
 import MuiAlert from '@material-ui/lab/Alert';
 import Slide from '@material-ui/core/Slide';
+import CustomSaveButton from '../authComponents/dashboardComponents/CustomSaveButton';
 import Button from '@material-ui/core/Button';
 import { Mail } from '@styled-icons/entypo/Mail';
 import { UserDetail } from '@styled-icons/boxicons-solid/UserDetail';
@@ -160,17 +161,33 @@ const CustomMuiAlert = withStyles(() => ({
         alignItems: 'center',
         alignContent: 'center',
         backgroundColor: '#136539',
-        padding: '.8em .8em',
+        padding: '.6em .8em',
         textShadow: 'rgba(0, 0, 0, 0.9) 0px 2px 2px',
         '& .MuiAlert-icon': {
             fontSize: '1.25em',
+            ['@media (max-width: 320px)']: {
+                fontSize: '2rem',
+            },
         },
         '& .MuiAlert-message': {
             fontSize: '.85em',
+            whiteSpace: 'nowrap',
+            ['@media (max-width: 320px)']: {
+                fontSize: '1rem',
+            },
         },
         '& .MuiAlert-action': {
             margin: '0',
             padding: '0',
+        },
+        '@media only screen and (max-width: 320px)': {
+            padding: '.8em .8em',
+            '& .MuiAlert-icon': {
+                fontSize: '1.1em',
+            },
+            '& .MuiAlert-message': {
+                fontSize: '.6em',
+            },
         },
         '@media only screen and (max-width: 375px)': {
             padding: '.8em .8em',
@@ -179,15 +196,6 @@ const CustomMuiAlert = withStyles(() => ({
             },
             '& .MuiAlert-message': {
                 fontSize: '1.1em',
-            },
-        },
-        '@media only screen and (max-width: 320px)': {
-            padding: '.8em .8em',
-            '& .MuiAlert-icon': {
-                fontSize: '2.2em',
-            },
-            '& .MuiAlert-message': {
-                fontSize: '.85em',
             },
         },
         '@media only screen and (max-width: 414px)': {
@@ -201,19 +209,19 @@ const CustomMuiAlert = withStyles(() => ({
         },
     },
     filledSuccess: {
-        background: '#156711',
+        background: '#1A222F',
     },
     filledError: {
-        background: '#76251F',
+        background: '#1A222F',
     },
     filledInfo: {
-        background: '#083768',
+        background: '#1A222F',
     },
 }))(MuiAlert);
 
 const CustomAlertButton = withStyles(() => ({
     root: {
-        padding: '2em 4em',
+        padding: '.6em .8em',
         margin: '0',
         height: '2em',
         maxWidth: '4.5em',
@@ -529,23 +537,14 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
                                     justifyContent: 'center',
                                 }}
                                 message={
-                                    <Alert
-                                        severity="success"
-                                        action={
-                                            <Link to="/login">
-                                                <CustomAlertButton
-                                                    variant="contained"
-                                                    color="primary"
-                                                    size="small"
-                                                >
-                                                    Login
-                                                </CustomAlertButton>
-                                            </Link>
-                                        }
-                                    >
-                                        Your account has been successfully
-                                        created!
-                                    </Alert>
+                                    <>
+                                        <Alert severity="success">
+                                            Your account has been created!
+                                        </Alert>
+                                        <Link to="/login">
+                                            <CustomSaveButton buttonLabel="Login" />
+                                        </Link>
+                                    </>
                                 }
                             />
                         </Snackbar>
