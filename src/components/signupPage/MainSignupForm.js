@@ -164,13 +164,13 @@ const CustomMuiAlert = withStyles(() => ({
         padding: '.6em .8em',
         textShadow: 'rgba(0, 0, 0, 0.9) 0px 2px 2px',
         '& .MuiAlert-icon': {
-            fontSize: '1.25em',
+            fontSize: '1.25rem',
             ['@media (max-width: 320px)']: {
                 fontSize: '2rem',
             },
         },
         '& .MuiAlert-message': {
-            fontSize: '.85em',
+            fontSize: '1em',
             whiteSpace: 'nowrap',
             ['@media (max-width: 320px)']: {
                 fontSize: '1rem',
@@ -201,7 +201,7 @@ const CustomMuiAlert = withStyles(() => ({
         '@media only screen and (max-width: 414px)': {
             padding: '.8em .8em',
             '& .MuiAlert-icon': {
-                fontSize: '3.5em',
+                fontSize: '2.5em',
             },
             '& .MuiAlert-message': {
                 fontSize: '1.2em',
@@ -280,7 +280,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
 
     const [accountCreationLoading, setAccountCreationLoading] = useState(false);
 
-    const [openSnackBar, setOpenSnackBar] = useState(false);
+    const [openSnackBar, setOpenSnackBar] = useState(true);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
         undefined
