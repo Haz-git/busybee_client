@@ -116,9 +116,13 @@ const ButtonContainer = styled.div`
 const ErrorTextInvisible = styled.h2`
     font-family: 'Nunito', sans-serif;
     color: red;
-    font-size: 1em;
+    font-size: 0.8em;
     font-weight: 100;
     opacity: 0;
+
+    @media only screen and (max-width: 320px) {
+        font-size: 0.7em;
+    }
 
     @media only screen and (min-width: 375px) {
         font-size: 1em;
@@ -144,8 +148,12 @@ const DeskErrorTextInvisible = styled.h2`
 const ErrorTextVisible = styled.h2`
     font-family: 'Nunito', sans-serif;
     color: red;
-    font-size: 15px;
+    font-size: 0.8em;
     font-weight: 100;
+
+    @media only screen and (max-width: 320px) {
+        font-size: 0.7em;
+    }
 
     @media only screen and (min-width: 375px) {
         font-size: 1em;
