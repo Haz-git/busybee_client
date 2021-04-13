@@ -280,7 +280,7 @@ const MainSignupForm = ({ handleSubmit, userRegistration }) => {
 
     const [accountCreationLoading, setAccountCreationLoading] = useState(false);
 
-    const [openSnackBar, setOpenSnackBar] = useState(true);
+    const [openSnackBar, setOpenSnackBar] = useState(false);
     const [areFieldsEmpty, setAreFieldsEmpty] = useState(undefined);
     const [hasInvalidUsernameLength, setHasInvalidUsernameLength] = useState(
         undefined
