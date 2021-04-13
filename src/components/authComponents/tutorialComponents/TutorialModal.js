@@ -78,6 +78,10 @@ const TutorialModalDesc = styled(ModalDesc)`
     word-break: break-word;
     text-align: left;
     hyphens: auto;
+
+    @media screen and (max-width: 320px) {
+        font-size: 0.9em;
+    }
 `;
 
 const ButtonContainer = styled.div`
