@@ -241,7 +241,7 @@ const StatCard = ({
     //Edit Modal:
 
     const [stateEditModal, setStateEditModal] = useState(false);
-    const [userEditInput, setUserEditInput] = useState(false);
+    const [userEditInput, setUserEditInput] = useState('');
 
     //Record Modal:
 
@@ -260,7 +260,7 @@ const StatCard = ({
     };
 
     //callback function for button state on pending request:
-    const enabledDisabledButton = (bool) => {
+    const enableDisabledButton = (bool) => {
         setIsRequestLoading(bool);
     };
 
@@ -291,7 +291,7 @@ const StatCard = ({
         deleteStat(
             exerciseId,
             deleteSnackbar,
-            enabledDisabledButton,
+            enableDisabledButton,
             disableModalOnCompletion
         );
     };
@@ -310,9 +310,25 @@ const StatCard = ({
         setUserEditInput(e.target.value);
     };
 
+    const editModalCallback = (bool) => {
+        setStateEditModal(bool);
+    };
+
     const onEditConfirmation = () => {
-        editStat(exerciseId, userEditInput, editSnackbar);
-        setStateEditModal(false);
+        if (userEditInput !== '') {
+            setIsRequestLoading(true);
+            editStat(
+                exerciseId,
+                userEditInput,
+                editSnackbar,
+                enableDisabledButton,
+                editModalCallback
+            );
+
+            setUserEditInput('');
+        } else {
+            alert('Please input a new value.');
+        }
     };
 
     //Controller functions for Record Modal:
@@ -424,6 +440,7 @@ const StatCard = ({
                         inputFunction={onEditInput}
                         buttonSubmitFunction={onEditConfirmation}
                         existingStatName={name}
+                        buttonDisabledState={isRequestLoading}
                     />
                     <StatCardRecordModal
                         openBoolean={stateRecordModal}
