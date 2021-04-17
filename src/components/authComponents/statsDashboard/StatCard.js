@@ -247,6 +247,9 @@ const StatCard = ({
 
     const [stateRecordModal, setStateRecordModal] = useState(false);
 
+    //States for loading buttons:
+    const [isRequestLoading, setIsRequestLoading] = useState(false);
+
     //Reformats ISO timestamp:
     const reformatDate = () => {
         if (date !== undefined && date !== null) {
@@ -254,6 +257,17 @@ const StatCard = ({
         } else {
             return null;
         }
+    };
+
+    //callback function for button state on pending request:
+    const enabledDisabledButton = (bool) => {
+        setIsRequestLoading(bool);
+    };
+
+    //Callback function for modal state on pending request:
+
+    const disableModalOnCompletion = (bool) => {
+        setStateDeleteModal(bool);
     };
 
     //Controller function for stateDropdown:
@@ -273,8 +287,13 @@ const StatCard = ({
     };
 
     const onDeleteConfirmation = () => {
-        deleteStat(exerciseId, deleteSnackbar);
-        setStateDeleteModal(false);
+        setIsRequestLoading(true);
+        deleteStat(
+            exerciseId,
+            deleteSnackbar,
+            enabledDisabledButton,
+            disableModalOnCompletion
+        );
     };
 
     //Controller Functions for Edit Modal:
@@ -397,6 +416,7 @@ const StatCard = ({
                 will be deleted."
                         ariaLabel="stat card modal"
                         ariaDesc="modal for stat deletion"
+                        buttonDisabledState={isRequestLoading}
                     />
                     <StatCardModalEdit
                         openBoolean={stateEditModal}
