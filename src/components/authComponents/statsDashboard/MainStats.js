@@ -206,6 +206,9 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
     //State for search filter:
     const [userSearchArray, setUserSearchArray] = useState(null);
 
+    //State for button on user request:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     useEffect(() => {
         if (stats.stats === undefined || stats.stats === null) {
             //If these are undefined, that means programs were not persisted and will need retrieval.
@@ -306,11 +309,28 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
         ) {
             alert('Please enter an exercise before submission.');
         } else {
-            addNewStat(userNewExercise, showNewStatSnackbar);
-            setStatModalOpen(false);
+            setIsButtonDisabled(true);
+            addNewStat(
+                userNewExercise,
+                showNewStatSnackbar,
+                undefined,
+                enableButtonOnSave,
+                closeModalOnSave
+            );
         }
 
         //Action Creator --> e.target.value;
+    };
+
+    //Modal callback controller:
+    const closeModalOnSave = (bool) => {
+        setStatModalOpen(bool);
+    };
+
+    //Button state controller:
+
+    const enableButtonOnSave = (bool) => {
+        setIsButtonDisabled(bool);
     };
 
     //Stat Card render function:
@@ -569,8 +589,14 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                                 </TextFieldContainer>
                                 <ButtonContainer>
                                     <CustomSaveButton
-                                        buttonLabel="Save"
+                                        buttonLabel={
+                                            isButtonDisabled === false
+                                                ? 'Save'
+                                                : 'Saving stat...'
+                                        }
                                         onClickFunction={handleUserSubmit}
+                                        isLoaderBtn={true}
+                                        disabledState={isButtonDisabled}
                                     />
                                 </ButtonContainer>
                             </FormContainer>
