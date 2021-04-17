@@ -2,6 +2,7 @@ import React from 'react';
 import ButtonBase from '@material-ui/core/ButtonBase';
 import { withStyles } from '@material-ui/core/styles';
 import styled from 'styled-components';
+import CircularProgress from '@material-ui/core/CircularProgress';
 
 const StyledButtonBase = withStyles({
     root: {
@@ -55,7 +56,7 @@ const CustomDeleteButton = ({
                 {isLoaderBtn === true && disabledState === true ? (
                     <LoaderContainer>
                         <CircularProgress
-                            size={20}
+                            size={17}
                             thickness={6}
                             color="inherit"
                         />
