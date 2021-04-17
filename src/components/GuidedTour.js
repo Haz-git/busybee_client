@@ -37,7 +37,6 @@ const GuidedTour = withRouter(
         const enableBody = (target) => enableBodyScroll(target);
         const accentColor = 'white';
         //States for moving around the app. Unfortunately, using the history object with reactour generates an infinite loop. We'll first check if we have navigated to an area before using the historyObject.
-        console.log('Test for infinite re-render');
 
         //Custom tutorial program information:
         const programName = 'Test Program',
