@@ -22,7 +22,7 @@ const StyledButtonBase = withStyles({
         cursor: 'pointer',
         backgroundColor: '#20861b',
         borderRadius: '.4rem',
-        transition: 'all .4s ease-in-out',
+        transition: 'all .3s ease-in-out',
         border: 'none',
         '&:hover': {
             backgroundColor: '#034500',
@@ -36,34 +36,6 @@ const StyledButtonBase = withStyles({
         },
     },
 })(ButtonBase);
-
-// export const CustomButton = styled.div`
-//     display: flex;
-//     align-items: center;
-//     justify-content: center;
-//     border: none;
-//     border-radius: 0.4rem;
-//     color: white;
-//     font-family: 'Lato', sans-serif, helvetica;
-//     font-weight: 600;
-//     font-size: 1.2rem;
-//     letter-spacing: 0.05rem;
-//     padding: 0.7rem 1rem;
-//     text-shadow: rgba(0, 0, 0, 1) 0px 1px 1px;
-//     box-shadow: rgba(0, 0, 0, 0.5) 0px 3px 10px;
-//     cursor: pointer;
-//     width: 100%;
-//     max-width: 100%;
-//     transition: all 0.35s ease-in-out;
-
-//     &:focus {
-//         outline: none;
-//     }
-
-//     @media screen and (max-width: 320px) {
-//         font-size: 1rem;
-//     }
-// `;
 
 const LoaderContainer = styled.div`
     margin-right: 0.5rem;
