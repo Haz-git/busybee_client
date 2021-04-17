@@ -54,7 +54,12 @@ export function addNewStat(
     };
 }
 
-export function deleteStat(exerciseId, callback) {
+export function deleteStat(
+    exerciseId,
+    snackbarCallback,
+    btnCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         //For delete axios requests, data is possible in request bodies, but the following format is required.
 
@@ -68,7 +73,9 @@ export function deleteStat(exerciseId, callback) {
         });
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
+            btnCallback(false);
+            modalCallback(false);
         }
     };
 }
