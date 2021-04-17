@@ -41,12 +41,13 @@ const ButtonContainer = styled.div`
     grid-column-gap: 0.5em;
 `;
 
-const StatCardModalDelete = ({
+const StatCardModalEdit = ({
     openBoolean,
     closeFunction,
     buttonSubmitFunction,
     inputFunction,
     existingStatName,
+    buttonDisabledState,
 }) => {
     return (
         <>
@@ -77,8 +78,14 @@ const StatCardModalDelete = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={buttonSubmitFunction}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
@@ -116,8 +123,14 @@ const StatCardModalDelete = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={buttonSubmitFunction}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
@@ -132,4 +145,4 @@ const StatCardModalDelete = ({
     );
 };
 
-export default StatCardModalDelete;
+export default StatCardModalEdit;
