@@ -317,6 +317,8 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                 enableButtonOnSave,
                 closeModalOnSave
             );
+
+            setUserNewExercise('');
         }
 
         //Action Creator --> e.target.value;
