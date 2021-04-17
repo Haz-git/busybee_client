@@ -149,6 +149,11 @@ export const PromptLink = styled(Link)`
     font-weight: 600;
     color: ${({ theme }) => theme.MobPromptLink};
 
+    @media only screen and (max-width: 320px) {
+        font-size: 1em;
+        font-weight: 900;
+    }
+
     @media only screen and (min-width: 375px) {
         font-size: 1.1em;
         font-weight: 900;
