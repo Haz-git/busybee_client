@@ -46,6 +46,7 @@ const StatCardModalDelete = ({
     modalDesc,
     ariaLabel,
     ariaDesc,
+    buttonDisabledState,
 }) => {
     return (
         <>
@@ -69,8 +70,14 @@ const StatCardModalDelete = ({
                             <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                             <ButtonContainer>
                                 <CustomDeleteButton
-                                    buttonLabel="Delete"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Delete'
+                                            : 'Deleting...'
+                                    }
                                     onClickFunction={buttonSubmitFunction}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
@@ -101,10 +108,15 @@ const StatCardModalDelete = ({
                             <DeleteModalDesc>{modalDesc}</DeleteModalDesc>
                             <ButtonContainer>
                                 <CustomDeleteButton
-                                    buttonLabel="Delete"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Delete'
+                                            : 'Deleting...'
+                                    }
                                     onClickFunction={buttonSubmitFunction}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
-
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
                                     onClickFunction={closeFunction}
