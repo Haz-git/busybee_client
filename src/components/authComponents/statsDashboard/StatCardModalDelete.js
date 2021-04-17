@@ -46,7 +46,7 @@ const StatCardModalDelete = ({
     modalDesc,
     ariaLabel,
     ariaDesc,
-    buttonDisabledState,
+    buttonDisabledState = false,
 }) => {
     return (
         <>
