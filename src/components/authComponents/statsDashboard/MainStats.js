@@ -633,8 +633,14 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
                                 </TextFieldContainer>
                                 <ButtonContainer>
                                     <CustomSaveButton
-                                        buttonLabel="Save"
+                                        buttonLabel={
+                                            isButtonDisabled === false
+                                                ? 'Save'
+                                                : 'Saving stat...'
+                                        }
                                         onClickFunction={handleUserSubmit}
+                                        isLoaderBtn={true}
+                                        disabledState={isButtonDisabled}
                                     />
                                 </ButtonContainer>
                             </FormContainer>
