@@ -80,7 +80,13 @@ export function deleteStat(
     };
 }
 
-export function editStat(exerciseId, newExerciseName, callback) {
+export function editStat(
+    exerciseId,
+    newExerciseName,
+    snackbarCallback,
+    btnCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.patch('/user/editstat', {
             exerciseId,
@@ -93,7 +99,9 @@ export function editStat(exerciseId, newExerciseName, callback) {
         });
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
+            btnCallback(false);
+            modalCallback(false);
         }
     };
 }
