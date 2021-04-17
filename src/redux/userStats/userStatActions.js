@@ -22,7 +22,13 @@ export function getUserStatData() {
     };
 }
 
-export function addNewStat(exerciseName, callback, tutorialStatId) {
+export function addNewStat(
+    exerciseName,
+    snackbarCallback,
+    tutorialStatId,
+    btnCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post('/user/addnewstat', {
             exerciseName,
@@ -36,11 +42,14 @@ export function addNewStat(exerciseName, callback, tutorialStatId) {
 
         if (
             response &&
-            callback &&
-            tutorialStatId === undefined &&
-            tutorialStatId === null
+            snackbarCallback &&
+            btnCallback &&
+            modalCallback &&
+            (tutorialStatId === undefined || tutorialStatId === null)
         ) {
-            callback(true);
+            btnCallback(false);
+            snackbarCallback(true);
+            modalCallback(false);
         }
     };
 }
