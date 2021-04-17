@@ -56,7 +56,7 @@ const CustomSaveButton = ({
                 {isLoaderBtn === true && disabledState === true ? (
                     <LoaderContainer>
                         <CircularProgress
-                            size={20}
+                            size={17}
                             thickness={6}
                             color="inherit"
                         />
