@@ -35,7 +35,14 @@ export function addToUserProgramCount(programId) {
     };
 }
 
-export function addNewProgram(programName, programDesc, callback, tutorialId) {
+export function addNewProgram(
+    programName,
+    programDesc,
+    snackbarCallback,
+    tutorialId,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         let response;
 
@@ -59,11 +66,14 @@ export function addNewProgram(programName, programDesc, callback, tutorialId) {
 
         if (
             response &&
-            callback &&
-            tutorialId === undefined &&
-            tutorialId === null
+            snackbarCallback &&
+            buttonCallback &&
+            modalCallback &&
+            (tutorialId === undefined || tutorialId === null)
         ) {
-            callback(true);
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
         }
     };
 }
@@ -72,7 +82,7 @@ export function editExistingProgram(
     programId,
     newProgramName,
     newProgramDesc,
-    callback
+    snackbarCallback
 ) {
     return async (dispatch) => {
         const response = await api.patch(`/user/editprogram`, {
@@ -87,12 +97,12 @@ export function editExistingProgram(
         });
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
         }
     };
 }
 
-export function deleteExistingProgram(programId, callback) {
+export function deleteExistingProgram(programId, snackbarCallback) {
     return async (dispatch) => {
         const response = await api.delete(`/user/deleteprogram`, {
             data: { programId },
@@ -104,7 +114,7 @@ export function deleteExistingProgram(programId, callback) {
         });
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
         }
     };
 }
