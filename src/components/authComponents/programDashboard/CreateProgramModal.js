@@ -132,6 +132,7 @@ const CreateProgramModal = ({
     descValue,
     namePlaceholder,
     descPlaceholder,
+    buttonDisabledState = false,
 }) => {
     return (
         <>
@@ -176,8 +177,14 @@ const CreateProgramModal = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={submitHandler}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
@@ -229,8 +236,14 @@ const CreateProgramModal = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={submitHandler}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
