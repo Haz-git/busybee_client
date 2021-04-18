@@ -72,6 +72,7 @@ const RecordCardEditModal = ({
     existingStatSets,
     existingStatReps,
     existingStatWeight,
+    buttonDisabledState = false,
 }) => {
     return (
         <>
@@ -116,8 +117,14 @@ const RecordCardEditModal = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={submitHandler}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
@@ -169,8 +176,14 @@ const RecordCardEditModal = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={submitHandler}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
