@@ -71,6 +71,7 @@ const RecordCardAddModal = ({
     needNameHandler,
     nameFunction,
     maxTextLength,
+    buttonDisabledState = false,
 }) => {
     return (
         <>
@@ -133,8 +134,14 @@ const RecordCardAddModal = ({
                             </InputContainer>
                             <ButtonContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        buttonDisabledState === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={submitHandler}
+                                    isLoaderBtn={true}
+                                    disabledState={buttonDisabledState}
                                 />
                                 <CustomCancelButton
                                     buttonLabel="Cancel"
