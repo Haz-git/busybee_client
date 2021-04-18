@@ -82,7 +82,9 @@ export function editExistingProgram(
     programId,
     newProgramName,
     newProgramDesc,
-    snackbarCallback
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
 ) {
     return async (dispatch) => {
         const response = await api.patch(`/user/editprogram`, {
@@ -96,13 +98,20 @@ export function editExistingProgram(
             payload: response.data.userPrograms,
         });
 
-        if (response) {
+        if (response && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
             snackbarCallback(true);
         }
     };
 }
 
-export function deleteExistingProgram(programId, snackbarCallback) {
+export function deleteExistingProgram(
+    programId,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.delete(`/user/deleteprogram`, {
             data: { programId },
@@ -113,7 +122,9 @@ export function deleteExistingProgram(programId, snackbarCallback) {
             payload: response.data.userPrograms,
         });
 
-        if (response) {
+        if (response && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
             snackbarCallback(true);
         }
     };
