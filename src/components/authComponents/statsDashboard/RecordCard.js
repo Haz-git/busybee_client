@@ -207,6 +207,9 @@ const RecordCard = ({
     //State for dropdown buttons:
     const [stateDropdown, setStateDropdown] = useState(false);
 
+    //State for disabling button on user request:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     //States for showing delete and edit modals for records.
 
     const [stateDeleteRecordModal, setStateDeleteRecordModal] = useState(false);
@@ -219,6 +222,19 @@ const RecordCard = ({
     const [recordReps, setRecordReps] = useState('');
     const [recordUnit, setRecordUnit] = useState('');
 
+    //callback functions for modal state and button state on user request:
+    const setButtonState = (bool) => {
+        setIsButtonDisabled(bool);
+    };
+
+    const setDeleteModalState = (bool) => {
+        setStateDeleteRecordModal(bool);
+    };
+
+    const setEditModalState = (bool) => {
+        setStateEditRecordModal(bool);
+    };
+
     //Controller functions for deletion modal:
 
     const openDeleteRecordModal = () => {
@@ -230,8 +246,14 @@ const RecordCard = ({
     };
 
     const onDeleteRecordConfirmation = () => {
-        deleteRecord(exerciseId, recordId, deleteRecordSnackbar);
-        setStateDeleteRecordModal(false);
+        setIsButtonDisabled(true);
+        deleteRecord(
+            exerciseId,
+            recordId,
+            deleteRecordSnackbar,
+            setButtonState,
+            setDeleteModalState
+        );
     };
 
     //Controller functions for edit modal:
@@ -271,6 +293,7 @@ const RecordCard = ({
                 recordReps.trim() !== '' ||
                 recordWeight.trim() !== ''
             ) {
+                setIsButtonDisabled(true);
                 editRecord(
                     exerciseId,
                     recordId,
@@ -278,10 +301,10 @@ const RecordCard = ({
                     recordReps,
                     recordWeight,
                     recordUnit,
-                    editRecordSnackbar
+                    editRecordSnackbar,
+                    setButtonState,
+                    setEditModalState
                 );
-
-                setStateEditRecordModal(false);
             } else {
                 alert(
                     '1Please input atleast one new value, or press cancel to exit.'
@@ -385,6 +408,7 @@ const RecordCard = ({
                 modalDesc="Are you sure you want to delete this record?"
                 ariaLabel="record delete modal"
                 ariaDesc="modal for confirmation of record deletion"
+                buttonDisabledState={isButtonDisabled}
             />
             <RecordCardEditModal
                 openBoolean={stateEditRecordModal}
@@ -397,6 +421,7 @@ const RecordCard = ({
                 existingStatSets={`Sets: ${sets}`}
                 existingStatReps={`Reps: ${reps}`}
                 existingStatWeight={weight}
+                buttonDisabledState={isButtonDisabled}
             />
         </>
     );
