@@ -122,12 +122,16 @@ const StatCardRecordModal = ({
     //State for modified records (under a sort):
     const [sortedRecordArray, setSortedRecordArray] = useState(null);
 
+    //Button loading state:
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     //Modal State:
 
     const [stateAddRecordModal, setStateAddRecordModal] = useState(false);
-    const [weightInput, setWeightInput] = useState(null);
-    const [setsInput, setSetsInput] = useState(null);
-    const [repsInput, setRepsInput] = useState(null);
+    const [weightInput, setWeightInput] = useState('');
+    const [setsInput, setSetsInput] = useState('');
+    const [repsInput, setRepsInput] = useState('');
     const [unitSelect, setUnitSelect] = useState(null);
 
     //States for SnackBars:
@@ -190,17 +194,43 @@ const StatCardRecordModal = ({
         setUnitSelect(e.target.value);
     };
 
+    const resetUserInputHandlers = () => {
+        setRepsInput('');
+        setSetsInput('');
+        setWeightInput('');
+    };
+
     const handleSubmission = (e) => {
         e.preventDefault();
-        addRecord(
-            exerciseId,
-            setsInput,
-            repsInput,
-            weightInput,
-            unitSelect,
-            showNewRecordSnackBar
-        );
-        setStateAddRecordModal(false);
+        if (
+            weightInput.trim() !== '' &&
+            setsInput.trim() !== '' &&
+            repsInput.trim() !== ''
+        ) {
+            setIsButtonDisabled(true);
+            addRecord(
+                exerciseId,
+                setsInput,
+                repsInput,
+                weightInput,
+                unitSelect,
+                showNewRecordSnackBar,
+                setButtonState,
+                recordModalCallback
+            );
+            resetUserInputHandlers();
+        } else {
+            alert('Please input values for your new record.');
+        }
+    };
+
+    //Controller functions for modal and button loading callback:
+    const recordModalCallback = (bool) => {
+        setStateAddRecordModal(bool);
+    };
+
+    const setButtonState = (bool) => {
+        setIsButtonDisabled(bool);
     };
 
     //Controller functions for SnackBars:
@@ -434,6 +464,7 @@ const StatCardRecordModal = ({
                 unitFunction={handleUnitSelect}
                 submitHandler={handleSubmission}
                 needNameHandler={false}
+                buttonDisabledState={isButtonDisabled}
             />
             <GlobalSnackbar
                 openFunction={openAddRecordSnackBar}
