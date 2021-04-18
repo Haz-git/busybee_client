@@ -23,7 +23,16 @@ export function retrieveRecord(exerciseId) {
     };
 }
 
-export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
+export function addRecord(
+    exerciseId,
+    sets,
+    reps,
+    weight,
+    unit,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post('/user/stat/addnewrecord', {
             exerciseId,
@@ -40,13 +49,15 @@ export function addRecord(exerciseId, sets, reps, weight, unit, callback) {
 
         //Creating a snackbar to notify new record add:
 
-        if (response && callback) {
-            callback(true);
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
         }
     };
 }
 
-export function deleteRecord(exerciseId, recordId, callback) {
+export function deleteRecord(exerciseId, recordId, snackbarCallback) {
     return async (dispatch) => {
         const response = await api.delete('/user/stat/deleterecord', {
             data: {
@@ -63,7 +74,7 @@ export function deleteRecord(exerciseId, recordId, callback) {
         //Creating a snackbar to notify user that a record is deleted:
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
         }
     };
 }
@@ -75,7 +86,7 @@ export function editRecord(
     reps,
     weight,
     unit,
-    callback
+    snackbarCallback
 ) {
     return async (dispatch) => {
         const response = await api.patch('/user/stat/editrecord', {
@@ -95,7 +106,7 @@ export function editRecord(
         //Creating a snackbar to notify user that record is edited:
 
         if (response) {
-            callback(true);
+            snackbarCallback(true);
         }
     };
 }
