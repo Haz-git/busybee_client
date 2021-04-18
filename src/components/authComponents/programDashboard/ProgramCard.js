@@ -261,12 +261,30 @@ const ProgramCard = ({
     isFormatted,
     addToUserProgramCount,
 }) => {
+    //States for button on user request:
+
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     //States:
     const [stateRunProgramModal, setStateRunProgramModal] = useState(false);
     const [stateEditModal, setStateEditModal] = useState(false);
     const [editModalName, setEditModalName] = useState(name);
     const [editModalDesc, setEditModalDesc] = useState(desc);
     const [stateDeleteModal, setStateDeleteModal] = useState(false);
+
+    //Callback functions for button and modal on user request:
+
+    const setButtonState = (bool) => {
+        setIsButtonDisabled(bool);
+    };
+
+    const setEditModalState = (bool) => {
+        setStateEditModal(bool);
+    };
+
+    const setDeleteModalState = (bool) => {
+        setStateDeleteModal(bool);
+    };
 
     //Edit Modal user input event handlers:
 
@@ -286,19 +304,28 @@ const ProgramCard = ({
         setEditModalDesc(e.target.value);
     };
 
+    const resetEditModalDetails = () => {
+        setEditModalName(name);
+        setEditModalDesc(desc);
+    };
+
     const handleEditModalSubmit = () => {
         if (
             editModalName !== undefined &&
             editModalName !== null &&
-            editModalName !== ''
+            editModalName.trim() !== ''
         ) {
+            setIsButtonDisabled(true);
             editAction(
                 programId,
                 editModalName,
                 editModalDesc,
-                editProgramSnackbar
+                editProgramSnackbar,
+                setButtonState,
+                setEditModalState
             );
-            setStateEditModal(false);
+
+            resetEditModalDetails();
         } else {
             alert('The name cannot be an empty value.');
         }
@@ -315,8 +342,13 @@ const ProgramCard = ({
     };
 
     const deleteModalHandler = () => {
-        deleteAction(programId, deleteProgramSnackbar);
-        setStateDeleteModal(false);
+        setIsButtonDisabled(true);
+        deleteAction(
+            programId,
+            deleteProgramSnackbar,
+            setButtonState,
+            setDeleteModalState
+        );
     };
 
     //Delete Modal Input handlers:
@@ -547,6 +579,7 @@ const ProgramCard = ({
                 modalDesc="Are you sure you want to delete this program? This action is irreversible, and all program exercises will be deleted."
                 ariaDesc="Modal for deleting a program"
                 ariaLabel="Modal for deleting a program"
+                buttonDisabledState={isButtonDisabled}
             />
             <CreateProgramModal
                 ariaDesc="Modal for editing program"
@@ -559,6 +592,7 @@ const ProgramCard = ({
                 submitHandler={handleEditModalSubmit}
                 namePlaceholder={name}
                 descPlaceholder={desc}
+                buttonDisabledState={isButtonDisabled}
             />
             <WrapperContainer>
                 <MainContainer className="ProgramCard-MainContainer">
