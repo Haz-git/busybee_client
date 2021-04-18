@@ -172,6 +172,10 @@ const MainPrograms = ({
     const [openDeleteProgramSnackBar, setOpenDeleteProgramSnackBar] = useState(
         false
     );
+
+    //This state controls button disabling for user requests:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     //This state controls the filtered array for programs:
     const [userSearchArray, setUserSearchArray] = useState(null);
 
@@ -183,8 +187,18 @@ const MainPrograms = ({
     const [stateProgramAddModal, setStateProgramAddModal] = useState(false);
 
     //These states control the input text fields to create a new program:
-    const [inputProgramName, setInputProgramName] = useState(undefined);
+    const [inputProgramName, setInputProgramName] = useState('');
     const [inputProgramDesc, setInputProgramDesc] = useState(undefined);
+
+    //Callback functions for modal and buttonDisabled state:
+
+    const setButtonState = (bool) => {
+        setIsButtonDisabled(bool);
+    };
+
+    const setProgramAddModalState = (bool) => {
+        setStateProgramAddModal(bool);
+    };
 
     //Add Program modal functions:
     const openAddProgramModal = () => {
@@ -209,14 +223,18 @@ const MainPrograms = ({
         if (
             inputProgramName !== undefined &&
             inputProgramName !== null &&
-            inputProgramName !== ''
+            inputProgramName.trim() !== ''
         ) {
+            setButtonState(true);
             addNewProgram(
                 inputProgramName,
                 inputProgramDesc,
-                showNewProgramSnackBar
+                showNewProgramSnackBar,
+                undefined,
+                setButtonState,
+                setProgramAddModalState
             );
-            setStateProgramAddModal(false);
+            resetUserProgramDetailInput();
         } else {
             alert('Please enter a program name.');
         }
@@ -334,6 +352,12 @@ const MainPrograms = ({
             setUserSearchArray(filteredArray);
             setUserHasInput(true);
         }
+    };
+
+    //User input program name and desc reset function:
+    const resetUserProgramDetailInput = () => {
+        setInputProgramDesc(undefined);
+        setInputProgramName('');
     };
 
     //Search bar reset function:
@@ -664,6 +688,7 @@ const MainPrograms = ({
                 titleFunction={addTitleInput}
                 descFunction={addDescInput}
                 submitHandler={submitUserInputs}
+                buttonDisabledState={isButtonDisabled}
             />
             <MainContainer>
                 {isMobileOnly && (
