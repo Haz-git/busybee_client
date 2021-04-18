@@ -45,7 +45,7 @@ const CustomDeleteButton = ({
     buttonLabel,
     onClickFunction,
     isLoaderBtn,
-    disabledState,
+    disabledState = false,
 }) => {
     return (
         <>
