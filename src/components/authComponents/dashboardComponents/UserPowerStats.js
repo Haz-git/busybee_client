@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 import {
     BrowserView,
@@ -108,10 +108,16 @@ const UserPowerStats = ({
     addNewBench,
     addNewSquat,
     addNewDeadlift,
+    benchSnackbarCallback,
+    squatSnackbarCallback,
+    deadliftSnackbarCallback,
 }) => {
     useEffect(() => {
         getUserLiftingData();
     }, []);
+
+    //State for button disable during user request:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     const checkUserPowerLiftData = () => {
         let results = [];
@@ -154,6 +160,9 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Deadlift"
                                 img={deadlift}
+                                deadliftSnackbarCallback={
+                                    deadliftSnackbarCallback
+                                }
                                 addAction={addNewDeadlift}
                                 existingStat={
                                     existingStats.powerLiftStats !==
@@ -185,6 +194,7 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Squat"
                                 img={squat}
+                                squatSnackbarCallback={squatSnackbarCallback}
                                 addAction={addNewSquat}
                                 existingStat={
                                     existingStats.powerLiftStats !==
@@ -216,6 +226,7 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Bench"
                                 img={benchpress}
+                                benchSnackbarCallback={benchSnackbarCallback}
                                 addAction={addNewBench}
                                 existingStat={
                                     existingStats.powerLiftStats !==
@@ -267,6 +278,9 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Deadlift"
                                 img={deadlift}
+                                deadliftSnackbarCallback={
+                                    deadliftSnackbarCallback
+                                }
                                 addAction={addNewDeadlift}
                                 existingStat={
                                     existingStats.powerLiftStats !==
@@ -298,6 +312,7 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Squat"
                                 img={squat}
+                                squatSnackbarCallback={squatSnackbarCallback}
                                 addAction={addNewSquat}
                                 existingStat={
                                     existingStats.powerLiftStats !==
@@ -329,6 +344,7 @@ const UserPowerStats = ({
                             <UserPowerStatCard
                                 header="Bench"
                                 img={benchpress}
+                                benchSnackbarCallback={benchSnackbarCallback}
                                 addAction={addNewBench}
                                 existingStat={
                                     existingStats.powerLiftStats !==
