@@ -300,11 +300,18 @@ const UserPowerStatCard = ({
     existingStat,
     recentStatWeightChange,
     recentStatTimeChange,
+    buttonDisabledState,
+    deadliftSnackbarCallback,
+    benchSnackbarCallback,
+    squatSnackbarCallback,
 }) => {
     //Various states, manages modal open/close and user inputs.
     const [modalOpen, setModalOpen] = useState(false);
     const [inputWeight, setInputWeight] = useState(null);
     const [metric, setMetric] = useState('Lbs');
+
+    //State for disabling button on user request:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
 
     //Check for existing values for lbs.
     const renderExistingStatLbs = () => {
@@ -347,6 +354,25 @@ const UserPowerStatCard = ({
         setInputWeight(e.target.value);
     };
 
+    //Button and modal callbacks:
+    const setStateModal = (bool) => {
+        setModalOpen(bool);
+    };
+
+    const setStateButton = (bool) => {
+        setIsButtonDisabled(bool);
+    };
+
+    //Determines which snackbar handler is undefined:
+
+    const parseDefinedSnackbar = () => {
+        return (
+            benchSnackbarCallback ||
+            squatSnackbarCallback ||
+            deadliftSnackbarCallback
+        );
+    };
+
     //Handle card submit:
 
     const handleNewStatSubmit = (e) => {
@@ -363,9 +389,13 @@ const UserPowerStatCard = ({
         if (newStat.weight === '' || newStat.weight === null) {
             alert('Please input a weight.');
         } else {
-            console.log(newStat);
-            addAction(newStat);
-            setModalOpen(false);
+            setIsButtonDisabled(true);
+            addAction(
+                newStat,
+                parseDefinedSnackbar(),
+                setStateButton,
+                setStateModal
+            );
         }
     };
 
@@ -401,8 +431,14 @@ const UserPowerStatCard = ({
                                     <CustomSelector changeFunc={handleSelect} />
                                 </ModalInputContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        isButtonDisabled === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={handleNewStatSubmit}
+                                    isLoaderBtn={true}
+                                    disabledState={isButtonDisabled}
                                 />
                             </ModalContainer>
                         </Fade>
@@ -465,8 +501,14 @@ const UserPowerStatCard = ({
                                     <CustomSelector changeFunc={handleSelect} />
                                 </ModalInputContainer>
                                 <CustomSaveButton
-                                    buttonLabel="Save"
+                                    buttonLabel={
+                                        isButtonDisabled === false
+                                            ? 'Save'
+                                            : 'Saving...'
+                                    }
                                     onClickFunction={handleNewStatSubmit}
+                                    isLoaderBtn={true}
+                                    disabledState={isButtonDisabled}
                                 />
                             </BrowserModalContainer>
                         </Fade>
