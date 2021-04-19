@@ -11,6 +11,7 @@ import {
 } from '../../redux/userDetails/detailActions';
 
 //Components:
+import GlobalSnackbar from './dashboardComponents/GlobalSnackbar';
 import TutorialModal from './tutorialComponents/TutorialModal';
 import UserGreeting from './dashboardComponents/UserGreeting';
 import UserPowerStats from './dashboardComponents/UserPowerStats';
@@ -42,8 +43,16 @@ const Dashboard = ({
     startAppTour,
     closeAppTour,
 }) => {
+    //Loading State:
     const [isLoaded, setIsLoaded] = useState(false);
+
+    //Tutorial Modal State:
     const [stateTutorialModal, setStateTutorialModal] = useState(false);
+
+    //Snackbars State:
+    const [stateBenchSnackbar, setStateBenchSnackbar] = useState(false);
+    const [stateDeadliftSnackbar, setStateDeadliftSnackbar] = useState(false);
+    const [stateSquatSnackbar, setStateSquatSnackbar] = useState(false);
 
     useEffect(() => {
         if (
@@ -80,6 +89,34 @@ const Dashboard = ({
         }
     }, []);
 
+    //Snackbar callbacks:
+
+    const handleBenchSnackbar = (bool) => {
+        setStateBenchSnackbar(bool);
+    };
+
+    const handleDeadliftSnackbar = (bool) => {
+        setStateDeadliftSnackbar(bool);
+    };
+
+    const handleSquatSnackbar = (bool) => {
+        setStateSquatSnackbar(bool);
+    };
+
+    //Snackbar close controllers:
+
+    const closeBenchSnackbar = () => {
+        setStateBenchSnackbar(false);
+    };
+
+    const closeDeadliftSnackbar = () => {
+        setStateDeadliftSnackbar(false);
+    };
+
+    const closeSquatSnackbar = () => {
+        setStateSquatSnackbar(false);
+    };
+
     const closeTutorialModal = () => {
         changeIsNewUserValue(false);
         setStateTutorialModal(false);
@@ -110,7 +147,11 @@ const Dashboard = ({
                             email={email}
                             userName={userName}
                         />
-                        <UserPowerStats />
+                        <UserPowerStats
+                            benchSnackbarCallback={handleBenchSnackbar}
+                            squatSnackbarCallback={handleSquatSnackbar}
+                            deadliftSnackbarCallback={handleDeadliftSnackbar}
+                        />
                         <UserTopPrograms userPrograms={programs.programs} />
                         <UserRecentStats userStats={stats.stats} />
                     </MainContainer>
@@ -119,6 +160,33 @@ const Dashboard = ({
                         closeFunction={closeTutorialModal}
                         buttonSubmitFunction={sendUserToTutorialPage}
                         firstName={firstName}
+                    />
+                    <GlobalSnackbar
+                        openFunction={stateBenchSnackbar}
+                        closeFunction={closeBenchSnackbar}
+                        autoHideDuration={3000}
+                        anchorOriginVertical="top"
+                        anchorOriginHorizontal="center"
+                        alertSeverity="success"
+                        alertMessage="Your new bench has been saved."
+                    />
+                    <GlobalSnackbar
+                        openFunction={stateDeadliftSnackbar}
+                        closeFunction={closeDeadliftSnackbar}
+                        autoHideDuration={3000}
+                        anchorOriginVertical="top"
+                        anchorOriginHorizontal="center"
+                        alertSeverity="success"
+                        alertMessage="Your new deadlift has been saved."
+                    />
+                    <GlobalSnackbar
+                        openFunction={stateSquatSnackbar}
+                        closeFunction={closeSquatSnackbar}
+                        autoHideDuration={3000}
+                        anchorOriginVertical="top"
+                        anchorOriginHorizontal="center"
+                        alertSeverity="success"
+                        alertMessage="Your new squat has been saved."
                     />
                 </>
             );
