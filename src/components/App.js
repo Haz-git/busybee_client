@@ -115,6 +115,7 @@ const App = withRouter(({ location, changeIsNewUserValue }) => {
                 <BrowserView>
                     <ThemeProvider theme={grabbedTheme}>
                         <GlobalStyle />
+                        <GuidedTour openOn={startTour} closeFunc={closeTour} />
                         <Switch>
                             <Route exact path="/" component={MainLandingPage} />
                             <Route
@@ -149,7 +150,13 @@ const App = withRouter(({ location, changeIsNewUserValue }) => {
                                         <Route
                                             exact
                                             path="/dashboard"
-                                            component={Dashboard}
+                                            render={(props) => (
+                                                <Dashboard
+                                                    {...props}
+                                                    startAppTour={startAppTour}
+                                                    closeAppTour={closeTour}
+                                                />
+                                            )}
                                         />
                                         <Route
                                             exact
