@@ -165,6 +165,9 @@ const MainSettings = ({
     const [stateEditPasswordModal, setStateEditPasswordModal] = useState(false);
     const [stateSignOutModal, setStateSignOutModal] = useState(false);
 
+    //Button state on user request:
+    const [isButtonDisabled, setIsButtonDisabled] = useState(false);
+
     //User text input state handlers:
 
     const [currentPassword, setCurrentPassword] = useState('');
@@ -178,6 +181,24 @@ const MainSettings = ({
     const [newFirstName, setNewFirstName] = useState('');
     const [newLastName, setNewLastName] = useState('');
     const [newUserName, setNewUserName] = useState('');
+
+    //Button state and modal callback function:
+
+    const setStateButton = (bool) => {
+        setIsButtonDisabled(bool);
+    };
+
+    const emailModalChange = (bool) => {
+        setStateEditEmailModal(bool);
+    };
+
+    const passwordModalChange = (bool) => {
+        setStateEditPasswordModal(bool);
+    };
+
+    const userDetailsModalChange = (bool) => {
+        setStateEditUserDetailsModal(bool);
+    };
 
     //EditUserDetailsModal handlers:
 
@@ -203,17 +224,18 @@ const MainSettings = ({
 
     const handleUserDetailSubmission = () => {
         if (newUserName === '' && newFirstName === '' && newLastName === '') {
-            alert('Please input one value you want to change.');
+            alert('Please input a value you want to change.');
         } else {
+            setIsButtonDisabled(true);
             userEditGeneralInfo(
                 USER_INFO_CHANGE,
                 newUserName,
                 newFirstName,
                 newLastName,
-                showEditDetailSnackBar
+                showEditDetailSnackBar,
+                setStateButton,
+                userDetailsModalChange
             );
-
-            setStateEditUserDetailsModal(false);
         }
     };
 
@@ -243,9 +265,14 @@ const MainSettings = ({
                 newEmailConfirm !== '' &&
                 newEmailConfirm !== null
             ) {
-                userEditEmail(EMAIL_CHANGE, newEmail, showEditEmailSnackBar);
-
-                setStateEditEmailModal(false);
+                setIsButtonDisabled(true);
+                userEditEmail(
+                    EMAIL_CHANGE,
+                    newEmail,
+                    showEditEmailSnackBar,
+                    setStateButton,
+                    emailModalChange
+                );
             } else {
                 alert('Your new email must not be empty values.');
             }
@@ -294,13 +321,16 @@ const MainSettings = ({
                 newPasswordConfirm !== '' &&
                 newPasswordConfirm !== null
             ) {
+                setIsButtonDisabled(true);
                 userEditPassword(
                     PASSWORD_CHANGE,
                     newPassword,
                     newPasswordConfirm,
                     currentPassword,
                     handlePasswordError,
-                    showEditPasswordSnackBar
+                    showEditPasswordSnackBar,
+                    setStateButton,
+                    passwordModalChange
                 );
             } else {
                 alert('You cannot save an empty value as your password.');
@@ -462,6 +492,7 @@ const MainSettings = ({
                 editLastNameHandler={handleNewLastNameChange}
                 editUserNameHandler={handleNewUserNameChange}
                 userDetailSubmissionHandler={handleUserDetailSubmission}
+                buttonDisabledState={isButtonDisabled}
             />
             <SettingsModal
                 openBoolean={stateEditEmailModal}
@@ -475,6 +506,7 @@ const MainSettings = ({
                 editEmailHandler={handleNewEmailChange}
                 editEmailConfirmHandler={handleNewEmailConfirmChange}
                 userEmailSubmissionHandler={handleEmailSubmission}
+                buttonDisabledState={isButtonDisabled}
             />
             <SettingsModal
                 openBoolean={stateEditPasswordModal}
@@ -489,6 +521,7 @@ const MainSettings = ({
                 editNewPasswordConfirmHandler={handleNewPasswordConfirmChange}
                 userPasswordSubmissionHandler={handlePasswordSubmission}
                 hasPasswordError={hasPasswordError}
+                buttonDisabledState={isButtonDisabled}
             />
             <SettingsModal
                 openBoolean={stateSignOutModal}
