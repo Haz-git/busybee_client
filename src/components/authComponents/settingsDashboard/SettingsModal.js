@@ -170,6 +170,7 @@ const SettingsModal = ({
     userEmailSubmissionHandler,
     userPasswordSubmissionHandler,
     hasPasswordError,
+    buttonDisabledState,
 }) => {
     return (
         <>
@@ -246,10 +247,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userPasswordSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
@@ -283,10 +290,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userEmailSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
@@ -326,10 +339,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userDetailSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
@@ -415,10 +434,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userPasswordSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
@@ -452,10 +477,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userEmailSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
@@ -495,10 +526,16 @@ const SettingsModal = ({
                                     </FieldDivider>
                                     <ButtonContainer>
                                         <CustomSaveButton
-                                            buttonLabel="Save"
+                                            buttonLabel={
+                                                buttonDisabledState === false
+                                                    ? 'Save'
+                                                    : 'Saving...'
+                                            }
                                             onClickFunction={
                                                 userDetailSubmissionHandler
                                             }
+                                            isLoaderBtn={true}
+                                            disabledState={buttonDisabledState}
                                         />
                                         <CustomCancelButton
                                             buttonLabel="Cancel"
