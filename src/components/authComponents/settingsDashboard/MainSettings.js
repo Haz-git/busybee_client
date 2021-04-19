@@ -439,7 +439,7 @@ const MainSettings = ({
                     </SettingOptionsContainer>
                 )}
                 {isBrowser && (
-                    <BrowserSettingOptionsContainer>
+                    <BrowserSettingOptionsContainer className="MainSettings-SettingsOptionsContainer">
                         <SettingsCard
                             icon={<UserDetailIcon />}
                             textLabel="Edit User Details"

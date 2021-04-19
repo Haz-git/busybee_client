@@ -171,7 +171,7 @@ const BackButtonHeader = ({
                 <MainHeaderContainer>
                     <Link to={previousLink} onClick={onClickFunc}>
                         {buttonColor === 'default' ? (
-                            <BackButton>
+                            <BackButton className="BackButtonHeader-BackButton">
                                 {previousButtonIcon}
                                 {previousButtonLabel && (
                                     <BrowserBackButtonLabel>
@@ -181,6 +181,7 @@ const BackButtonHeader = ({
                             </BackButton>
                         ) : (
                             <BackButton
+                                className="BackButtonHeader-BackButton"
                                 style={{ backgroundColor: `${buttonColor}` }}
                             >
                                 {previousButtonIcon}

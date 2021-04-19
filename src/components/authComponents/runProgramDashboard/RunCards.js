@@ -771,7 +771,7 @@ const RunCards = ({
                             </ButtonContainer>
                         )}
                         {isBrowser && (
-                            <BrowserButtonContainer>
+                            <BrowserButtonContainer className="RunCards-ButtonContainer">
                                 <ButtonDivider>
                                     <MoveButtonLeft onClick={onPrev}>
                                         <ArrowLeft />

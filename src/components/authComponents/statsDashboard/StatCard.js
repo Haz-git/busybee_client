@@ -454,7 +454,7 @@ const StatCard = ({
                 <>
                     <BrowserWrapperContainer>
                         <MainContainer>
-                            <BrowserNameContainer>
+                            <BrowserNameContainer className="StatCard-NameContainer">
                                 <NameHeader>{name}</NameHeader>
                                 <DateContainer>
                                     <DateText>{reformatDate()}</DateText>
@@ -463,6 +463,8 @@ const StatCard = ({
                             <DropdownContainer>
                                 <StyledDropdownButton
                                     onClick={enableDropdownMenu}
+                                    className="StatCard-StyledDropdownButton"
+                                    id="StatCard-StyledDropdownButton"
                                 >
                                     <CaretIcon
                                         style={
@@ -482,6 +484,7 @@ const StatCard = ({
                             </DropdownContainer>
                         </MainContainer>
                         <ButtonContainer
+                            className="StatCard-ButtonContainer"
                             style={
                                 stateDropdown === false
                                     ? {
@@ -505,7 +508,11 @@ const StatCard = ({
                                 <EditIcon />
                             </StyledButton>
                             <StyledButton>
-                                <DatabaseIcon onClick={openRecordModal} />
+                                <DatabaseIcon
+                                    onClick={openRecordModal}
+                                    className="StatCard-DatabaseIcon"
+                                    id="StatCard-Database-Button"
+                                />
                             </StyledButton>
                         </ButtonContainer>
                     </BrowserWrapperContainer>

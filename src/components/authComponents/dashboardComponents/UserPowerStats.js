@@ -274,7 +274,7 @@ const UserPowerStats = ({
                     <MainContainer>
                         <MainHeader>Your Main Lifts</MainHeader>
                         <StyledDivider />
-                        <BrowserStatCardContainer>
+                        <BrowserStatCardContainer className="UserPowerStats-StatCardContainer">
                             <UserPowerStatCard
                                 header="Deadlift"
                                 img={deadlift}
