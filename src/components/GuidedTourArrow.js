@@ -21,6 +21,11 @@ const NextIcon = styled(NavigateNext)`
     &:focus {
         outline: none;
     }
+
+    @media screen and (min-width: 1024px) {
+        height: 3.5rem;
+        width: 3.5rem;
+    }
 `;
 
 const GuidedTourArrow = () => {

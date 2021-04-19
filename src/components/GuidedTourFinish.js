@@ -21,6 +21,10 @@ const ExitIcon = styled(ExitToApp)`
     &:focus {
         outline: none;
     }
+    @media screen and (min-width: 1024px) {
+        height: 3rem;
+        width: 3rem;
+    }
 `;
 
 const GuidedTourFinish = () => {
