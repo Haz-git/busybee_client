@@ -17,7 +17,12 @@ export function getUserLiftingData() {
     };
 }
 
-export function addNewBench(newBenchValue) {
+export function addNewBench(
+    newBenchValue,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post(`/user/addNewBench`, {
             newBenchValue,
@@ -27,10 +32,21 @@ export function addNewBench(newBenchValue) {
             type: USER_ADD_NEW_BENCH,
             payload: response.data.responseObject,
         });
+
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
+        }
     };
 }
 
-export function addNewSquat(newSquatValue) {
+export function addNewSquat(
+    newSquatValue,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post(`/user/addNewSquat`, {
             newSquatValue,
@@ -40,10 +56,21 @@ export function addNewSquat(newSquatValue) {
             type: USER_ADD_NEW_SQUAT,
             payload: response.data.responseObject,
         });
+
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
+        }
     };
 }
 
-export function addNewDeadlift(newDeadliftValue) {
+export function addNewDeadlift(
+    newDeadliftValue,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post(`/user/addNewDeadlift`, {
             newDeadliftValue,
@@ -53,5 +80,11 @@ export function addNewDeadlift(newDeadliftValue) {
             type: USER_ADD_NEW_DEADLIFT,
             payload: response.data.responseObject,
         });
+
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
+        }
     };
 }
