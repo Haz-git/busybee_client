@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { isBrowser, isMobileOnly } from 'react-device-detect';
 import GuidedTourContainer from './GuidedTourContainer';
 import GuidedTourArrow from './GuidedTourArrow';
 import GuidedTourFinish from './GuidedTourFinish';
@@ -77,9 +78,10 @@ const GuidedTour = withRouter(
             color: 'white',
             padding: '.6em .5em .5em .5em',
             margin: '0 0',
-            maxWidth: '15em',
-            width: '15em',
+            maxWidth: () => (isMobileOnly ? '15em' : '18em'),
+            width: () => (isMobileOnly ? '15em' : '18em'),
             boxShadow: 'rgba(255, 255, 255, .15) 0px 1px 8px',
+
             //The controls (arrows) for reactour is centered in globalstyles.js
         };
 
