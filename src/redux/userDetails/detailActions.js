@@ -54,7 +54,9 @@ export function userEditGeneralInfo(
     newUserName,
     newFirstName,
     newLastName,
-    callback
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
 ) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
@@ -69,13 +71,21 @@ export function userEditGeneralInfo(
             payload: response.data.user,
         });
 
-        if (response) {
-            callback(true);
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
         }
     };
 }
 
-export function userEditEmail(requestType, newEmail, callback) {
+export function userEditEmail(
+    requestType,
+    newEmail,
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
+) {
     return async (dispatch) => {
         const response = await api.post('/user/settings/edituserdetails', {
             requestType,
@@ -87,8 +97,10 @@ export function userEditEmail(requestType, newEmail, callback) {
             payload: response.data.user,
         });
 
-        if (response) {
-            callback(true);
+        if (response && snackbarCallback && buttonCallback && modalCallback) {
+            buttonCallback(false);
+            modalCallback(false);
+            snackbarCallback(true);
         }
     };
 }
@@ -99,7 +111,9 @@ export function userEditPassword(
     newPasswordConfirm,
     currentPassword,
     errorCallback,
-    callback
+    snackbarCallback,
+    buttonCallback,
+    modalCallback
 ) {
     return async (dispatch) => {
         const response = await api
@@ -121,6 +135,8 @@ export function userEditPassword(
 
         //No need for a dispatch.
 
-        callback(true);
+        buttonCallback(false);
+        modalCallback(false);
+        snackbarCallback(true);
     };
 }
