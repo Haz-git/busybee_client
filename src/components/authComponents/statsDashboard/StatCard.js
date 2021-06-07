@@ -341,14 +341,6 @@ const StatCard = ({
         setStateRecordModal(false);
     };
 
-    //Helper function for record amount:
-
-    // const calculateRecordNumber = (length) => {
-    //     if (length !== undefined && length !== null) {
-    //         return length;
-    //     }
-    // };
-
     return (
         <>
             {isMobileOnly && (
