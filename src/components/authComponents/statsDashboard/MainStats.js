@@ -515,7 +515,6 @@ const MainStats = ({ addNewStat, getUserStatData, stats, statRecords }) => {
             userSearchValue !== null &&
             userSearchValue !== ''
         ) {
-            console.log('not null');
             const getUserNewRecordValues = async () => {
                 //Refresh the stat data:
                 const bool = await getUserStatData();
