@@ -1,70 +1,75 @@
-# Getting Started with Create React App
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# GymJot (Client-Side/Front-End)
 
-## Available Scripts
+A *powerlifting-focused* web-app designed for tracking weight statistics and creating custom weightlifting programs.
 
-In the project directory, you can run:
+- This repository houses the client-side of my web application *GymJot*. As such, most of the details mentioned here are largely front-end related. If you want to learn more about my API, please visit [GymJot's server-side repository](https://github.com/Haz-git/GymJot-Server)!
 
-### `npm start`
+### About The Project
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+*GymJot* was developed to improve the workflow of one of my most favorite hobbies-- powerlifting. Normally, I'd create my powerlifting training
+regiments on something like *Excel* or *Google Drive*, and then take a picture of the spreadsheet to carry to the gym. Then, all my weightlifting statistics
+are simply stored in the *Notes* app on my iphone. Taking multiple pictures of my main exercises for the week and fervently searching through a long list of weight records was clunky and unappealing.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
+I decided to leverage my development skills to create my own progressive web-app (PWA) to solve my issue. With *GymJot*, I can store all my stats + create and run my custom workout routines on the same app!
 
-### `npm test`
+#### Built With
+- Html
+- CSS
+- ReactJS
+- React-Redux + Redux
+- Styled-Components
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+*For more tools used, see **acknowledgements***.
 
-### `npm run build`
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
 
-### `npm run eject`
+## Demo
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
+*Although desktop browser support is available, installing GymJot on your mobile device as a PWA on IOS or Android is highly recommended as GymJot was intended for use on Mobile!*
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+1. Go to [GymJot's website](https://gymjot.netlify.app/) on your phone or desktop browser.
+2. If you are on mobile, be sure to install the app as a PWA to maximize experience.
+3. Navigate to 'Join Us' to create a new account.
+4. 'Log in' to start exploring the app! *For new users, the tutorial is highly recommended*.
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
+  
+## Features
 
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
+- Dashboard
+    - User details
+    - Main Lifts Tracker (Squat, Deadlift, Bench)
+    - Top Programs
+    - Recently Modified Stats
+- Programs
+    - Add/Modify/Delete Custom Programs
+    - Total Program Exercise Time Estimation
+    - 7 Different Options To Add Exercises or Rest Periods
+    - Ability to Blueprint Program To Customize Program Sequence Order
+    - Run Customized Programs
+- Stats
+    - Add/Modify/Delete Stats
+    - Sort Stats via 'Newest', '# of Records', or 'Alphabetical'
+    - Add/Modify/Delete Records Within Each Individual Stats
+    - 7 Ways to Sort Records
+- Settings
+    - Sign Out
+    - Change User details
+    - Edit Email Address (Username)
+    - Edit Password
+    - Change Theme (WIP)
 
-## Learn More
+  
+## Authors
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+- [@Haz-git](https://github.com/Haz-git)
+    - [Personal Website / Contact Me](https://zharry.me/)
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+  
+## License
 
-### Code Splitting
+[MIT](https://choosealicense.com/licenses/mit/)
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+  
