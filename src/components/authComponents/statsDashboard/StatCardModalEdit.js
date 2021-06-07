@@ -73,7 +73,6 @@ const StatCardModalEdit = ({
                                     type="text"
                                     placeholder={`${existingStatName}`}
                                     changeFunc={inputFunction}
-                                    maxlength={17}
                                 />
                             </InputContainer>
                             <ButtonContainer>
@@ -118,7 +117,6 @@ const StatCardModalEdit = ({
                                     type="text"
                                     placeholder={`${existingStatName}`}
                                     changeFunc={inputFunction}
-                                    maxlength={17}
                                 />
                             </InputContainer>
                             <ButtonContainer>
