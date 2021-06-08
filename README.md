@@ -15,7 +15,7 @@ I decided to leverage my development skills to create my own progressive web-app
 
 #### Built With
 - Html
-- CSS
+- Css
 - ReactJS
 - React-Redux + Redux
 - Styled-Components
@@ -61,15 +61,37 @@ I decided to leverage my development skills to create my own progressive web-app
     - Edit Password
     - Change Theme (WIP)
 
-  
+
 ## Authors
 
 - [@Haz-git](https://github.com/Haz-git)
-    - [Personal Website / Contact Me](https://zharry.me/)
+- [Personal Website / Contact Me](https://zharry.me/)
 
   
 ## License
 
 [MIT](https://choosealicense.com/licenses/mit/)
+
+  
+## Acknowledgements
+*The following are some additional packages/technologies used in the creation of this app:*
+
+- Material UI
+- Axios
+- body-scroll-lock
+- dayjs
+- react-countdown
+- react-device-detect
+- react-ios-pwa-prompt
+- react-remove-scroll
+- react-reveal
+- react-router-dom
+- reactour
+- redux-form
+- redux-persist
+- redux-thunk
+- styled-icons
+- eslint
+- prettier
 
   
